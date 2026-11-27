@@ -24,7 +24,17 @@ export const Route = createFileRoute("/bakery")({
   component: BakeryPage,
 });
 
-const BAKERY_CATEGORIES = ["All", "Pastries", "Cupcakes", "Cookies", "Breads", "Desserts"] as const;
+const BAKERY_CATEGORIES = [
+  "All",
+  "Pastries",
+  "Brownies",
+  "Donuts",
+  "Cupcakes",
+  "Cookies",
+  "Breads",
+  "Desserts",
+  "Beverages",
+] as const;
 
 function BakeryPage() {
   const [selectedCategory, setSelectedCategory] = useState<string>("All");

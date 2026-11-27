@@ -18,36 +18,42 @@
    ========================================================================== */
 
 :root {
-  /* Luminous Luxury Patisserie Palette */
-  --color-espresso: #2A1A12;
-  --color-cream: #FAF7F2;
-  --color-gold: #C69A52;
-  --color-caramel: #B97942;
-  --color-beige: #EBDCC8;
-  --color-chocolate: #1C1009;
+  /* Exact Karshni Bakers Brand Palette */
+  --color-warm-cream: #F3EBDD;
+  --color-soft-ivory: #F8F3EA;
+  --color-caramel-beige: #D9BFA2;
+  --color-chocolate-brown: #6B4435;
+  --color-deep-charcoal: #30251F;
+  --color-soft-beige: #EDE2D3;
 
-  /* Refined Nuances */
+  /* Legacy & Nuance Variables */
+  --color-espresso: #30251F;
+  --color-cream: #F3EBDD;
+  --color-gold: #D9BFA2;
+  --color-caramel: #B97942;
+  --color-beige: #EDE2D3;
+  --color-chocolate: #6B4435;
   --color-gold-light: #DFC085;
-  --color-gold-dark: #A57D3B;
-  --color-gold-border: rgba(198, 154, 82, 0.35);
+  --color-gold-dark: #8C5E35;
+  --color-gold-border: rgba(217, 191, 162, 0.45);
   --color-white: #FFFFFF;
 
   /* Semantic Mappings */
-  --background: #FAF7F2;
-  --foreground: #2A1A12;
-  --card: #FFFFFF;
-  --card-foreground: #2A1A12;
-  --primary: #C69A52;
+  --background: #F3EBDD;
+  --foreground: #30251F;
+  --card: #EDE2D3;
+  --card-foreground: #30251F;
+  --primary: #6B4435;
   --primary-foreground: #FFFFFF;
-  --secondary: #F5EDE2;
-  --secondary-foreground: #2A1A12;
-  --muted: #F2E7D9;
-  --muted-foreground: #6B4E3D;
-  --accent: #C69A52;
-  --accent-foreground: #FFFFFF;
-  --border: #E8D9C5;
-  --input: #E8D9C5;
-  --ring: #C69A52;
+  --secondary: #F8F3EA;
+  --secondary-foreground: #30251F;
+  --muted: #EDE2D3;
+  --muted-foreground: #6B4435;
+  --accent: #D9BFA2;
+  --accent-foreground: #30251F;
+  --border: #D9BFA2;
+  --input: #D9BFA2;
+  --ring: #6B4435;
   --radius: 0.85rem;
 }
 
@@ -100,6 +106,45 @@ body {
   overflow-x: clip;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/* ==========================================================================
+   KARSHNI EXACT PALETTE UTILITY CLASSES
+   - Warm Cream:       #F3EBDD (Primary website background 55%)
+   - Soft Ivory:       #F8F3EA (Alternating sections)
+   - Soft Beige Cards: #EDE2D3 (20% card backgrounds)
+   - Chocolate Brown:  #6B4435 (15% headings and buttons)
+   - Caramel Beige:    #D9BFA2 (10% premium accents & borders)
+   - Deep Charcoal:    #30251F (Crisp readable text)
+   ========================================================================== */
+.bg-warm-cream { background-color: #F3EBDD; }
+.bg-soft-ivory { background-color: #F8F3EA; }
+.bg-soft-beige { background-color: #EDE2D3; }
+.bg-chocolate-brown { background-color: #6B4435; }
+.bg-caramel-beige { background-color: #D9BFA2; }
+.bg-deep-charcoal { background-color: #30251F; }
+
+.text-chocolate-brown { color: #6B4435; }
+.text-deep-charcoal { color: #30251F; }
+.text-caramel-beige { color: #D9BFA2; }
+.text-warm-cream { color: #F3EBDD; }
+
+.border-caramel-beige { border-color: #D9BFA2; }
+.border-chocolate-brown { border-color: #6B4435; }
+.border-soft-beige { border-color: #EDE2D3; }
+
+/* Luxury 3D Card Hover & Subtle Depth */
+.card-luxury-3d {
+  background-color: #EDE2D3;
+  border: 1px solid rgba(217, 191, 162, 0.6);
+  box-shadow: 0 10px 30px -10px rgba(48, 37, 31, 0.08), 0 4px 6px -2px rgba(48, 37, 31, 0.04);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, box-shadow;
+}
+.card-luxury-3d:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 40px -12px rgba(107, 68, 53, 0.18), 0 8px 16px -4px rgba(48, 37, 31, 0.08);
+  border-color: #D9BFA2;
 }
 
 /* Prevent iOS Safari auto-zoom on input focus by ensuring at least 16px on mobile */

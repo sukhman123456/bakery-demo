@@ -200,7 +200,7 @@ export const BAKERY_SERVICES: BakeryServiceItem[] = [
 export interface BakeryProductItem {
   id: string;
   name: string;
-  category: "Cakes" | "Pastries" | "Cupcakes" | "Cookies" | "Breads" | "Desserts";
+  category: "Cakes" | "Pastries" | "Brownies" | "Donuts" | "Cookies" | "Cupcakes" | "Breads" | "Desserts" | "Beverages";
   description: string;
   image: string;
   dietary?: "Vegetarian" | "Eggless Available" | "Chef Special" | "Bestseller";
@@ -211,10 +211,13 @@ export interface BakeryProductItem {
 export const PRODUCT_CATEGORIES = [
   "Cakes",
   "Pastries",
-  "Cupcakes",
+  "Brownies",
+  "Donuts",
   "Cookies",
+  "Cupcakes",
   "Breads",
   "Desserts",
+  "Beverages",
 ] as const;
 
 export const BAKERY_PRODUCTS: BakeryProductItem[] = [
@@ -368,17 +371,51 @@ export const BAKERY_PRODUCTS: BakeryProductItem[] = [
     priceNote: "Fresh Daily",
   },
 
-  // 6. Desserts
+  // 6. Brownies
   {
-    id: "prod-dessert-1",
+    id: "prod-brownie-1",
     name: "Belgian Dark Chocolate Brownies",
-    category: "Desserts",
+    category: "Brownies",
     description: "Ultra-fudgy dark chocolate squares with a shiny crackly crust and melted chocolate pockets.",
     image: REAL_PHOTOS.brownies,
     dietary: "Vegetarian",
     tag: "Bestseller",
-    priceNote: "Fresh Daily",
+    priceNote: "₹120 / pc",
   },
+  {
+    id: "prod-brownie-2",
+    name: "Roasted Walnut Fudge Brownie",
+    category: "Brownies",
+    description: "Kashmiri golden walnuts folded into rich 70% dark Belgian cocoa batter with melted fudge chunks.",
+    image: REAL_PHOTOS.brownies,
+    dietary: "Vegetarian",
+    tag: "Chef Special",
+    priceNote: "₹140 / pc",
+  },
+
+  // 7. Donuts
+  {
+    id: "prod-donut-1",
+    name: "Belgian Dark Glazed Donut",
+    category: "Donuts",
+    description: "Fluffy artisan ring donut dipped in warm Valrhona chocolate glaze and chocolate curls.",
+    image: REAL_PHOTOS.donuts,
+    dietary: "Vegetarian",
+    tag: "Fresh Baked",
+    priceNote: "₹90 / pc",
+  },
+  {
+    id: "prod-donut-2",
+    name: "Caramel Cream Filled Donut",
+    category: "Donuts",
+    description: "Pillow-soft brioche donut generously piped with silky caramel cream and dusted with powdered sugar.",
+    image: REAL_PHOTOS.donuts,
+    dietary: "Vegetarian",
+    tag: "Bestseller",
+    priceNote: "₹95 / pc",
+  },
+
+  // 8. Desserts
   {
     id: "prod-dessert-2",
     name: "Celebration Dessert Gift Box",
@@ -387,7 +424,7 @@ export const BAKERY_PRODUCTS: BakeryProductItem[] = [
     image: REAL_PHOTOS.celebrationHamper,
     dietary: "Chef Special",
     tag: "Gift Hamper",
-    priceNote: "Custom Box",
+    priceNote: "From ₹650",
   },
   {
     id: "prod-dessert-3",
@@ -397,7 +434,39 @@ export const BAKERY_PRODUCTS: BakeryProductItem[] = [
     image: REAL_PHOTOS.cakePops,
     dietary: "Vegetarian",
     tag: "Party Favorite",
-    priceNote: "Fresh Daily",
+    priceNote: "₹60 / pc",
+  },
+
+  // 9. Beverages
+  {
+    id: "prod-bev-1",
+    name: "Artisan Cold Coffee with Belgian Ice Cream",
+    category: "Beverages",
+    description: "Signature freshly pulled espresso blended with creamy milk, dark chocolate fudge, and vanilla ice cream.",
+    image: REAL_PHOTOS.storeInterior,
+    dietary: "Vegetarian",
+    tag: "Signature Drink",
+    priceNote: "₹140",
+  },
+  {
+    id: "prod-bev-2",
+    name: "Royal Dark Chocolate Hot Cocoa",
+    category: "Beverages",
+    description: "Rich steamed dairy milk infused with pure 70% Belgian chocolate, served with whipped cream.",
+    image: REAL_PHOTOS.storeInterior,
+    dietary: "Vegetarian",
+    tag: "Winter Special",
+    priceNote: "₹130",
+  },
+  {
+    id: "prod-bev-3",
+    name: "Iced Caramel Macchiato",
+    category: "Beverages",
+    description: "Chilled milk kissed with Madagascar vanilla syrup, dark espresso float, and buttery golden caramel.",
+    image: REAL_PHOTOS.storeInterior,
+    dietary: "Vegetarian",
+    tag: "Cafe Favorite",
+    priceNote: "₹150",
   },
 ];
 

@@ -371,20 +371,20 @@ export function HomeExperience() {
       {/* ====================================================================
           LUXURY MARQUEE RIBBON
           ==================================================================== */}
-      <div className="w-full bg-[#180C06] text-[#DFC085] py-2.5 px-4 border-y border-[#C69A52]/30 overflow-hidden select-none">
-        <div className="flex items-center justify-center gap-4 sm:gap-8 text-[11px] sm:text-xs font-serif tracking-[0.18em] uppercase font-light text-center flex-wrap">
+      <div className="w-full bg-[#6B4435] text-[#F3EBDD] py-3 px-4 border-y border-[#D9BFA2]/40 overflow-hidden select-none">
+        <div className="flex items-center justify-center gap-4 sm:gap-8 text-[11px] sm:text-xs font-serif tracking-[0.2em] uppercase font-light text-center flex-wrap">
           <span className="flex items-center gap-1.5">
-            <span className="text-[#C69A52]">✦</span> Freshly Baked Daily in Dinanagar
+            <span className="text-[#D9BFA2]">✦</span> Freshly Baked Daily in Dinanagar
           </span>
-          <span className="text-[#C69A52] opacity-60">•</span>
+          <span className="text-[#D9BFA2] opacity-60">•</span>
           <span className="flex items-center gap-1.5">
             100% Pure Dairy Butter
           </span>
-          <span className="hidden sm:inline-block text-[#C69A52] opacity-60">•</span>
+          <span className="hidden sm:inline-block text-[#D9BFA2] opacity-60">•</span>
           <span className="hidden sm:flex items-center gap-1.5">
             Bespoke Theme & Wedding Cakes
           </span>
-          <span className="text-[#C69A52] opacity-60">•</span>
+          <span className="text-[#D9BFA2] opacity-60">•</span>
           <span className="flex items-center gap-1.5">
             Shree Ram Market • Near Punjab & Sind Bank
           </span>
