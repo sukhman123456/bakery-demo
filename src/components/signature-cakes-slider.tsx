@@ -1,12 +1,7 @@
-import { useEffect, useRef, useState } from "react";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { BRAND, REAL_PHOTOS } from "../lib/bakery-data";
-import { MessageCircle, ChevronLeft, ChevronRight, Sparkles, ArrowRight } from "lucide-react";
-
-if (typeof window !== "undefined") {
-  gsap.registerPlugin(ScrollTrigger);
-}
+import { useEffect, useRef, useState, useCallback } from "react";
+import { BRAND, type BakeryProductItem } from "../lib/bakery-data";
+import { MessageCircle, ChevronLeft, ChevronRight, Sparkles, ArrowRight, SlidersHorizontal } from "lucide-react";
+import { CakeCustomizerModal } from "./cake-customizer-modal";
 
 // ============================================================================
 // FLOATING INGREDIENTS VECTOR ARTWORK
@@ -104,12 +99,10 @@ function FreshStrawberry({ size = 46, rotation = 25 }: { size?: number; rotation
       style={{ transform: `rotate(${rotation}deg)` }}
       className="drop-shadow-[0_10px_22px_rgba(180,20,50,0.45)]"
     >
-      {/* Berry Body */}
       <path
         d="M30 52C22 45 10 34 10 22C10 14 18 10 26 12C28 12.5 30 14 30 14C30 14 32 12.5 34 12C42 10 50 14 50 22C50 34 38 45 30 52Z"
         fill="url(#berryGrad)"
       />
-      {/* Gloss Specular Highlight */}
       <path
         d="M16 20C16 16 22 14 26 15"
         stroke="#FFAEC0"
@@ -117,7 +110,6 @@ function FreshStrawberry({ size = 46, rotation = 25 }: { size?: number; rotation
         strokeLinecap="round"
         opacity="0.75"
       />
-      {/* Seeds */}
       <circle cx="20" cy="24" r="1" fill="#FFDE7A" />
       <circle cx="28" cy="22" r="1" fill="#FFDE7A" />
       <circle cx="36" cy="24" r="1" fill="#FFDE7A" />
@@ -127,7 +119,6 @@ function FreshStrawberry({ size = 46, rotation = 25 }: { size?: number; rotation
       <circle cx="26" cy="40" r="1" fill="#FFDE7A" />
       <circle cx="34" cy="38" r="1" fill="#FFDE7A" />
       <circle cx="30" cy="46" r="0.8" fill="#FFDE7A" />
-      {/* Green Calyx Leaves */}
       <path
         d="M30 12C28 6 22 8 20 10C24 11 26 13 28 14C24 14 18 16 19 19C22 18 26 16 29 15C29 17 28 21 30 22C32 21 31 17 31 15C34 16 38 18 41 19C42 16 36 14 32 14C34 13 36 11 40 10C38 8 32 6 30 12Z"
         fill="#2E7D32"
@@ -155,9 +146,7 @@ function FreshCherry({ size = 48, rotation = -15 }: { size?: number; rotation?: 
       style={{ transform: `rotate(${rotation}deg)` }}
       className="drop-shadow-[0_12px_24px_rgba(120,8,25,0.6)]"
     >
-      {/* Cherry Ball */}
       <circle cx="30" cy="36" r="18" fill="url(#cherryGrad)" />
-      {/* Glossy Specular Crescent */}
       <path
         d="M20 28C22 24 28 22 34 23"
         stroke="#FFA0B5"
@@ -165,7 +154,6 @@ function FreshCherry({ size = 48, rotation = -15 }: { size?: number; rotation?: 
         strokeLinecap="round"
         opacity="0.85"
       />
-      {/* Stem Indentation & Stem */}
       <ellipse cx="30" cy="22" rx="4" ry="2" fill="#3D060F" />
       <path
         d="M30 22C32 14 38 8 46 4"
@@ -204,7 +192,6 @@ function CaramelCube({ size = 44, rotation = 30 }: { size?: number; rotation?: n
       <path d="M30 10L48 20L30 32L12 24Z" fill="url(#caramelHighlight)" opacity="0.95" />
       <path d="M12 24L30 32L28 52L10 40Z" fill="url(#caramelSideL)" />
       <path d="M48 20L46 42L28 52L30 32Z" fill="url(#caramelSideR)" />
-      {/* Golden Honey Drip Edge */}
       <path d="M30 32L30 44" stroke="#FFE4A0" strokeWidth="2" strokeLinecap="round" opacity="0.8" />
       <defs>
         <linearGradient id="caramelTop" x1="10" y1="10" x2="48" y2="52" gradientUnits="userSpaceOnUse">
@@ -248,7 +235,7 @@ interface IngredientItem {
   rotation: number;
   left: string;
   top: string;
-  depth: "fg" | "mg" | "bg"; // foreground (faster), midground, background (slower)
+  depth: "fg" | "mg" | "bg";
   floatClass: string;
   blurClass?: string;
 }
@@ -256,7 +243,7 @@ interface IngredientItem {
 interface SignatureSlideData {
   id: string;
   index: number;
-  bgWord: string; // The giant oversized editorial background text
+  bgWord: string;
   cakeTitle: string;
   flavourBadge: string;
   description: string;
@@ -368,20 +355,17 @@ const SIGNATURE_SLIDES: SignatureSlideData[] = [
 
 export function SignatureCakesSlider() {
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
-  const containerRef = useRef<HTMLDivElement>(null);
-  const triggerRef = useRef<HTMLDivElement>(null);
-  const slidesRef = useRef<(HTMLDivElement | null)[]>([]);
-  const isAnimatingRef = useRef(false);
-  const currentSlideIndexRef = useRef(0);
-  currentSlideIndexRef.current = currentSlideIndex;
+  const trackRef = useRef<HTMLDivElement>(null);
+  const [customizerProduct, setCustomizerProduct] = useState<BakeryProductItem | null>(null);
+  const [isCustomizerOpen, setIsCustomizerOpen] = useState(false);
 
-  // Direct WhatsApp Order Handler
-  const handleOrder = (slide: SignatureSlideData) => {
-    const text = `Hello Karshni Bakers! I would like to order / inquire about your signature *${slide.cakeTitle}* (${slide.flavourBadge}). Please share available weights and delivery timing for Dinanagar.`;
-    window.open(`https://wa.me/${BRAND.whatsapp}?text=${encodeURIComponent(text)}`, "_blank");
-  };
+  // Drag-to-scroll state for desktop
+  const isDraggingRef = useRef(false);
+  const startXRef = useRef(0);
+  const scrollLeftRef = useRef(0);
+  const hasDraggedRef = useRef(false);
 
-  // Preload all 4 optimized WebP cake images for instant lag-free switching
+  // Preload images for instant lag-free switching
   useEffect(() => {
     SIGNATURE_SLIDES.forEach((s) => {
       const img = new Image();
@@ -389,249 +373,202 @@ export function SignatureCakesSlider() {
     });
   }, []);
 
-  // Navigate to target slide programmatically
-  const goToSlide = (targetIndex: number) => {
-    if (targetIndex < 0 || targetIndex >= SIGNATURE_SLIDES.length) return;
-    if (isAnimatingRef.current) return;
-    isAnimatingRef.current = true;
-    setCurrentSlideIndex(targetIndex);
-
-    // Sync ScrollTrigger position silently without competing smooth-scroll
-    if (typeof window !== "undefined") {
-      const st = ScrollTrigger.getById("signature-slider-pin");
-      if (st && st.scroll && st.start && st.end) {
-        const targetScroll = st.start + (targetIndex / (SIGNATURE_SLIDES.length - 1)) * (st.end - st.start);
-        st.scroll(targetScroll);
-      }
-    }
-
-    setTimeout(() => {
-      isAnimatingRef.current = false;
-    }, 420);
-  };
-
-  // GSAP ScrollTrigger Pinned Presentation with Snapping
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-
-    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (prefersReducedMotion) return;
-
-    const timer = setTimeout(() => {
-      const ctx = gsap.context(() => {
-        if (!triggerRef.current || !containerRef.current) return;
-
-        ScrollTrigger.create({
-          id: "signature-slider-pin",
-          trigger: triggerRef.current,
-          start: "top top",
-          end: () => `+=${Math.max(1400, window.innerHeight * 1.5)}`,
-          pin: true,
-          scrub: 0.3,
-          anticipatePin: 1,
-          snap: {
-            snapTo: 1 / (SIGNATURE_SLIDES.length - 1),
-            duration: { min: 0.2, max: 0.4 },
-            delay: 0.05,
-            ease: "power2.out",
-          },
-          onUpdate: (self) => {
-            if (isAnimatingRef.current) return;
-            const progress = self.progress;
-            const totalSlides = SIGNATURE_SLIDES.length;
-            const rawIndex = progress * (totalSlides - 1);
-            const roundedIndex = Math.min(totalSlides - 1, Math.max(0, Math.round(rawIndex)));
-            if (roundedIndex !== currentSlideIndexRef.current) {
-              setCurrentSlideIndex(roundedIndex);
-            }
-          },
-        });
-      });
-
-      return () => ctx.revert();
-    }, 150);
-
-    return () => clearTimeout(timer);
+  // Smooth slide navigation
+  const scrollToSlide = useCallback((index: number) => {
+    const track = trackRef.current;
+    if (!track) return;
+    const clamped = Math.max(0, Math.min(SIGNATURE_SLIDES.length - 1, index));
+    const slideWidth = track.clientWidth;
+    track.scrollTo({
+      left: clamped * slideWidth,
+      behavior: "smooth",
+    });
+    setCurrentSlideIndex(clamped);
   }, []);
 
-  // Direct Mouse Wheel & Trackpad gesture navigation when viewing the section
-  useEffect(() => {
-    const container = containerRef.current;
-    if (!container) return;
-
-    let isLocked = false;
-
-    const handleWheel = (e: WheelEvent) => {
-      const rect = container.getBoundingClientRect();
-      const inView = rect.top <= 100 && rect.bottom >= window.innerHeight - 100;
-      if (!inView) return;
-
-      // When locked during transition, block rapid triggers to prevent stutter
-      if (isLocked || isAnimatingRef.current) {
-        if (
-          (e.deltaY > 0 && currentSlideIndexRef.current < SIGNATURE_SLIDES.length - 1) ||
-          (e.deltaY < 0 && currentSlideIndexRef.current > 0)
-        ) {
-          e.preventDefault();
-        }
-        return;
-      }
-
-      if (e.deltaY > 18) {
-        // Scrolling DOWN
-        if (currentSlideIndexRef.current < SIGNATURE_SLIDES.length - 1) {
-          e.preventDefault();
-          isLocked = true;
-          goToSlide(currentSlideIndexRef.current + 1);
-          setTimeout(() => {
-            isLocked = false;
-          }, 420);
-        }
-      } else if (e.deltaY < -18) {
-        // Scrolling UP
-        if (currentSlideIndexRef.current > 0) {
-          e.preventDefault();
-          isLocked = true;
-          goToSlide(currentSlideIndexRef.current - 1);
-          setTimeout(() => {
-            isLocked = false;
-          }, 420);
-        }
-      }
-    };
-
-    container.addEventListener("wheel", handleWheel, { passive: false });
-    return () => {
-      container.removeEventListener("wheel", handleWheel);
-    };
-  }, []);
-
-  // Keyboard Navigation (ArrowLeft / ArrowRight)
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "ArrowRight") {
-        goToSlide(currentSlideIndex + 1);
-      } else if (e.key === "ArrowLeft") {
-        goToSlide(currentSlideIndex - 1);
-      }
-    };
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [currentSlideIndex]);
-
-  // Touch Swipe Gesture for Mobile
-  const touchStartX = useRef<number | null>(null);
-  const touchStartY = useRef<number | null>(null);
-
-  const handleTouchStart = (e: React.TouchEvent) => {
-    const touch = e.touches[0];
-    if (!touch) return;
-    touchStartX.current = touch.clientX;
-    touchStartY.current = touch.clientY;
-  };
-
-  const handleTouchEnd = (e: React.TouchEvent) => {
-    if (touchStartX.current === null || touchStartY.current === null) return;
-    const touch = e.changedTouches[0];
-    if (!touch) return;
-    const diffX = touchStartX.current - touch.clientX;
-    const diffY = touchStartY.current - touch.clientY;
-
-    // Detect horizontal swipe if larger than vertical scroll
-    if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 40) {
-      if (diffX > 0) {
-        goToSlide(currentSlideIndex + 1);
-      } else {
-        goToSlide(currentSlideIndex - 1);
+  // Track horizontal scroll progress to update slide index counter and pills
+  const handleTrackScroll = () => {
+    const track = trackRef.current;
+    if (!track) return;
+    const scrollLeft = track.scrollLeft;
+    const slideWidth = track.clientWidth;
+    if (slideWidth > 0) {
+      const newIndex = Math.round(scrollLeft / slideWidth);
+      if (newIndex >= 0 && newIndex < SIGNATURE_SLIDES.length && newIndex !== currentSlideIndex) {
+        setCurrentSlideIndex(newIndex);
       }
     }
-    touchStartX.current = null;
-    touchStartY.current = null;
   };
 
-  const activeSlide = SIGNATURE_SLIDES[currentSlideIndex] ?? SIGNATURE_SLIDES[0]!;
+  // Mouse Drag-to-slide on Desktop
+  const handleMouseDown = (e: React.MouseEvent) => {
+    const track = trackRef.current;
+    if (!track) return;
+    isDraggingRef.current = true;
+    hasDraggedRef.current = false;
+    startXRef.current = e.pageX - track.offsetLeft;
+    scrollLeftRef.current = track.scrollLeft;
+  };
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!isDraggingRef.current) return;
+    const track = trackRef.current;
+    if (!track) return;
+    const x = e.pageX - track.offsetLeft;
+    const walk = (x - startXRef.current) * 1.2;
+    if (Math.abs(walk) > 4) {
+      hasDraggedRef.current = true;
+    }
+    track.scrollLeft = scrollLeftRef.current - walk;
+  };
+
+  const handleMouseUp = () => {
+    if (!isDraggingRef.current) return;
+    isDraggingRef.current = false;
+    const track = trackRef.current;
+    if (track && hasDraggedRef.current) {
+      const slideWidth = track.clientWidth;
+      const nearestIndex = Math.round(track.scrollLeft / slideWidth);
+      scrollToSlide(nearestIndex);
+    }
+  };
+
+  // Direct WhatsApp Order
+  const handleOrder = (slide: SignatureSlideData) => {
+    const text = `Hello Karshni Bakers! I would like to order your signature *${slide.cakeTitle}* (${slide.flavourBadge}) in Dinanagar. Please confirm price and delivery timing.`;
+    window.open(`https://wa.me/${BRAND.whatsapp}?text=${encodeURIComponent(text)}`, "_blank");
+  };
+
+  // Open Customizer Modal
+  const handleCustomize = (slide: SignatureSlideData) => {
+    setCustomizerProduct({
+      id: slide.id,
+      name: slide.cakeTitle,
+      category: "Cakes",
+      priceNote: slide.price,
+      tag: "Signature",
+      description: slide.description,
+      image: slide.image,
+      dietary: "Eggless Available",
+    });
+    setIsCustomizerOpen(true);
+  };
 
   return (
-    <div
+    <section
       id="signature-cakes"
-      ref={triggerRef}
-      className="relative w-full select-none isolate"
+      className="relative w-full bg-[#120703] text-white select-none isolate border-y border-[#C69A52]/20"
+      aria-label="Signature Celebration Cakes Showcase"
     >
       {/* ====================================================================
-          FULL-VIEWPORT IMMERSIVE PRODUCT SLIDER CONTAINER (~100vh)
+          TOP BAR: Brand Header & Interactive Quick Cake Pills
           ==================================================================== */}
-      <section
-        ref={containerRef}
-        onTouchStart={handleTouchStart}
-        onTouchEnd={handleTouchEnd}
-        className="relative w-full h-[100dvh] min-h-[640px] max-h-[1100px] overflow-hidden flex flex-col justify-between transition-colors duration-1000 ease-out"
-        style={{
-          background: activeSlide.bgGradient,
-        }}
-        aria-label="Signature Cakes Showcase"
-      >
-        {/* ==================================================================
-            LAYER 1 — ATMOSPHERIC LIGHTING & RADIAL HALO
-            ================================================================== */}
-        <div
-          className="absolute inset-0 pointer-events-none transition-all duration-1000 ease-out"
-          style={{
-            background: `radial-gradient(circle at 50% 50%, ${activeSlide.cakeShadowColor} 0%, transparent 65%)`,
-          }}
-        />
+      <header className="relative z-30 pt-8 sm:pt-12 pb-4 px-4 sm:px-10 max-w-[1440px] w-full mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+        {/* Left: Brand badge */}
+        <div className="flex items-center gap-2 text-xs uppercase tracking-[0.24em] text-[#DFC085] font-semibold text-center sm:text-left">
+          <span className="text-[#DFC085]">✦</span>
+          <span>Signature Collection</span>
+          <span className="hidden sm:inline text-white/30">•</span>
+          <span className="hidden sm:inline text-white/70">Artisan Haute Pâtisserie</span>
+        </div>
 
-        {/* ==================================================================
-            TOP BAR: Subline Brand Tag & Slide Indicator Numbers (01 / 04)
-            ================================================================== */}
-        <header className="relative z-30 pt-16 sm:pt-20 px-6 sm:px-12 max-w-[1440px] w-full mx-auto flex items-center justify-between">
-          <div className="flex items-center gap-2 text-xs uppercase tracking-[0.26em] text-[#DFC085] font-semibold">
-            <span className="text-[#DFC085]">✦</span>
-            <span>Signature Collection</span>
-            <span className="hidden sm:inline text-white/40">•</span>
-            <span className="hidden sm:inline text-white/70">Artisan Haute Pâtisserie</span>
-          </div>
-
-          {/* Slide Counter (e.g. 01 / 04) */}
-          <div className="flex items-center gap-3">
-            <span className="font-serif text-lg sm:text-xl font-bold tracking-widest text-[#DFC085]">
-              {`0${currentSlideIndex + 1}`}
-            </span>
-            <span className="text-white/40 text-xs">/</span>
-            <span className="text-white/60 text-xs font-mono">04</span>
-          </div>
-        </header>
-
-        {/* ==================================================================
-            LAYER 2 & 3 & 4 — THE IMMERSIVE SLIDE COMPOSITION
-            ================================================================== */}
-        <div className="relative flex-1 w-full max-w-[1440px] mx-auto px-4 sm:px-8 flex items-center justify-center overflow-hidden">
+        {/* Center: Quick Select Flavour Pills */}
+        <div className="flex items-center gap-1.5 sm:gap-2 flex-wrap justify-center">
           {SIGNATURE_SLIDES.map((slide, sIdx) => {
             const isActive = sIdx === currentSlideIndex;
-            const isLeft = sIdx < currentSlideIndex;
-            const isRight = sIdx > currentSlideIndex;
+            return (
+              <button
+                key={slide.id}
+                type="button"
+                onClick={() => scrollToSlide(sIdx)}
+                className={`px-3 py-1.5 rounded-full text-xs font-medium tracking-wide transition-all cursor-pointer flex items-center gap-1.5 ${
+                  isActive
+                    ? "bg-gradient-to-r from-[#F5DFB0] via-[#DFC085] to-[#B97942] text-[#140A04] font-bold shadow-[0_0_16px_rgba(223,192,133,0.55)] scale-105"
+                    : "bg-[#221008]/80 text-[#DFC085]/70 hover:bg-[#32170D] hover:text-white border border-[#DFC085]/20"
+                }`}
+              >
+                <span className="text-[10px] font-mono opacity-80">{`0${sIdx + 1}`}</span>
+                <span>{slide.cakeTitle.split(" ")[0]}</span>
+              </button>
+            );
+          })}
+        </div>
 
-            // Directional transform classes based on active state (GPU-only opacity & transform)
-            let transformClass = "opacity-0 pointer-events-none";
-            if (isActive) {
-              transformClass = "opacity-100 pointer-events-auto z-20 scale-100 translate-x-0";
-            } else if (isLeft) {
-              transformClass = "opacity-0 pointer-events-none z-10 scale-95 -translate-x-8";
-            } else if (isRight) {
-              transformClass = "opacity-0 pointer-events-none z-10 scale-95 translate-x-8";
-            }
+        {/* Right: Slide Counter */}
+        <div className="flex items-center gap-2">
+          <span className="font-serif text-lg sm:text-xl font-bold tracking-widest text-[#DFC085]">
+            {`0${currentSlideIndex + 1}`}
+          </span>
+          <span className="text-white/40 text-xs">/</span>
+          <span className="text-white/60 text-xs font-mono">04</span>
+        </div>
+      </header>
 
+      {/* ====================================================================
+          HORIZONTAL SCROLL / SWIPE TRACK (Continuous & Free Page Scroll)
+          ==================================================================== */}
+      <div className="relative w-full overflow-hidden">
+        {/* Floating Left Navigation Arrow Button */}
+        <button
+          type="button"
+          onClick={() => scrollToSlide(currentSlideIndex - 1)}
+          disabled={currentSlideIndex === 0}
+          aria-label="Previous Cake"
+          className={`absolute left-3 sm:left-6 top-1/2 -translate-y-1/2 z-40 p-2.5 sm:p-3.5 rounded-full border transition-all cursor-pointer ${
+            currentSlideIndex === 0
+              ? "opacity-0 pointer-events-none"
+              : "border-[#DFC085]/60 text-[#DFC085] bg-[#160A04]/90 backdrop-blur-md hover:border-[#DFC085] hover:text-white hover:scale-110 active:scale-95 shadow-[0_8px_24px_rgba(0,0,0,0.85)]"
+          }`}
+        >
+          <ChevronLeft size={22} />
+        </button>
+
+        {/* Floating Right Navigation Arrow Button */}
+        <button
+          type="button"
+          onClick={() => scrollToSlide(currentSlideIndex + 1)}
+          disabled={currentSlideIndex === SIGNATURE_SLIDES.length - 1}
+          aria-label="Next Cake"
+          className={`absolute right-3 sm:right-6 top-1/2 -translate-y-1/2 z-40 p-2.5 sm:p-3.5 rounded-full border transition-all cursor-pointer ${
+            currentSlideIndex === SIGNATURE_SLIDES.length - 1
+              ? "opacity-0 pointer-events-none"
+              : "border-[#DFC085]/60 text-[#DFC085] bg-[#160A04]/90 backdrop-blur-md hover:border-[#DFC085] hover:text-white hover:scale-110 active:scale-95 shadow-[0_8px_24px_rgba(0,0,0,0.85)]"
+          }`}
+        >
+          <ChevronRight size={22} />
+        </button>
+
+        {/* The Native Horizontal Scroll-Snap Track */}
+        <div
+          ref={trackRef}
+          onScroll={handleTrackScroll}
+          onMouseDown={handleMouseDown}
+          onMouseMove={handleMouseMove}
+          onMouseUp={handleMouseUp}
+          onMouseLeave={handleMouseUp}
+          className="relative w-full flex overflow-x-auto snap-x snap-mandatory scrollbar-none select-none scroll-smooth touch-pan-x cursor-grab active:cursor-grabbing"
+          style={{
+            scrollbarWidth: "none",
+            msOverflowStyle: "none",
+          }}
+        >
+          {SIGNATURE_SLIDES.map((slide, sIdx) => {
             return (
               <div
                 key={slide.id}
-                ref={(el) => {
-                  slidesRef.current[sIdx] = el;
-                }}
-                className={`absolute inset-0 flex flex-col items-center justify-center transition-opacity transition-transform duration-400 ease-out will-change-[opacity,transform] ${transformClass}`}
+                data-slide-index={sIdx}
+                className="w-full min-w-full flex-shrink-0 snap-center relative min-h-[620px] sm:min-h-[680px] lg:h-[80vh] max-h-[860px] flex flex-col items-center justify-center overflow-hidden transition-colors duration-700 select-none px-4 py-8"
+                style={{ background: slide.bgGradient }}
               >
-                {/* --------------------------------------------------------
-                    LAYER 2 — OVERSIZED EDITORIAL BACKGROUND TYPOGRAPHY
-                    Positioned BEHIND the cake with parallax depth
-                    -------------------------------------------------------- */}
+                {/* Layer 1: Ambient Lighting Spotlight */}
+                <div
+                  className="absolute inset-0 pointer-events-none"
+                  style={{
+                    background: `radial-gradient(circle at 50% 50%, ${slide.cakeShadowColor} 0%, transparent 68%)`,
+                  }}
+                />
+
+                {/* Layer 2: Oversized Editorial Typography Background Watermark */}
                 <div
                   className="absolute inset-0 flex items-center justify-center pointer-events-none select-none overflow-hidden z-0"
                   aria-hidden="true"
@@ -640,7 +577,7 @@ export function SignatureCakesSlider() {
                     className="font-serif font-black tracking-tighter uppercase text-center leading-none whitespace-nowrap"
                     style={{
                       fontSize: "clamp(4.5rem, 16vw, 15rem)",
-                      background: "linear-gradient(180deg, rgba(255, 255, 255, 0.14) 0%, rgba(223, 192, 133, 0.04) 100%)",
+                      background: "linear-gradient(180deg, rgba(255, 255, 255, 0.12) 0%, rgba(223, 192, 133, 0.03) 100%)",
                       WebkitBackgroundClip: "text",
                       WebkitTextFillColor: "transparent",
                       letterSpacing: "-0.04em",
@@ -651,10 +588,7 @@ export function SignatureCakesSlider() {
                   </span>
                 </div>
 
-                {/* --------------------------------------------------------
-                    LAYER 4 — FLOATING ISOLATED INGREDIENTS
-                    Different depths, subtle floating movement & rotations
-                    -------------------------------------------------------- */}
+                {/* Layer 4: Floating Artisan Ingredients */}
                 <div className="absolute inset-0 pointer-events-none z-10 overflow-hidden">
                   {slide.ingredients.map((ing) => (
                     <div
@@ -688,25 +622,21 @@ export function SignatureCakesSlider() {
                   ))}
                 </div>
 
-                {/* --------------------------------------------------------
-                    LAYER 3 — THE MAIN CAKE (CENTER OF THE SCREEN)
-                    Realistic proportions, contact shadow, pedestal reflection
-                    -------------------------------------------------------- */}
-                <div className="relative z-20 flex flex-col items-center justify-center my-auto w-full max-w-lg px-4">
-                  {/* The Cake Image Container */}
-                  <div className="relative w-64 h-64 sm:w-80 sm:h-80 md:w-96 md:h-96 flex items-center justify-center">
-                    {/* Ambient Glow behind Cake */}
+                {/* Layer 3: Central Cake Presentation & Card Info */}
+                <div className="relative z-20 flex flex-col items-center justify-center my-auto w-full max-w-lg px-4 text-center">
+                  {/* Cake Image Box with Shadow & Glow */}
+                  <div className="relative w-60 h-60 sm:w-76 sm:h-76 md:w-88 md:h-88 lg:w-96 lg:h-96 flex items-center justify-center group pointer-events-auto">
+                    {/* Glow */}
                     <div
-                      className="absolute inset-4 rounded-full transition-opacity duration-500 pointer-events-none"
+                      className="absolute inset-4 rounded-full pointer-events-none"
                       style={{
                         background: `radial-gradient(circle, ${slide.cakeShadowColor} 0%, transparent 70%)`,
                         filter: "blur(20px)",
                       }}
                     />
-
-                    {/* Multi-Tier Pedestal & Grounding Shadows */}
+                    {/* Pedestal Shadows */}
                     <div
-                      className="absolute -bottom-6 sm:-bottom-8 w-[88%] h-12 rounded-[100%] pointer-events-none transition-transform duration-500 group-hover:scale-105 will-change-transform"
+                      className="absolute -bottom-6 sm:-bottom-8 w-[88%] h-12 rounded-[100%] pointer-events-none"
                       style={{
                         background: "radial-gradient(ellipse at center, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.65) 45%, transparent 75%)",
                         filter: "blur(14px)",
@@ -720,22 +650,18 @@ export function SignatureCakesSlider() {
                       }}
                     />
 
-                    {/* Floating Artisan Cake Presentation (Seamless blend & contrast with background — zero circular border) */}
-                    <div className="relative w-full h-full flex items-center justify-center group pointer-events-auto">
-                      <img
-                        src={slide.image}
-                        alt={`${slide.cakeTitle} — Karshni Bakers`}
-                        loading="eager"
-                        decoding="async"
-                        className="relative z-10 w-full h-full object-contain select-none transition-transform duration-500 ease-out group-hover:scale-105 will-change-transform filter drop-shadow-[0_16px_30px_rgba(0,0,0,0.85)]"
-                      />
-                    </div>
+                    {/* Image */}
+                    <img
+                      src={slide.image}
+                      alt={`${slide.cakeTitle} — Karshni Bakers Dinanagar`}
+                      loading="eager"
+                      decoding="async"
+                      className="relative z-10 w-full h-full object-contain select-none transition-transform duration-500 ease-out group-hover:scale-105 will-change-transform filter drop-shadow-[0_16px_30px_rgba(0,0,0,0.85)]"
+                    />
                   </div>
 
-                  {/* --------------------------------------------------------
-                      CAKE DETAILS: Title, Tagline & Direct Price
-                      -------------------------------------------------------- */}
-                  <div className="relative z-25 text-center mt-3 sm:mt-5 space-y-2 max-w-md">
+                  {/* Cake Details */}
+                  <div className="relative z-25 text-center mt-2 sm:mt-4 space-y-1.5 sm:space-y-2 max-w-md">
                     <span
                       className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-[#180A04]/90 backdrop-blur-md border text-[10px] sm:text-xs font-semibold tracking-widest uppercase"
                       style={{ color: "#DFC085", borderColor: "rgba(223, 192, 133, 0.45)" }}
@@ -745,35 +671,46 @@ export function SignatureCakesSlider() {
                     </span>
 
                     <h3
-                      className="font-serif text-2xl sm:text-3xl md:text-4xl font-medium drop-shadow-[0_4px_16px_rgba(0,0,0,0.95)] tracking-tight"
-                      style={{ color: "#FFFFFF" }}
+                      className="font-serif text-2xl sm:text-3xl md:text-4xl font-medium drop-shadow-[0_4px_16px_rgba(0,0,0,0.95)] tracking-tight text-white"
                     >
                       {slide.cakeTitle}
                     </h3>
 
                     <p
-                      className="font-sans text-xs sm:text-sm leading-relaxed max-w-sm mx-auto line-clamp-2 px-2"
-                      style={{ color: "rgba(245, 237, 226, 0.85)" }}
+                      className="font-sans text-xs sm:text-sm leading-relaxed max-w-sm mx-auto line-clamp-2 px-2 text-[#F5EDE2]/85"
                     >
                       {slide.description}
                     </p>
 
-                    <div className="pt-1 flex items-center justify-center gap-4">
+                    {/* Action Buttons */}
+                    <div className="pt-2 flex flex-wrap items-center justify-center gap-2 sm:gap-3">
                       <span
-                        className="font-serif text-sm sm:text-base font-semibold"
+                        className="font-serif text-sm sm:text-base font-semibold px-2"
                         style={{ color: "#DFC085" }}
                       >
                         {slide.price}
                       </span>
-                      <span className="text-white/30">•</span>
+                      <span className="text-white/30 hidden sm:inline">•</span>
+
+                      {/* WhatsApp Direct Order */}
                       <button
                         type="button"
                         onClick={() => handleOrder(slide)}
-                        className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-[#F5DFB0] via-[#DFC085] to-[#B97942] text-[#140A04] text-xs font-bold tracking-wider uppercase shadow-[0_4px_20px_rgba(223,192,133,0.5)] hover:scale-105 active:scale-95 transition-all cursor-pointer"
+                        className="inline-flex items-center gap-2 px-4 sm:px-5 py-2 sm:py-2.5 rounded-full bg-gradient-to-r from-[#F5DFB0] via-[#DFC085] to-[#B97942] text-[#140A04] text-xs font-bold tracking-wider uppercase shadow-[0_4px_20px_rgba(223,192,133,0.45)] hover:scale-105 active:scale-95 transition-all cursor-pointer"
                       >
                         <MessageCircle size={14} />
-                        <span>Order This Cake</span>
+                        <span>Order on WhatsApp</span>
                         <ArrowRight size={13} />
+                      </button>
+
+                      {/* Customizer Modal Trigger */}
+                      <button
+                        type="button"
+                        onClick={() => handleCustomize(slide)}
+                        className="inline-flex items-center gap-1.5 px-3.5 py-2 sm:py-2.5 rounded-full bg-[#200F07]/90 hover:bg-[#2C150A] text-[#DFC085] border border-[#DFC085]/40 text-xs font-semibold tracking-wide hover:border-[#DFC085] hover:scale-105 active:scale-95 transition-all cursor-pointer"
+                      >
+                        <SlidersHorizontal size={13} />
+                        <span>Customise</span>
                       </button>
                     </div>
                   </div>
@@ -782,67 +719,77 @@ export function SignatureCakesSlider() {
             );
           })}
         </div>
+      </div>
 
-        {/* ==================================================================
-            LAYER 5 — INTERACTIVE NAVIGATION CONTROLS & INDICATORS
-            ================================================================== */}
-        <footer className="relative z-30 pb-6 sm:pb-8 px-6 sm:px-12 max-w-[1440px] w-full mx-auto flex items-center justify-between">
-          {/* Previous / Next Arrow Controls */}
-          <div className="flex items-center gap-2">
-            <button
-              type="button"
-              onClick={() => goToSlide(currentSlideIndex - 1)}
-              disabled={currentSlideIndex === 0}
-              aria-label="Previous Cake"
-              className={`p-2.5 sm:p-3 rounded-full border transition-all cursor-pointer ${currentSlideIndex === 0
+      {/* ====================================================================
+          FOOTER CONTROLS: Arrow Buttons, Indicator Dots & Free Scroll Prompt
+          ==================================================================== */}
+      <footer className="relative z-30 py-4 sm:py-5 px-6 sm:px-12 max-w-[1440px] w-full mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 text-center sm:text-left">
+        {/* Previous / Next Arrow Controls */}
+        <div className="flex items-center gap-2">
+          <button
+            type="button"
+            onClick={() => scrollToSlide(currentSlideIndex - 1)}
+            disabled={currentSlideIndex === 0}
+            aria-label="Previous Cake"
+            className={`p-2 sm:p-2.5 rounded-full border transition-all cursor-pointer ${
+              currentSlideIndex === 0
                 ? "border-white/10 text-white/20 cursor-not-allowed"
-                : "border-[#DFC085]/40 text-[#DFC085] bg-[#160A04]/80 backdrop-blur-md hover:border-[#DFC085] hover:text-white hover:scale-110 active:scale-95 shadow-md"
-                }`}
-            >
-              <ChevronLeft size={18} />
-            </button>
+                : "border-[#DFC085]/40 text-[#DFC085] bg-[#160A04]/80 backdrop-blur-md hover:border-[#DFC085] hover:text-white hover:scale-110 active:scale-95"
+            }`}
+          >
+            <ChevronLeft size={16} />
+          </button>
 
-            <button
-              type="button"
-              onClick={() => goToSlide(currentSlideIndex + 1)}
-              disabled={currentSlideIndex === SIGNATURE_SLIDES.length - 1}
-              aria-label="Next Cake"
-              className={`p-2.5 sm:p-3 rounded-full border transition-all cursor-pointer ${currentSlideIndex === SIGNATURE_SLIDES.length - 1
+          <button
+            type="button"
+            onClick={() => scrollToSlide(currentSlideIndex + 1)}
+            disabled={currentSlideIndex === SIGNATURE_SLIDES.length - 1}
+            aria-label="Next Cake"
+            className={`p-2 sm:p-2.5 rounded-full border transition-all cursor-pointer ${
+              currentSlideIndex === SIGNATURE_SLIDES.length - 1
                 ? "border-white/10 text-white/20 cursor-not-allowed"
-                : "border-[#DFC085]/40 text-[#DFC085] bg-[#160A04]/80 backdrop-blur-md hover:border-[#DFC085] hover:text-white hover:scale-110 active:scale-95 shadow-md"
-                }`}
-            >
-              <ChevronRight size={18} />
-            </button>
-          </div>
+                : "border-[#DFC085]/40 text-[#DFC085] bg-[#160A04]/80 backdrop-blur-md hover:border-[#DFC085] hover:text-white hover:scale-110 active:scale-95"
+            }`}
+          >
+            <ChevronRight size={16} />
+          </button>
+        </div>
 
-          {/* 4 Clickable Slide Indicator Pills */}
-          <nav className="flex items-center gap-2 sm:gap-2.5" aria-label="Slide Indicator Tabs">
-            {SIGNATURE_SLIDES.map((slide, idx) => {
-              const isActive = idx === currentSlideIndex;
-              return (
-                <button
-                  key={slide.id}
-                  type="button"
-                  onClick={() => goToSlide(idx)}
-                  aria-label={`Go to ${slide.cakeTitle}`}
-                  className={`h-2 sm:h-2.5 rounded-full transition-all duration-500 cursor-pointer ${isActive
+        {/* 4 Clickable Slide Indicator Pills */}
+        <nav className="flex items-center gap-2 sm:gap-2.5" aria-label="Slide Indicator Tabs">
+          {SIGNATURE_SLIDES.map((slide, idx) => {
+            const isActive = idx === currentSlideIndex;
+            return (
+              <button
+                key={slide.id}
+                type="button"
+                onClick={() => scrollToSlide(idx)}
+                aria-label={`Go to ${slide.cakeTitle}`}
+                className={`h-2 sm:h-2.5 rounded-full transition-all duration-300 cursor-pointer ${
+                  isActive
                     ? "w-8 sm:w-10 bg-gradient-to-r from-[#F5DFB0] via-[#DFC085] to-[#B97942] shadow-[0_0_12px_rgba(223,192,133,0.85)]"
                     : "w-2 sm:w-2.5 bg-white/25 hover:bg-white/50"
-                    }`}
-                />
-              );
-            })}
-          </nav>
+                }`}
+              />
+            );
+          })}
+        </nav>
 
-          {/* Swipe Hint on Mobile / Scroll Hint on Desktop */}
-          <div className="text-[11px] text-[#DFC085]/75 font-light tracking-wider uppercase">
-            <span className="hidden sm:inline">Scroll to slide • Click to explore</span>
-            <span className="sm:hidden">Swipe or Tap ‹ ›</span>
-          </div>
-        </footer>
-      </section>
-    </div>
+        {/* User-friendly Navigation Hint */}
+        <div className="text-[11px] text-[#DFC085]/75 font-light tracking-wider uppercase">
+          <span>Swipe or click ‹ › to browse cakes • Scroll freely down</span>
+        </div>
+      </footer>
+
+      {/* Customizer Modal */}
+      {isCustomizerOpen && (
+        <CakeCustomizerModal
+          isOpen={isCustomizerOpen}
+          onClose={() => setIsCustomizerOpen(false)}
+          product={customizerProduct}
+        />
+      )}
+    </section>
   );
 }
-
