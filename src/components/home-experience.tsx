@@ -5,6 +5,8 @@ import {
   MessageCircle,
   X,
   CheckCircle2,
+  ArrowRight,
+  Sparkles,
 } from "lucide-react";
 import {
   BRAND,
@@ -250,35 +252,54 @@ export function HomeExperience() {
             MOBILE & TABLET CLEAN LUXURY BRANDING (1-Line Minimal & Kaint)
             - Replaced heavy multi-line stacked text with a single elegant line
             - Leaves the central artisan cake 100% visible, unobstructed & stunning
+            - Rich luxury micro-animations: floating glow, golden text shimmer, light sheen sweep, live indicator
             ================================================================ */}
         <div
           ref={heroTextRef}
           className="lg:hidden relative z-20 flex-1 flex flex-col items-center justify-between py-10 px-4 text-center pointer-events-auto will-change-transform"
         >
-          {/* Top: 1-Line Clean Luxury Brand Pill */}
-          <div className="pt-2">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#180C05]/85 backdrop-blur-md border border-[#D9BFA2]/60 text-[#D9BFA2] text-xs font-serif tracking-[0.24em] uppercase shadow-[0_4px_24px_rgba(0,0,0,0.85)] select-none">
-              <span className="text-[#D9BFA2] text-[10px]">✦</span>
-              <span>A Little Sweetness In Every Moment</span>
-              <span className="text-[#D9BFA2] text-[10px]">✦</span>
+          {/* Top: 1-Line Clean Luxury Brand Pill with Floating Glow & Continuous Gold Shimmer */}
+          <div className="pt-2 animate-luxury-float-glow">
+            <div className="relative overflow-hidden inline-flex items-center gap-2 sm:gap-2.5 px-4 sm:px-5 py-2 sm:py-2.5 rounded-full bg-[#180C05]/90 backdrop-blur-md border border-[#D9BFA2]/75 text-[#D9BFA2] text-xs font-serif tracking-[0.24em] uppercase shadow-[0_6px_30px_rgba(0,0,0,0.9),0_0_20px_rgba(217,191,162,0.3)] select-none">
+              {/* Animated Specular Light Beam sweeping across pill */}
+              <div className="absolute inset-0 w-1/2 h-full bg-gradient-to-r from-transparent via-[#FFF8E7]/25 to-transparent -skew-x-12 animate-shimmer-sweep pointer-events-none" />
+
+              <Sparkles size={12} className="text-[#DFC085] animate-sparkle-twinkle flex-shrink-0" />
+              <span className="animate-gold-shimmer-text font-medium text-[11px] sm:text-xs tracking-[0.22em]">
+                A Little Sweetness In Every Moment
+              </span>
+              <Sparkles size={12} className="text-[#DFC085] animate-sparkle-twinkle-delay flex-shrink-0" />
             </div>
           </div>
 
-          {/* Bottom: Clean Luxury Actions */}
+          {/* Ambient Center Spotlight Glow behind the cake */}
+          <div className="pointer-events-none absolute inset-0 flex items-center justify-center -z-10">
+            <div className="w-64 h-64 sm:w-80 sm:h-80 rounded-full bg-gradient-radial from-[#DFC085]/15 via-[#6B4435]/8 to-transparent blur-2xl animate-halo-pulse" />
+          </div>
+
+          {/* Bottom: Clean Luxury Actions with Micro-Interactions & Sheen */}
           <div className="pb-4 flex items-center justify-center gap-3">
             <button
               type="button"
               onClick={() => scrollToSection("signature-cakes")}
-              className="px-5 py-2.5 rounded-full bg-gradient-to-r from-[#D9BFA2] via-[#F3EBDD] to-[#D9BFA2] text-[#30251F] text-xs font-bold tracking-wider uppercase shadow-[0_4px_20px_rgba(217,191,162,0.4)] hover:scale-105 active:scale-95 transition-all cursor-pointer"
+              className="group relative overflow-hidden px-5 py-2.5 rounded-full bg-gradient-to-r from-[#D9BFA2] via-[#F8F3EA] to-[#D9BFA2] text-[#30251F] text-xs font-bold tracking-wider uppercase shadow-[0_4px_20px_rgba(217,191,162,0.45)] hover:shadow-[0_6px_28px_rgba(223,192,133,0.7)] hover:scale-105 active:scale-95 transition-all duration-300 flex items-center gap-1.5 cursor-pointer"
             >
-              <span>Explore Cakes</span>
+              <span className="relative z-10 flex items-center gap-1.5">
+                <span>Explore Cakes</span>
+                <ArrowRight size={13} className="transition-transform duration-300 group-hover:translate-x-1" />
+              </span>
+              <div className="absolute inset-0 w-1/2 h-full bg-gradient-to-r from-transparent via-white/40 to-transparent -skew-x-12 animate-shimmer-sweep pointer-events-none" />
             </button>
             <button
               type="button"
               onClick={() => handleOrderWhatsApp()}
-              className="px-5 py-2.5 rounded-full bg-[#6B4435]/90 hover:bg-[#30251F] text-white border border-[#D9BFA2]/50 text-xs font-bold tracking-wider uppercase shadow-lg flex items-center gap-1.5 transition-all cursor-pointer"
+              className="group relative px-5 py-2.5 rounded-full bg-[#30251F]/90 hover:bg-[#180C05] text-white border border-[#D9BFA2]/60 text-xs font-bold tracking-wider uppercase shadow-lg hover:shadow-[0_4px_20px_rgba(107,68,53,0.6)] flex items-center gap-2 transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer"
             >
-              <MessageCircle size={14} />
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#25D366] opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-[#25D366]"></span>
+              </span>
+              <MessageCircle size={14} className="text-[#DFC085] transition-transform duration-300 group-hover:scale-110" />
               <span>Order Now</span>
             </button>
           </div>
