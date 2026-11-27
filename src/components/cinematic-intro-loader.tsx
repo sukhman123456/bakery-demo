@@ -26,76 +26,99 @@ export function CinematicIntroLoader({ onComplete }: CinematicIntroLoaderProps) 
 
     // Setup initial GSAP states
     const ctx = gsap.context(() => {
-      // Background and ambient elements
+      // Ambient spotlight & sparkles
       gsap.set(haloGlowRef.current, { scale: 0.5, opacity: 0 });
       gsap.set(sparklesRef.current, { opacity: 0 });
 
       // Core brand emblem & typography
-      gsap.set(crestRef.current, { scale: 0.6, opacity: 0, rotation: -10 });
-      gsap.set(karshniRef.current, { opacity: 0, y: 24, filter: "blur(6px)" });
-      gsap.set(bakersRef.current, { opacity: 0, y: 20, letterSpacing: "0.35em" });
-      gsap.set(taglineRef.current, { opacity: 0, y: 16, scale: 0.92 });
+      gsap.set(crestRef.current, { scale: 0.65, opacity: 0, rotation: -8 });
+      gsap.set(karshniRef.current, { opacity: 0, y: 22, filter: "blur(5px)" });
+      gsap.set(bakersRef.current, { opacity: 0, y: 18, letterSpacing: "0.32em" });
+      gsap.set(taglineRef.current, { opacity: 0, y: 14, scale: 0.94 });
 
-      const tl = gsap.timeline({
-        onComplete: () => {
-          document.body.style.overflow = originalOverflow;
-          setIsFinished(true);
-          onComplete();
-        },
-      });
+      const tl = gsap.timeline();
 
       // -------------------------------------------------------------
       // PHASE 1: Center Majesty Reveal (0.0s - 1.2s)
       // Royal emblem scales & glows, cursive Karshni & serif Bakers emerge
       // -------------------------------------------------------------
-      tl.to(haloGlowRef.current, {
-        scale: 1.15,
-        opacity: 0.9,
-        duration: 1.2,
-        ease: "power2.out",
-      }, 0.1)
-        .to(crestRef.current, {
-          scale: 1,
-          opacity: 1,
-          rotation: 0,
-          duration: 1.0,
-          ease: "back.out(1.5)",
-        }, 0.2)
-        .to(sparklesRef.current, {
-          opacity: 1,
-          duration: 0.8,
+      tl.to(
+        haloGlowRef.current,
+        {
+          scale: 1.15,
+          opacity: 0.9,
+          duration: 1.2,
           ease: "power2.out",
-        }, 0.4)
-        .to(karshniRef.current, {
-          opacity: 1,
-          y: 0,
-          filter: "blur(0px)",
-          duration: 0.9,
-          ease: "power2.out",
-        }, 0.35)
-        .to(bakersRef.current, {
-          opacity: 1,
-          y: 0,
-          letterSpacing: "0.22em",
-          duration: 0.9,
-          ease: "power2.out",
-        }, 0.5);
+        },
+        0.1
+      )
+        .to(
+          crestRef.current,
+          {
+            scale: 1,
+            opacity: 1,
+            rotation: 0,
+            duration: 1.0,
+            ease: "back.out(1.4)",
+          },
+          0.2
+        )
+        .to(
+          sparklesRef.current,
+          {
+            opacity: 1,
+            duration: 0.8,
+            ease: "power2.out",
+          },
+          0.35
+        )
+        .to(
+          karshniRef.current,
+          {
+            opacity: 1,
+            y: 0,
+            filter: "blur(0px)",
+            duration: 0.9,
+            ease: "power2.out",
+          },
+          0.3
+        )
+        .to(
+          bakersRef.current,
+          {
+            opacity: 1,
+            y: 0,
+            letterSpacing: "0.22em",
+            duration: 0.9,
+            ease: "power2.out",
+          },
+          0.45
+        );
 
       // -------------------------------------------------------------
-      // PHASE 2: Tagline Reveal Underneath (1.0s - 1.8s)
+      // PHASE 2: Tagline Reveal Underneath (1.05s - 1.85s)
       // "— HAUTE PÂTISSERIE —" fades in and tracks gracefully below
       // -------------------------------------------------------------
-      tl.to(taglineRef.current, {
-        opacity: 1,
-        y: 0,
-        scale: 1,
-        duration: 0.85,
-        ease: "power2.out",
-      }, 1.05);
+      tl.to(
+        taglineRef.current,
+        {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          duration: 0.85,
+          ease: "power2.out",
+        },
+        1.05
+      );
 
       // -------------------------------------------------------------
-      // PHASE 3: Seamless Glide to Left-Top Navbar Target (2.1s - 3.2s)
-      // Calculates live bounding coordinates of #header-brand-logo
+      // PHASE 3: Ultra-Smooth Glide to Navbar Target (2.0s - 3.4s)
+      // Flawless Zero-Blink Handoff:
+      // - Calculates live exact bounding coordinates
+      // - Glides with silky 'power3.inOut' easing over 1.35s
+      // - Fades backdrop curtain in sync
+      // - Pre-activates navbar logo underneath at landing moment
+      // - Seamless cross-fade leaving zero gap, zero flicker!
       // -------------------------------------------------------------
       tl.add(() => {
         const targetEl = document.getElementById("header-brand-logo");
@@ -105,59 +128,75 @@ export function CinematicIntroLoader({ onComplete }: CinematicIntroLoaderProps) 
           const targetRect = targetEl.getBoundingClientRect();
           const currentRect = logoEl.getBoundingClientRect();
 
-          // Target center coordinates in viewport
+          // Calculate exact center-to-center translation offsets
           const targetCenterX = targetRect.left + targetRect.width / 2;
           const targetCenterY = targetRect.top + targetRect.height / 2;
 
-          // Current center coordinates in viewport
-          const currentCenterX = window.innerWidth / 2;
-          const currentCenterY = window.innerHeight / 2;
+          const currentCenterX = currentRect.left + currentRect.width / 2;
+          const currentCenterY = currentRect.top + currentRect.height / 2;
 
-          // Required translation offsets
           const deltaX = targetCenterX - currentCenterX;
           const deltaY = targetCenterY - currentCenterY;
 
-          // Scale proportion between target and intro size
-          const scaleRatio = Math.min(
-            targetRect.height / currentRect.height,
-            targetRect.width / currentRect.width
-          );
+          // Proportional scale to fit navbar logo height
+          const scaleRatio = targetRect.height / currentRect.height;
 
-          // Fly smoothly to the exact navbar logo location
+          // 1. Silky flight to target
           gsap.to(logoEl, {
             x: deltaX,
             y: deltaY,
             scale: scaleRatio,
-            duration: 1.15,
+            duration: 1.35,
             ease: "power3.inOut",
+            onComplete: () => {
+              // Immediately ensure target element is solid 100%
+              targetEl.style.opacity = "1";
+
+              // Cross-fade out the intro logo over 100ms — 100% zero blink!
+              gsap.to(logoEl, {
+                opacity: 0,
+                duration: 0.1,
+                ease: "none",
+                onComplete: () => {
+                  document.body.style.overflow = originalOverflow;
+                  setIsFinished(true);
+                  onComplete();
+                },
+              });
+            },
           });
 
-          // Concurrently fade the dark backdrop curtain to reveal hero
+          // 2. Concurrently fade out dark backdrop overlay
           gsap.to(overlayRef.current, {
             opacity: 0,
-            duration: 0.95,
+            duration: 1.05,
             ease: "power2.inOut",
-            delay: 0.25,
+            delay: 0.2,
           });
 
-          // Soften the ambient glow during flight
+          // 3. Fade out ambient glow & sparkles during flight
           gsap.to([haloGlowRef.current, sparklesRef.current], {
             opacity: 0,
-            duration: 0.6,
+            duration: 0.5,
             ease: "power2.in",
           });
+
+          // 4. Reveal navbar logo just before touchdown so there is NEVER a blank gap
+          gsap.delayedCall(1.2, () => {
+            targetEl.style.opacity = "1";
+          });
         } else {
-          // Fallback if target element not yet in DOM
           gsap.to(overlayRef.current, {
             opacity: 0,
-            duration: 0.8,
-            ease: "power2.out",
+            duration: 0.6,
+            onComplete: () => {
+              document.body.style.overflow = originalOverflow;
+              setIsFinished(true);
+              onComplete();
+            },
           });
         }
-      }, 2.1);
-
-      // Keep timeline alive until glide is complete
-      tl.to({}, { duration: 1.25 });
+      }, 2.0);
     });
 
     return () => {
@@ -168,10 +207,13 @@ export function CinematicIntroLoader({ onComplete }: CinematicIntroLoaderProps) 
 
   const handleSkip = () => {
     document.body.style.overflow = "";
+    const targetEl = document.getElementById("header-brand-logo");
+    if (targetEl) targetEl.style.opacity = "1";
+
     if (overlayRef.current) {
       gsap.to(overlayRef.current, {
         opacity: 0,
-        duration: 0.4,
+        duration: 0.35,
         onComplete: () => {
           setIsFinished(true);
           onComplete();
@@ -196,7 +238,7 @@ export function CinematicIntroLoader({ onComplete }: CinematicIntroLoaderProps) 
       {/* Ambient Halo Radial Spotlight */}
       <div
         ref={haloGlowRef}
-        className="pointer-events-none absolute w-[320px] h-[320px] sm:w-[480px] sm:h-[480px] rounded-full bg-gradient-radial from-[#DFC085]/25 via-[#6B4435]/15 to-transparent blur-3xl will-change-transform"
+        className="pointer-events-none absolute w-[340px] h-[340px] sm:w-[500px] sm:h-[500px] rounded-full bg-gradient-radial from-[#DFC085]/25 via-[#6B4435]/15 to-transparent blur-3xl will-change-transform"
       />
 
       {/* Floating Golden Dust Particles */}
@@ -212,15 +254,15 @@ export function CinematicIntroLoader({ onComplete }: CinematicIntroLoaderProps) 
         ref={logoWrapperRef}
         className="relative z-10 flex flex-col items-center justify-center will-change-transform pointer-events-none"
       >
-        {/* Main Logo Row: Crest + Brand Name */}
-        <div className="flex items-center gap-3.5 sm:gap-5">
+        {/* Main Logo Row: Crest + Brand Name (Exact 2x Proportions of BrandLogo) */}
+        <div className="flex items-center gap-2.5 sm:gap-4">
           {/* Royal Artisan Cupcake Crest Emblem */}
           <div ref={crestRef} className="relative flex-shrink-0">
             <svg
               viewBox="0 0 54 54"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
-              className="w-14 h-14 sm:w-20 sm:h-20 drop-shadow-[0_4px_24px_rgba(223,192,133,0.55)]"
+              className="w-16 h-16 sm:w-20 sm:h-20 drop-shadow-[0_4px_24px_rgba(223,192,133,0.55)]"
             >
               {/* Golden Ambient Backlight Glow */}
               <circle cx="27" cy="27" r="22" fill="url(#introAmbientGlow)" opacity="0.6" />
@@ -323,7 +365,7 @@ export function CinematicIntroLoader({ onComplete }: CinematicIntroLoaderProps) 
             <div className="flex items-baseline gap-2 sm:gap-3 leading-none">
               <span
                 ref={karshniRef}
-                className="text-white text-[38px] xs:text-[46px] sm:text-[62px] md:text-[70px] font-normal tracking-wide whitespace-nowrap will-change-transform"
+                className="text-white text-[46px] xs:text-[52px] sm:text-[64px] md:text-[68px] font-normal tracking-wide whitespace-nowrap will-change-transform"
                 style={{
                   fontFamily: "'Great Vibes', cursive, serif",
                   textShadow: "0 4px 24px rgba(0,0,0,0.95), 0 0 20px rgba(223,192,133,0.45)",
@@ -333,7 +375,7 @@ export function CinematicIntroLoader({ onComplete }: CinematicIntroLoaderProps) 
               </span>
               <span
                 ref={bakersRef}
-                className="font-serif font-bold text-[20px] xs:text-[24px] sm:text-[34px] md:text-[40px] uppercase whitespace-nowrap animate-gold-shimmer-text will-change-transform"
+                className="font-serif font-bold text-[26px] xs:text-[30px] sm:text-[36px] md:text-[40px] uppercase whitespace-nowrap animate-gold-shimmer-text will-change-transform"
                 style={{
                   textShadow: "0 4px 16px rgba(0,0,0,0.85)",
                 }}
@@ -345,11 +387,11 @@ export function CinematicIntroLoader({ onComplete }: CinematicIntroLoaderProps) 
             {/* Tagline Underneath: Revealed on Phase 2 */}
             <div
               ref={taglineRef}
-              className="mt-1 sm:mt-2 flex items-center gap-2 sm:gap-3 text-[10px] xs:text-[12px] sm:text-[15px] tracking-[0.28em] sm:tracking-[0.32em] uppercase font-serif text-[#DFC085] font-light drop-shadow will-change-transform"
+              className="mt-0.5 sm:mt-1 flex items-center gap-2 sm:gap-2.5 text-[15px] xs:text-[16px] sm:text-[19px] tracking-[0.24em] uppercase font-serif text-[#DFC085]/95 font-light drop-shadow will-change-transform"
             >
-              <span className="w-5 sm:w-10 h-[1px] bg-gradient-to-r from-transparent via-[#DFC085]/70 to-[#DFC085]" />
+              <span className="w-6 sm:w-8 h-[1px] bg-[#DFC085]/70 inline-block" />
               <span className="font-medium whitespace-nowrap">Haute Pâtisserie</span>
-              <span className="w-5 sm:w-10 h-[1px] bg-gradient-to-l from-transparent via-[#DFC085]/70 to-[#DFC085]" />
+              <span className="w-6 sm:w-8 h-[1px] bg-[#DFC085]/70 inline-block" />
             </div>
           </div>
         </div>

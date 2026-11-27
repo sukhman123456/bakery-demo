@@ -212,9 +212,8 @@ export function SiteShell({ children }: { children: ReactNode }) {
                     window.location.href = "/";
                   }
                 }}
-                className={`group focus:outline-none cursor-pointer transition-opacity duration-300 ${
-                  introComplete ? "opacity-100" : "opacity-0"
-                }`}
+                className="group focus:outline-none cursor-pointer"
+                style={{ opacity: introComplete ? 1 : 0 }}
               >
                 <BrandLogo scrolled={showSolidNavbar} />
               </a>
