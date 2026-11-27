@@ -247,53 +247,41 @@ export function HomeExperience() {
         </div>
 
         {/* ================================================================
-            MOBILE & TABLET CLEAN LUXURY BRANDING
-            - Centered vertically in viewport
-            - Clean, balanced typography with luxury gold & white branding
-            - No clutter, perfectly matched to user screenshot
+            MOBILE & TABLET CLEAN LUXURY BRANDING (1-Line Minimal & Kaint)
+            - Replaced heavy multi-line stacked text with a single elegant line
+            - Leaves the central artisan cake 100% visible, unobstructed & stunning
             ================================================================ */}
         <div
           ref={heroTextRef}
-          className="lg:hidden relative z-20 flex-1 flex flex-col items-center justify-center my-auto px-4 text-center pointer-events-auto will-change-transform"
+          className="lg:hidden relative z-20 flex-1 flex flex-col items-center justify-between py-10 px-4 text-center pointer-events-auto will-change-transform"
         >
-          {/* Ambient Warm Golden Backlight Glow */}
-          <div
-            className="absolute -inset-10 -z-10 rounded-full bg-[radial-gradient(ellipse_at_center,_rgba(223,192,133,0.2)_0%,_rgba(185,121,66,0.1)_45%,_transparent_70%)] pointer-events-none"
-            aria-hidden="true"
-          />
-
-          {/* Heritage Badge */}
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#180C05]/85 backdrop-blur-md border border-[#DFC085]/50 text-[#DFC085] text-[10px] font-semibold tracking-[0.22em] uppercase mb-2 shadow-[0_0_15px_rgba(223,192,133,0.3)] select-none">
-            <span className="text-[#DFC085] inline-block">✦</span>
-            <span>Baked with Love • Dinanagar</span>
-            <span className="text-[#DFC085] inline-block">✦</span>
+          {/* Top: 1-Line Clean Luxury Brand Pill */}
+          <div className="pt-2">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#180C05]/85 backdrop-blur-md border border-[#D9BFA2]/60 text-[#D9BFA2] text-xs font-serif tracking-[0.24em] uppercase shadow-[0_4px_24px_rgba(0,0,0,0.85)] select-none">
+              <span className="text-[#D9BFA2] text-[10px]">✦</span>
+              <span>A Little Sweetness In Every Moment</span>
+              <span className="text-[#D9BFA2] text-[10px]">✦</span>
+            </div>
           </div>
 
-          {/* Master Calligraphy + Serif Headline */}
-          <h1 className="flex flex-col items-center justify-center select-none">
-            <span className="font-['Great_Vibes',cursive] text-6xl sm:text-7xl text-white tracking-wide leading-none drop-shadow-[0_4px_20px_rgba(0,0,0,0.95)]">
-              Karshni
-            </span>
-            <span className="font-serif text-2xl sm:text-3xl font-bold tracking-[0.28em] uppercase text-[#DFC085] drop-shadow-[0_2px_12px_rgba(0,0,0,0.9)] -mt-1 sm:-mt-2">
-              Bakers
-            </span>
-          </h1>
-
-          {/* Main Tagline: A Little Sweetness In Every Moment */}
-          <div className="flex items-center justify-center gap-2 mt-2 select-none">
-            <span className="w-5 sm:w-8 h-[1px] bg-gradient-to-r from-transparent via-[#DFC085] to-transparent" />
-            <span className="text-[#DFC085] text-[9px] inline-block" aria-hidden="true">✦</span>
-            <p className="font-serif text-[11px] sm:text-[12.5px] text-[#F5EDE2] font-medium tracking-[0.22em] uppercase drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)]">
-              A Little Sweetness in Every Moment
-            </p>
-            <span className="text-[#DFC085] text-[9px] inline-block" aria-hidden="true">✦</span>
-            <span className="w-5 sm:w-8 h-[1px] bg-gradient-to-r from-transparent via-[#DFC085] to-transparent" />
+          {/* Bottom: Clean Luxury Actions */}
+          <div className="pb-4 flex items-center justify-center gap-3">
+            <button
+              type="button"
+              onClick={() => scrollToSection("signature-cakes")}
+              className="px-5 py-2.5 rounded-full bg-gradient-to-r from-[#D9BFA2] via-[#F3EBDD] to-[#D9BFA2] text-[#30251F] text-xs font-bold tracking-wider uppercase shadow-[0_4px_20px_rgba(217,191,162,0.4)] hover:scale-105 active:scale-95 transition-all cursor-pointer"
+            >
+              <span>Explore Cakes</span>
+            </button>
+            <button
+              type="button"
+              onClick={() => handleOrderWhatsApp()}
+              className="px-5 py-2.5 rounded-full bg-[#6B4435]/90 hover:bg-[#30251F] text-white border border-[#D9BFA2]/50 text-xs font-bold tracking-wider uppercase shadow-lg flex items-center gap-1.5 transition-all cursor-pointer"
+            >
+              <MessageCircle size={14} />
+              <span>Order Now</span>
+            </button>
           </div>
-
-          {/* Description */}
-          <p className="text-[12px] sm:text-xs text-[#E6D2B8]/95 font-light max-w-[310px] sm:max-w-sm mx-auto leading-relaxed mt-2 drop-shadow-[0_2px_6px_rgba(0,0,0,0.9)] select-none">
-            Beautiful cakes, fresh bakes & unforgettable moments — made with love.
-          </p>
         </div>
 
         {/* 4 Feature Dock (Desktop Only — on mobile, hero photo expands edge-to-edge) */}
