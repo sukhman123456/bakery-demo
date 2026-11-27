@@ -14,6 +14,7 @@ import { useEffect, useRef, useState, type ReactNode } from "react";
 import { BRAND } from "../lib/bakery-data";
 import { BrandLogo } from "./brand-logo";
 import { FloatingSocialDock } from "./ui/social-action-buttons";
+import { CinematicIntroLoader } from "./cinematic-intro-loader";
 
 interface NavItem {
   id: string;
@@ -50,6 +51,7 @@ export function SiteShell({ children }: { children: ReactNode }) {
 
   const isHomePage = pathname === "/" || pathname === "";
   const showSolidNavbar = !isHomePage || scrolled;
+  const [introComplete, setIntroComplete] = useState(!isHomePage);
 
   useEffect(() => {
     setIsLoaded(true);
@@ -176,6 +178,11 @@ export function SiteShell({ children }: { children: ReactNode }) {
 
   return (
     <div className="min-h-screen bg-[#FAF7F2] text-[#2A1A12] flex flex-col font-sans selection:bg-[#C69A52] selection:text-white">
+      {/* Master Cinematic Intro Sequence (Center reveal -> Underneath tagline -> Smooth glide to navbar logo) */}
+      {!introComplete && isHomePage && (
+        <CinematicIntroLoader onComplete={() => setIntroComplete(true)} />
+      )}
+
       {/* ====================================================================
           MASTER LUXURY NAVBAR (Always visible, animated sliding underline)
           - 100% Transparent at hero top on homepage, seamlessly floating over dark bakery ceiling
@@ -194,6 +201,7 @@ export function SiteShell({ children }: { children: ReactNode }) {
             {/* Left: Brand Logo & Divider */}
             <div className="flex items-center">
               <a
+                id="header-brand-logo"
                 href="/#hero"
                 onClick={(e) => {
                   e.preventDefault();
@@ -204,7 +212,9 @@ export function SiteShell({ children }: { children: ReactNode }) {
                     window.location.href = "/";
                   }
                 }}
-                className="group focus:outline-none cursor-pointer"
+                className={`group focus:outline-none cursor-pointer transition-opacity duration-300 ${
+                  introComplete ? "opacity-100" : "opacity-0"
+                }`}
               >
                 <BrandLogo scrolled={showSolidNavbar} />
               </a>
