@@ -521,21 +521,21 @@ export function CinematicBakeryExperience() {
             </div>
           </div>
 
-          {/* Real Bakery Store & Craft Atmosphere (3 Cards) */}
+          {/* Luxury Bakery Craft & Atmosphere (3 High-End Editorial Cards) */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="card-luxury-3d rounded-2xl overflow-hidden p-3 bg-[#EDE2D3]">
               <div className="aspect-[4/3] rounded-xl overflow-hidden bg-[#D9BFA2]/30 mb-3">
                 <img
-                  src={REAL_PHOTOS.bakeryDisplay}
-                  alt="Pastries & Daily Delights Display Counter"
+                  src="/images/luxury-fresh-pastries.jpg"
+                  alt="Artisan Pastries & Golden Croissants — Karshni Bakers"
                   className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
                 />
               </div>
               <div className="px-2 pb-1">
-                <span className="text-[10px] uppercase tracking-wider font-semibold text-[#6B4435]">Fresh Counter</span>
-                <h4 className="font-serif text-lg font-medium text-[#30251F] mt-0.5">Pastries & Daily Delights</h4>
+                <span className="text-[10px] uppercase tracking-wider font-semibold text-[#6B4435]">Oven-Fresh Daily</span>
+                <h4 className="font-serif text-lg font-medium text-[#30251F] mt-0.5">Artisan Pastries & Croissants</h4>
                 <p className="text-xs text-[#30251F]/75 mt-1 leading-relaxed">
-                  Oven-warm croissants, fruit tarts, muffins, and cookies baked fresh every morning in Dinanagar.
+                  Slow-baked European butter croissants, glossy berry custard tarts, and delicate breakfast bakes crafted fresh every morning.
                 </p>
               </div>
             </div>
@@ -543,16 +543,16 @@ export function CinematicBakeryExperience() {
             <div className="card-luxury-3d rounded-2xl overflow-hidden p-3 bg-[#EDE2D3]">
               <div className="aspect-[4/3] rounded-xl overflow-hidden bg-[#D9BFA2]/30 mb-3">
                 <img
-                  src={REAL_PHOTOS.storeInterior}
-                  alt="Karshni Cafe & Store Seating"
+                  src="/images/luxury-bakery-cafe.jpg"
+                  alt="Barista Coffee & Warm Patisserie — Karshni Cafe Dinanagar"
                   className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
                 />
               </div>
               <div className="px-2 pb-1">
-                <span className="text-[10px] uppercase tracking-wider font-semibold text-[#6B4435]">Store Ambience</span>
-                <h4 className="font-serif text-lg font-medium text-[#30251F] mt-0.5">Shree Ram Market Cafe</h4>
+                <span className="text-[10px] uppercase tracking-wider font-semibold text-[#6B4435]">Boutique Cafe</span>
+                <h4 className="font-serif text-lg font-medium text-[#30251F] mt-0.5">Barista Coffee & Brownies</h4>
                 <p className="text-xs text-[#30251F]/75 mt-1 leading-relaxed">
-                  A welcoming boutique space to enjoy artisanal coffee, chocolate brownies, and place custom cake orders.
+                  Specialty rosetta latte art, velvety hot chocolate, and warm Belgian fudge brownies in a welcoming, cozy ambience.
                 </p>
               </div>
             </div>
@@ -560,16 +560,16 @@ export function CinematicBakeryExperience() {
             <div className="card-luxury-3d rounded-2xl overflow-hidden p-3 bg-[#EDE2D3]">
               <div className="aspect-[4/3] rounded-xl overflow-hidden bg-[#D9BFA2]/30 mb-3">
                 <img
-                  src={REAL_PHOTOS.hero}
-                  alt="Artisanal Celebration Cake Atelier"
+                  src="/images/luxury-cake-craft.jpg"
+                  alt="Master Pastry Chef Decorating Celebration Cake"
                   className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
                 />
               </div>
               <div className="px-2 pb-1">
-                <span className="text-[10px] uppercase tracking-wider font-semibold text-[#6B4435]">Atelier Craft</span>
+                <span className="text-[10px] uppercase tracking-wider font-semibold text-[#6B4435]">Master Atelier</span>
                 <h4 className="font-serif text-lg font-medium text-[#30251F] mt-0.5">Handmade Milestone Cakes</h4>
                 <p className="text-xs text-[#30251F]/75 mt-1 leading-relaxed">
-                  Each cake is freshly finished to order with bespoke plaques, Belgian ganache drips, and floral sugar art.
+                  Every tiered celebration cake is hand-sculpted to order with 100% pure butter, 24K edible gold leaf, and bespoke sugarcraft.
                 </p>
               </div>
             </div>
