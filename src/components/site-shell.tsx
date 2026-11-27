@@ -4,324 +4,520 @@ import {
   Phone,
   X,
   MapPin,
-  Clock,
-  ArrowRight,
-  ExternalLink,
+  UtensilsCrossed,
+  ShoppingBag,
+  Truck,
+  MessageCircle,
 } from "lucide-react";
-import { useEffect, useState, type ReactNode } from "react";
-import { BRAND, REAL_PHOTOS } from "../lib/bakery-data";
-import { FloatingSocialDock, SocialActionButtons } from "./ui/social-action-buttons";
+import { useEffect, useRef, useState, type ReactNode } from "react";
+import { BRAND } from "../lib/bakery-data";
+import { BrandLogo } from "./brand-logo";
+import { FloatingSocialDock } from "./ui/social-action-buttons";
 
 interface NavItem {
+  id: string;
   label: string;
   href: string;
+  routePath?: string;
+  hasDropdown?: boolean;
 }
 
-const navLinks: NavItem[] = [
-  { label: "Home", href: "/" },
-  { label: "Fresh Bakery", href: "/#bakery-products" },
-  { label: "Cakes", href: "/cakes" },
-  { label: "Special Orders", href: "/#special-orders" },
-  { label: "Celebrations", href: "/#celebrations" },
-  { label: "Gallery", href: "/#gallery" },
-  { label: "Contact", href: "/#contact" },
+const navItems: NavItem[] = [
+  { id: "hero", label: "Home", href: "/#hero", routePath: "/" },
+  { id: "signature-cakes", label: "Signatures", href: "/#signature-cakes", routePath: "/#signature-cakes" },
+  { id: "about", label: "About Us", href: "/about", routePath: "/about" },
+  { id: "services", label: "Services", href: "/#services", routePath: "/#services" },
+  { id: "products", label: "Our Products", href: "/cakes", routePath: "/cakes", hasDropdown: true },
+  { id: "gallery", label: "Gallery", href: "/gallery", routePath: "/gallery" },
+  { id: "contact", label: "Contact Us", href: "/contact", routePath: "/contact" },
 ];
 
 export function SiteShell({ children }: { children: ReactNode }) {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [productMenuOpen, setProductMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("hero");
+  const [hoveredNav, setHoveredNav] = useState<string | null>(null);
+  const [indicatorStyle, setIndicatorStyle] = useState({ left: 0, width: 0, opacity: 0 });
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  const navContainerRef = useRef<HTMLElement | null>(null);
+  const navItemRefs = useRef<Record<string, HTMLAnchorElement | null>>({});
   const pathname = useRouterState({ select: (state) => state.location.pathname });
 
+  const isHomePage = pathname === "/" || pathname === "";
+  const showSolidNavbar = !isHomePage || scrolled;
+
   useEffect(() => {
+    setIsLoaded(true);
     const handleScroll = () => {
-      setScrolled(window.scrollY > 30);
+      setScrolled(window.scrollY > 25);
     };
     handleScroll();
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Determine active nav key based on path or section
+  useEffect(() => {
+    if (pathname === "/about") {
+      setActiveSection("about");
+      return undefined;
+    }
+    if (pathname === "/cakes" || pathname === "/bakery" || pathname === "/cafe") {
+      setActiveSection("products");
+      return undefined;
+    }
+    if (pathname === "/gallery") {
+      setActiveSection("gallery");
+      return undefined;
+    }
+    if (pathname === "/contact") {
+      setActiveSection("contact");
+      return undefined;
+    }
+    if (isHomePage) {
+      const sections = ["hero", "signature-cakes", "products", "about", "services", "gallery", "reviews", "contact"];
+      const handleScrollSpy = () => {
+        const scrollPosition = window.scrollY + 160;
+        for (const id of sections) {
+          const el = document.getElementById(id);
+          if (el && scrollPosition >= el.offsetTop) {
+            setActiveSection(id);
+          }
+        }
+      };
+      handleScrollSpy();
+      window.addEventListener("scroll", handleScrollSpy, { passive: true });
+      return () => window.removeEventListener("scroll", handleScrollSpy);
+    }
+    return undefined;
+  }, [pathname, isHomePage]);
+
+  // Sliding underline calculation
+  const updateIndicator = () => {
+    const currentKey = hoveredNav || activeSection || "hero";
+    const el = navItemRefs.current[currentKey];
+    const container = navContainerRef.current;
+    if (el && container) {
+      const containerRect = container.getBoundingClientRect();
+      const elRect = el.getBoundingClientRect();
+      setIndicatorStyle({
+        left: elRect.left - containerRect.left,
+        width: elRect.width,
+        opacity: 1,
+      });
+    }
+  };
+
+  useEffect(() => {
+    const timer = setTimeout(updateIndicator, 50);
+    window.addEventListener("resize", updateIndicator);
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener("resize", updateIndicator);
+    };
+  }, [hoveredNav, activeSection, pathname]);
+
   // Close mobile drawer on route navigation
   useEffect(() => {
     setOpen(false);
   }, [pathname]);
 
-  const whatsappOrderUrl = `https://wa.me/${BRAND.whatsapp}?text=${encodeURIComponent(
-    "Hello Karshni Baker's! I would like to place an order / inquire about your celebration cakes."
+  const whatsappUrl = `https://wa.me/${BRAND.whatsapp}?text=${encodeURIComponent(
+    "Hello Karshni Bakers! I would like to inquire about ordering handcrafted cakes & fresh treats."
   )}`;
 
+  const productCategories = [
+    { name: "Celebration Cakes Studio", icon: "🎂", href: "/cakes", desc: "Custom, fondant & milestone cakes" },
+    { name: "Fresh Bakery & Pastries", icon: "🥐", href: "/bakery", desc: "Croissants, brownies & bakes" },
+    { name: "Café Delights & Snacks", icon: "☕", href: "/cafe", desc: "Beverages, savouries & coffee" },
+    { name: "Full Visual Gallery", icon: "🖼️", href: "/gallery", desc: "Real photos from our kitchen" },
+    { name: "Guest Reviews & Feedback", icon: "⭐", href: "/reviews", desc: "What our patrons say" },
+  ];
+
+  const handleNavClick = (item: NavItem) => {
+    setOpen(false);
+    setActiveSection(item.id);
+
+    if (isHomePage) {
+      // If target is on home page, scroll to section
+      const targetId = item.id;
+      const el = document.getElementById(targetId);
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth" });
+        return;
+      }
+    }
+
+    // Otherwise navigate to the route or hash
+    if (item.routePath && !item.routePath.startsWith("/#")) {
+      window.location.href = item.routePath;
+    } else {
+      window.location.href = item.href;
+    }
+  };
+
   return (
-    <div className="min-h-screen bg-[var(--color-cream)] text-[var(--color-chocolate)] flex flex-col font-sans selection:bg-[var(--color-gold)] selection:text-white">
-      {/* Top Notification Bar */}
-      <div className="bg-[var(--color-chocolate)] text-[var(--color-sand)] text-xs py-1.5 px-4 text-center tracking-wider border-b border-[var(--color-gold-border)] hidden sm:flex items-center justify-between z-50">
-        <div className="flex items-center gap-2 mx-auto">
-          <span className="inline-flex items-center gap-1.5 text-xs text-[var(--color-gold-light)] font-medium">
-            <Clock size={13} /> {BRAND.hours} · {BRAND.days}
-          </span>
-          <span className="text-white/30">|</span>
-          <span className="flex items-center gap-1">
-            <MapPin size={13} className="text-[var(--color-gold-light)]" /> {BRAND.landmark}, {BRAND.city}
-          </span>
-          <span className="text-white/30">|</span>
-          <a
-            href={`tel:${BRAND.phoneRaw}`}
-            className="hover:text-[var(--color-gold-light)] transition-colors"
-          >
-            Call: {BRAND.phone}
-          </a>
-        </div>
-      </div>
-
-      {/* Sticky Main Navigation: Transparent initially, solid cream/sand on scroll */}
-      <header className={`site-navbar ${scrolled ? "scrolled" : ""}`}>
-        <div className="max-w-[1360px] mx-auto flex items-center justify-between">
-          {/* Karshni Baker's Official Logo */}
-          <Link to="/" className="flex items-center gap-3 group">
-            <img
-              src={REAL_PHOTOS.logo}
-              alt="Karshni Baker's Official Logo"
-              className="h-12 w-12 sm:h-14 sm:w-14 rounded-full object-cover shadow-md transition-transform duration-300 group-hover:scale-105 flex-shrink-0"
-            />
-            <div className="flex flex-col text-left">
-              <span
-                className={`font-serif text-lg sm:text-xl font-medium tracking-wide transition-colors ${
-                  scrolled ? "text-[var(--color-chocolate)]" : "text-white"
-                }`}
+    <div className="min-h-screen bg-[#FAF7F2] text-[#2A1A12] flex flex-col font-sans selection:bg-[#C69A52] selection:text-white">
+      {/* ====================================================================
+          MASTER LUXURY NAVBAR (Always visible, animated sliding underline)
+          - 100% Transparent at hero top on homepage, seamlessly floating over dark bakery ceiling
+          - Frosted luxury dark espresso blur when scrolled or on subpages
+          - Smooth animated sliding gold line under hovered & active items
+          ==================================================================== */}
+      <header
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-in-out ${
+          showSolidNavbar
+            ? "bg-[#140804]/96 backdrop-blur-xl border-b border-[#C69A52]/25 shadow-[0_8px_32px_rgba(0,0,0,0.65)] py-2.5"
+            : "bg-transparent py-4 sm:py-5 border-none shadow-none"
+        }`}
+      >
+        <div className="max-w-[1440px] mx-auto px-4 sm:px-8">
+          <div className="flex items-center justify-between">
+            {/* Left: Brand Logo & Divider */}
+            <div className="flex items-center">
+              <a
+                href="/#hero"
+                onClick={(e) => {
+                  e.preventDefault();
+                  if (isHomePage) {
+                    const el = document.getElementById("hero");
+                    if (el) el.scrollIntoView({ behavior: "smooth" });
+                  } else {
+                    window.location.href = "/";
+                  }
+                }}
+                className="group focus:outline-none cursor-pointer"
               >
-                {BRAND.name}
-              </span>
-              <span className="text-[0.68rem] tracking-[0.2em] uppercase text-[var(--color-gold-light)] font-semibold">
-                Cakes · Bakes · Sweet Moments
-              </span>
+                <BrandLogo scrolled={showSolidNavbar} />
+              </a>
+
+              {/* Vertical Divider from Artwork */}
+              <div className="h-6 w-[1.5px] bg-[#DFC085]/35 mx-4 lg:mx-6 hidden md:block" />
             </div>
-          </Link>
 
-          {/* Desktop Navigation Links */}
-          <nav className="hidden lg:flex items-center gap-8">
-            {navLinks.map((link) => {
-              const isCakePage = link.href === "/cakes" && pathname === "/cakes";
-              if (link.href === "/cakes") {
-                return (
-                  <Link
-                    key={link.label}
-                    to="/cakes"
-                    className={`nav-link ${isCakePage ? "active" : ""}`}
-                  >
-                    {link.label}
-                  </Link>
-                );
-              }
-              return (
-                <a
-                  key={link.label}
-                  href={link.href}
-                  className="nav-link"
-                >
-                  {link.label}
-                </a>
-              );
-            })}
-          </nav>
-
-          {/* Actions: Social Action Buttons & Call */}
-          <div className="hidden lg:flex items-center gap-3">
-            <SocialActionButtons size="sm" />
-
-            <a
-              href={`tel:${BRAND.phoneRaw}`}
-              className={`p-2.5 rounded-full border transition-all duration-300 hover:scale-110 active:scale-95 ${
-                scrolled
-                  ? "border-[var(--color-sand)] text-[var(--color-chocolate)] hover:border-[var(--color-gold)] hover:text-[var(--color-gold)]"
-                  : "border-white/30 text-white hover:border-white hover:bg-white/10"
-              }`}
-              title={`Call ${BRAND.phone}`}
-              aria-label={`Call ${BRAND.phone}`}
+            {/* Center: Desktop Navigation with Animated Sliding Underline */}
+            <nav
+              ref={navContainerRef}
+              onMouseLeave={() => setHoveredNav(null)}
+              className="relative hidden lg:flex items-center gap-7 xl:gap-9 py-1"
             >
-              <Phone size={15} />
-            </a>
-          </div>
+              {/* The Sliding Animated Underline */}
+              <span
+                className="absolute bottom-0 left-0 h-[2.5px] rounded-full bg-gradient-to-r from-[#F5D8A0] via-[#DFC085] to-[#C69A52] shadow-[0_0_12px_rgba(223,192,133,0.95)] pointer-events-none transition-all duration-300 ease-out"
+                style={{
+                  transform: `translateX(${indicatorStyle.left}px)`,
+                  width: `${indicatorStyle.width}px`,
+                  opacity: indicatorStyle.opacity,
+                }}
+              />
 
-          {/* Mobile Hamburger Button */}
-          <button
-            onClick={() => setOpen(!open)}
-            aria-label={open ? "Close navigation menu" : "Open navigation menu"}
-            className={`lg:hidden p-2.5 rounded-xl border transition-colors ${
-              scrolled
-                ? "border-[var(--color-sand)] bg-white text-[var(--color-chocolate)]"
-                : "border-white/30 bg-black/40 text-white"
-            }`}
-          >
-            {open ? <X size={22} /> : <Menu size={22} />}
-          </button>
-        </div>
-
-        {/* Mobile Navigation Drawer */}
-        {open && (
-          <div className="lg:hidden mt-3 bg-[#FFFFFF]/98 backdrop-blur-xl rounded-2xl p-5 border border-[var(--color-sand)] shadow-2xl animate-in slide-in-from-top-4 duration-200">
-            <div className="flex items-center justify-between pb-4 border-b border-[var(--color-sand-light)]">
-              <div className="flex items-center gap-2.5">
-                <img
-                  src={REAL_PHOTOS.logo}
-                  alt="Karshni Baker's Logo"
-                  className="h-10 w-10 rounded-full object-cover shadow-sm flex-shrink-0"
-                />
-                <span className="font-serif font-medium text-[var(--color-chocolate)]">
-                  {BRAND.name}
-                </span>
-              </div>
-            </div>
-
-            <div className="flex flex-col gap-1 py-4 border-b border-[var(--color-sand-light)]">
-              {navLinks.map((link) => {
-                if (link.href === "/cakes") {
+              {navItems.map((item) => {
+                const isTarget = (hoveredNav || activeSection) === item.id;
+                if (item.hasDropdown) {
                   return (
-                    <Link
-                      key={link.label}
-                      to="/cakes"
-                      onClick={() => setOpen(false)}
-                      className="flex items-center justify-between py-2.5 px-3 rounded-lg text-sm font-medium text-[var(--color-chocolate)] hover:bg-[var(--color-sand-light)] transition-colors"
+                    <div
+                      key={item.id}
+                      className="relative"
+                      onMouseEnter={() => {
+                        setHoveredNav(item.id);
+                        setProductMenuOpen(true);
+                      }}
+                      onMouseLeave={() => {
+                        setProductMenuOpen(false);
+                      }}
                     >
-                      <span>{link.label}</span>
-                      <ArrowRight size={14} className="text-[var(--color-gold)]" />
-                    </Link>
+                      <a
+                        ref={(el) => {
+                          navItemRefs.current[item.id] = el;
+                        }}
+                        href={item.href}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          handleNavClick(item);
+                        }}
+                        className={`flex items-center gap-1.5 py-1 px-1 text-[14px] tracking-wide transition-colors duration-200 cursor-pointer ${
+                          isTarget
+                            ? "text-white font-semibold"
+                            : "text-[#F5EDE2]/85 hover:text-white"
+                        }`}
+                      >
+                        <span>{item.label}</span>
+                        <span
+                          className={`text-[10px] text-[#DFC085] transition-transform duration-200 ${
+                            productMenuOpen ? "rotate-180" : ""
+                          }`}
+                        >
+                          ▾
+                        </span>
+                      </a>
+
+                      {/* Animated Dropdown Menu */}
+                      {productMenuOpen && (
+                        <div className="absolute top-full -left-6 mt-2 w-72 rounded-2xl bg-[#1C0E07]/98 backdrop-blur-2xl border border-[#C69A52]/40 shadow-[0_16px_40px_rgba(0,0,0,0.7)] p-2.5 z-50 animate-in fade-in slide-in-from-top-2 duration-200">
+                          <div className="text-[10px] font-semibold uppercase tracking-wider text-[#DFC085] px-3 py-1.5 border-b border-white/10 mb-1 flex items-center justify-between">
+                            <span>Artisan Bakery Studios</span>
+                            <span className="text-[9px] text-[#DFC085]">Explore</span>
+                          </div>
+                          {productCategories.map((cat) => (
+                            <a
+                              key={cat.name}
+                              href={cat.href}
+                              onClick={() => setProductMenuOpen(false)}
+                              className="w-full flex items-center gap-3 px-3 py-2 text-left text-xs font-medium text-[#F5EDE2] hover:text-white hover:bg-[#C69A52]/25 rounded-xl transition-all cursor-pointer"
+                            >
+                              <span className="text-base flex-shrink-0">{cat.icon}</span>
+                              <div className="flex flex-col">
+                                <span className="font-semibold text-white">{cat.name}</span>
+                                <span className="text-[10px] text-[#DFC085]/80 font-light leading-tight">{cat.desc}</span>
+                              </div>
+                            </a>
+                          ))}
+                        </div>
+                      )}
+                    </div>
                   );
                 }
+
                 return (
                   <a
-                    key={link.label}
-                    href={link.href}
-                    onClick={() => setOpen(false)}
-                    className="flex items-center justify-between py-2.5 px-3 rounded-lg text-sm font-medium text-[var(--color-chocolate)] hover:bg-[var(--color-sand-light)] transition-colors"
+                    key={item.id}
+                    ref={(el) => {
+                      navItemRefs.current[item.id] = el;
+                    }}
+                    href={item.href}
+                    onMouseEnter={() => setHoveredNav(item.id)}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      handleNavClick(item);
+                    }}
+                    className={`py-1 px-1 text-[14px] tracking-wide transition-colors duration-200 cursor-pointer ${
+                      isTarget
+                        ? "text-white font-semibold"
+                        : "text-[#F5EDE2]/85 hover:text-white"
+                    }`}
                   >
-                    <span>{link.label}</span>
-                    <ArrowRight size={14} className="text-[var(--color-gold)]" />
+                    {item.label}
                   </a>
                 );
               })}
-            </div>
+            </nav>
 
-            <div className="pt-4 flex items-center justify-between gap-3 border-t border-[var(--color-sand)]">
-              <span className="text-xs font-semibold uppercase tracking-wider text-[var(--color-chocolate)]">
-                Connect With Us
-              </span>
-              <SocialActionButtons size="sm" />
-            </div>
+              {/* Right: Golden Pill "Order" Button & Mobile Toggle */}
+              <div className="flex items-center gap-2 sm:gap-3 flex-shrink-0">
+                <a
+                  href={whatsappUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Order Now on WhatsApp"
+                  className="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-5 py-2 sm:py-2.5 rounded-full bg-gradient-to-r from-[#F5DFB0] via-[#DFC085] to-[#B97942] text-[#140A04] text-[11px] sm:text-xs font-bold tracking-wider uppercase shadow-[0_4px_18px_rgba(223,192,133,0.45)] hover:shadow-[0_6px_25px_rgba(223,192,133,0.7)] hover:scale-105 active:scale-95 transition-all duration-300 select-none cursor-pointer whitespace-nowrap"
+                >
+                  <ShoppingBag size={14} className="text-[#140A04] stroke-[2.2]" />
+                  <span className="hidden sm:inline">Order Now →</span>
+                  <span className="sm:hidden font-bold tracking-wider">ORDER</span>
+                </a>
 
-            <div className="pt-2">
-              <a
-                href={`tel:${BRAND.phoneRaw}`}
-                className="btn btn-primary w-full py-2.5 text-sm justify-center"
-              >
-                <Phone size={15} />
-                <span>Call {BRAND.phone}</span>
-              </a>
-            </div>
+                {/* Mobile Hamburger Button */}
+                <button
+                  type="button"
+                  onClick={() => setOpen(!open)}
+                  aria-label="Toggle Mobile Navigation"
+                  className="lg:hidden p-2 rounded-xl bg-[#24150D]/90 backdrop-blur-md text-[#DFC085] border border-[#C69A52]/45 hover:border-[#DFC085] hover:text-white transition-all shadow-md active:scale-95 flex-shrink-0 cursor-pointer"
+                >
+                  {open ? <X size={20} /> : <Menu size={20} />}
+                </button>
+              </div>
           </div>
-        )}
+        </div>
       </header>
 
-      {/* Main Page Slot */}
-      <main className="flex-grow">{children}</main>
+      {/* Mobile Drawer Navigation */}
+      {open && (
+        <div className="fixed inset-0 z-40 bg-[#1A0E08]/98 backdrop-blur-2xl flex flex-col justify-between pt-24 pb-8 px-6 lg:hidden animate-in fade-in duration-300 overflow-y-auto">
+          <div className="flex flex-col items-center gap-4 text-center mt-2">
+            <BrandLogo scrolled={false} size="lg" />
 
-      {/* Floating Social Media Action Buttons (Mobile & Desktop) */}
-      <FloatingSocialDock />
-
-      {/* FOOTER: Dark chocolate/black footer */}
-      <footer className="site-footer-luxury">
-        <div className="max-w-[1320px] mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-12 pb-14 border-b border-white/10">
-          {/* Brand Info & Logo */}
-          <div className="lg:col-span-5">
-            <div className="flex items-center gap-3.5 mb-5">
-              <img
-                src={REAL_PHOTOS.logo}
-                alt="Karshni Baker's Logo"
-                className="h-14 w-14 sm:h-16 sm:w-16 rounded-full object-cover shadow-lg flex-shrink-0"
-              />
-              <div>
-                <h3 className="font-serif text-2xl text-white font-medium tracking-wide">
-                  {BRAND.name}
-                </h3>
-                <p className="text-xs uppercase tracking-widest text-[var(--color-gold-light)] font-semibold">
-                  Crafted for Sweet Moments.
-                </p>
-              </div>
+            <div className="flex flex-wrap items-center justify-center gap-2 py-1 text-xs text-[#DFC085]">
+              <Link to="/cakes" onClick={() => setOpen(false)} className="px-2.5 py-1 rounded-full bg-white/5 border border-[#C69A52]/30 hover:border-[#DFC085]">Cakes</Link>
+              <Link to="/bakery" onClick={() => setOpen(false)} className="px-2.5 py-1 rounded-full bg-white/5 border border-[#C69A52]/30 hover:border-[#DFC085]">Bakery</Link>
+              <Link to="/cafe" onClick={() => setOpen(false)} className="px-2.5 py-1 rounded-full bg-white/5 border border-[#C69A52]/30 hover:border-[#DFC085]">Café</Link>
+              <Link to="/gallery" onClick={() => setOpen(false)} className="px-2.5 py-1 rounded-full bg-white/5 border border-[#C69A52]/30 hover:border-[#DFC085]">Gallery</Link>
             </div>
 
-            <p className="text-sm text-[var(--color-sand)] leading-relaxed max-w-md mb-6 opacity-90">
-              {BRAND.aboutText}
-            </p>
+            <div className="h-[1px] w-24 bg-gradient-to-r from-transparent via-[#C69A52] to-transparent mx-auto my-1" />
 
-            {/* Social & Contact Direct Links */}
-            <div className="flex items-center gap-3">
-              <SocialActionButtons size="sm" />
-              <a
-                href={`tel:${BRAND.phoneRaw}`}
-                className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white/10 hover:bg-[var(--color-gold)] hover:text-white flex items-center justify-center transition-all duration-300 text-[var(--color-sand)] border border-white/20 hover:scale-110 active:scale-95 shadow-md"
-                aria-label={`Call Karshni Baker's at ${BRAND.phone}`}
-                title={`Call ${BRAND.phone}`}
-              >
-                <Phone size={16} />
-              </a>
+            <div className="flex flex-col gap-2 w-full max-w-xs">
+              {navItems.map((item) => (
+                <a
+                  key={item.label}
+                  href={item.href}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleNavClick(item);
+                  }}
+                  className="font-serif text-lg tracking-wider text-white/90 hover:text-[#DFC085] py-1.5 transition-colors border-b border-white/5 cursor-pointer"
+                >
+                  {item.label}
+                </a>
+              ))}
+            </div>
+          </div>
+
+          {/* Mobile Bottom Contacts */}
+          <div className="flex flex-col gap-3 pt-4 border-t border-[#C69A52]/30 text-center">
+            <div className="text-xs text-[#E6D2B8]/80 mb-1">
+              <p className="font-light">{BRAND.address}</p>
+            </div>
+            <a
+              href={`tel:${BRAND.phoneRaw}`}
+              className="inline-flex items-center justify-center gap-2 py-3 px-4 rounded-full border border-[#C69A52]/50 bg-[#29170F] text-[#DFC085] text-xs font-semibold tracking-wider"
+            >
+              <Phone size={15} />
+              <span>Call: {BRAND.phone}</span>
+            </a>
+            <a
+              href={whatsappUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center gap-2 py-3 px-4 rounded-full bg-gradient-to-r from-[#C69A52] via-[#DFC085] to-[#B97942] text-[#180C06] text-xs font-bold tracking-wider uppercase shadow-lg"
+            >
+              <MessageCircle size={16} />
+              <span>Order on WhatsApp</span>
+            </a>
+          </div>
+        </div>
+      )}
+
+      {/* Main Page Content */}
+      <main className="flex-grow">{children}</main>
+
+      {/* Luxury Brand Footer */}
+      <footer className="bg-[#180C06] text-[#F3E8D5] border-t border-[#C69A52]/30 pt-16 pb-10 px-6">
+        <div className="max-w-[1360px] mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-14">
+          {/* Brand Info */}
+          <div className="space-y-4">
+            <BrandLogo scrolled={false} size="lg" />
+            <p className="text-sm text-[#E6D2B8]/80 leading-relaxed font-light mt-4">
+              {BRAND.tagline} Handcrafted celebration cakes and artisanal delicacies, baked fresh daily in Dinanagar, Punjab.
+            </p>
+            <div className="pt-2">
+              <span className="text-xs font-semibold tracking-wider uppercase text-[#DFC085] block mb-1.5">
+                Specialties
+              </span>
+              <div className="flex flex-wrap items-center gap-2 text-xs text-white/90">
+                <span className="bg-[#29170F] px-2.5 py-1 rounded-full border border-[#C69A52]/40 text-[#DFC085]">
+                  Custom Birthday Cakes
+                </span>
+                <span className="bg-[#29170F] px-2.5 py-1 rounded-full border border-[#C69A52]/40 text-[#DFC085]">
+                  Wedding Cakes
+                </span>
+                <span className="bg-[#29170F] px-2.5 py-1 rounded-full border border-[#C69A52]/40 text-[#DFC085]">
+                  Designer Cakes
+                </span>
+              </div>
             </div>
           </div>
 
           {/* Quick Links */}
-          <div className="lg:col-span-3">
-            <h4 className="text-white font-serif text-lg mb-5 tracking-wide">Quick Links</h4>
-            <Link to="/" className="footer-link">Home</Link>
-            <a href="/#bakery-products" className="footer-link">Fresh From Our Bakery</a>
-            <Link to="/cakes" className="footer-link">Cakes & Custom Creations</Link>
-            <a href="/#special-orders" className="footer-link">Special & Bulk Orders</a>
-            <a href="/#celebrations" className="footer-link">Party & Celebrations</a>
-            <a href="/#gallery" className="footer-link">Portfolio Gallery</a>
-            <a href="/#contact" className="footer-link">Contact & Orders</a>
-            <a href="/?replay=true" className="footer-link inline-flex items-center gap-1.5 text-xs text-[var(--color-gold-light)] hover:text-white mt-1">
-              <span>✨ Replay Intro Animation</span>
-            </a>
+          <div>
+            <h4 className="font-serif text-lg text-white font-medium mb-4 pb-1 border-b border-[#C69A52]/30 inline-block">
+              Quick Navigation
+            </h4>
+            <ul className="space-y-2.5 text-sm text-[#E6D2B8]/80">
+              <li>
+                <a href="/#hero" className="hover:text-[#DFC085] transition-colors">
+                  Home
+                </a>
+              </li>
+              <li>
+                <a href="/#about" className="hover:text-[#DFC085] transition-colors">
+                  About Us
+                </a>
+              </li>
+              <li>
+                <a href="/#services" className="hover:text-[#DFC085] transition-colors">
+                  Bakery Services
+                </a>
+              </li>
+              <li>
+                <a href="/#products" className="hover:text-[#DFC085] transition-colors">
+                  Our Products & Menu
+                </a>
+              </li>
+              <li>
+                <a href="/#gallery" className="hover:text-[#DFC085] transition-colors">
+                  Photo Gallery
+                </a>
+              </li>
+              <li>
+                <a href="/#contact" className="hover:text-[#DFC085] transition-colors">
+                  Contact Us
+                </a>
+              </li>
+            </ul>
           </div>
 
-          {/* Contact Details & Visit */}
-          <div className="lg:col-span-4">
-            <h4 className="text-white font-serif text-lg mb-5 tracking-wide">Visit Our Bakery</h4>
-            <address className="not-italic text-sm text-[var(--color-sand)] leading-relaxed mb-4 opacity-90">
-              <span className="text-white font-medium block mb-1">{BRAND.landmark}</span>
-              {BRAND.address}
-            </address>
+          {/* Food & Product Categories */}
+          <div>
+            <h4 className="font-serif text-lg text-white font-medium mb-4 pb-1 border-b border-[#C69A52]/30 inline-block">
+              Bakery Specialties
+            </h4>
+            <ul className="grid grid-cols-2 gap-x-2 gap-y-2 text-xs text-[#E6D2B8]/80">
+              <li>• Celebration Cakes</li>
+              <li>• Designer Cakes</li>
+              <li>• Fresh Pastries</li>
+              <li>• Cupcakes</li>
+              <li>• Cookies & Biscuits</li>
+              <li>• Fresh Bread Loaves</li>
+              <li>• Dessert Hampers</li>
+              <li>• Party Cake Pops</li>
+              <li>• Fruit Tarts</li>
+              <li>• Fudge Brownies</li>
+            </ul>
+          </div>
 
-            <p className="text-sm text-[var(--color-sand)] mb-2 flex items-center gap-2">
-              <Clock size={15} className="text-[var(--color-gold-light)]" />
-              <span>{BRAND.hours} · Daily</span>
-            </p>
-
-            <p className="text-sm text-[var(--color-sand)] mb-4 flex items-center gap-2">
-              <Phone size={15} className="text-[var(--color-gold-light)]" />
-              <a href={`tel:${BRAND.phoneRaw}`} className="text-white hover:underline">
-                {BRAND.phone}
-              </a>
-            </p>
-
-            <div className="flex flex-wrap items-center gap-3 pt-2">
+          {/* Visit & Contact */}
+          <div className="space-y-3">
+            <h4 className="font-serif text-lg text-white font-medium mb-4 pb-1 border-b border-[#C69A52]/30 inline-block">
+              Visit Karshni Baker’s
+            </h4>
+            <div className="text-sm text-[#E6D2B8]/90 space-y-3 font-light">
+              <p className="flex items-start gap-2">
+                <MapPin size={16} className="text-[#DFC085] flex-shrink-0 mt-1" />
+                <span>{BRAND.address}</span>
+              </p>
+              <p className="flex items-center gap-2">
+                <Phone size={16} className="text-[#DFC085] flex-shrink-0" />
+                <a href={`tel:${BRAND.phoneRaw}`} className="hover:text-[#DFC085] font-medium">
+                  {BRAND.phone}
+                </a>
+              </p>
+            </div>
+            <div className="pt-3">
               <a
                 href={BRAND.mapsUrl}
                 target="_blank"
-                rel="noreferrer"
-                className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-[var(--color-gold-light)] hover:underline"
+                rel="noopener noreferrer"
+                className="btn btn-outline-white !py-2.5 !px-4 !text-xs w-full text-center"
               >
-                <span>View on Google Maps</span>
-                <ExternalLink size={13} />
+                <span>Get Directions (Google Maps)</span>
               </a>
             </div>
           </div>
         </div>
 
-        {/* Copyright */}
-        <div className="max-w-[1320px] mx-auto pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-[var(--color-sand)] opacity-70 gap-4">
-          <p>© {new Date().getFullYear()} {BRAND.name}. All Rights Reserved.</p>
-          <p>
-            Karshni Baker's · Cakes · Bakes · Sweet Moments · Dinanagar, Punjab
+        {/* Bottom Bar */}
+        <div className="max-w-[1360px] mx-auto pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between text-xs text-white/50 gap-4">
+          <p>© {new Date().getFullYear()} {BRAND.fullName}. All rights reserved.</p>
+          <p className="text-[#DFC085]/80">
+            Shree Ram Market, Near Punjab & Sind Bank, Dinanagar, Punjab 143531
           </p>
         </div>
       </footer>
+
+      {/* Global Floating Call-To-Action Dock (Always slides with scroll on mobile & desktop) */}
+      <FloatingSocialDock />
     </div>
   );
 }

@@ -1,10 +1,7 @@
-import { CAKE_PORTFOLIO, type CakePortfolioItem } from "./cake-portfolio";
-
 export interface GalleryPhoto {
   id: string;
   title: string;
-  subtitle: string;
-  category: "Celebration Cakes" | "Kids & Themes" | "Bakery Portfolio" | "Artisanal Display";
+  category: "Cakes" | "Pastries & Bakes" | "Café Specials" | "Ambience";
   src: string;
   aspect: "landscape" | "portrait" | "wide";
   description: string;
@@ -12,33 +9,63 @@ export interface GalleryPhoto {
 
 export const BRAND = {
   name: "Karshni Baker's",
-  fullName: "Karshni Baker's",
+  fullName: "Karshni Baker's — Artisanal Bakery & Custom Cakes",
   shortName: "Karshni",
-  tagline: "Crafted for Sweet Moments.",
-  heroEyebrow: "Artisanal Bakery & Custom Cakes",
-  heroTitle: "Crafted for Sweet Moments.",
-  heroSupportingText: "Handcrafted celebration cakes and artisanal delicacies, baked fresh daily in Dinanagar.",
+  category: "Artisanal Bakery & Custom Cakes",
+  tagline: "A Little Sweetness in Every Moment",
+  heroEyebrow: "BAKED WITH LOVE • DINANAGAR",
+  heroTitle: "A Little Sweetness in Every Moment",
+  heroSubtitle: "Cakes • Pastries • Desserts • More",
+  heroDescription:
+    "Beautiful cakes, fresh bakes & unforgettable moments — made with love.",
   aboutHeading: "Made With Passion. Crafted With Detail.",
-  aboutText:
-    "Karshni Baker's creates handcrafted cakes and desserts for birthdays, anniversaries, celebrations and special occasions. Every creation is conceived as a piece of edible art—combining refined aesthetics, time-honored artisanal baking techniques, and pure ingredients to make life's milestones unforgettable.",
+  aboutDescription:
+    "Karshni Baker's creates handcrafted celebration cakes and artisanal desserts for birthdays, anniversaries, weddings, and special milestones. Every creation is conceived as a piece of edible art—combining refined aesthetics, time-honored artisanal baking techniques, and pure ingredients to make life's milestones unforgettable.",
   address: "Shree Ram Market, Near Punjab & Sind Bank, Dinanagar JT Road, Dinanagar, Punjab 143531",
   landmark: "Shree Ram Market, Near Punjab & Sind Bank",
   city: "Dinanagar, Punjab",
+  pincode: "143531",
   phone: "+91 98885 26072",
+  phoneDisplay: "098885 26072",
   phoneRaw: "+919888526072",
   whatsapp: "919888526072",
+  founder: "Manoj Kumar",
+  founderTitle: "Founder & Master Craftsman",
+  founderPhoto: "/images/owner-manoj-kumar.jpg",
+  founderBio:
+    "Founder and master craftsman behind Karshni Bakers & Cafe, Dinanagar. Dedicated to 100% pure dairy butter, artisanal European patisserie methods, and handcrafted milestone celebration cakes.",
   instagram: "@karshni_bakers",
   instagramUrl: "https://www.instagram.com/karshni_bakers/",
-  mapsUrl: "https://www.google.com/maps/search/?api=1&query=Karshni+Bakers+Shree+Ram+Market+Dinanagar+Punjab",
+  mapsUrl:
+    "https://www.google.com/maps/search/?api=1&query=Karshni+Bakers+Shree+Ram+Market+Dinanagar+Punjab",
   hours: "9:00 AM – 9:30 PM",
   days: "Open 7 Days a Week",
-  rating: "4.9",
-  reviewCount: "140+",
+  servicesList: [
+    {
+      title: "Custom Orders",
+      tagline: "Celebration Cakes",
+      description:
+        "Bespoke designer cakes for birthdays, anniversaries, weddings, and theme parties.",
+    },
+    {
+      title: "Fresh Counter Pickup",
+      tagline: "Shree Ram Market, Dinanagar",
+      description:
+        "Oven-fresh pastries, muffins, biscuits, breads, and treats ready daily on our bakery counter.",
+    },
+    {
+      title: "Careful Delivery",
+      tagline: "Safe & On-Time",
+      description:
+        "Handled with utmost care for special milestone celebration cakes across Dinanagar & nearby areas.",
+    },
+  ],
 };
 
 export const REAL_PHOTOS = {
+  ownerManoj: "/images/owner-manoj-kumar.jpg",
   logo: "/images/karshni-logo.jpg",
-  hero: "/images/bakery-showcase-wide.jpg",
+  hero: "/images/karshni-hero-master.jpg",
   storeInterior: "/images/cafe-seating.jpg",
   bakeryDisplay: "/images/bakery-display-angle.jpg",
   bakeryCounter: "/images/bakery-counter-logo.jpg",
@@ -63,600 +90,397 @@ export const REAL_PHOTOS = {
 };
 
 /**
- * 1. FRESH FROM OUR BAKERY
- * Strictly ONLY the products requested by the user:
- * Fresh Pastries, Muffins, Donuts, Brownies, Cookies, Fresh Homemade Biscuits,
- * Cream Rolls, Cheese Rolls, Cake Pops, Tarts, Buns, Garlic Bread, Fresh Bread.
+ * 4. BAKERY SERVICES
+ * - Custom Birthday Cakes
+ * - Wedding Cakes
+ * - Designer Cakes
+ * - Fresh Pastries
+ * - Cupcakes
+ * - Cookies & Biscuits
+ * - Fresh Bread
+ * - Dessert Boxes
+ * - Party & Event Orders
  */
-export interface BakeryProduct {
-  id: string;
-  name: string;
-  category: "Pastries" | "Biscuits & Cookies" | "Breads" | "Patisserie";
-  description: string;
-  badge?: string;
-  image: string;
-  isHouseMade?: boolean;
-}
-
-export const FRESH_BAKERY_PRODUCTS: BakeryProduct[] = [
-  {
-    id: "prod-pastries",
-    name: "Fresh Pastries",
-    category: "Pastries",
-    description: "Multi-layered European patisserie slices featuring Belgian dark truffle, fresh fruit gateaux, and light chantilly cream.",
-    badge: "Daily Fresh Cut",
-    image: REAL_PHOTOS.tarts,
-  },
-  {
-    id: "prod-muffins",
-    name: "Muffins",
-    category: "Patisserie",
-    description: "Golden-baked blueberry crumble and double Belgian chocolate muffins with an exceptionally tender, moist crumb.",
-    badge: "Oven Hot",
-    image: REAL_PHOTOS.muffins,
-  },
-  {
-    id: "prod-donuts",
-    name: "Donuts",
-    category: "Patisserie",
-    description: "Handcrafted brioche ring donuts dipped in decadent dark chocolate glaze with roasted pistachios and vanilla bean glaze.",
-    badge: "Artisanal Glaze",
-    image: REAL_PHOTOS.donuts,
-  },
-  {
-    id: "prod-brownies",
-    name: "Brownies",
-    category: "Patisserie",
-    description: "Dense, ultra-fudgy dark chocolate walnut brownies with a delicate crackly top and sprinkled flaky sea salt.",
-    badge: "Bestseller",
-    image: REAL_PHOTOS.brownies,
-  },
-  {
-    id: "prod-cookies",
-    name: "Cookies",
-    category: "Biscuits & Cookies",
-    description: "Thick, golden-baked gourmet cookies studded with rich chocolate chunks, toasted macadamias, and wholesome butter.",
-    badge: "Baked Fresh",
-    image: REAL_PHOTOS.homemadeBiscuits,
-  },
-  {
-    id: "prod-homemade-biscuits",
-    name: "Fresh Homemade Biscuits",
-    category: "Biscuits & Cookies",
-    description: "Our signature house-made crunchy butter biscuits baked fresh in our Dinanagar ovens, packed with sliced almonds and aromatic cardamom.",
-    badge: "House-Made Specialty",
-    image: REAL_PHOTOS.homemadeBiscuits,
-    isHouseMade: true,
-  },
-  {
-    id: "prod-cream-rolls",
-    name: "Cream Rolls",
-    category: "Patisserie",
-    description: "Crisp, golden-brown flaky puff pastry horn cones generously filled with light vanilla bean whipped cream and dusted with fine sugar.",
-    badge: "Bakery Classic",
-    image: REAL_PHOTOS.creamRolls,
-  },
-  {
-    id: "prod-cheese-rolls",
-    name: "Cheese Rolls",
-    category: "Breads",
-    description: "Flaky golden puff pastry rolls packed with savory cottage cheese, Italian herbs, and melted cheese baked to golden perfection.",
-    badge: "Savory Special",
-    image: REAL_PHOTOS.garlicBread,
-  },
-  {
-    id: "prod-cake-pops",
-    name: "Cake Pops",
-    category: "Patisserie",
-    description: "Bespoke chocolate cake pop truffles dipped in Belgian dark and ivory chocolate, delicately accented with edible gold luster.",
-    badge: "Party Favorite",
-    image: REAL_PHOTOS.cakePops,
-  },
-  {
-    id: "prod-tarts",
-    name: "Tarts",
-    category: "Patisserie",
-    description: "Crisp buttery French pastry shells layered with silky vanilla custard, fresh raspberries, blackberries, and edible gold leaf.",
-    badge: "Haute Patisserie",
-    image: REAL_PHOTOS.tarts,
-  },
-  {
-    id: "prod-buns",
-    name: "Buns",
-    category: "Breads",
-    description: "Pillow-soft brioche milk buns and golden dinner rolls baked each morning with a shimmering butter glaze.",
-    badge: "Morning Bake",
-    image: REAL_PHOTOS.freshBread,
-  },
-  {
-    id: "prod-garlic-bread",
-    name: "Garlic Bread",
-    category: "Breads",
-    description: "Toasted artisanal baguette slices infused with fresh roasted garlic butter, aromatic herbs, and bubbling mozzarella.",
-    badge: "Warm & Crispy",
-    image: REAL_PHOTOS.garlicBread,
-  },
-  {
-    id: "prod-fresh-bread",
-    name: "Fresh Bread",
-    category: "Breads",
-    description: "Authentic crusty sourdough boules, soft sandwich loaves, and golden baguettes baked daily using wholesome grains.",
-    badge: "Scratch Baked",
-    image: REAL_PHOTOS.freshBread,
-  },
-];
-
-/**
- * 2. CAKES & CUSTOM CAKES SHOWCASE
- * Includes all requested cake types with focus on Custom Cake Orders:
- * Custom Cakes, Birthday Cakes, Anniversary Cakes, Wedding Cakes, Theme Cakes,
- * Designer Cakes, Photo Cakes, Eggless Cakes, Bento / Mini Cakes, Cupcakes.
- */
-export interface CakeShowcaseType {
-  id: string;
-  name: string;
-  subtitle: string;
-  description: string;
-  tag: string;
-  image: string;
-  highlight?: boolean;
-}
-
-export const CAKE_TYPES_SHOWCASE: CakeShowcaseType[] = [
-  {
-    id: "custom-cakes",
-    name: "Custom Cakes",
-    subtitle: "Your Vision, Edibly Crafted",
-    description: "100% bespoke celebration centerpieces created from your photo references, event invitations, and personalized color palettes.",
-    tag: "Main Specialty",
-    image: REAL_PHOTOS.cakeKanishToybox,
-    highlight: true,
-  },
-  {
-    id: "birthday-cakes",
-    name: "Birthday Cakes",
-    subtitle: "Milestones & Yearly Celebrations",
-    description: "Distinctive age toppers, candle arrangements, and personalized messages customized for children, teens, and adults.",
-    tag: "Celebration Essential",
-    image: REAL_PHOTOS.cakeSupercar,
-  },
-  {
-    id: "anniversary-cakes",
-    name: "Anniversary Cakes",
-    subtitle: "Romantic Couple Moments",
-    description: "Heart-shaped silhouettes, milestone calendar date plaques, and fresh red rose floral styling for couple milestones.",
-    tag: "Couple Edition",
-    image: REAL_PHOTOS.cakeRomanticHeart,
-  },
-  {
-    id: "wedding-cakes",
-    name: "Wedding Cakes",
-    subtitle: "Grand Tiered Elegance",
-    description: "Multi-tiered reception centerpieces with pristine fondant drapery, sugar florals, and subtle champagne gold accents.",
-    tag: "Grand Occasions",
-    image: REAL_PHOTOS.cakeTulipBow,
-  },
-  {
-    id: "theme-cakes",
-    name: "Theme Cakes",
-    subtitle: "Cartoon, Sports & Fantasy",
-    description: "Vibrant custom themes ranging from sports cars and race tracks to enchanted animated cartoon wonderlands.",
-    tag: "Handcrafted Themes",
-    image: REAL_PHOTOS.cakeMashaBear,
-  },
-  {
-    id: "designer-cakes",
-    name: "Designer Cakes",
-    subtitle: "Haute Couture Aesthetic",
-    description: "Minimalist ribbons, fondant bows, modern geometric piping, and editorial patisserie styling.",
-    tag: "Signature Aesthetic",
-    image: REAL_PHOTOS.cakeTulipBow,
-  },
-  {
-    id: "photo-cakes",
-    name: "Photo Cakes",
-    subtitle: "Cherished Memories",
-    description: "High-resolution edible sugar sheet photo printing framed with delicate cream borders and custom greetings.",
-    tag: "Personalized",
-    image: REAL_PHOTOS.bakeryDisplay,
-  },
-  {
-    id: "eggless-cakes",
-    name: "Eggless Cakes",
-    subtitle: "100% Pure Vegetarian Recipe",
-    description: "Fluffy, melt-in-the-mouth sponges crafted using our proprietary egg-free recipe without compromising on height or richness.",
-    tag: "100% Pure Veg",
-    image: REAL_PHOTOS.cakeRomanticHeart,
-  },
-  {
-    id: "bento-mini-cakes",
-    name: "Bento / Mini Cakes",
-    subtitle: "Korean Minimalist Bento Box",
-    description: "Charming 4-inch individual celebration cakes packaged in vintage lunchbox containers for intimate milestones.",
-    tag: "Trending",
-    image: REAL_PHOTOS.cakeTulipBow,
-  },
-  {
-    id: "cupcakes",
-    name: "Cupcakes",
-    subtitle: "Artisanal Single Servings",
-    description: "Boxed sets of gourmet cupcakes swirled with whipped Belgian chocolate, vanilla bean cream, and celebration sprinkles.",
-    tag: "Party Box",
-    image: REAL_PHOTOS.muffins,
-  },
-];
-
-/**
- * 3. SPECIAL & BULK ORDERS
- * Custom Orders, Bulk Orders, Party Orders, Wedding & Event Orders, Corporate Orders, Celebration Orders.
- */
-export interface SpecialOrderService {
+export interface BakeryServiceItem {
   id: string;
   title: string;
+  shortDescription: string;
+  image: string;
   badge: string;
-  lead: string;
-  description: string;
-  highlights: string[];
-  ctaLabel: string;
-  whatsappMessage: string;
+  categoryTarget: string;
 }
 
-export const SPECIAL_BULK_ORDERS: SpecialOrderService[] = [
+export const BAKERY_SERVICES: BakeryServiceItem[] = [
   {
-    id: "custom-orders",
-    title: "Custom Orders",
-    badge: "1-on-1 Consultation",
-    lead: "Bring any cake or pastry idea to life with our head pastry chef.",
-    description: "Share your reference photos, theme sketches, or Pinterest boards. We customize every element from inner layers and fillings to exterior fondant sculpting.",
-    highlights: ["Hand-sculpted 3D figurines", "Custom edible calendar plaques", "Flavor & sweetness tailoring"],
-    ctaLabel: "Order a Custom Cake",
-    whatsappMessage: "Hello Karshni Baker's! I'd like to consult on a Custom Cake order with reference photos.",
+    id: "serv-birthday-cakes",
+    title: "Custom Birthday Cakes",
+    shortDescription:
+      "Handcrafted themed cakes, milestone number designs, and character creations baked fresh to make birthdays unforgettable.",
+    image: REAL_PHOTOS.cakeRomanticHeart,
+    badge: "Personalized",
+    categoryTarget: "Cakes",
   },
   {
-    id: "bulk-orders",
-    title: "Bulk Orders",
-    badge: "Volume Pricing",
-    lead: "Fresh daily bakery treats and boxes for large gatherings.",
-    description: "Ideal for schools, community gatherings, festive holiday gifts, and large tea parties. We bake and pack fresh boxes on schedule with zero compromises on quality.",
-    highlights: ["Fresh homemade biscuit boxes", "Assorted pastry trays", "Scheduled on-time batch baking"],
-    ctaLabel: "Ask About Bulk Orders",
-    whatsappMessage: "Hello Karshni Baker's! I would like to inquire about placing a Bulk Bakery Order.",
+    id: "serv-wedding-cakes",
+    title: "Wedding Cakes",
+    shortDescription:
+      "Stately multi-tiered masterpieces draped in satin fondant, edible pearl lace, and handcrafted floral sugarcraft.",
+    image: REAL_PHOTOS.cakeTulipBow,
+    badge: "Grand Masterpiece",
+    categoryTarget: "Cakes",
   },
   {
-    id: "party-orders",
-    title: "Party Orders",
-    badge: "Complete Setup",
-    lead: "Comprehensive bakery catering for birthdays and private parties.",
-    description: "Streamline your event with complete packages including centerpiece cakes, finger pastries, savory cheese puffs, and cake pops for all your guests.",
-    highlights: ["Coordinated color palettes", "Kids & adult party bundles", "Pre-portioned snack boxes"],
-    ctaLabel: "Place a Party Order",
-    whatsappMessage: "Hello Karshni Baker's! I would like to organize a Party Order with cakes and savory snacks.",
+    id: "serv-designer-cakes",
+    title: "Designer Cakes",
+    shortDescription:
+      "Bespoke artistic centerpieces featuring rich chocolate drips, French macarons, and gold-leaf accents.",
+    image: REAL_PHOTOS.hero,
+    badge: "Artisan Signature",
+    categoryTarget: "Cakes",
   },
   {
-    id: "wedding-event-orders",
-    title: "Wedding & Event Orders",
-    badge: "Grand Occasions",
-    lead: "Showstopping multi-tiered centerpieces for receptions and engagements.",
-    description: "From multi-tiered wedding cakes with delicate sugar ribbons to dessert display tables and personalized guest favors, we deliver luxury at scale.",
-    highlights: ["Grand multi-tier structures", "Safe banquet delivery & setup", "Custom tasting consultations"],
-    ctaLabel: "Inquire Wedding Cake",
-    whatsappMessage: "Hello Karshni Baker's! I would like to inquire about a Wedding / Grand Event Cake.",
+    id: "serv-fresh-pastries",
+    title: "Fresh Pastries",
+    shortDescription:
+      "Flaky European fruit gateaux slices, Belgian truffle pastries, and crispy custard-filled tarts baked daily.",
+    image: REAL_PHOTOS.tarts,
+    badge: "Daily Fresh Cut",
+    categoryTarget: "Pastries",
   },
   {
-    id: "corporate-orders",
-    title: "Corporate Orders",
-    badge: "Business Gifts",
-    lead: "Sophisticated gift hampers and refreshment boxes for professional events.",
-    description: "Impress clients, staff, and executives with branded corporate dessert boxes, anniversary treats, and premium house-made tea biscuit hampers.",
-    highlights: ["Custom logo edible tags", "Premium gift packaging", "Bulk delivery to office locations"],
-    ctaLabel: "Inquire Corporate Gifts",
-    whatsappMessage: "Hello Karshni Baker's! I'd like to discuss a Corporate Gifting / Order requirement.",
+    id: "serv-cupcakes",
+    title: "Cupcakes",
+    shortDescription:
+      "Moist vanilla, red velvet, and Belgian chocolate cupcakes crowned with whipped swirl buttercream frosting.",
+    image: REAL_PHOTOS.muffins,
+    badge: "Sweet Delights",
+    categoryTarget: "Cupcakes",
   },
   {
-    id: "celebration-orders",
-    title: "Celebration Orders",
-    badge: "Family Milestones",
-    lead: "Celebrate anniversaries, retirements, baby arrivals, and reunions.",
-    description: "Every celebration is distinct. We provide customized greeting plaques, theme-matched cupcakes, and celebration cake packages.",
-    highlights: ["Same-day milestone bookings", "Custom inscription ribbons", "Careful safe packaging"],
-    ctaLabel: "Book Celebration Order",
-    whatsappMessage: "Hello Karshni Baker's! I would like to book a special Celebration Cake order.",
+    id: "serv-cookies-biscuits",
+    title: "Cookies & Biscuits",
+    shortDescription:
+      "Crunchy traditional bakery biscuits, rich butter cookies, and chocolate chip treats made with heritage recipes.",
+    image: REAL_PHOTOS.homemadeBiscuits,
+    badge: "Heritage Bakes",
+    categoryTarget: "Cookies",
+  },
+  {
+    id: "serv-fresh-bread",
+    title: "Fresh Bread",
+    shortDescription:
+      "Artisan sourdough, golden sandwich loaves, herb-buttered garlic breads, and soft dinner rolls fresh from the oven.",
+    image: REAL_PHOTOS.freshBread,
+    badge: "Oven Hot",
+    categoryTarget: "Breads",
+  },
+  {
+    id: "serv-dessert-boxes",
+    title: "Dessert Boxes",
+    shortDescription:
+      "Curated luxury gift hampers and assorted pastry boxes ideal for festive gifting and family celebrations.",
+    image: REAL_PHOTOS.celebrationHamper,
+    badge: "Gift Hampers",
+    categoryTarget: "Desserts",
+  },
+  {
+    id: "serv-party-event-orders",
+    title: "Party & Event Orders",
+    shortDescription:
+      "Complete dessert catering for gatherings, including hand-dipped cake pops, mini pastries, and custom dessert tables.",
+    image: REAL_PHOTOS.cakePops,
+    badge: "Event Catering",
+    categoryTarget: "Cakes",
   },
 ];
 
 /**
- * 4. PARTY & CELEBRATION
- * Birthday Cakes, Celebration Cakes, Cake Toppers, Candles, Party Packs,
- * Celebration Boxes, Gift Hampers, Custom Celebration Orders.
+ * 6. PRODUCTS & MENU
  */
-export interface PartyCelebrationItem {
+export interface BakeryProductItem {
   id: string;
   name: string;
-  category: string;
+  category: "Cakes" | "Pastries" | "Cupcakes" | "Cookies" | "Breads" | "Desserts";
   description: string;
   image: string;
+  dietary?: "Vegetarian" | "Eggless Available" | "Chef Special" | "Bestseller";
+  tag: string;
+  priceNote: string;
 }
 
-export const PARTY_CELEBRATION_ITEMS: PartyCelebrationItem[] = [
-  {
-    id: "party-birthday-cakes",
-    name: "Birthday Cakes",
-    category: "Centerpiece",
-    description: "Showstopping birthday cakes tailored with age numbers, custom figures, and decadent chocolate or fruit flavors.",
-    image: REAL_PHOTOS.cakeSupercar,
-  },
-  {
-    id: "party-celebration-cakes",
-    name: "Celebration Cakes",
-    category: "Signature",
-    description: "Handcrafted cakes with delicate floral piping, satin ribbon fondant, and heartfelt personal messages.",
-    image: REAL_PHOTOS.cakeTulipBow,
-  },
-  {
-    id: "party-cake-toppers",
-    name: "Cake Toppers",
-    category: "Accessories",
-    description: "Gleaming golden acrylic milestone numbers, 'Happy Birthday' cursive banners, and personalized name toppers.",
-    image: REAL_PHOTOS.celebrationHamper,
-  },
-  {
-    id: "party-candles",
-    name: "Designer Candles",
-    category: "Accessories",
-    description: "Champagne gold metallic taper candles, sparkling celebration fountains, and numeral candle sets.",
-    image: REAL_PHOTOS.celebrationHamper,
-  },
-  {
-    id: "party-packs",
-    name: "Party Packs",
-    category: "Snack Bundles",
-    description: "Pre-boxed party packages featuring individual cake slices, warm savory patties, and cake pops for hassle-free hosting.",
-    image: REAL_PHOTOS.muffins,
-  },
-  {
-    id: "party-celebration-boxes",
-    name: "Celebration Boxes",
-    category: "Gift Sets",
-    description: "Luxurious dessert boxes filled with assorted brownies, donuts, pastries, and house-made cookies.",
-    image: REAL_PHOTOS.celebrationHamper,
-  },
-  {
-    id: "party-gift-hampers",
-    name: "Artisanal Gift Hampers",
-    category: "Luxury Hampers",
-    description: "Elegant kraft and satin gold ribbon hampers packed with house-made almond biscuits, brownies, and confections.",
-    image: REAL_PHOTOS.celebrationHamper,
-  },
-  {
-    id: "party-custom-celebration",
-    name: "Custom Celebration Orders",
-    category: "Bespoke Service",
-    description: "Complete celebration packages curated with matching cake, cupcakes, cake pops, and party favor boxes.",
-    image: REAL_PHOTOS.cakeRomanticHeart,
-  },
-];
+export const PRODUCT_CATEGORIES = [
+  "Cakes",
+  "Pastries",
+  "Cupcakes",
+  "Cookies",
+  "Breads",
+  "Desserts",
+] as const;
 
-export const OCCASIONS_LIST = [
+export const BAKERY_PRODUCTS: BakeryProductItem[] = [
+  // 1. Cakes
   {
-    id: "birthday",
-    title: "Birthday",
-    subtitle: "Milestone & Theme Celebrations",
-    image: REAL_PHOTOS.cakeSupercar,
-    description: "Distinctive celebration cakes personalized with age toppers, custom figures, and decadent flavors.",
-    link: "/cakes",
+    id: "prod-cake-1",
+    name: "Belgian Chocolate Drip Cake",
+    category: "Cakes",
+    description: "Layers of moist chocolate sponge drizzled with rich ganache, topped with macarons and fresh berries.",
+    image: "/images/cakes/cake-belgian-drip-clean.jpg",
+    dietary: "Chef Special",
+    tag: "Signature",
+    priceNote: "Inquire / Custom Order",
   },
   {
-    id: "anniversary",
-    title: "Anniversary",
-    subtitle: "Romantic & Couple Moments",
+    id: "prod-cake-2",
+    name: "Luxury Tulip Ribbon Bow Cake",
+    category: "Cakes",
+    description: "Pristine white finish draped in a handcrafted fondant ribbon bow with delicate miniature tulip buds.",
+    image: REAL_PHOTOS.cakeTulipBow,
+    dietary: "Eggless Available",
+    tag: "Designer",
+    priceNote: "Inquire / Custom Order",
+  },
+  {
+    id: "prod-cake-3",
+    name: "Romantic Heart Calendar Cake",
+    category: "Cakes",
+    description: "Heart-shaped vanilla cream cake with golden lettering, fresh crimson roses, and custom date plaque.",
     image: REAL_PHOTOS.cakeRomanticHeart,
-    description: "Heart-shaped silhouettes adorned with fresh roses, golden lettering, and custom calendar date plaques.",
-    link: "/cakes",
+    dietary: "Bestseller",
+    tag: "Anniversary",
+    priceNote: "Inquire / Custom Order",
   },
   {
-    id: "kids-celebration",
-    title: "Kids Celebration",
-    subtitle: "Playful Themes & Characters",
+    id: "prod-cake-4",
+    name: "McLaren Supercar Track Cake",
+    category: "Cakes",
+    description: "Sky-blue fondant racetrack cake with chequered flags, custom age number, and supercar topper.",
+    image: REAL_PHOTOS.cakeSupercar,
+    dietary: "Eggless Available",
+    tag: "Kids Theme",
+    priceNote: "Inquire / Custom Order",
+  },
+  {
+    id: "prod-cake-5",
+    name: "Masha & Bear Character Cake",
+    category: "Cakes",
+    description: "Woodland cartoon birthday cake with handcrafted character figures, tree stump detailing, and floral accents.",
     image: REAL_PHOTOS.cakeMashaBear,
-    description: "Imaginative 3D sculptures, favorite animated figures, and vibrant dreamscapes crafted with wholesome taste.",
-    link: "/cakes",
+    dietary: "Chef Special",
+    tag: "Kids Special",
+    priceNote: "Inquire / Custom Order",
+  },
+
+  // 2. Pastries
+  {
+    id: "prod-pastry-1",
+    name: "Artisan Fruit & Ganache Tarts",
+    category: "Pastries",
+    description: "Crisp golden shortcrust pastry filled with dark Belgian chocolate ganache or seasonal fruit compote.",
+    image: REAL_PHOTOS.tarts,
+    dietary: "Vegetarian",
+    tag: "Fresh Cut",
+    priceNote: "Fresh Daily",
   },
   {
-    id: "special-moments",
-    title: "Special Moments",
-    subtitle: "Designer Haute Patisserie",
-    image: REAL_PHOTOS.cakeTulipBow,
-    description: "Sophisticated fondant drapery, delicate hand-piped flowers, and minimalist luxury centerpieces.",
-    link: "/cakes",
+    id: "prod-pastry-2",
+    name: "Flaky Crème Horn Rolls",
+    category: "Pastries",
+    description: "Crispy puff pastry horns rolled in granulated sugar and generously filled with whipped vanilla cream.",
+    image: REAL_PHOTOS.creamRolls,
+    dietary: "Vegetarian",
+    tag: "Bakery Classic",
+    priceNote: "Fresh Daily",
+  },
+  {
+    id: "prod-pastry-3",
+    name: "Golden Butter Croissants",
+    category: "Pastries",
+    description: "Multi-layered European butter croissants baked each morning to a light, flaky golden crust.",
+    image: "/images/bakery/croissant-clean.jpg",
+    dietary: "Vegetarian",
+    tag: "Oven Hot",
+    priceNote: "Fresh Daily",
+  },
+
+  // 3. Cupcakes
+  {
+    id: "prod-cupcake-1",
+    name: "Frosted Berry Vanilla Cupcakes",
+    category: "Cupcakes",
+    description: "Fluffy vanilla sponge piped with rich buttercream swirls and garnished with fresh berries.",
+    image: REAL_PHOTOS.muffins,
+    dietary: "Vegetarian",
+    tag: "Bestseller",
+    priceNote: "Fresh Daily",
+  },
+  {
+    id: "prod-cupcake-2",
+    name: "Belgian Chocolate Fudge Cupcakes",
+    category: "Cupcakes",
+    description: "Moist dark cocoa sponge crowned with decadent chocolate frosting and chocolate flakes.",
+    image: "/images/bakery/cupcakes-clean.jpg",
+    dietary: "Vegetarian",
+    tag: "Indulgent",
+    priceNote: "Fresh Daily",
+  },
+
+  // 4. Cookies
+  {
+    id: "prod-cookie-1",
+    name: "Traditional Homemade Biscuits",
+    category: "Cookies",
+    description: "Crunchy golden bakery biscuits prepared using heritage dairy butter and aromatic cardamom.",
+    image: REAL_PHOTOS.homemadeBiscuits,
+    dietary: "Vegetarian",
+    tag: "Heritage",
+    priceNote: "Fresh Daily",
+  },
+  {
+    id: "prod-cookie-2",
+    name: "Chunky Chocolate Chip Cookies",
+    category: "Cookies",
+    description: "Crisp on the outside and soft inside, packed with Belgian chocolate chips and brown sugar.",
+    image: REAL_PHOTOS.homemadeBiscuits,
+    dietary: "Vegetarian",
+    tag: "Bestseller",
+    priceNote: "Fresh Daily",
+  },
+
+  // 5. Breads
+  {
+    id: "prod-bread-1",
+    name: "Fresh Handcrafted Bread Loaf",
+    category: "Breads",
+    description: "Slow-fermented artisan sandwich bread loaf baked daily with a golden crust and tender crumb.",
+    image: REAL_PHOTOS.freshBread,
+    dietary: "Vegetarian",
+    tag: "Daily Bread",
+    priceNote: "Fresh Daily",
+  },
+  {
+    id: "prod-bread-2",
+    name: "Herb Toasted Garlic Bread",
+    category: "Breads",
+    description: "Crusty golden baguette brushed with roasted garlic butter, parsley, and Italian herbs.",
+    image: REAL_PHOTOS.garlicBread,
+    dietary: "Vegetarian",
+    tag: "Savory",
+    priceNote: "Fresh Daily",
+  },
+
+  // 6. Desserts
+  {
+    id: "prod-dessert-1",
+    name: "Belgian Dark Chocolate Brownies",
+    category: "Desserts",
+    description: "Ultra-fudgy dark chocolate squares with a shiny crackly crust and melted chocolate pockets.",
+    image: REAL_PHOTOS.brownies,
+    dietary: "Vegetarian",
+    tag: "Bestseller",
+    priceNote: "Fresh Daily",
+  },
+  {
+    id: "prod-dessert-2",
+    name: "Celebration Dessert Gift Box",
+    category: "Desserts",
+    description: "Curated luxury gift box containing assorted brownies, macarons, cookies, and fine pastries.",
+    image: REAL_PHOTOS.celebrationHamper,
+    dietary: "Chef Special",
+    tag: "Gift Hamper",
+    priceNote: "Custom Box",
+  },
+  {
+    id: "prod-dessert-3",
+    name: "Artisan Cake Pops",
+    category: "Desserts",
+    description: "Rich cake truffles dipped in white and dark chocolate, decorated with colorful party sprinkles.",
+    image: REAL_PHOTOS.cakePops,
+    dietary: "Vegetarian",
+    tag: "Party Favorite",
+    priceNote: "Fresh Daily",
   },
 ];
 
-export const WHY_KARSHNI = [
-  {
-    id: "freshly-crafted",
-    title: "Freshly Crafted",
-    description: "Every sponge, filling, and cream layer is baked freshly to order in our artisanal Dinanagar bakery kitchen.",
-    icon: "Sparkles",
-  },
-  {
-    id: "custom-designs",
-    title: "Custom Designs",
-    description: "From bespoke 3D fondant characters to romantic calendar date plaques, we bring your unique vision to life.",
-    icon: "Palette",
-  },
-  {
-    id: "premium-ingredients",
-    title: "Premium Ingredients",
-    description: "We use exclusively premium dairy creams, imported chocolates, and wholesome, fresh ingredients.",
-    icon: "ShieldCheck",
-  },
-  {
-    id: "made-for-moments",
-    title: "Made For Your Moments",
-    description: "Meticulously detailed and gracefully packaged to ensure your celebrations leave lasting sweet memories.",
-    icon: "HeartHandshake",
-  },
-];
-
-export const WHY_KARSHINI = WHY_KARSHNI;
-
-export const GALLERY_ITEMS: GalleryPhoto[] = [
-  {
-    id: "gal-c1",
-    title: "Luxury Tulip Ribbon Bow Cake",
-    subtitle: "Designer Signature Edition",
-    category: "Celebration Cakes",
-    src: REAL_PHOTOS.cakeTulipBow,
-    aspect: "portrait",
-    description: "Pure white textured satin finish with a dramatic handcrafted fondant bow and miniature pink tulips.",
-  },
-  {
-    id: "gal-c2",
-    title: "Romantic Heart & Calendar Date Plaque Cake",
-    subtitle: "Anniversary & Couple Edition",
-    category: "Celebration Cakes",
-    src: REAL_PHOTOS.cakeRomanticHeart,
-    aspect: "portrait",
-    description: "Heart-shaped cake with fresh roses, golden lettering, and edible calendar tile for memorable dates.",
-  },
-  {
-    id: "gal-c3",
-    title: "McLaren Supercar Track Cake",
-    subtitle: "Kids 7th Birthday Milestone",
-    category: "Kids & Themes",
-    src: REAL_PHOTOS.cakeSupercar,
-    aspect: "portrait",
-    description: "Electric blue sports car theme with checkered track border, edible tires, and cascading balloon pearl garland.",
-  },
-  {
-    id: "gal-c4",
-    title: "Masha & Bear 'Vamika' Birthday Cake",
-    subtitle: "Custom Cartoon Birthday Theme",
-    category: "Kids & Themes",
-    src: REAL_PHOTOS.cakeMashaBear,
-    aspect: "portrait",
-    description: "Woodland cartoon birthday cake with personalized 'Vamika' banner, bear, tree, and butterflies.",
-  },
-  {
-    id: "gal-c5",
-    title: "Personalized Toybox & Football 'KANISH' Cake",
-    subtitle: "Custom 3D Figurine Creation",
-    category: "Kids & Themes",
-    src: REAL_PHOTOS.cakeKanishToybox,
-    aspect: "portrait",
-    description: "Handmade 3D boy figurine holding soccer ball with toy airplane, teddy bear, and 'KANISH' name.",
-  },
+/**
+ * 7. VISUAL GALLERY
+ */
+export const GALLERY_PHOTOS: GalleryPhoto[] = [
   {
     id: "gal-1",
-    title: "Artisanal Bakery Showcase",
-    subtitle: "Illuminated Multi-Tier Cake Counter",
-    category: "Bakery Portfolio",
-    src: REAL_PHOTOS.bakeryWide,
+    title: "Freshly Baked With Love — Karshni Baker's",
+    category: "Cakes",
+    src: REAL_PHOTOS.hero,
     aspect: "wide",
-    description: "Our signature multi-tier chilled display filled with fresh daily celebration cakes, pastries and treats beneath an ambient wooden pergola ceiling.",
+    description:
+      "Our signature master showcase: artisanal chocolate drip cake, golden croissants, and handcrafted cupcakes.",
   },
   {
     id: "gal-2",
-    title: "Climate-Controlled Display",
-    subtitle: "Expansive Chilled Glass Counter",
-    category: "Artisanal Display",
-    src: REAL_PHOTOS.bakeryDisplay,
+    title: "Luxury Tulip Ribbon Bow Cake",
+    category: "Cakes",
+    src: REAL_PHOTOS.cakeTulipBow,
+    aspect: "portrait",
+    description:
+      "Handcrafted sugarcraft ribbon bow with miniature tulip buds on satin smooth fondant.",
+  },
+  {
+    id: "gal-3",
+    title: "Belgian Fudge Chocolate Brownies",
+    category: "Pastries & Bakes",
+    src: REAL_PHOTOS.brownies,
     aspect: "landscape",
-    description: "Panoramic view of our transparent refrigerated showcase displaying daily cakes, pastries, and artisanal bakes.",
+    description:
+      "Dense Belgian dark chocolate squares baked fresh daily with a crackly glaze top.",
+  },
+  {
+    id: "gal-4",
+    title: "Romantic Heart Milestone Cake",
+    category: "Cakes",
+    src: REAL_PHOTOS.cakeRomanticHeart,
+    aspect: "portrait",
+    description:
+      "Heart-shaped anniversary creation with golden calligraphy, fresh red roses, and date plaque.",
+  },
+  {
+    id: "gal-5",
+    title: "Artisan Patisserie Tarts & Pastries",
+    category: "Pastries & Bakes",
+    src: REAL_PHOTOS.tarts,
+    aspect: "landscape",
+    description:
+      "Flaky tart shells filled with dark chocolate ganache and seasonal fruit compote.",
+  },
+  {
+    id: "gal-6",
+    title: "Fresh Baked Artisan Bread Loaves",
+    category: "Pastries & Bakes",
+    src: REAL_PHOTOS.freshBread,
+    aspect: "landscape",
+    description:
+      "Golden crust hand-kneaded artisan breads, buns, and garlic loaves fresh from the oven.",
+  },
+  {
+    id: "gal-7",
+    title: "McLaren Supercar Themed Cake",
+    category: "Cakes",
+    src: REAL_PHOTOS.cakeSupercar,
+    aspect: "portrait",
+    description:
+      "Custom racetrack cake designed for celebrations with racing flags and supercar topper.",
+  },
+  {
+    id: "gal-8",
+    title: "Karshni Bakery Display & Ambiance",
+    category: "Ambience",
+    src: REAL_PHOTOS.bakeryWide,
+    aspect: "wide",
+    description:
+      "Illuminated glass showcase filled with fresh cakes and delicacies at Shree Ram Market, Dinanagar.",
   },
 ];
 
-export const TESTIMONIALS_LIST = [
-  {
-    id: "test-1",
-    quote:
-      "The craftsmanship on our anniversary cake was extraordinary. The delicate floral work and date plaque looked regal, and the flavor was exceptionally rich yet light.",
-    author: "Harpreet Kaur",
-    occasion: "Anniversary Celebration",
-    city: "Dinanagar",
-  },
-  {
-    id: "test-2",
-    quote:
-      "Karshni Baker's made my son's 7th birthday supercar cake exactly as promised. Fresh sponge, precise detailing, and on-time delivery. A truly premium experience.",
-    author: "Rajesh Mehra",
-    occasion: "7th Birthday Milestone",
-    city: "Dinanagar",
-  },
-  {
-    id: "test-3",
-    quote:
-      "Easily the most sophisticated bakery in Dinanagar. From custom celebration cakes to daily patisserie, their attention to detail and purity is unmatched.",
-    author: "Dr. Simranjit Singh",
-    occasion: "Family Celebration",
-    city: "Dinanagar",
-  },
-];
-
-// Preserved for any legacy route references
-export interface MenuItem {
-  id: string;
-  name: string;
-  category: "Pastries" | "Patties & Savouries" | "Biscuits & Cookies" | "Desserts";
-  description: string;
-  tag?: string;
-  weight?: string;
-  image: string;
-  imagePosition?: string;
-}
-
-export const MENU_ITEMS: MenuItem[] = [
-  {
-    id: "bakery-1",
-    name: "Fresh Pastries",
-    category: "Pastries",
-    description: "Decadent Dutch chocolate sponge layered with silky ganache glaze.",
-    tag: "Fresh Cut",
-    image: REAL_PHOTOS.tarts,
-    imagePosition: "center center",
-  },
-  {
-    id: "bakery-2",
-    name: "Classic Fruit Tarts",
-    category: "Pastries",
-    description: "Crisp buttery pastry filled with vanilla bean cream and berries.",
-    image: REAL_PHOTOS.tarts,
-    imagePosition: "center center",
-  },
-  {
-    id: "bakery-3",
-    name: "Cheese Rolls",
-    category: "Patties & Savouries",
-    description: "Flaky golden multi-layered puff pastry filled with cheese and herbs.",
-    tag: "Fresh Daily",
-    image: REAL_PHOTOS.garlicBread,
-    imagePosition: "center center",
-  },
-  {
-    id: "bakery-4",
-    name: "Fresh Garlic Bread",
-    category: "Patties & Savouries",
-    description: "Artisanal baguette slices toasted with herb garlic butter and cheese.",
-    image: REAL_PHOTOS.garlicBread,
-    imagePosition: "center center",
-  },
-  {
-    id: "bakery-5",
-    name: "Fresh Homemade Biscuits",
-    category: "Biscuits & Cookies",
-    weight: "250g Box",
-    description: "House-made crunchy butter biscuits studded with roasted California almonds.",
-    tag: "House-Made",
-    image: REAL_PHOTOS.homemadeBiscuits,
-    imagePosition: "center center",
-  },
-  {
-    id: "bakery-6",
-    name: "Fudge Brownies",
-    category: "Desserts",
-    description: "Dense and fudgy chocolate brownie packed with toasted walnuts.",
-    tag: "Patisserie Special",
-    image: REAL_PHOTOS.brownies,
-    imagePosition: "center center",
-  },
-];
+// Backwards-compatible aliases
+export const GALLERY_ITEMS = GALLERY_PHOTOS;
+export const FOOD_MENU_ITEMS = BAKERY_PRODUCTS;
+export const MENU_CATEGORIES = PRODUCT_CATEGORIES;
+export const SIGNATURE_COLLECTIONS = BAKERY_SERVICES;

@@ -1,20 +1,16 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import {
   ArrowLeft,
-  ArrowRight,
   Eye,
   Phone,
   Sparkles,
   X,
-  Palette,
-  Send,
+  MessageCircle,
 } from "lucide-react";
 import { useMemo, useState } from "react";
-import { WhatsAppIcon } from "../components/ui/whatsapp-icon";
 import { BRAND, REAL_PHOTOS } from "../lib/bakery-data";
 import {
   CAKE_PORTFOLIO,
-  CAKE_CATEGORIES_LIST,
   type CakeCategory,
   type CakePortfolioItem,
 } from "../lib/cake-portfolio";
@@ -22,17 +18,17 @@ import {
 export const Route = createFileRoute("/cakes")({
   head: () => ({
     meta: [
-      { title: "Celebration Cakes Portfolio — Karshni Baker’s Dinanagar" },
+      { title: `Celebration Cakes Portfolio — ${BRAND.fullName}` },
       {
         name: "description",
-        content:
-          "Browse real handcrafted celebration cakes from Karshni Baker's in Dinanagar. Designer ribbon bow cakes, anniversary heart date plaques, and custom kids 3D theme cakes.",
+        content: `Browse handcrafted celebration cakes from ${BRAND.name} at Shree Ram Market, Near Punjab & Sind Bank, Dinanagar, Punjab. Artisan chocolate drip cakes, designer ribbon bow cakes, anniversary heart plaques, and custom theme cakes.`,
       },
-      { property: "og:title", content: "Celebration Cakes Portfolio — Karshni Baker’s" },
+      { property: "og:title", content: `Celebration Cakes Portfolio — ${BRAND.name}` },
       {
         property: "og:description",
-        content: "Explore Karshni Baker’s authentic cake portfolio for birthdays, anniversaries, and milestones.",
+        content: `Explore ${BRAND.name} authentic cake portfolio for birthdays, anniversaries, and milestones.`,
       },
+      { property: "og:image", content: REAL_PHOTOS.hero },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
@@ -42,14 +38,12 @@ export const Route = createFileRoute("/cakes")({
 
 const ALL_FILTER_CATEGORIES: CakeCategory[] = [
   "All",
-  "Birthday Cakes",
-  "Anniversary Cakes",
-  "Custom Cakes",
-  "Kids Cakes",
+  "Celebration Cakes",
+  "Chocolate Cakes",
   "Designer Cakes",
+  "Anniversary Cakes",
+  "Kids Cakes",
   "Premium Cakes",
-  "Theme Cakes",
-  "Dessert Cakes",
 ];
 
 function CakesPage() {
@@ -59,250 +53,180 @@ function CakesPage() {
   const filteredCakes = useMemo(() => {
     if (selectedCategory === "All") return CAKE_PORTFOLIO;
     return CAKE_PORTFOLIO.filter(
-      (item) => item.category === selectedCategory || item.categories.includes(selectedCategory)
+      (cake) => cake.category === selectedCategory || cake.categories.includes(selectedCategory)
     );
   }, [selectedCategory]);
 
-  const orderWhatsApp = (cake: CakePortfolioItem) => {
-    const text = `Hello Karshni Baker's! I am interested in ordering the *"${cake.name}"* from your cake collection. Could you please share available flavors and weight options?`;
+  const handleOrderWhatsApp = (cake: CakePortfolioItem) => {
+    const text = `Hello ${BRAND.name}! I would like to inquire about ordering: *${cake.name}* (ID: ${cake.id}). Please share availability and customization options.`;
     window.open(`https://wa.me/${BRAND.whatsapp}?text=${encodeURIComponent(text)}`, "_blank");
   };
 
   return (
-    <div className="pt-24 min-h-screen bg-[var(--color-cream)]">
-      {/* Hero Header */}
-      <section className="relative py-20 sm:py-28 px-6 overflow-hidden bg-[var(--color-chocolate)] text-white text-center">
+    <div className="min-h-screen bg-[var(--color-cream)]">
+      {/* Header */}
+      <section className="relative pt-32 sm:pt-40 pb-20 sm:pb-28 px-4 sm:px-6 overflow-hidden bg-gradient-to-b from-[#180C06] via-[#24130A] to-[#180C06] text-white text-center">
         <img
-          src={REAL_PHOTOS.cakeTulipBow}
-          alt="Karshni Baker's Designer Cake Portfolio"
+          src={REAL_PHOTOS.hero}
+          alt="Karshni Baker's Celebration Cakes"
           className="hero-bg-media opacity-20"
         />
-        <div className="hero-overlay" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#180C06] via-transparent to-[#180C06]/80" />
 
         <div className="relative z-10 max-w-3xl mx-auto">
           <Link
             to="/"
-            className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-[var(--color-gold-light)] hover:underline mb-6"
+            className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-[#DFC085] hover:text-white transition-colors mb-6"
           >
             <ArrowLeft size={14} /> Back to Home
           </Link>
 
-          <span className="section-eyebrow !text-[var(--color-gold-light)]">Bespoke Collection</span>
+          <span className="section-eyebrow !text-[#DFC085]">Artisan Cake Studio</span>
           <h1 className="font-serif text-3xl sm:text-5xl md:text-6xl font-medium text-white mb-4 leading-tight">
-            Celebration Cakes <span className="italic text-[var(--color-gold-light)]">Portfolio</span>
+            Celebration Cakes <br />
+            <span className="italic text-[#DFC085]">Crafted With Detail</span>
           </h1>
-          <p className="text-base text-[var(--color-sand)] max-w-xl mx-auto mb-8 font-light leading-relaxed opacity-90">
-            Real handcrafted celebration cakes baked fresh in our Dinanagar bakery kitchen. Each design is customized to your exact celebratory moment.
+          <p className="text-base text-[#F5EDE2]/90 max-w-xl mx-auto font-light leading-relaxed mb-6">
+            Every celebration cake is handcrafted to turn your milestone into a work of art. Order for counter pickup or safe delivery across Dinanagar.
           </p>
 
-          <div className="flex flex-wrap items-center justify-center gap-4">
-            <button
-              onClick={() => {
-                const text =
-                  "Hello Karshni Baker's! I would like to inquire about a custom designer cake with my reference photo.";
-                window.open(`https://wa.me/${BRAND.whatsapp}?text=${encodeURIComponent(text)}`, "_blank");
-              }}
-              className="btn btn-gold text-xs"
+          <div className="flex flex-wrap items-center justify-center gap-3">
+            <a
+              href={`https://wa.me/${BRAND.whatsapp}?text=${encodeURIComponent("Hello Karshni Bakers! I would like to design a bespoke cake for an upcoming celebration.")}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn btn-gold !py-2.5 !px-5 !text-xs"
             >
-              <Palette size={15} />
-              <span>Request Custom Cake Design</span>
-            </button>
-            <a href={`tel:${BRAND.phoneRaw}`} className="btn btn-outline-white text-xs">
-              <Phone size={14} />
-              <span>Call Bakery: {BRAND.phone}</span>
+              <MessageCircle size={15} />
+              <span>Discuss Custom Cake Design</span>
+            </a>
+            <a href={`tel:${BRAND.phoneRaw}`} className="btn btn-outline-white !py-2.5 !px-5 !text-xs">
+              <Phone size={14} className="text-[#DFC085]" />
+              <span>Call: {BRAND.phone}</span>
             </a>
           </div>
         </div>
       </section>
 
-      {/* Categories Bar */}
-      <section className="max-w-[1320px] mx-auto px-6 -mt-8 relative z-20">
-        <div className="bg-white rounded-2xl p-6 shadow-xl border border-[var(--color-sand)] flex flex-col md:flex-row items-center justify-between gap-6">
-          <div className="flex items-center gap-4">
-            <div className="w-14 h-14 rounded-xl overflow-hidden flex-shrink-0 border border-[var(--color-gold-border)] bg-[var(--color-cream)]">
-              <img
-                src={REAL_PHOTOS.cakeRomanticHeart}
-                alt="Karshni Cake Detail"
-                className="w-full h-full object-cover"
-              />
-            </div>
-            <div>
-              <div className="flex items-center gap-2">
-                <span className="text-xs uppercase font-semibold text-[var(--color-gold)] tracking-wider">
-                  Handcrafted In Dinanagar
-                </span>
-                <span className="w-2 h-2 rounded-full bg-[var(--color-gold)] animate-pulse" />
-              </div>
-              <h2 className="font-serif text-lg text-[var(--color-chocolate)] font-medium">
-                Authentic Karshni Baker's Portfolio
-              </h2>
-              <p className="text-xs text-[#604F46]">
-                All photographs represent genuine cakes handcrafted by our pastry team.
-              </p>
-            </div>
-          </div>
-
-          <div className="flex items-center gap-3">
-            <span className="text-xs text-[#705D53]">Showing {filteredCakes.length} handcrafted creations</span>
-          </div>
+      {/* Filter Tabs */}
+      <section className="py-6 px-4 sm:px-6 bg-[#180C06] border-y border-[#C69A52]/30 sticky top-[60px] sm:top-[68px] z-20 backdrop-blur-md">
+        <div className="max-w-[1320px] mx-auto flex items-center justify-start lg:justify-center gap-2.5 overflow-x-auto pb-2 no-scrollbar">
+          {ALL_FILTER_CATEGORIES.map((cat) => (
+            <button
+              key={cat}
+              type="button"
+              onClick={() => setSelectedCategory(cat)}
+              className={`px-4 py-2 rounded-full text-xs font-semibold tracking-wider uppercase transition-all duration-300 whitespace-nowrap cursor-pointer ${
+                selectedCategory === cat
+                  ? "bg-gradient-to-r from-[#F0D69E] via-[#DFC085] to-[#B97942] text-[#1A0E07] shadow-lg font-bold"
+                  : "bg-[#25140B] text-[#E6D2B8] border border-[#C69A52]/30 hover:border-[#DFC085] hover:text-white"
+              }`}
+            >
+              {cat}
+            </button>
+          ))}
         </div>
       </section>
 
-      {/* Filter Buttons */}
-      <section className="section-wrapper">
+      {/* Cakes Showcase Grid */}
+      <section className="section-wrapper py-14 sm:py-20">
         <div className="section-container">
-          <div className="flex flex-wrap justify-center gap-2.5 mb-12">
-            {ALL_FILTER_CATEGORIES.map((cat) => (
-              <button
-                key={cat}
-                onClick={() => setSelectedCategory(cat)}
-                className={`btn text-xs px-4 py-2 rounded-full transition-all ${
-                  selectedCategory === cat
-                    ? "bg-[var(--color-espresso)] text-white shadow-md border-[var(--color-espresso)]"
-                    : "bg-white text-[var(--color-chocolate)] border-[var(--color-sand)] hover:border-[var(--color-gold)]"
-                }`}
-              >
-                {cat}
-              </button>
-            ))}
-          </div>
-
-          {/* Cards Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
             {filteredCakes.map((cake) => (
-              <article key={cake.id} className="luxury-card group">
-                <div
-                  className="luxury-card-img-wrap cursor-zoom-in"
-                  onClick={() => setLightboxCake(cake)}
-                >
-                  <img
-                    src={cake.image}
-                    alt={cake.name}
-                    className="luxury-card-img"
-                    loading="lazy"
-                  />
-                  <span className="luxury-card-tag">{cake.tag}</span>
-                  {cake.weight && (
-                    <span className="absolute bottom-3 right-3 bg-black/70 backdrop-blur-md text-white text-xs font-medium px-2.5 py-1 rounded-md border border-white/10">
-                      {cake.weight}
-                    </span>
-                  )}
-                  <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white gap-2 text-xs font-semibold">
-                    <Eye size={16} />
-                    <span>Click to Zoom</span>
-                  </div>
+              <div key={cake.id} className="signature-card group">
+                <div className="signature-card-img-wrap">
+                  <img src={cake.image} alt={cake.name} className="signature-card-img" />
+                  <span className="signature-badge">{cake.tag}</span>
                 </div>
 
-                <div className="luxury-card-body">
-                  <div className="flex items-center justify-between mb-2">
-                    <span className="text-[0.72rem] uppercase tracking-widest text-[var(--color-gold)] font-semibold">
-                      {cake.category}
-                    </span>
+                <div className="signature-card-body">
+                  <div className="flex items-center justify-between text-xs text-[#B97942] font-semibold uppercase mb-1">
+                    <span>{cake.category}</span>
+                    {cake.weight && <span>{cake.weight}</span>}
                   </div>
 
-                  <h3 className="luxury-card-title group-hover:text-[var(--color-gold)] transition-colors">
+                  <h3 className="signature-card-title group-hover:text-[#B97942] transition-colors">
                     {cake.name}
                   </h3>
 
-                  <p className="luxury-card-desc">{cake.description}</p>
+                  <p className="signature-card-desc">{cake.description}</p>
 
-                  <div className="p-3 bg-[var(--color-cream)] rounded-xl text-xs text-[#55443B] mb-5 border border-[var(--color-sand)]">
-                    <strong className="text-[var(--color-espresso)] block mb-0.5">Inscription & Customization:</strong>
+                  <div className="text-[11px] text-[#6A4B3A] italic bg-[#FAF7F2] p-2.5 rounded-xl border border-[#E8D9C5] mb-4">
                     {cake.inscriptions}
                   </div>
 
-                  <div className="luxury-card-actions">
+                  <div className="pt-3 border-t border-[#E8D9C5] flex items-center justify-between gap-2">
                     <button
+                      type="button"
                       onClick={() => setLightboxCake(cake)}
-                      className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-[var(--color-chocolate)] hover:text-[var(--color-gold)] transition-colors"
+                      className="inline-flex items-center gap-1.5 text-xs text-[#2A1A12] hover:text-[#B97942] font-medium cursor-pointer"
                     >
-                      <Eye size={14} />
-                      <span>Details</span>
+                      <Eye size={14} /> View Details
                     </button>
 
                     <button
-                      onClick={() => orderWhatsApp(cake)}
-                      className="btn btn-whatsapp text-xs px-4 py-2"
-                      title="Order this cake design on WhatsApp"
+                      type="button"
+                      onClick={() => handleOrderWhatsApp(cake)}
+                      className="btn btn-gold !py-2 !px-4 !text-xs"
                     >
-                      <WhatsAppIcon size={14} />
-                      <span>Order Now</span>
+                      <MessageCircle size={14} />
+                      <span>Order on WhatsApp</span>
                     </button>
                   </div>
                 </div>
-              </article>
+              </div>
             ))}
-          </div>
-
-          {/* Custom Cake Banner */}
-          <div className="mt-16 bg-white p-8 sm:p-12 rounded-3xl border border-[var(--color-sand)] shadow-lg flex flex-col md:flex-row items-center justify-between gap-8">
-            <div className="max-w-xl">
-              <span className="section-eyebrow">Bespoke Creations</span>
-              <h3 className="font-serif text-2xl sm:text-3xl text-[var(--color-chocolate)] mb-2 font-medium">
-                Have Something Special In Mind?
-              </h3>
-              <p className="text-sm text-[#55443B] leading-relaxed">
-                Tell us your idea and we’ll turn it into a cake made especially for your celebration. Share your theme, colors, or reference photos directly on WhatsApp.
-              </p>
-            </div>
-            <button
-              onClick={() => {
-                const text =
-                  "Hello Karshni Baker's! I have a special custom cake idea in mind for an upcoming celebration.";
-                window.open(`https://wa.me/${BRAND.whatsapp}?text=${encodeURIComponent(text)}`, "_blank");
-              }}
-              className="btn btn-gold text-xs flex-shrink-0"
-            >
-              <WhatsAppIcon size={16} />
-              <span>Discuss on WhatsApp</span>
-            </button>
           </div>
         </div>
       </section>
 
-      {/* Lightbox Modal */}
+      {/* Lightbox */}
       {lightboxCake && (
-        <div
-          className="lightbox-backdrop"
-          onClick={() => setLightboxCake(null)}
-          role="dialog"
-          aria-modal="true"
-        >
-          <div
-            className="lightbox-content max-w-2xl"
-            onClick={(e) => e.stopPropagation()}
-          >
+        <div className="lightbox-backdrop" onClick={() => setLightboxCake(null)}>
+          <div className="lightbox-content bg-[#1F110A] p-6 sm:p-8 rounded-3xl border border-[#C69A52]/40 max-w-xl text-left shadow-2xl animate-in zoom-in-95 duration-200" onClick={(e) => e.stopPropagation()}>
             <button
+              type="button"
               onClick={() => setLightboxCake(null)}
-              className="lightbox-close-btn"
-              aria-label="Close cake modal"
+              className="absolute top-4 right-4 text-white/70 hover:text-white p-2"
+              aria-label="Close"
             >
-              <X size={20} />
+              <X size={24} />
             </button>
-            <img
-              src={lightboxCake.image}
-              alt={lightboxCake.name}
-              className="lightbox-img max-h-[70vh]"
-            />
-            <div className="mt-4 text-center text-white max-w-xl">
-              <span className="text-xs uppercase tracking-widest text-[var(--color-gold-light)] font-semibold">
-                {lightboxCake.category} · {lightboxCake.tag}
-              </span>
-              <h4 className="font-serif text-2xl mt-1 mb-2">
-                {lightboxCake.name}
-              </h4>
-              <p className="text-sm text-[var(--color-sand)] mb-4 opacity-90">
-                {lightboxCake.description}
-              </p>
+
+            <div className="rounded-2xl overflow-hidden aspect-[4/3] mb-4 border border-[#C69A52]/30 w-full">
+              <img src={lightboxCake.image} alt={lightboxCake.name} className="w-full h-full object-cover" />
+            </div>
+
+            <span className="text-xs uppercase tracking-wider text-[#DFC085] font-semibold">
+              {lightboxCake.tag} • {lightboxCake.category}
+            </span>
+            <h3 className="font-serif text-2xl font-medium text-white mt-1 mb-2">
+              {lightboxCake.name}
+            </h3>
+            <p className="text-xs text-[#F5EDE2]/90 leading-relaxed font-light mb-3">
+              {lightboxCake.description}
+            </p>
+            <p className="text-xs text-[#DFC085] font-medium mb-5 bg-white/5 p-2.5 rounded-xl border border-white/10">
+              {lightboxCake.inscriptions}
+            </p>
+            <div className="flex flex-wrap items-center gap-3">
               <button
+                type="button"
                 onClick={() => {
-                  orderWhatsApp(lightboxCake);
+                  handleOrderWhatsApp(lightboxCake);
                   setLightboxCake(null);
                 }}
-                className="btn btn-whatsapp text-xs px-6 py-2.5 mx-auto"
+                className="btn btn-gold !py-2.5 !px-5 !text-xs"
               >
-                <WhatsAppIcon size={15} />
-                <span>Order on WhatsApp</span>
+                <MessageCircle size={15} />
+                <span>Customize & Order via WhatsApp</span>
+              </button>
+              <button
+                type="button"
+                onClick={() => setLightboxCake(null)}
+                className="btn btn-outline-white !py-2.5 !px-4 !text-xs"
+              >
+                <span>Close</span>
               </button>
             </div>
           </div>

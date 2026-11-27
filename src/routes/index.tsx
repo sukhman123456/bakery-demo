@@ -1,35 +1,28 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { HomeExperience } from "../components/home-experience";
-import { CinematicIntro } from "../components/cinematic-intro";
+import { BRAND, REAL_PHOTOS } from "../lib/bakery-data";
 
 function HomePage() {
-  return (
-    <>
-      <CinematicIntro />
-      <HomeExperience />
-    </>
-  );
+  return <HomeExperience />;
 }
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Karshni Baker’s — Crafted for Sweet Moments" },
+      { title: `${BRAND.name} — ${BRAND.category} | Dinanagar` },
       {
         name: "description",
-        content:
-          "Karshni Baker’s creates handcrafted cakes, custom creations and handcrafted desserts made for every celebration in Dinanagar, Punjab.",
+        content: `${BRAND.name} creates handcrafted celebration cakes, custom milestone creations, and artisanal delicacies in Dinanagar, Punjab.`,
       },
-      { property: "og:title", content: "Karshni Baker’s — Crafted for Sweet Moments" },
+      { property: "og:title", content: `${BRAND.name} — ${BRAND.tagline}` },
       {
         property: "og:description",
-        content: "Premium cakes, custom creations and handcrafted desserts made for every celebration.",
+        content: `${BRAND.heroDescription}`,
       },
-      { property: "og:image", content: "/images/karshni-logo.jpg" },
+      { property: "og:image", content: REAL_PHOTOS.hero },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: HomePage,
 });
-

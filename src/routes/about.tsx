@@ -1,21 +1,21 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowLeft, CheckCircle2, Phone, Sparkles } from "lucide-react";
+import { ArrowLeft, CheckCircle2, Phone, UtensilsCrossed, ShoppingBag, Truck } from "lucide-react";
 import { BRAND, REAL_PHOTOS } from "../lib/bakery-data";
 
 export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
-      { title: "About Us — Karshni Baker’s Dinanagar" },
+      { title: `About Us — ${BRAND.fullName}` },
       {
         name: "description",
-        content:
-          "Discover the story behind Karshni Baker's in Dinanagar. Handcrafted cakes, custom celebration creations, and premium patisserie.",
+        content: `Discover ${BRAND.name} at Shree Ram Market, Near Punjab & Sind Bank, Dinanagar, Punjab. Handcrafted celebration cakes, designer bakes, and artisanal delicacies.`,
       },
-      { property: "og:title", content: "About Karshni Baker's" },
+      { property: "og:title", content: `About ${BRAND.name}` },
       {
         property: "og:description",
-        content: "Authentic baking, celebration cakes, and confectionery in Dinanagar.",
+        content: BRAND.aboutDescription,
       },
+      { property: "og:image", content: REAL_PHOTOS.hero },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
@@ -25,94 +25,111 @@ export const Route = createFileRoute("/about")({
 
 function AboutPage() {
   return (
-    <div className="pt-24 min-h-screen bg-[var(--color-cream)]">
+    <div className="min-h-screen bg-[var(--color-cream)]">
       {/* About Hero Header */}
-      <section className="relative py-20 sm:py-28 px-6 overflow-hidden bg-[var(--color-chocolate)] text-white text-center">
+      <section className="relative pt-32 sm:pt-40 pb-20 sm:pb-28 px-4 sm:px-6 overflow-hidden bg-gradient-to-b from-[#180C06] via-[#24130A] to-[#180C06] text-white text-center">
         <img
-          src={REAL_PHOTOS.bakeryWide}
+          src={REAL_PHOTOS.hero}
           alt="Karshni Baker's Showcase"
-          className="hero-bg-media opacity-25"
+          className="hero-bg-media opacity-20"
         />
-        <div className="hero-overlay" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#180C06] via-transparent to-[#180C06]/80" />
 
         <div className="relative z-10 max-w-3xl mx-auto">
           <Link
             to="/"
-            className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-[var(--color-gold-light)] hover:underline mb-6"
+            className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-[#DFC085] hover:text-white transition-colors mb-6"
           >
             <ArrowLeft size={14} /> Back to Home
           </Link>
 
-          <span className="section-eyebrow !text-[var(--color-gold-light)]">Our Story & Standards</span>
+          <span className="section-eyebrow !text-[#DFC085]">Our Story & Standards</span>
           <h1 className="font-serif text-3xl sm:text-5xl md:text-6xl font-medium text-white mb-4 leading-tight">
-            Made With Passion. <br />
-            <span className="italic text-[var(--color-gold-light)]">Crafted With Detail.</span>
+            More Than a Bakery. <br />
+            <span className="italic text-[#DFC085]">A Little World of Happiness.</span>
           </h1>
-          <p className="text-base text-[var(--color-sand)] max-w-xl mx-auto font-light opacity-90 leading-relaxed">
-            Karshni Baker's creates handcrafted cakes and desserts for birthdays, anniversaries, celebrations and special occasions in Dinanagar.
+          <p className="text-base text-[#F5EDE2]/90 max-w-xl mx-auto font-light leading-relaxed mb-6">
+            {BRAND.aboutDescription}
           </p>
+
+          <div className="flex flex-wrap items-center justify-center gap-3">
+            <Link to="/cakes" className="btn btn-gold !py-2.5 !px-5 !text-xs">
+              <span>Explore Cakes Studio</span>
+            </Link>
+            <a
+              href={`https://wa.me/${BRAND.whatsapp}?text=${encodeURIComponent("Hello Karshni Bakers! I would like to learn more about your bakery offerings.")}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn btn-outline-white !py-2.5 !px-5 !text-xs"
+            >
+              <span>Chat with Baker</span>
+            </a>
+          </div>
         </div>
       </section>
 
       {/* Story Narrative & Real Photo */}
-      <section className="section-wrapper">
+      <section className="section-wrapper py-16 sm:py-24">
         <div className="section-container">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center mb-16">
-            <div className="lg:col-span-6">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center mb-16">
+            <div className="lg:col-span-6 space-y-6">
               <span className="section-eyebrow">The Karshni Philosophy</span>
               <h2 className="section-title">
                 Artisanal Patisserie & <br />
-                <span className="section-title-italic">Pure Taste</span>
+                <span className="section-title-italic">Celebration Art</span>
               </h2>
 
-              <div className="w-14 h-0.5 bg-[var(--color-gold)] mb-6" />
+              <div className="w-14 h-0.5 bg-[#C69A52] mb-6" />
 
-              <p className="text-[#55443B] leading-relaxed mb-5">
-                Karshni Baker's was conceived with a clear vision: to bring a luxurious, refined bakery experience to Dinanagar, where celebratory centerpieces are treated as authentic works of edible art.
+              <p className="text-[#3A281E] leading-relaxed">
+                Located at Shree Ram Market, Near Punjab & Sind Bank, Dinanagar, <strong>Karshni Baker's</strong> was conceived to bring a refined, high-end bakery experience where celebration cakes are treated as true edible art.
               </p>
 
-              <p className="text-[#55443B] leading-relaxed mb-6">
-                From delicate hand-piped miniature tulips and pristine fondant ribbon bows to complex 3D sports cars and custom milestone calendar date plaques, every dessert is individually shaped to celebrate your life's sweetest milestones.
+              <p className="text-[#5C453A] leading-relaxed font-light">
+                From delicate hand-piped fondant ribbon bow cakes and romantic anniversary calendar date plaques to kids’ 3D theme creations, every dessert is individually shaped using pure dairy cream, fine chocolate, and genuine passion.
               </p>
 
               <div className="space-y-3.5 mb-8">
-                <div className="flex items-start gap-3">
-                  <CheckCircle2 size={18} className="text-[var(--color-gold)] mt-0.5 flex-shrink-0" />
-                  <span className="text-sm text-[var(--color-chocolate)]">
-                    <strong>Fresh Daily Baking:</strong> Every sponge and frosting is prepared from scratch with pure dairy creams and gourmet chocolate.
+                <div className="flex items-start gap-3 p-3.5 rounded-2xl bg-white border border-[#E8D9C5] shadow-sm">
+                  <UtensilsCrossed size={18} className="text-[#C69A52] mt-0.5 flex-shrink-0" />
+                  <span className="text-sm text-[#2A1A12]">
+                    <strong>Bespoke Customization:</strong> Tailored fondant, floral, and multi-tier cakes designed specifically for your event.
                   </span>
                 </div>
-                <div className="flex items-start gap-3">
-                  <CheckCircle2 size={18} className="text-[var(--color-gold)] mt-0.5 flex-shrink-0" />
-                  <span className="text-sm text-[var(--color-chocolate)]">
-                    <strong>Bespoke Customization:</strong> Tailored fondant, floral, photo, and tier cakes designed specifically for your event.
+                <div className="flex items-start gap-3 p-3.5 rounded-2xl bg-white border border-[#E8D9C5] shadow-sm">
+                  <ShoppingBag size={18} className="text-[#C69A52] mt-0.5 flex-shrink-0" />
+                  <span className="text-sm text-[#2A1A12]">
+                    <strong>Fresh Counter Pickup:</strong> Daily fresh bakes, pastries, muffins, and cookies at Shree Ram Market, Dinanagar.
                   </span>
                 </div>
-                <div className="flex items-start gap-3">
-                  <CheckCircle2 size={18} className="text-[var(--color-gold)] mt-0.5 flex-shrink-0" />
-                  <span className="text-sm text-[var(--color-chocolate)]">
-                    <strong>Gender-Neutral Luxury:</strong> Sophisticated, elegant aesthetics suitable for milestone anniversaries, grand birthdays, and corporate celebrations.
+                <div className="flex items-start gap-3 p-3.5 rounded-2xl bg-white border border-[#E8D9C5] shadow-sm">
+                  <Truck size={18} className="text-[#C69A52] mt-0.5 flex-shrink-0" />
+                  <span className="text-sm text-[#2A1A12]">
+                    <strong>Doorstep Delivery:</strong> Safe and careful celebration cake delivery across Dinanagar and nearby areas.
                   </span>
                 </div>
               </div>
 
-              <div className="flex items-center gap-4">
+              <div className="flex flex-wrap items-center gap-3">
                 <a href={`tel:${BRAND.phoneRaw}`} className="btn btn-primary text-xs">
                   <Phone size={14} />
-                  <span>Call Bakery: {BRAND.phone}</span>
+                  <span>Call {BRAND.phone}</span>
                 </a>
                 <Link to="/cakes" className="btn btn-cream text-xs">
-                  <span>Explore Cake Portfolio</span>
+                  <span>Explore Cakes Studio</span>
+                </Link>
+                <Link to="/contact" className="btn btn-cream text-xs">
+                  <span>Visit Us in Dinanagar</span>
                 </Link>
               </div>
             </div>
 
             <div className="lg:col-span-6 relative">
-              <div className="rounded-3xl overflow-hidden shadow-2xl border border-[var(--color-sand)] bg-white">
+              <div className="rounded-3xl overflow-hidden shadow-2xl border-4 border-white bg-white aspect-[4/3]">
                 <img
-                  src={REAL_PHOTOS.cakeTulipBow}
-                  alt="Karshni Baker's Handcrafted Designer Cake"
-                  className="w-full aspect-[4/5] object-cover"
+                  src={REAL_PHOTOS.storeInterior}
+                  alt="Karshni Baker's Showcase"
+                  className="w-full h-full object-cover"
                 />
               </div>
             </div>

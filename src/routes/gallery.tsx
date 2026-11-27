@@ -1,22 +1,22 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowLeft, Eye, X } from "lucide-react";
+import { ArrowLeft, Eye, X, MessageCircle } from "lucide-react";
 import { useState } from "react";
-import { BRAND, GALLERY_ITEMS, type GalleryPhoto } from "../lib/bakery-data";
+import { BRAND, GALLERY_ITEMS, REAL_PHOTOS, type GalleryPhoto } from "../lib/bakery-data";
 
 export const Route = createFileRoute("/gallery")({
   head: () => ({
     meta: [
-      { title: "Artisanal Cake & Bakery Portfolio Gallery — Karshni Baker’s" },
+      { title: `Visual Gallery — ${BRAND.fullName}` },
       {
         name: "description",
-        content:
-          "Browse real photographs of Karshni Baker's handcrafted celebration cakes, artisanal patisserie displays, and bakery counter in Dinanagar.",
+        content: `Browse real photographs of ${BRAND.name} celebration cakes, chocolate creations, fresh croissants, pastries, and café ambience in Dinanagar.`,
       },
-      { property: "og:title", content: "Portfolio Gallery — Karshni Baker's" },
+      { property: "og:title", content: `Visual Gallery — ${BRAND.name}` },
       {
         property: "og:description",
-        content: "Authentic cake and bakery photography of Karshni Baker's in Dinanagar.",
+        content: `Authentic cake and bakery photography of ${BRAND.name} at Shree Ram Market, Near Punjab & Sind Bank, Dinanagar, Punjab.`,
       },
+      { property: "og:image", content: REAL_PHOTOS.hero },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
@@ -28,87 +28,111 @@ function GalleryPage() {
   const [activePhoto, setActivePhoto] = useState<GalleryPhoto | null>(null);
   const [filter, setFilter] = useState<string>("All");
 
-  const filterOptions = ["All", "Celebration Cakes", "Kids & Themes", "Bakery Portfolio", "Artisanal Display"];
+  const filterOptions = ["All", "Cakes", "Pastries & Bakes", "Ambience"];
 
   const filteredPhotos =
     filter === "All"
       ? GALLERY_ITEMS
-      : GALLERY_ITEMS.filter((item) => item.category === filter);
+      : GALLERY_ITEMS.filter((item) => {
+          if (filter === "Cakes") return item.category === "Cakes";
+          if (filter === "Pastries & Bakes") return item.category === "Pastries & Bakes";
+          if (filter === "Ambience") return item.category === "Ambience";
+          return true;
+        });
 
   return (
-    <div className="pt-24 min-h-screen bg-[var(--color-cream)]">
+    <div className="min-h-screen bg-[var(--color-cream)]">
       {/* Gallery Hero Header */}
-      <section className="relative py-20 sm:py-28 px-6 overflow-hidden bg-[var(--color-chocolate)] text-white text-center">
+      <section className="relative pt-32 sm:pt-40 pb-20 sm:pb-28 px-4 sm:px-6 overflow-hidden bg-gradient-to-b from-[#180C06] via-[#24130A] to-[#180C06] text-white text-center">
+        <img
+          src={REAL_PHOTOS.hero}
+          alt="Karshni Baker's Gallery"
+          className="hero-bg-media opacity-20"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#180C06] via-transparent to-[#180C06]/80" />
+
         <div className="relative z-10 max-w-3xl mx-auto">
           <Link
             to="/"
-            className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-[var(--color-gold-light)] hover:underline mb-6"
+            className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-[#DFC085] hover:text-white transition-colors mb-6"
           >
             <ArrowLeft size={14} /> Back to Home
           </Link>
 
-          <span className="section-eyebrow !text-[var(--color-gold-light)]">Artisanal Portfolio</span>
+          <span className="section-eyebrow !text-[#DFC085]">Visual Feast</span>
           <h1 className="font-serif text-3xl sm:text-5xl md:text-6xl font-medium text-white mb-4 leading-tight">
-            The Karshni Baker’s <span className="italic text-[var(--color-gold-light)]">Gallery</span>
+            Karshni Baker's <span className="italic text-[#DFC085]">Gallery</span>
           </h1>
-          <p className="text-base text-[var(--color-sand)] max-w-xl mx-auto font-light opacity-90 leading-relaxed">
-            Real, authentic photographs of our handcrafted celebration cakes, customized themes, and bakery showcases in Dinanagar.
+          <p className="text-base text-[#F5EDE2]/90 max-w-xl mx-auto font-light leading-relaxed mb-6">
+            Authentic photographs of our custom cakes, chocolate creations, golden croissants, fresh pastries, and warm bakery atmosphere in Dinanagar, Punjab.
           </p>
+
+          <div className="flex flex-wrap items-center justify-center gap-3">
+            <Link to="/cakes" className="btn btn-gold !py-2.5 !px-5 !text-xs">
+              <span>View Cake Portfolio</span>
+            </Link>
+            <a
+              href={`https://wa.me/${BRAND.whatsapp}?text=${encodeURIComponent("Hello Karshni Bakers! I saw your gallery and would like to place an order.")}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn btn-outline-white !py-2.5 !px-5 !text-xs"
+            >
+              <MessageCircle size={15} />
+              <span>Order on WhatsApp</span>
+            </a>
+          </div>
         </div>
       </section>
 
       {/* Gallery Filter & Grid */}
-      <section className="section-wrapper">
-        <div className="section-container">
-          {/* Filter Pills */}
-          <div className="flex flex-wrap justify-center gap-2 mb-12">
-            {filterOptions.map((opt) => (
-              <button
-                key={opt}
-                onClick={() => setFilter(opt)}
-                className={`btn text-xs px-4 py-2 rounded-full transition-all ${
-                  filter === opt
-                    ? "bg-[var(--color-espresso)] text-white shadow-md border-[var(--color-espresso)]"
-                    : "bg-white text-[var(--color-chocolate)] border-[var(--color-sand)] hover:border-[var(--color-gold)]"
-                }`}
-              >
-                {opt}
-              </button>
-            ))}
-          </div>
+      <section className="py-6 px-4 sm:px-6 bg-[#180C06] border-y border-[#C69A52]/30 sticky top-[60px] sm:top-[68px] z-20 backdrop-blur-md">
+        <div className="max-w-[1320px] mx-auto flex items-center justify-start sm:justify-center gap-2.5 overflow-x-auto pb-2 no-scrollbar">
+          {filterOptions.map((opt) => (
+            <button
+              key={opt}
+              type="button"
+              onClick={() => setFilter(opt)}
+              className={`px-4 py-2 rounded-full text-xs font-semibold tracking-wider uppercase transition-all duration-300 whitespace-nowrap cursor-pointer ${
+                filter === opt
+                  ? "bg-gradient-to-r from-[#F0D69E] via-[#DFC085] to-[#B97942] text-[#1A0E07] shadow-lg font-bold"
+                  : "bg-[#25140B] text-[#E6D2B8] border border-[#C69A52]/30 hover:border-[#DFC085] hover:text-white"
+              }`}
+            >
+              {opt}
+            </button>
+          ))}
+        </div>
+      </section>
 
-          {/* Masonry / Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <section className="section-wrapper py-14 sm:py-20">
+        <div className="section-container">
+          <div className="gallery-grid">
             {filteredPhotos.map((photo) => (
               <div
                 key={photo.id}
                 onClick={() => setActivePhoto(photo)}
-                className="luxury-card group cursor-zoom-in"
+                className={`gallery-item ${
+                  photo.aspect === "portrait"
+                    ? "aspect-portrait"
+                    : photo.aspect === "wide"
+                    ? "aspect-wide"
+                    : ""
+                }`}
               >
-                <div className="relative aspect-[4/5] overflow-hidden bg-[var(--color-sand-light)]">
-                  <img
-                    src={photo.src}
-                    alt={photo.title}
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-108"
-                    loading="lazy"
-                  />
-                  <span className="luxury-card-tag">{photo.category}</span>
-                  <div className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white gap-2 font-medium text-xs">
-                    <Eye size={16} />
-                    <span>View Larger</span>
-                  </div>
-                </div>
-
-                <div className="p-6">
-                  <span className="text-xs uppercase font-semibold text-[var(--color-gold)] tracking-wider mb-1 block">
-                    {photo.subtitle}
+                <img src={photo.src} alt={photo.title} />
+                <div className="gallery-item-overlay">
+                  <span className="text-[10px] uppercase tracking-wider text-[#DFC085] font-semibold mb-1">
+                    {photo.category}
                   </span>
-                  <h3 className="font-serif text-xl text-[var(--color-chocolate)] group-hover:text-[var(--color-gold)] transition-colors mb-2 font-medium">
+                  <h4 className="font-serif text-lg text-white font-medium mb-1">
                     {photo.title}
-                  </h3>
-                  <p className="text-xs sm:text-sm text-[#55443B] leading-relaxed">
+                  </h4>
+                  <p className="text-xs text-white/80 line-clamp-2 font-light">
                     {photo.description}
                   </p>
+                  <span className="mt-2 inline-flex items-center gap-1 text-[11px] text-[#DFC085] font-medium">
+                    <Eye size={12} /> Click to expand
+                  </span>
                 </div>
               </div>
             ))}
@@ -118,38 +142,54 @@ function GalleryPage() {
 
       {/* Lightbox Modal */}
       {activePhoto && (
-        <div
-          className="lightbox-backdrop"
-          onClick={() => setActivePhoto(null)}
-          role="dialog"
-          aria-modal="true"
-        >
-          <div
-            className="lightbox-content"
-            onClick={(e) => e.stopPropagation()}
-          >
+        <div className="lightbox-backdrop" onClick={() => setActivePhoto(null)}>
+          <div className="lightbox-content bg-[#1F110A] p-6 sm:p-8 rounded-3xl border border-[#C69A52]/40 max-w-xl text-left shadow-2xl animate-in zoom-in-95 duration-200" onClick={(e) => e.stopPropagation()}>
             <button
+              type="button"
               onClick={() => setActivePhoto(null)}
-              className="lightbox-close-btn"
-              aria-label="Close photo preview"
+              className="absolute top-4 right-4 text-white/70 hover:text-white p-2"
+              aria-label="Close"
             >
-              <X size={20} />
+              <X size={24} />
             </button>
-            <img
-              src={activePhoto.src}
-              alt={activePhoto.title}
-              className="lightbox-img"
-            />
-            <div className="mt-4 text-center text-white max-w-xl">
-              <span className="text-xs uppercase tracking-widest text-[var(--color-gold-light)] font-semibold">
-                {activePhoto.subtitle}
-              </span>
-              <h4 className="font-serif text-2xl mt-1 mb-2">
-                {activePhoto.title}
-              </h4>
-              <p className="text-sm text-[var(--color-sand)] opacity-90">
-                {activePhoto.description}
-              </p>
+
+            <div className="rounded-2xl overflow-hidden aspect-[4/3] mb-4 border border-[#C69A52]/30 w-full">
+              <img src={activePhoto.src} alt={activePhoto.title} className="w-full h-full object-cover" />
+            </div>
+
+            <span className="text-xs uppercase tracking-wider text-[#DFC085] font-semibold">
+              {activePhoto.category}
+            </span>
+            <h3 className="font-serif text-2xl font-medium text-white mt-1 mb-2">
+              {activePhoto.title}
+            </h3>
+            <p className="text-xs text-[#F5EDE2]/90 leading-relaxed font-light mb-5">
+              {activePhoto.description}
+            </p>
+            <div className="flex flex-wrap items-center gap-3">
+              <button
+                type="button"
+                onClick={() => {
+                  window.open(
+                    `https://wa.me/${BRAND.whatsapp}?text=${encodeURIComponent(
+                      `Hello Karshni Baker's! I am interested in: ${activePhoto.title}`
+                    )}`,
+                    "_blank"
+                  );
+                  setActivePhoto(null);
+                }}
+                className="btn btn-gold !py-2.5 !px-5 !text-xs"
+              >
+                <MessageCircle size={15} />
+                <span>Inquire on WhatsApp</span>
+              </button>
+              <button
+                type="button"
+                onClick={() => setActivePhoto(null)}
+                className="btn btn-outline-white !py-2.5 !px-4 !text-xs"
+              >
+                <span>Close</span>
+              </button>
             </div>
           </div>
         </div>
