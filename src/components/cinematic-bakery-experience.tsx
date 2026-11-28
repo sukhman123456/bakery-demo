@@ -404,10 +404,24 @@ export function CinematicBakeryExperience() {
     });
   };
 
-  // Section 11: Live Sliding Instagram Feed State & Continuous Glide
+  // Section 11: Live GPU-Composited Sliding Instagram Feed (60/120fps Butter Smooth)
   const igTrackRef = useRef<HTMLDivElement>(null);
-  const igScrollPosRef = useRef(0);
+  const igOffsetRef = useRef(0);
+  const igVelocityRef = useRef(0.044);
+  const igStepDeltaRef = useRef(0);
+  const igPausedRef = useRef(false);
+  const igDragRef = useRef({
+    active: false,
+    startX: 0,
+    startY: 0,
+    lastX: 0,
+    lastTime: 0,
+    velocity: 0,
+    lock: null as "x" | "y" | null,
+    moved: false,
+  });
   const igResumeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const igSwipeResetTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const [isIgHoverOrTouchPaused, setIsIgHoverOrTouchPaused] = useState(false);
   const [isIgUserPaused, setIsIgUserPaused] = useState(false);
   const [likedIgPosts, setLikedIgPosts] = useState<Record<string, boolean>>({});
@@ -417,64 +431,152 @@ export function CinematicBakeryExperience() {
   const isIgSlidingPaused = isIgHoverOrTouchPaused || isIgUserPaused;
 
   useEffect(() => {
+    igPausedRef.current = isIgSlidingPaused;
+  }, [isIgSlidingPaused]);
+
+  useEffect(() => {
     return () => {
       if (igResumeTimerRef.current) clearTimeout(igResumeTimerRef.current);
+      if (igSwipeResetTimerRef.current) clearTimeout(igSwipeResetTimerRef.current);
     };
   }, []);
 
   useEffect(() => {
-    if (isIgSlidingPaused) return;
     let frameId: number;
     let lastTime = performance.now();
 
     const animateGlide = (now: number) => {
-      const dt = Math.min(now - lastTime, 50);
+      const dt = Math.min(now - lastTime, 48);
       lastTime = now;
 
-      const container = igTrackRef.current;
-      if (container) {
-        const halfWidth = container.scrollWidth / 2;
+      const track = igTrackRef.current;
+      const drag = igDragRef.current;
+
+      if (track) {
+        const halfWidth = track.scrollWidth / 2;
         if (halfWidth > 0) {
-          igScrollPosRef.current += dt * 0.045;
-          if (igScrollPosRef.current >= halfWidth) {
-            igScrollPosRef.current -= halfWidth;
+          // Ease cruise velocity smoothly down to 0 when paused/dragging or up to 44px/s when gliding
+          const targetCruise = igPausedRef.current || (drag.active && drag.lock === "x") ? 0 : 0.044;
+          const ease = 1 - Math.exp(-dt * 0.0055);
+          igVelocityRef.current += (targetCruise - igVelocityRef.current) * ease;
+
+          if (!(drag.active && drag.lock === "x")) {
+            igOffsetRef.current += igVelocityRef.current * dt;
+
+            // Smooth spring coasting for finger swipe inertia & arrow clicks
+            if (Math.abs(igStepDeltaRef.current) > 0.05) {
+              const step = igStepDeltaRef.current * (1 - Math.exp(-dt * 0.009));
+              igOffsetRef.current += step;
+              igStepDeltaRef.current -= step;
+            } else {
+              igStepDeltaRef.current = 0;
+            }
           }
-          container.scrollLeft = Math.floor(igScrollPosRef.current);
+
+          while (igOffsetRef.current >= halfWidth) igOffsetRef.current -= halfWidth;
+          while (igOffsetRef.current < 0) igOffsetRef.current += halfWidth;
+
+          track.style.transform = `translate3d(${-igOffsetRef.current.toFixed(3)}px, 0, 0)`;
         }
       }
+
       frameId = requestAnimationFrame(animateGlide);
     };
 
     frameId = requestAnimationFrame(animateGlide);
     return () => cancelAnimationFrame(frameId);
-  }, [isIgSlidingPaused]);
+  }, []);
 
   const pauseIgTemporarily = () => {
     setIsIgHoverOrTouchPaused(true);
     if (igResumeTimerRef.current) clearTimeout(igResumeTimerRef.current);
   };
 
-  const resumeIgAfterDelay = (delayMs = 2600) => {
+  const resumeIgAfterDelay = (delayMs = 2000) => {
     if (igResumeTimerRef.current) clearTimeout(igResumeTimerRef.current);
     igResumeTimerRef.current = setTimeout(() => {
-      if (igTrackRef.current) {
-        igScrollPosRef.current = igTrackRef.current.scrollLeft;
-      }
       setIsIgHoverOrTouchPaused(false);
     }, delayMs);
   };
 
-  const handleIgArrowSlide = (direction: "left" | "right") => {
-    const container = igTrackRef.current;
-    if (!container) return;
+  const handleIgTouchStart = (e: React.TouchEvent<HTMLDivElement>) => {
+    const touch = e.touches[0];
+    if (!touch) return;
+    if (igSwipeResetTimerRef.current) clearTimeout(igSwipeResetTimerRef.current);
+    igDragRef.current = {
+      active: true,
+      startX: touch.clientX,
+      startY: touch.clientY,
+      lastX: touch.clientX,
+      lastTime: performance.now(),
+      velocity: 0,
+      lock: null,
+      moved: false,
+    };
+    igStepDeltaRef.current = 0;
     pauseIgTemporarily();
-    const halfWidth = container.scrollWidth / 2;
-    if (direction === "left" && container.scrollLeft < 40 && halfWidth > 0) {
-      container.scrollLeft += halfWidth;
+  };
+
+  const handleIgTouchMove = (e: React.TouchEvent<HTMLDivElement>) => {
+    const touch = e.touches[0];
+    const drag = igDragRef.current;
+    if (!touch || !drag.active) return;
+
+    const totalDx = touch.clientX - drag.startX;
+    const totalDy = touch.clientY - drag.startY;
+
+    if (!drag.lock) {
+      if (Math.abs(totalDx) > 7 && Math.abs(totalDx) > Math.abs(totalDy)) {
+        drag.lock = "x";
+        drag.moved = true;
+      } else if (Math.abs(totalDy) > 7 && Math.abs(totalDy) >= Math.abs(totalDx)) {
+        drag.lock = "y";
+        return;
+      } else {
+        return;
+      }
     }
-    const delta = direction === "left" ? -305 : 305;
-    container.scrollBy({ left: delta, behavior: "smooth" });
-    resumeIgAfterDelay(3200);
+
+    if (drag.lock === "x") {
+      const now = performance.now();
+      const dt = Math.max(now - drag.lastTime, 8);
+      const dx = touch.clientX - drag.lastX;
+      drag.velocity = drag.velocity * 0.4 + (dx / dt) * 0.6;
+      drag.lastX = touch.clientX;
+      drag.lastTime = now;
+      drag.moved = true;
+
+      igOffsetRef.current -= dx;
+      const track = igTrackRef.current;
+      if (track) {
+        const halfWidth = track.scrollWidth / 2;
+        if (halfWidth > 0) {
+          while (igOffsetRef.current >= halfWidth) igOffsetRef.current -= halfWidth;
+          while (igOffsetRef.current < 0) igOffsetRef.current += halfWidth;
+          track.style.transform = `translate3d(${-igOffsetRef.current.toFixed(3)}px, 0, 0)`;
+        }
+      }
+    }
+  };
+
+  const handleIgTouchEnd = () => {
+    const drag = igDragRef.current;
+    if (drag.lock === "x") {
+      const coast = Math.max(-520, Math.min(520, -drag.velocity * 220));
+      igStepDeltaRef.current = coast;
+    }
+    drag.active = false;
+    drag.lock = null;
+    igSwipeResetTimerRef.current = setTimeout(() => {
+      igDragRef.current.moved = false;
+    }, 60);
+    resumeIgAfterDelay(2200);
+  };
+
+  const handleIgArrowSlide = (direction: "left" | "right") => {
+    pauseIgTemporarily();
+    igStepDeltaRef.current += direction === "left" ? -310 : 310;
+    resumeIgAfterDelay(2600);
   };
 
   const toggleLikeIgPost = (id: string, uniqueKey?: string) => {
@@ -1812,26 +1914,37 @@ export function CinematicBakeryExperience() {
             <ChevronRight size={20} />
           </button>
 
-          {/* Horizontally Sliding Feed Container */}
+          {/* Horizontally Sliding Feed Viewport (GPU Composited 60/120fps) */}
           <div
-            ref={igTrackRef}
             onMouseEnter={pauseIgTemporarily}
-            onMouseLeave={() => resumeIgAfterDelay(800)}
-            onTouchStart={pauseIgTemporarily}
-            onTouchEnd={() => resumeIgAfterDelay(2600)}
-            className="flex gap-4 sm:gap-5 overflow-x-auto no-scrollbar px-4 sm:px-8 py-3 select-none"
+            onMouseLeave={() => resumeIgAfterDelay(700)}
+            onTouchStart={handleIgTouchStart}
+            onTouchMove={handleIgTouchMove}
+            onTouchEnd={handleIgTouchEnd}
+            className="overflow-hidden px-4 sm:px-8 py-3 select-none touch-pan-y"
           >
-            {[...INSTAGRAM_POSTS, ...INSTAGRAM_POSTS].map((post, loopIdx) => {
-              const uniqueKey = `${post.id}-${loopIdx}`;
-              const isLiked = Boolean(likedIgPosts[post.id]);
-              const isSaved = Boolean(savedIgPosts[post.id]);
-              const isBursting = heartBurstPostId === uniqueKey;
+            <div
+              ref={igTrackRef}
+              onClickCapture={(e) => {
+                if (igDragRef.current.moved) {
+                  e.preventDefault();
+                  e.stopPropagation();
+                }
+              }}
+              className="flex w-max will-change-transform"
+              style={{ backfaceVisibility: "hidden" }}
+            >
+              {[...INSTAGRAM_POSTS, ...INSTAGRAM_POSTS].map((post, loopIdx) => {
+                const uniqueKey = `${post.id}-${loopIdx}`;
+                const isLiked = Boolean(likedIgPosts[post.id]);
+                const isSaved = Boolean(savedIgPosts[post.id]);
+                const isBursting = heartBurstPostId === uniqueKey;
 
-              return (
-                <article
-                  key={uniqueKey}
-                  className="w-[270px] sm:w-[300px] shrink-0 rounded-2xl bg-[#FFF8EE] border border-[#C5A16A]/80 shadow-[0_10px_28px_rgba(73,49,38,0.08)] hover:shadow-[0_14px_34px_rgba(197,161,106,0.28)] hover:border-[#C5A16A] transition-all duration-300 flex flex-col overflow-hidden group relative"
-                >
+                return (
+                  <article
+                    key={uniqueKey}
+                    className="w-[270px] sm:w-[300px] mr-4 sm:mr-5 shrink-0 rounded-2xl bg-[#FFF8EE] border border-[#C5A16A]/80 shadow-[0_10px_28px_rgba(73,49,38,0.08)] hover:shadow-[0_14px_34px_rgba(197,161,106,0.28)] hover:border-[#C5A16A] transition-shadow duration-300 flex flex-col overflow-hidden group relative"
+                  >
                   {/* 1. Authentic Instagram Post Header */}
                   <div className="px-3.5 py-2.5 flex items-center justify-between border-b border-[#C5A16A]/25 bg-gradient-to-r from-[#FFF8EE] to-[#F7F0E5]">
                     <a
@@ -1888,14 +2001,8 @@ export function CinematicBakeryExperience() {
                       className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                     />
 
-                    {/* Subtle Diagonal Shimmer Sweep */}
-                    <div
-                      className="absolute inset-y-0 w-24 bg-gradient-to-r from-transparent via-white/35 to-transparent pointer-events-none animate-pillar-shimmer"
-                      style={{ animationDelay: `${(loopIdx % 6) * 0.8}s` }}
-                    />
-
                     {/* Top-Right IG Badge Pill */}
-                    <span className="absolute top-2.5 right-2.5 px-2.5 py-0.5 rounded-full bg-[#180C06]/80 backdrop-blur-md border border-[#C5A16A]/60 text-[#DFC085] text-[10px] font-semibold tracking-wider uppercase flex items-center gap-1 shadow-md">
+                    <span className="absolute top-2.5 right-2.5 px-2.5 py-0.5 rounded-full bg-[#180C06]/85 border border-[#C5A16A]/60 text-[#DFC085] text-[10px] font-semibold tracking-wider uppercase flex items-center gap-1 shadow-md">
                       <Instagram size={10} />
                       <span>{post.badge}</span>
                     </span>
@@ -2016,9 +2123,10 @@ export function CinematicBakeryExperience() {
                       </button>
                     </div>
                   </div>
-                </article>
-              );
-            })}
+                  </article>
+                );
+              })}
+            </div>
           </div>
         </div>
 
