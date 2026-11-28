@@ -216,27 +216,21 @@ export function SiteShell({ children }: { children: ReactNode }) {
                     window.location.href = "/";
                   }
                 }}
-                className="group focus:outline-none cursor-pointer relative z-50 will-change-transform"
-                style={{ opacity: !introComplete && isHomePage ? 0 : 1 }}
+                className="group focus:outline-none cursor-pointer"
+                style={{ opacity: introComplete ? 1 : 0 }}
               >
                 <BrandLogo scrolled={showSolidNavbar} />
               </a>
 
               {/* Vertical Divider from Artwork */}
-              <div
-                className={`h-6 w-[1.5px] bg-[#DFC085]/35 mx-4 lg:mx-6 hidden md:block navbar-accessory transition-opacity duration-700 ${
-                  introComplete ? "opacity-100" : "opacity-0"
-                }`}
-              />
+              <div className="h-6 w-[1.5px] bg-[#DFC085]/35 mx-4 lg:mx-6 hidden md:block" />
             </div>
 
             {/* Center: Desktop Navigation with Animated Sliding Underline */}
             <nav
               ref={navContainerRef}
               onMouseLeave={() => setHoveredNav(null)}
-              className={`relative hidden lg:flex items-center gap-7 xl:gap-9 py-1 navbar-accessory transition-opacity duration-700 ${
-                introComplete ? "opacity-100" : "opacity-0"
-              }`}
+              className="relative hidden lg:flex items-center gap-7 xl:gap-9 py-1"
             >
               {/* The Sliding Animated Underline */}
               <span
@@ -340,11 +334,7 @@ export function SiteShell({ children }: { children: ReactNode }) {
             </nav>
 
               {/* Right: Golden Pill "Order" Button & Mobile Toggle */}
-              <div
-                className={`flex items-center gap-2 sm:gap-3 flex-shrink-0 navbar-accessory transition-opacity duration-700 ${
-                  introComplete ? "opacity-100" : "opacity-0"
-                }`}
-              >
+              <div className="flex items-center gap-2 sm:gap-3 flex-shrink-0">
                 <a
                   href={whatsappUrl}
                   target="_blank"

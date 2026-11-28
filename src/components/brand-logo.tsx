@@ -10,7 +10,7 @@ export function BrandLogo({ scrolled = false, size = "md" }: BrandLogoProps) {
   return (
     <div className="flex items-center gap-2 sm:gap-3 select-none group cursor-pointer">
       {/* Royal Artisan Cupcake Crest Emblem */}
-      <div className="relative flex-shrink-0 transition-transform duration-300 group-hover:scale-108 brand-logo-crest">
+      <div className="relative flex-shrink-0 transition-transform duration-300 group-hover:scale-108">
         <svg
           viewBox="0 0 54 54"
           fill="none"
@@ -118,7 +118,7 @@ export function BrandLogo({ scrolled = false, size = "md" }: BrandLogoProps) {
       <div className="flex flex-col text-left justify-center">
         <div className="flex items-baseline gap-1 sm:gap-2 leading-none">
           <span
-            className="text-white text-[23px] xs:text-[26px] sm:text-[32px] md:text-[34px] font-normal tracking-wide whitespace-nowrap brand-logo-karshni will-change-transform"
+            className="text-white text-[23px] xs:text-[26px] sm:text-[32px] md:text-[34px] font-normal tracking-wide whitespace-nowrap"
             style={{
               fontFamily: "'Great Vibes', cursive, serif",
               textShadow: "0 2px 14px rgba(0,0,0,0.95), 0 0 10px rgba(223,192,133,0.35)",
@@ -127,7 +127,7 @@ export function BrandLogo({ scrolled = false, size = "md" }: BrandLogoProps) {
             Karshni
           </span>
           <span
-            className="font-serif font-bold text-[13px] xs:text-[15px] sm:text-[18px] md:text-[20px] tracking-[0.22em] uppercase whitespace-nowrap animate-gold-shimmer-text brand-logo-bakers will-change-transform"
+            className="font-serif font-bold text-[13px] xs:text-[15px] sm:text-[18px] md:text-[20px] tracking-[0.22em] uppercase whitespace-nowrap animate-gold-shimmer-text"
             style={{
               textShadow: "0 2px 8px rgba(0,0,0,0.85)",
             }}
@@ -135,7 +135,7 @@ export function BrandLogo({ scrolled = false, size = "md" }: BrandLogoProps) {
             Bakers
           </span>
         </div>
-        <span className="text-[7.5px] xs:text-[8px] sm:text-[9.5px] tracking-[0.24em] uppercase font-serif text-[#DFC085]/90 font-light -mt-0.5 sm:-mt-1 drop-shadow flex items-center gap-1.5 brand-logo-tagline will-change-transform">
+        <span className="text-[7.5px] xs:text-[8px] sm:text-[9.5px] tracking-[0.24em] uppercase font-serif text-[#DFC085]/90 font-light -mt-0.5 sm:-mt-1 drop-shadow flex items-center gap-1.5">
           <span className="w-3 sm:w-4 h-[0.5px] bg-[#DFC085]/60 inline-block" />
           <span>Haute Pâtisserie</span>
           <span className="w-3 sm:w-4 h-[0.5px] bg-[#DFC085]/60 inline-block" />
