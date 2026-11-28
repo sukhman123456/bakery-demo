@@ -257,7 +257,7 @@ export function CinematicIntroLoader({ onComplete }: CinematicIntroLoaderProps) 
       {/* Ambient Halo Radial Spotlight with warm luxury pulsation */}
       <div
         ref={haloGlowRef}
-        className="pointer-events-none absolute w-[400px] h-[400px] sm:w-[600px] sm:h-[600px] rounded-full bg-gradient-radial from-[#DFC085]/25 via-[#6B4435]/15 to-transparent blur-3xl will-change-transform"
+        className="pointer-events-none absolute w-[400px] h-[400px] sm:w-[600px] sm:h-[600px] rounded-full bg-gradient-radial from-[#DFC085]/25 via-[#493126]/15 to-transparent blur-3xl will-change-transform"
       />
 
       {/* Floating Golden Confectionery Dust Particles */}

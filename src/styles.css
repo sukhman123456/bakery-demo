@@ -18,48 +18,51 @@
    ========================================================================== */
 
 :root {
-  /* Exact Karshni Bakers Brand Palette */
-  --color-warm-cream: #F3EBDD;
-  --color-soft-ivory: #F8F3EA;
-  --color-caramel-beige: #D9BFA2;
-  --color-chocolate-brown: #6B4435;
-  --color-deep-charcoal: #30251F;
-  --color-soft-beige: #EDE2D3;
+  /* Exact Karshni Bakers Master Luxury Palette */
+  --color-warm-cream: #F7F0E5;
+  --color-soft-vanilla: #EFE3D2;
+  --color-warm-beige: #E8D8C4;
+  --color-deep-espresso: #392820;
+  --color-muted-cocoa: #796253;
+  --color-champagne-gold: #C5A16A;
+  --color-rich-chocolate: #35231D;
+  --color-deep-cocoa: #493126;
+  --color-soft-ivory: #FFF8EE;
 
-  /* Legacy & Nuance Variables */
-  --color-espresso: #30251F;
-  --color-cream: #F3EBDD;
-  --color-gold: #D9BFA2;
-  --color-caramel: #B97942;
-  --color-beige: #EDE2D3;
-  --color-chocolate: #6B4435;
+  /* Legacy & Semantic Mappings */
+  --color-espresso: #392820;
+  --color-cream: #F7F0E5;
+  --color-gold: #C5A16A;
+  --color-caramel: #C5A16A;
+  --color-beige: #E8D8C4;
+  --color-chocolate: #35231D;
   --color-gold-light: #DFC085;
   --color-gold-dark: #8C5E35;
-  --color-gold-border: rgba(217, 191, 162, 0.45);
+  --color-gold-border: rgba(197, 161, 106, 0.45);
   --color-white: #FFFFFF;
 
   /* Semantic Mappings */
-  --background: #F3EBDD;
-  --foreground: #30251F;
-  --card: #EDE2D3;
-  --card-foreground: #30251F;
-  --primary: #6B4435;
-  --primary-foreground: #FFFFFF;
-  --secondary: #F8F3EA;
-  --secondary-foreground: #30251F;
-  --muted: #EDE2D3;
-  --muted-foreground: #6B4435;
-  --accent: #D9BFA2;
-  --accent-foreground: #30251F;
-  --border: #D9BFA2;
-  --input: #D9BFA2;
-  --ring: #6B4435;
+  --background: #F7F0E5;
+  --foreground: #392820;
+  --card: #E8D8C4;
+  --card-foreground: #392820;
+  --primary: #493126;
+  --primary-foreground: #FFF8EE;
+  --secondary: #EFE3D2;
+  --secondary-foreground: #392820;
+  --muted: #E8D8C4;
+  --muted-foreground: #796253;
+  --accent: #C5A16A;
+  --accent-foreground: #392820;
+  --border: #C5A16A;
+  --input: #E8D8C4;
+  --ring: #493126;
   --radius: 0.85rem;
 }
 
 @theme inline {
-  --font-sans: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-serif: "Playfair Display", Georgia, serif;
+  --font-sans: "DM Sans", "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-serif: "Playfair Display", "Cormorant Garamond", Georgia, serif;
 
   --color-espresso: var(--color-espresso);
   --color-cream: var(--color-cream);
@@ -109,79 +112,113 @@ body {
 }
 
 /* ==========================================================================
-   KARSHNI EXACT PALETTE UTILITY CLASSES
-   - Warm Cream:       #F3EBDD (Primary website background 55%)
-   - Soft Ivory:       #F8F3EA (Alternating sections)
-   - Soft Beige Cards: #EDE2D3 (20% card backgrounds)
-   - Chocolate Brown:  #6B4435 (15% headings and buttons)
-   - Caramel Beige:    #D9BFA2 (10% premium accents & borders)
-   - Deep Charcoal:    #30251F (Crisp readable text)
+   KARSHNI EXACT MASTER LUXURY PALETTE UTILITY CLASSES
+   - Warm Cream:       #F7F0E5 (Primary website background)
+   - Soft Vanilla:     #EFE3D2 (Secondary background)
+   - Warm Beige:       #E8D8C4 (Card backgrounds)
+   - Deep Espresso:    #392820 (Primary text)
+   - Muted Cocoa:      #796253 (Secondary text)
+   - Champagne Gold:   #C5A16A (Accent color)
+   - Rich Chocolate:   #35231D (Dark contrast sections)
+   - Deep Cocoa:       #493126 (Buttons)
+   - Soft Ivory:       #FFF8EE (Button text / light text)
    ========================================================================== */
 .bg-warm-cream {
-  background-color: #F3EBDD;
+  background-color: #F7F0E5;
 }
 
+.bg-soft-vanilla,
 .bg-soft-ivory {
-  background-color: #F8F3EA;
+  background-color: #EFE3D2;
 }
 
+.bg-warm-beige,
 .bg-soft-beige {
-  background-color: #EDE2D3;
+  background-color: #E8D8C4;
 }
 
+.bg-rich-chocolate {
+  background-color: #35231D;
+}
+
+.bg-deep-cocoa,
 .bg-chocolate-brown {
-  background-color: #6B4435;
+  background-color: #493126;
 }
 
+.bg-champagne-gold,
 .bg-caramel-beige {
-  background-color: #D9BFA2;
+  background-color: #C5A16A;
 }
 
+.bg-deep-espresso,
 .bg-deep-charcoal {
-  background-color: #30251F;
+  background-color: #392820;
 }
 
-.text-chocolate-brown {
-  color: #6B4435;
-}
-
+.text-deep-espresso,
 .text-deep-charcoal {
-  color: #30251F;
+  color: #392820;
 }
 
+.text-muted-cocoa {
+  color: #796253;
+}
+
+.text-champagne-gold,
 .text-caramel-beige {
-  color: #D9BFA2;
+  color: #C5A16A;
+}
+
+.text-rich-chocolate {
+  color: #35231D;
+}
+
+.text-deep-cocoa,
+.text-chocolate-brown {
+  color: #493126;
 }
 
 .text-warm-cream {
-  color: #F3EBDD;
+  color: #F7F0E5;
 }
 
+.text-soft-ivory {
+  color: #FFF8EE;
+}
+
+.border-champagne-gold,
 .border-caramel-beige {
-  border-color: #D9BFA2;
+  border-color: #C5A16A;
 }
 
+.border-rich-chocolate {
+  border-color: #35231D;
+}
+
+.border-deep-cocoa,
 .border-chocolate-brown {
-  border-color: #6B4435;
+  border-color: #493126;
 }
 
+.border-warm-beige,
 .border-soft-beige {
-  border-color: #EDE2D3;
+  border-color: #E8D8C4;
 }
 
 /* Luxury 3D Card Hover & Subtle Depth */
 .card-luxury-3d {
-  background-color: #EDE2D3;
-  border: 1px solid rgba(217, 191, 162, 0.6);
-  box-shadow: 0 10px 30px -10px rgba(48, 37, 31, 0.08), 0 4px 6px -2px rgba(48, 37, 31, 0.04);
+  background-color: #E8D8C4;
+  border: 1px solid rgba(197, 161, 106, 0.6);
+  box-shadow: 0 10px 30px -10px rgba(57, 40, 32, 0.08), 0 4px 6px -2px rgba(57, 40, 32, 0.04);
   transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: transform, box-shadow;
 }
 
 .card-luxury-3d:hover {
   transform: translateY(-6px);
-  box-shadow: 0 20px 40px -12px rgba(107, 68, 53, 0.18), 0 8px 16px -4px rgba(48, 37, 31, 0.08);
-  border-color: #D9BFA2;
+  box-shadow: 0 20px 40px -12px rgba(73, 49, 38, 0.18), 0 8px 16px -4px rgba(57, 40, 32, 0.08);
+  border-color: #C5A16A;
 }
 
 /* Prevent iOS Safari auto-zoom on input focus by ensuring at least 16px on mobile */
@@ -247,13 +284,13 @@ h4 {
 }
 
 .btn-primary {
-  background: var(--color-chocolate);
-  color: var(--color-cream);
-  border-color: var(--color-chocolate);
+  background: var(--color-deep-cocoa);
+  color: var(--color-soft-ivory);
+  border-color: var(--color-deep-cocoa);
 }
 
 .btn-primary:hover {
-  background: var(--color-espresso);
+  background: var(--color-rich-chocolate);
   color: #FFFFFF;
 }
 

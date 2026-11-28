@@ -69,7 +69,7 @@ function GoogleGIcon({ size = 18 }: { size?: number }) {
 
 function FrameCorner({ className = "", style }: { className?: string; style?: React.CSSProperties }) {
   return (
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" style={style} className={`text-[#D9BFA2] ${className}`}>
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" style={style} className={`text-[#C5A16A] ${className}`}>
       <path d="M2 10V4C2 2.89543 2.89543 2 4 2H10" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
       <circle cx="5" cy="5" r="1.5" fill="currentColor" />
     </svg>
@@ -394,38 +394,38 @@ export function CinematicBakeryExperience() {
     : GALLERY_PHOTOS.filter((p) => p.category.includes(activeGalleryCategory));
 
   return (
-    <div className="w-full bg-[#F3EBDD] text-[#30251F] selection:bg-[#D9BFA2] selection:text-[#30251F]">
+    <div className="w-full bg-[#F7F0E5] text-[#392820] selection:bg-[#C5A16A] selection:text-[#392820]">
 
       {/* ====================================================================
           SECTION 3 – ABOUT KARSHNI BAKERS & FOUNDER MANOJ KUMAR SHOWCASE
-          Warm Cream (#F3EBDD) & Chocolate Brown (#6B4435) Editorial
+          Warm Cream (#F7F0E5) & Chocolate Brown (#493126) Editorial
           ==================================================================== */}
-      <section id="about" className="relative w-full py-20 lg:py-28 bg-[#F3EBDD] border-b border-[#D9BFA2]/40 overflow-hidden">
+      <section id="about" className="relative w-full py-20 lg:py-28 bg-[#F7F0E5] border-b border-[#C5A16A]/40 overflow-hidden">
         {/* Subtle decorative background watermarks */}
-        <div className="absolute -left-20 top-20 text-[18vw] font-serif font-black text-[#6B4435]/[0.03] select-none pointer-events-none leading-none">
+        <div className="absolute -left-20 top-20 text-[18vw] font-serif font-black text-[#493126]/[0.03] select-none pointer-events-none leading-none">
           CRAFT
         </div>
-        <div className="absolute -right-20 bottom-10 text-[18vw] font-serif font-black text-[#6B4435]/[0.03] select-none pointer-events-none leading-none">
+        <div className="absolute -right-20 bottom-10 text-[18vw] font-serif font-black text-[#493126]/[0.03] select-none pointer-events-none leading-none">
           PURITY
         </div>
 
         <div className="max-w-[1360px] mx-auto px-5 sm:px-10 relative z-10">
           {/* Section Header */}
           <div className="text-center max-w-2xl mx-auto mb-16">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#EDE2D3] border border-[#D9BFA2] text-[#6B4435] text-xs font-semibold tracking-[0.2em] uppercase mb-3">
-              <Sparkles size={13} className="text-[#6B4435]" />
+            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#E8D8C4] border border-[#C5A16A] text-[#493126] text-xs font-semibold tracking-[0.2em] uppercase mb-3">
+              <Sparkles size={13} className="text-[#493126]" />
               <span>Section 03 • The Bakery Story</span>
             </div>
-            <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-medium text-[#6B4435] tracking-tight">
+            <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-medium text-[#493126] tracking-tight">
               Baking with Passion & Purity.
             </h2>
-            <p className="font-sans text-sm sm:text-base text-[#30251F]/80 mt-3 leading-relaxed">
+            <p className="font-sans text-sm sm:text-base text-[#392820]/80 mt-3 leading-relaxed">
               Founded in Dinanagar, Karshni Bakers is dedicated to the purest art of European patisserie, slow-churned dairy butter, and celebration cakes that turn sweet moments into lifelong memories.
             </p>
           </div>
 
           {/* Master Founder Showcase Card: Manoj Kumar */}
-          <div className="w-full rounded-3xl bg-[#180C06] text-[#F8F3EA] border-2 border-[#D9BFA2]/50 p-6 sm:p-10 lg:p-14 shadow-2xl relative overflow-hidden mb-16">
+          <div className="w-full rounded-3xl bg-[#180C06] text-[#EFE3D2] border-2 border-[#C5A16A]/50 p-6 sm:p-10 lg:p-14 shadow-2xl relative overflow-hidden mb-16">
             {/* Background Glow */}
             <div className="absolute -top-32 -right-32 w-96 h-96 rounded-full bg-[radial-gradient(circle,_rgba(217,191,162,0.25)_0%,_transparent_70%)] pointer-events-none" />
             <div className="absolute -bottom-32 -left-32 w-96 h-96 rounded-full bg-[radial-gradient(circle,_rgba(107,68,53,0.35)_0%,_transparent_70%)] pointer-events-none" />
@@ -433,7 +433,7 @@ export function CinematicBakeryExperience() {
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
               {/* Left Column: Royal Gilded Frame with Manoj Kumar's Portrait */}
               <div className="lg:col-span-5 flex flex-col items-center justify-center">
-                <div className="relative group p-4 sm:p-5 rounded-2xl bg-gradient-to-br from-[#2D160C] via-[#1F0E07] to-[#120703] border-4 border-[#D9BFA2] shadow-[0_20px_50px_rgba(0,0,0,0.85)] max-w-sm w-full">
+                <div className="relative group p-4 sm:p-5 rounded-2xl bg-gradient-to-br from-[#2D160C] via-[#1F0E07] to-[#120703] border-4 border-[#C5A16A] shadow-[0_20px_50px_rgba(0,0,0,0.85)] max-w-sm w-full">
                   {/* Antique Frame Corner Ornaments */}
                   <FrameCorner className="absolute top-2 left-2" />
                   <FrameCorner className="absolute top-2 right-2 rotate-90" />
@@ -441,7 +441,7 @@ export function CinematicBakeryExperience() {
                   <FrameCorner className="absolute bottom-2 right-2 rotate-180" />
 
                   {/* Inner Cream Passe-Partout Matting */}
-                  <div className="p-2 sm:p-2.5 rounded-xl bg-[#F8F3EA] border border-[#D9BFA2]/70 shadow-inner">
+                  <div className="p-2 sm:p-2.5 rounded-xl bg-[#EFE3D2] border border-[#C5A16A]/70 shadow-inner">
                     <div className="relative aspect-square w-full rounded-lg overflow-hidden bg-[#24130A]">
                       <img
                         src="/images/owner-manoj-kumar.jpg"
@@ -452,11 +452,11 @@ export function CinematicBakeryExperience() {
                   </div>
 
                   {/* Engraved Heavy Brass Plaque */}
-                  <div className="mt-4 py-2.5 px-4 rounded-lg bg-gradient-to-r from-[#D9BFA2] via-[#F3EBDD] to-[#D9BFA2] text-[#30251F] text-center shadow-md border border-[#8C5E35]/40">
+                  <div className="mt-4 py-2.5 px-4 rounded-lg bg-gradient-to-r from-[#C5A16A] via-[#F7F0E5] to-[#C5A16A] text-[#392820] text-center shadow-md border border-[#8C5E35]/40">
                     <p className="font-serif text-xs sm:text-sm font-bold tracking-[0.16em] uppercase">
                       Manoj Kumar
                     </p>
-                    <p className="text-[10px] tracking-[0.18em] uppercase font-semibold text-[#6B4435]">
+                    <p className="text-[10px] tracking-[0.18em] uppercase font-semibold text-[#493126]">
                       Founder & Master Craftsman
                     </p>
                   </div>
@@ -466,34 +466,34 @@ export function CinematicBakeryExperience() {
               {/* Right Column: Founder's Story, Craftsmanship Pillars & Actions */}
               <div className="lg:col-span-7 space-y-6">
                 <div>
-                  <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#D9BFA2]/20 border border-[#D9BFA2]/40 text-[#D9BFA2] text-xs font-semibold tracking-wider uppercase mb-2">
+                  <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#C5A16A]/20 border border-[#C5A16A]/40 text-[#C5A16A] text-xs font-semibold tracking-wider uppercase mb-2">
                     <Award size={13} />
                     <span>The Heart of Karshni Bakers</span>
                   </div>
                   <h3 className="font-serif text-2xl sm:text-3xl lg:text-4xl text-white font-medium leading-tight">
                     "Every celebration cake is a work of edible art, baked with pure dairy butter and unconditional love."
                   </h3>
-                  <p className="font-sans text-sm sm:text-base text-[#F8F3EA]/85 mt-3 leading-relaxed">
+                  <p className="font-sans text-sm sm:text-base text-[#EFE3D2]/85 mt-3 leading-relaxed">
                     Under the culinary vision of Manoj Kumar, Karshni Bakers has become Dinanagar's celebrated landmark for artisanal celebration cakes. Rejecting commercial premixes and hydrogenated fats, our bakery upholds the time-tested discipline of baking with 100% pure butter, fine cocoa, and hand-sculpted sugar flowers.
                   </p>
                 </div>
 
                 {/* Craftsmanship Pillars */}
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-3.5 pt-2">
-                  <div className="p-3.5 rounded-xl bg-white/5 border border-white/10 hover:border-[#D9BFA2]/50 transition-colors">
-                    <span className="text-[#D9BFA2] font-serif text-lg font-bold block mb-1">100%</span>
+                  <div className="p-3.5 rounded-xl bg-white/5 border border-white/10 hover:border-[#C5A16A]/50 transition-colors">
+                    <span className="text-[#C5A16A] font-serif text-lg font-bold block mb-1">100%</span>
                     <h4 className="text-xs font-semibold text-white tracking-wide uppercase">Pure Dairy Butter</h4>
-                    <p className="text-[11px] text-[#F8F3EA]/70 mt-1">Zero margarine, zero artificial cake premixes.</p>
+                    <p className="text-[11px] text-[#EFE3D2]/70 mt-1">Zero margarine, zero artificial cake premixes.</p>
                   </div>
-                  <div className="p-3.5 rounded-xl bg-white/5 border border-white/10 hover:border-[#D9BFA2]/50 transition-colors">
-                    <span className="text-[#D9BFA2] font-serif text-lg font-bold block mb-1">70%</span>
+                  <div className="p-3.5 rounded-xl bg-white/5 border border-white/10 hover:border-[#C5A16A]/50 transition-colors">
+                    <span className="text-[#C5A16A] font-serif text-lg font-bold block mb-1">70%</span>
                     <h4 className="text-xs font-semibold text-white tracking-wide uppercase">Belgian Dark Cocoa</h4>
-                    <p className="text-[11px] text-[#F8F3EA]/70 mt-1">Rich Valrhona and imported chocolate ganache.</p>
+                    <p className="text-[11px] text-[#EFE3D2]/70 mt-1">Rich Valrhona and imported chocolate ganache.</p>
                   </div>
-                  <div className="p-3.5 rounded-xl bg-white/5 border border-white/10 hover:border-[#D9BFA2]/50 transition-colors">
-                    <span className="text-[#D9BFA2] font-serif text-lg font-bold block mb-1">Bespoke</span>
+                  <div className="p-3.5 rounded-xl bg-white/5 border border-white/10 hover:border-[#C5A16A]/50 transition-colors">
+                    <span className="text-[#C5A16A] font-serif text-lg font-bold block mb-1">Bespoke</span>
                     <h4 className="text-xs font-semibold text-white tracking-wide uppercase">3D Sculptural Art</h4>
-                    <p className="text-[11px] text-[#F8F3EA]/70 mt-1">Custom fondant ribbons, characters & dates.</p>
+                    <p className="text-[11px] text-[#EFE3D2]/70 mt-1">Custom fondant ribbons, characters & dates.</p>
                   </div>
                 </div>
 
@@ -503,7 +503,7 @@ export function CinematicBakeryExperience() {
                     href={`https://wa.me/${BRAND.whatsapp}?text=${encodeURIComponent("Hello Manoj Kumar ji! I would like to consult with you about designing a custom milestone cake for an upcoming celebration.")}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-[#D9BFA2] via-[#F3EBDD] to-[#D9BFA2] text-[#30251F] text-xs font-bold tracking-wider uppercase shadow-[0_4px_20px_rgba(217,191,162,0.4)] hover:scale-105 active:scale-95 transition-all"
+                    className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-[#C5A16A] via-[#F7F0E5] to-[#C5A16A] text-[#392820] text-xs font-bold tracking-wider uppercase shadow-[0_4px_20px_rgba(217,191,162,0.4)] hover:scale-105 active:scale-95 transition-all"
                   >
                     <MessageCircle size={15} />
                     <span>Connect with Manoj Kumar on WhatsApp</span>
@@ -513,7 +513,7 @@ export function CinematicBakeryExperience() {
                     href={`tel:${BRAND.phoneRaw}`}
                     className="inline-flex items-center gap-2 px-5 py-3 rounded-full bg-white/10 text-white hover:bg-white/20 border border-white/20 text-xs font-semibold tracking-wider uppercase transition-all"
                   >
-                    <Phone size={14} className="text-[#D9BFA2]" />
+                    <Phone size={14} className="text-[#C5A16A]" />
                     <span>Call Store: {BRAND.phone}</span>
                   </a>
                 </div>
@@ -523,8 +523,8 @@ export function CinematicBakeryExperience() {
 
           {/* Luxury Bakery Craft & Atmosphere (3 High-End Editorial Cards) */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="card-luxury-3d rounded-2xl overflow-hidden p-3 bg-[#EDE2D3]">
-              <div className="aspect-[4/3] rounded-xl overflow-hidden bg-[#D9BFA2]/30 mb-3">
+            <div className="card-luxury-3d rounded-2xl overflow-hidden p-3 bg-[#E8D8C4]">
+              <div className="aspect-[4/3] rounded-xl overflow-hidden bg-[#C5A16A]/30 mb-3">
                 <img
                   src="/images/luxury-fresh-pastries.jpg"
                   alt="Artisan Pastries & Golden Croissants — Karshni Bakers"
@@ -532,16 +532,16 @@ export function CinematicBakeryExperience() {
                 />
               </div>
               <div className="px-2 pb-1">
-                <span className="text-[10px] uppercase tracking-wider font-semibold text-[#6B4435]">Oven-Fresh Daily</span>
-                <h4 className="font-serif text-lg font-medium text-[#30251F] mt-0.5">Artisan Pastries & Croissants</h4>
-                <p className="text-xs text-[#30251F]/75 mt-1 leading-relaxed">
+                <span className="text-[10px] uppercase tracking-wider font-semibold text-[#493126]">Oven-Fresh Daily</span>
+                <h4 className="font-serif text-lg font-medium text-[#392820] mt-0.5">Artisan Pastries & Croissants</h4>
+                <p className="text-xs text-[#392820]/75 mt-1 leading-relaxed">
                   Slow-baked European butter croissants, glossy berry custard tarts, and delicate breakfast bakes crafted fresh every morning.
                 </p>
               </div>
             </div>
 
-            <div className="card-luxury-3d rounded-2xl overflow-hidden p-3 bg-[#EDE2D3]">
-              <div className="aspect-[4/3] rounded-xl overflow-hidden bg-[#D9BFA2]/30 mb-3">
+            <div className="card-luxury-3d rounded-2xl overflow-hidden p-3 bg-[#E8D8C4]">
+              <div className="aspect-[4/3] rounded-xl overflow-hidden bg-[#C5A16A]/30 mb-3">
                 <img
                   src="/images/luxury-bakery-cafe.jpg"
                   alt="Barista Coffee & Warm Patisserie — Karshni Cafe Dinanagar"
@@ -549,16 +549,16 @@ export function CinematicBakeryExperience() {
                 />
               </div>
               <div className="px-2 pb-1">
-                <span className="text-[10px] uppercase tracking-wider font-semibold text-[#6B4435]">Boutique Cafe</span>
-                <h4 className="font-serif text-lg font-medium text-[#30251F] mt-0.5">Barista Coffee & Brownies</h4>
-                <p className="text-xs text-[#30251F]/75 mt-1 leading-relaxed">
+                <span className="text-[10px] uppercase tracking-wider font-semibold text-[#493126]">Boutique Cafe</span>
+                <h4 className="font-serif text-lg font-medium text-[#392820] mt-0.5">Barista Coffee & Brownies</h4>
+                <p className="text-xs text-[#392820]/75 mt-1 leading-relaxed">
                   Specialty rosetta latte art, velvety hot chocolate, and warm Belgian fudge brownies in a welcoming, cozy ambience.
                 </p>
               </div>
             </div>
 
-            <div className="card-luxury-3d rounded-2xl overflow-hidden p-3 bg-[#EDE2D3]">
-              <div className="aspect-[4/3] rounded-xl overflow-hidden bg-[#D9BFA2]/30 mb-3">
+            <div className="card-luxury-3d rounded-2xl overflow-hidden p-3 bg-[#E8D8C4]">
+              <div className="aspect-[4/3] rounded-xl overflow-hidden bg-[#C5A16A]/30 mb-3">
                 <img
                   src="/images/luxury-cake-craft.jpg"
                   alt="Master Pastry Chef Decorating Celebration Cake"
@@ -566,9 +566,9 @@ export function CinematicBakeryExperience() {
                 />
               </div>
               <div className="px-2 pb-1">
-                <span className="text-[10px] uppercase tracking-wider font-semibold text-[#6B4435]">Master Atelier</span>
-                <h4 className="font-serif text-lg font-medium text-[#30251F] mt-0.5">Handmade Milestone Cakes</h4>
-                <p className="text-xs text-[#30251F]/75 mt-1 leading-relaxed">
+                <span className="text-[10px] uppercase tracking-wider font-semibold text-[#493126]">Master Atelier</span>
+                <h4 className="font-serif text-lg font-medium text-[#392820] mt-0.5">Handmade Milestone Cakes</h4>
+                <p className="text-xs text-[#392820]/75 mt-1 leading-relaxed">
                   Every tiered celebration cake is hand-sculpted to order with 100% pure butter, 24K edible gold leaf, and bespoke sugarcraft.
                 </p>
               </div>
@@ -579,26 +579,26 @@ export function CinematicBakeryExperience() {
 
       {/* ====================================================================
           SECTION 4 – SIGNATURE CAKES CURATED SHOWCASE
-          Soft Ivory (#F8F3EA) with 5 Main Cake Categories
+          Soft Ivory (#EFE3D2) with 5 Main Cake Categories
           ==================================================================== */}
-      <section id="signature-gallery" className="relative w-full py-20 lg:py-28 bg-[#F8F3EA] border-b border-[#D9BFA2]/40">
+      <section id="signature-gallery" className="relative w-full py-20 lg:py-28 bg-[#EFE3D2] border-b border-[#C5A16A]/40">
         <div className="max-w-[1360px] mx-auto px-5 sm:px-10">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-14">
             <div>
-              <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#EDE2D3] border border-[#D9BFA2] text-[#6B4435] text-xs font-semibold tracking-[0.2em] uppercase mb-3">
-                <Sparkles size={13} className="text-[#6B4435]" />
+              <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#E8D8C4] border border-[#C5A16A] text-[#493126] text-xs font-semibold tracking-[0.2em] uppercase mb-3">
+                <Sparkles size={13} className="text-[#493126]" />
                 <span>Section 04 • Signature Creations</span>
               </div>
-              <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-medium text-[#6B4435] tracking-tight">
+              <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-medium text-[#493126] tracking-tight">
                 Celebrated Celebration Cakes
               </h2>
-              <p className="font-sans text-sm sm:text-base text-[#30251F]/80 mt-2 max-w-xl">
+              <p className="font-sans text-sm sm:text-base text-[#392820]/80 mt-2 max-w-xl">
                 Explore our signature birthday, anniversary, chocolate, designer, and bespoke custom theme creations.
               </p>
             </div>
             <a
               href="#custom-cake"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#6B4435] text-white text-xs font-bold tracking-wider uppercase hover:bg-[#30251F] transition-all self-start md:self-auto cursor-pointer"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#493126] text-[#FFF8EE] text-xs font-bold tracking-wider uppercase hover:bg-[#35231D] transition-all self-start md:self-auto cursor-pointer"
             >
               <span>Build Custom Cake</span>
               <ArrowRight size={14} />
@@ -610,36 +610,36 @@ export function CinematicBakeryExperience() {
             {SIGNATURE_CAKE_CATEGORIES.map((cakeItem) => (
               <div
                 key={cakeItem.id}
-                className="card-luxury-3d rounded-3xl overflow-hidden bg-[#EDE2D3] border border-[#D9BFA2] flex flex-col justify-between group"
+                className="card-luxury-3d rounded-3xl overflow-hidden bg-[#E8D8C4] border border-[#C5A16A] flex flex-col justify-between group"
               >
                 <div>
-                  <div className="relative aspect-square w-full overflow-hidden bg-[#F3EBDD]">
+                  <div className="relative aspect-square w-full overflow-hidden bg-[#F7F0E5]">
                     <img
                       src={cakeItem.image}
                       alt={cakeItem.title}
                       loading="lazy"
                       className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                     />
-                    <div className="absolute top-3.5 left-3.5 px-3 py-1 rounded-full bg-[#6B4435]/90 text-white text-[11px] font-semibold tracking-wider uppercase backdrop-blur-sm shadow-md">
+                    <div className="absolute top-3.5 left-3.5 px-3 py-1 rounded-full bg-[#493126]/90 text-white text-[11px] font-semibold tracking-wider uppercase backdrop-blur-sm shadow-md">
                       {cakeItem.tag}
                     </div>
-                    <div className="absolute top-3.5 right-3.5 px-3 py-1 rounded-full bg-[#EDE2D3]/95 text-[#6B4435] border border-[#D9BFA2] text-[11px] font-bold tracking-wider shadow-sm">
+                    <div className="absolute top-3.5 right-3.5 px-3 py-1 rounded-full bg-[#E8D8C4]/95 text-[#493126] border border-[#C5A16A] text-[11px] font-bold tracking-wider shadow-sm">
                       {cakeItem.price}
                     </div>
                   </div>
 
                   <div className="p-6">
-                    <span className="text-[11px] font-semibold uppercase tracking-widest text-[#6B4435] block mb-1">
+                    <span className="text-[11px] font-semibold uppercase tracking-widest text-[#493126] block mb-1">
                       {cakeItem.category}
                     </span>
-                    <h3 className="font-serif text-2xl font-medium text-[#30251F] group-hover:text-[#6B4435] transition-colors">
+                    <h3 className="font-serif text-2xl font-medium text-[#392820] group-hover:text-[#493126] transition-colors">
                       {cakeItem.title}
                     </h3>
-                    <p className="text-xs text-[#30251F]/80 mt-2 leading-relaxed">
+                    <p className="text-xs text-[#392820]/80 mt-2 leading-relaxed">
                       {cakeItem.description}
                     </p>
-                    <div className="mt-3.5 pt-3 border-t border-[#D9BFA2]/50 flex items-center gap-1.5 text-xs text-[#6B4435] font-medium">
-                      <Sparkles size={13} className="text-[#D9BFA2]" />
+                    <div className="mt-3.5 pt-3 border-t border-[#C5A16A]/50 flex items-center gap-1.5 text-xs text-[#493126] font-medium">
+                      <Sparkles size={13} className="text-[#C5A16A]" />
                       <span>{cakeItem.flavour}</span>
                     </div>
                   </div>
@@ -649,7 +649,7 @@ export function CinematicBakeryExperience() {
                   <button
                     type="button"
                     onClick={() => handleWhatsAppOrder(cakeItem.title, cakeItem.price, cakeItem.category)}
-                    className="w-full py-3 px-4 rounded-full bg-[#6B4435] hover:bg-[#30251F] text-white text-xs font-bold tracking-wider uppercase flex items-center justify-center gap-2 shadow-sm transition-all cursor-pointer"
+                    className="w-full py-3 px-4 rounded-full bg-[#493126] hover:bg-[#35231D] text-[#FFF8EE] text-xs font-bold tracking-wider uppercase flex items-center justify-center gap-2 shadow-sm transition-all cursor-pointer"
                   >
                     <MessageCircle size={14} />
                     <span>Inquire on WhatsApp</span>
@@ -660,18 +660,18 @@ export function CinematicBakeryExperience() {
             ))}
 
             {/* 6th Card: Custom 3D Cake Callout */}
-            <div className="rounded-3xl p-8 bg-gradient-to-br from-[#6B4435] to-[#30251F] text-[#F8F3EA] border border-[#D9BFA2] flex flex-col justify-between shadow-xl">
+            <div className="rounded-3xl p-8 bg-gradient-to-br from-[#493126] to-[#392820] text-[#EFE3D2] border border-[#C5A16A] flex flex-col justify-between shadow-xl">
               <div>
-                <div className="w-12 h-12 rounded-2xl bg-[#D9BFA2]/20 border border-[#D9BFA2]/40 text-[#D9BFA2] flex items-center justify-center mb-4">
+                <div className="w-12 h-12 rounded-2xl bg-[#C5A16A]/20 border border-[#C5A16A]/40 text-[#C5A16A] flex items-center justify-center mb-4">
                   <Cake size={24} />
                 </div>
-                <span className="text-xs uppercase tracking-widest text-[#D9BFA2] font-semibold block mb-1">
+                <span className="text-xs uppercase tracking-widest text-[#C5A16A] font-semibold block mb-1">
                   Bespoke Atelier
                 </span>
                 <h3 className="font-serif text-3xl font-medium text-white">
                   Have a Unique Design in Mind?
                 </h3>
-                <p className="text-xs text-[#F8F3EA]/80 mt-3 leading-relaxed">
+                <p className="text-xs text-[#EFE3D2]/80 mt-3 leading-relaxed">
                   Share a photo from Instagram or Pinterest, or describe your imagination. Manoj Kumar and our master team will craft it with 100% pure butter and perfection.
                 </p>
               </div>
@@ -679,7 +679,7 @@ export function CinematicBakeryExperience() {
               <div className="pt-6">
                 <a
                   href="#custom-cake"
-                  className="w-full py-3.5 px-5 rounded-full bg-[#D9BFA2] hover:bg-white text-[#30251F] text-xs font-bold tracking-wider uppercase flex items-center justify-center gap-2 shadow-lg transition-all"
+                  className="w-full py-3.5 px-5 rounded-full bg-[#C5A16A] hover:bg-white text-[#392820] text-xs font-bold tracking-wider uppercase flex items-center justify-center gap-2 shadow-lg transition-all"
                 >
                   <Upload size={14} />
                   <span>Upload Design Reference</span>
@@ -692,20 +692,20 @@ export function CinematicBakeryExperience() {
 
       {/* ====================================================================
           SECTION 5 – COMPLETE BAKERY MENU
-          Warm Cream (#F3EBDD) with Category Filters & Product Grid
+          Warm Cream (#F7F0E5) with Category Filters & Product Grid
           ==================================================================== */}
-      <section id="menu" className="relative w-full py-20 lg:py-28 bg-[#F3EBDD] border-b border-[#D9BFA2]/40">
+      <section id="menu" className="relative w-full py-20 lg:py-28 bg-[#F7F0E5] border-b border-[#C5A16A]/40">
         <div className="max-w-[1360px] mx-auto px-5 sm:px-10">
           {/* Header */}
           <div className="text-center max-w-2xl mx-auto mb-12">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#EDE2D3] border border-[#D9BFA2] text-[#6B4435] text-xs font-semibold tracking-[0.2em] uppercase mb-3">
-              <Utensils size={13} className="text-[#6B4435]" />
+            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#E8D8C4] border border-[#C5A16A] text-[#493126] text-xs font-semibold tracking-[0.2em] uppercase mb-3">
+              <Utensils size={13} className="text-[#493126]" />
               <span>Section 05 • Complete Bakery Menu</span>
             </div>
-            <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-medium text-[#6B4435] tracking-tight">
+            <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-medium text-[#493126] tracking-tight">
               Oven-Fresh Daily Delights
             </h2>
-            <p className="font-sans text-sm sm:text-base text-[#30251F]/80 mt-2">
+            <p className="font-sans text-sm sm:text-base text-[#392820]/80 mt-2">
               From signature cakes and European pastries to fudgy brownies, cookies, breads, and barista coffee.
             </p>
           </div>
@@ -717,8 +717,8 @@ export function CinematicBakeryExperience() {
               onClick={() => setActiveMenuCategory("All")}
               className={`px-4 py-2 rounded-full text-xs font-semibold tracking-wider uppercase transition-all cursor-pointer ${
                 activeMenuCategory === "All"
-                  ? "bg-[#6B4435] text-white shadow-md scale-105"
-                  : "bg-[#EDE2D3] text-[#30251F] hover:bg-[#D9BFA2]/40 border border-[#D9BFA2]/60"
+                  ? "bg-[#493126] text-[#FFF8EE] shadow-md scale-105"
+                  : "bg-[#E8D8C4] text-[#392820] hover:bg-[#C5A16A]/40 border border-[#C5A16A]/60"
               }`}
             >
               All Items ({BAKERY_PRODUCTS.length})
@@ -732,8 +732,8 @@ export function CinematicBakeryExperience() {
                   onClick={() => setActiveMenuCategory(cat)}
                   className={`px-4 py-2 rounded-full text-xs font-semibold tracking-wider uppercase transition-all cursor-pointer ${
                     activeMenuCategory === cat
-                      ? "bg-[#6B4435] text-white shadow-md scale-105"
-                      : "bg-[#EDE2D3] text-[#30251F] hover:bg-[#D9BFA2]/40 border border-[#D9BFA2]/60"
+                      ? "bg-[#493126] text-[#FFF8EE] shadow-md scale-105"
+                      : "bg-[#E8D8C4] text-[#392820] hover:bg-[#C5A16A]/40 border border-[#C5A16A]/60"
                   }`}
                 >
                   {cat} ({count})
@@ -747,10 +747,10 @@ export function CinematicBakeryExperience() {
             {filteredProducts.map((product) => (
               <div
                 key={product.id}
-                className="card-luxury-3d rounded-2xl overflow-hidden bg-[#EDE2D3] border border-[#D9BFA2] flex flex-col justify-between group"
+                className="card-luxury-3d rounded-2xl overflow-hidden bg-[#E8D8C4] border border-[#C5A16A] flex flex-col justify-between group"
               >
                 <div>
-                  <div className="relative aspect-[4/3] w-full overflow-hidden bg-[#F8F3EA]">
+                  <div className="relative aspect-[4/3] w-full overflow-hidden bg-[#EFE3D2]">
                     <img
                       src={product.image}
                       alt={product.name}
@@ -758,23 +758,23 @@ export function CinematicBakeryExperience() {
                       className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                     />
                     {product.dietary && (
-                      <span className="absolute top-2.5 left-2.5 px-2.5 py-0.5 rounded-full bg-[#180C06]/85 backdrop-blur-sm text-[#D9BFA2] text-[10px] font-semibold uppercase tracking-wider">
+                      <span className="absolute top-2.5 left-2.5 px-2.5 py-0.5 rounded-full bg-[#180C06]/85 backdrop-blur-sm text-[#C5A16A] text-[10px] font-semibold uppercase tracking-wider">
                         {product.dietary}
                       </span>
                     )}
-                    <span className="absolute top-2.5 right-2.5 px-2.5 py-0.5 rounded-full bg-[#EDE2D3] text-[#6B4435] border border-[#D9BFA2] text-[10px] font-bold">
+                    <span className="absolute top-2.5 right-2.5 px-2.5 py-0.5 rounded-full bg-[#E8D8C4] text-[#493126] border border-[#C5A16A] text-[10px] font-bold">
                       {product.priceNote}
                     </span>
                   </div>
 
                   <div className="p-4">
-                    <span className="text-[10px] font-semibold uppercase tracking-widest text-[#6B4435]">
+                    <span className="text-[10px] font-semibold uppercase tracking-widest text-[#493126]">
                       {product.category}
                     </span>
-                    <h3 className="font-serif text-lg font-medium text-[#30251F] mt-0.5 line-clamp-1 group-hover:text-[#6B4435] transition-colors">
+                    <h3 className="font-serif text-lg font-medium text-[#392820] mt-0.5 line-clamp-1 group-hover:text-[#493126] transition-colors">
                       {product.name}
                     </h3>
-                    <p className="text-xs text-[#30251F]/75 mt-1.5 line-clamp-2 leading-relaxed">
+                    <p className="text-xs text-[#392820]/75 mt-1.5 line-clamp-2 leading-relaxed">
                       {product.description}
                     </p>
                   </div>
@@ -784,7 +784,7 @@ export function CinematicBakeryExperience() {
                   <button
                     type="button"
                     onClick={() => handleWhatsAppOrder(product.name, product.priceNote, product.category)}
-                    className="w-full py-2.5 px-3 rounded-full bg-[#6B4435] hover:bg-[#30251F] text-white text-xs font-semibold tracking-wider uppercase flex items-center justify-center gap-1.5 transition-all cursor-pointer shadow-sm"
+                    className="w-full py-2.5 px-3 rounded-full bg-[#493126] hover:bg-[#35231D] text-[#FFF8EE] text-xs font-semibold tracking-wider uppercase flex items-center justify-center gap-1.5 transition-all cursor-pointer shadow-sm"
                   >
                     <MessageCircle size={13} />
                     <span>Order on WhatsApp</span>
@@ -798,30 +798,30 @@ export function CinematicBakeryExperience() {
 
       {/* ====================================================================
           SECTION 6 – CUSTOM CAKE EXPERIENCE (Interactive Builder)
-          Soft Ivory (#F8F3EA) with Embedded Design, Reference Upload & WhatsApp
+          Soft Ivory (#EFE3D2) with Embedded Design, Reference Upload & WhatsApp
           ==================================================================== */}
-      <section id="custom-cake" className="relative w-full py-20 lg:py-28 bg-[#F8F3EA] border-b border-[#D9BFA2]/40">
+      <section id="custom-cake" className="relative w-full py-20 lg:py-28 bg-[#EFE3D2] border-b border-[#C5A16A]/40">
         <div className="max-w-[1360px] mx-auto px-5 sm:px-10">
           <div className="text-center max-w-2xl mx-auto mb-14">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#EDE2D3] border border-[#D9BFA2] text-[#6B4435] text-xs font-semibold tracking-[0.2em] uppercase mb-3">
-              <Sparkles size={13} className="text-[#6B4435]" />
+            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#E8D8C4] border border-[#C5A16A] text-[#493126] text-xs font-semibold tracking-[0.2em] uppercase mb-3">
+              <Sparkles size={13} className="text-[#493126]" />
               <span>Section 06 • Custom Cake Atelier</span>
             </div>
-            <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-medium text-[#6B4435] tracking-tight">
+            <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-medium text-[#493126] tracking-tight">
               Design Your Dream Cake
             </h2>
-            <p className="font-sans text-sm sm:text-base text-[#30251F]/80 mt-2">
+            <p className="font-sans text-sm sm:text-base text-[#392820]/80 mt-2">
               Select your flavour, weight, date, and upload a design photo from your phone or gallery. Our master bakers in Dinanagar will craft it to perfection.
             </p>
           </div>
 
           {/* Form Card */}
-          <div className="max-w-4xl mx-auto bg-[#EDE2D3] border-2 border-[#D9BFA2] rounded-3xl p-6 sm:p-10 lg:p-12 shadow-xl">
+          <div className="max-w-4xl mx-auto bg-[#E8D8C4] border-2 border-[#C5A16A] rounded-3xl p-6 sm:p-10 lg:p-12 shadow-xl">
             <form onSubmit={handleCustomOrderSubmit} className="space-y-8">
               {/* Row 1: Contact Details */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                 <div>
-                  <label className="block text-xs font-bold uppercase tracking-wider text-[#6B4435] mb-2">
+                  <label className="block text-xs font-bold uppercase tracking-wider text-[#493126] mb-2">
                     Your Name *
                   </label>
                   <input
@@ -830,11 +830,11 @@ export function CinematicBakeryExperience() {
                     value={formName}
                     onChange={(e) => setFormName(e.target.value)}
                     placeholder="e.g. Sukhman Singh"
-                    className="w-full px-4 py-3 rounded-xl bg-white border border-[#D9BFA2] text-[#30251F] text-sm focus:outline-none focus:ring-2 focus:ring-[#6B4435]"
+                    className="w-full px-4 py-3 rounded-xl bg-white border border-[#C5A16A] text-[#392820] text-sm focus:outline-none focus:ring-2 focus:ring-[#493126]"
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-bold uppercase tracking-wider text-[#6B4435] mb-2">
+                  <label className="block text-xs font-bold uppercase tracking-wider text-[#493126] mb-2">
                     WhatsApp / Phone Number *
                   </label>
                   <input
@@ -843,7 +843,7 @@ export function CinematicBakeryExperience() {
                     value={formPhone}
                     onChange={(e) => setFormPhone(e.target.value)}
                     placeholder="e.g. 98150 94145"
-                    className="w-full px-4 py-3 rounded-xl bg-white border border-[#D9BFA2] text-[#30251F] text-sm focus:outline-none focus:ring-2 focus:ring-[#6B4435]"
+                    className="w-full px-4 py-3 rounded-xl bg-white border border-[#C5A16A] text-[#392820] text-sm focus:outline-none focus:ring-2 focus:ring-[#493126]"
                   />
                 </div>
               </div>
@@ -851,13 +851,13 @@ export function CinematicBakeryExperience() {
               {/* Row 2: Flavour & Occasion */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                 <div>
-                  <label className="block text-xs font-bold uppercase tracking-wider text-[#6B4435] mb-2">
+                  <label className="block text-xs font-bold uppercase tracking-wider text-[#493126] mb-2">
                     Cake Flavour *
                   </label>
                   <select
                     value={formFlavour}
                     onChange={(e) => setFormFlavour(e.target.value)}
-                    className="w-full px-4 py-3 rounded-xl bg-white border border-[#D9BFA2] text-[#30251F] text-sm focus:outline-none focus:ring-2 focus:ring-[#6B4435]"
+                    className="w-full px-4 py-3 rounded-xl bg-white border border-[#C5A16A] text-[#392820] text-sm focus:outline-none focus:ring-2 focus:ring-[#493126]"
                   >
                     <option value="Belgian Chocolate Truffle">Belgian Chocolate Truffle (70% Valrhona)</option>
                     <option value="Red Velvet Cream Cheese">Red Velvet & Cream Cheese</option>
@@ -870,13 +870,13 @@ export function CinematicBakeryExperience() {
                   </select>
                 </div>
                 <div>
-                  <label className="block text-xs font-bold uppercase tracking-wider text-[#6B4435] mb-2">
+                  <label className="block text-xs font-bold uppercase tracking-wider text-[#493126] mb-2">
                     Occasion / Theme *
                   </label>
                   <select
                     value={formOccasion}
                     onChange={(e) => setFormOccasion(e.target.value)}
-                    className="w-full px-4 py-3 rounded-xl bg-white border border-[#D9BFA2] text-[#30251F] text-sm focus:outline-none focus:ring-2 focus:ring-[#6B4435]"
+                    className="w-full px-4 py-3 rounded-xl bg-white border border-[#C5A16A] text-[#392820] text-sm focus:outline-none focus:ring-2 focus:ring-[#493126]"
                   >
                     <option value="Birthday Party">Birthday Party</option>
                     <option value="Anniversary & Romance">Anniversary & Romance</option>
@@ -891,7 +891,7 @@ export function CinematicBakeryExperience() {
 
               {/* Row 3: Cake Weight / Size Selection */}
               <div>
-                <label className="block text-xs font-bold uppercase tracking-wider text-[#6B4435] mb-2">
+                <label className="block text-xs font-bold uppercase tracking-wider text-[#493126] mb-2">
                   Select Weight / Size *
                 </label>
                 <div className="grid grid-cols-2 sm:grid-cols-5 gap-3">
@@ -908,8 +908,8 @@ export function CinematicBakeryExperience() {
                       onClick={() => setFormWeight(w.id)}
                       className={`p-3 rounded-xl border text-center transition-all cursor-pointer ${
                         formWeight === w.id
-                          ? "bg-[#6B4435] text-white border-[#6B4435] shadow-md scale-102"
-                          : "bg-white text-[#30251F] border-[#D9BFA2] hover:bg-[#F3EBDD]"
+                          ? "bg-[#493126] text-[#FFF8EE] border-[#493126] shadow-md scale-102"
+                          : "bg-white text-[#392820] border-[#C5A16A] hover:bg-[#F7F0E5]"
                       }`}
                     >
                       <span className="font-bold text-sm block">{w.label}</span>
@@ -922,7 +922,7 @@ export function CinematicBakeryExperience() {
               {/* Row 4: Required Date & Special Plaque Text */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                 <div>
-                  <label className="block text-xs font-bold uppercase tracking-wider text-[#6B4435] mb-2">
+                  <label className="block text-xs font-bold uppercase tracking-wider text-[#493126] mb-2">
                     Required Delivery / Pickup Date *
                   </label>
                   <input
@@ -930,11 +930,11 @@ export function CinematicBakeryExperience() {
                     required
                     value={formDate}
                     onChange={(e) => setFormDate(e.target.value)}
-                    className="w-full px-4 py-3 rounded-xl bg-white border border-[#D9BFA2] text-[#30251F] text-sm focus:outline-none focus:ring-2 focus:ring-[#6B4435]"
+                    className="w-full px-4 py-3 rounded-xl bg-white border border-[#C5A16A] text-[#392820] text-sm focus:outline-none focus:ring-2 focus:ring-[#493126]"
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-bold uppercase tracking-wider text-[#6B4435] mb-2">
+                  <label className="block text-xs font-bold uppercase tracking-wider text-[#493126] mb-2">
                     Message to Pipe on Cake Plaque
                   </label>
                   <input
@@ -942,17 +942,17 @@ export function CinematicBakeryExperience() {
                     value={formNotes}
                     onChange={(e) => setFormNotes(e.target.value)}
                     placeholder="e.g. Happy 25th Anniversary Mom & Dad"
-                    className="w-full px-4 py-3 rounded-xl bg-white border border-[#D9BFA2] text-[#30251F] text-sm focus:outline-none focus:ring-2 focus:ring-[#6B4435]"
+                    className="w-full px-4 py-3 rounded-xl bg-white border border-[#C5A16A] text-[#392820] text-sm focus:outline-none focus:ring-2 focus:ring-[#493126]"
                   />
                 </div>
               </div>
 
               {/* Row 5: Reference Image Upload from Gallery */}
               <div>
-                <label className="block text-xs font-bold uppercase tracking-wider text-[#6B4435] mb-2">
+                <label className="block text-xs font-bold uppercase tracking-wider text-[#493126] mb-2">
                   Upload Reference Photo (From your Phone or Computer Gallery)
                 </label>
-                <div className="p-6 rounded-2xl bg-white border-2 border-dashed border-[#D9BFA2] text-center hover:border-[#6B4435] transition-colors relative">
+                <div className="p-6 rounded-2xl bg-white border-2 border-dashed border-[#C5A16A] text-center hover:border-[#493126] transition-colors relative">
                   <input
                     type="file"
                     accept="image/*"
@@ -961,19 +961,19 @@ export function CinematicBakeryExperience() {
                   />
                   {formImagePreview ? (
                     <div className="flex flex-col items-center">
-                      <div className="w-28 h-28 rounded-xl overflow-hidden border-2 border-[#6B4435] mb-3 shadow-md">
+                      <div className="w-28 h-28 rounded-xl overflow-hidden border-2 border-[#493126] mb-3 shadow-md">
                         <img src={formImagePreview} alt="Reference Preview" className="w-full h-full object-cover" />
                       </div>
-                      <span className="text-xs font-semibold text-[#6B4435]">{formImageName}</span>
-                      <span className="text-[11px] text-[#30251F]/60 mt-0.5">Click or drag another image to replace</span>
+                      <span className="text-xs font-semibold text-[#493126]">{formImageName}</span>
+                      <span className="text-[11px] text-[#392820]/60 mt-0.5">Click or drag another image to replace</span>
                     </div>
                   ) : (
                     <div className="flex flex-col items-center">
-                      <div className="w-12 h-12 rounded-full bg-[#F3EBDD] text-[#6B4435] flex items-center justify-center mb-2">
+                      <div className="w-12 h-12 rounded-full bg-[#F7F0E5] text-[#493126] flex items-center justify-center mb-2">
                         <Upload size={20} />
                       </div>
-                      <span className="text-sm font-semibold text-[#30251F]">Click to upload design image from gallery</span>
-                      <span className="text-xs text-[#30251F]/60 mt-1">PNG, JPG, WebP supported</span>
+                      <span className="text-sm font-semibold text-[#392820]">Click to upload design image from gallery</span>
+                      <span className="text-xs text-[#392820]/60 mt-1">PNG, JPG, WebP supported</span>
                     </div>
                   )}
                 </div>
@@ -983,13 +983,13 @@ export function CinematicBakeryExperience() {
               <div className="text-center pt-2">
                 <button
                   type="submit"
-                  className="w-full sm:w-auto px-8 py-4 rounded-full bg-[#6B4435] hover:bg-[#30251F] text-white font-bold text-xs uppercase tracking-[0.18em] shadow-xl hover:scale-105 active:scale-95 transition-all inline-flex items-center justify-center gap-2.5 cursor-pointer"
+                  className="w-full sm:w-auto px-8 py-4 rounded-full bg-[#493126] hover:bg-[#35231D] text-[#FFF8EE] font-bold text-xs uppercase tracking-[0.18em] shadow-xl hover:scale-105 active:scale-95 transition-all inline-flex items-center justify-center gap-2.5 cursor-pointer"
                 >
                   <MessageCircle size={18} />
                   <span>Send Custom Cake Order on WhatsApp</span>
                   <ArrowRight size={16} />
                 </button>
-                <p className="text-[11px] text-[#30251F]/70 mt-3">
+                <p className="text-[11px] text-[#392820]/70 mt-3">
                   Direct kitchen review with master baker Manoj Kumar • Immediate response via WhatsApp
                 </p>
               </div>
@@ -1000,19 +1000,19 @@ export function CinematicBakeryExperience() {
 
       {/* ====================================================================
           SECTION 7 – WHY CHOOSE US
-          Warm Cream (#F3EBDD) with 5 Trust & Quality Pillars
+          Warm Cream (#F7F0E5) with 5 Trust & Quality Pillars
           ==================================================================== */}
-      <section id="why-choose-us" className="relative w-full py-20 lg:py-28 bg-[#F3EBDD] border-b border-[#D9BFA2]/40">
+      <section id="why-choose-us" className="relative w-full py-20 lg:py-28 bg-[#F7F0E5] border-b border-[#C5A16A]/40">
         <div className="max-w-[1360px] mx-auto px-5 sm:px-10">
           <div className="text-center max-w-2xl mx-auto mb-16">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#EDE2D3] border border-[#D9BFA2] text-[#6B4435] text-xs font-semibold tracking-[0.2em] uppercase mb-3">
-              <ShieldCheck size={13} className="text-[#6B4435]" />
+            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#E8D8C4] border border-[#C5A16A] text-[#493126] text-xs font-semibold tracking-[0.2em] uppercase mb-3">
+              <ShieldCheck size={13} className="text-[#493126]" />
               <span>Section 07 • The Karshni Standard</span>
             </div>
-            <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-medium text-[#6B4435] tracking-tight">
+            <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-medium text-[#493126] tracking-tight">
               Why Dinanagar Chooses Karshni
             </h2>
-            <p className="font-sans text-sm sm:text-base text-[#30251F]/80 mt-2">
+            <p className="font-sans text-sm sm:text-base text-[#392820]/80 mt-2">
               Every creation that leaves our kitchen carries our sacred promise of pure ingredients and artisan honesty.
             </p>
           </div>
@@ -1047,13 +1047,13 @@ export function CinematicBakeryExperience() {
             ].map((item, idx) => (
               <div
                 key={idx}
-                className="card-luxury-3d rounded-2xl p-6 bg-[#EDE2D3] border border-[#D9BFA2] text-center flex flex-col items-center"
+                className="card-luxury-3d rounded-2xl p-6 bg-[#E8D8C4] border border-[#C5A16A] text-center flex flex-col items-center"
               >
-                <div className="w-12 h-12 rounded-full bg-[#6B4435] text-[#D9BFA2] flex items-center justify-center mb-4 shadow-md">
+                <div className="w-12 h-12 rounded-full bg-[#493126] text-[#C5A16A] flex items-center justify-center mb-4 shadow-md">
                   <item.icon size={22} />
                 </div>
-                <h3 className="font-serif text-lg font-medium text-[#30251F] mb-2">{item.title}</h3>
-                <p className="text-xs text-[#30251F]/75 leading-relaxed">{item.desc}</p>
+                <h3 className="font-serif text-lg font-medium text-[#392820] mb-2">{item.title}</h3>
+                <p className="text-xs text-[#392820]/75 leading-relaxed">{item.desc}</p>
               </div>
             ))}
           </div>
@@ -1062,19 +1062,19 @@ export function CinematicBakeryExperience() {
 
       {/* ====================================================================
           SECTION 8 – SPECIAL OCCASIONS
-          Soft Ivory (#F8F3EA) with Occasion Cards
+          Soft Ivory (#EFE3D2) with Occasion Cards
           ==================================================================== */}
-      <section id="occasions" className="relative w-full py-20 lg:py-28 bg-[#F8F3EA] border-b border-[#D9BFA2]/40">
+      <section id="occasions" className="relative w-full py-20 lg:py-28 bg-[#EFE3D2] border-b border-[#C5A16A]/40">
         <div className="max-w-[1360px] mx-auto px-5 sm:px-10">
           <div className="text-center max-w-2xl mx-auto mb-14">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#EDE2D3] border border-[#D9BFA2] text-[#6B4435] text-xs font-semibold tracking-[0.2em] uppercase mb-3">
-              <Gift size={13} className="text-[#6B4435]" />
+            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#E8D8C4] border border-[#C5A16A] text-[#493126] text-xs font-semibold tracking-[0.2em] uppercase mb-3">
+              <Gift size={13} className="text-[#493126]" />
               <span>Section 08 • Special Occasions</span>
             </div>
-            <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-medium text-[#6B4435] tracking-tight">
+            <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-medium text-[#493126] tracking-tight">
               Cakes for Every Milestone
             </h2>
-            <p className="font-sans text-sm sm:text-base text-[#30251F]/80 mt-2">
+            <p className="font-sans text-sm sm:text-base text-[#392820]/80 mt-2">
               Every milestone deserves a bespoke centerpiece crafted to honor the joy of the moment.
             </p>
           </div>
@@ -1083,33 +1083,33 @@ export function CinematicBakeryExperience() {
             {SPECIAL_OCCASIONS.map((occ) => (
               <div
                 key={occ.id}
-                className="card-luxury-3d rounded-2xl overflow-hidden bg-[#EDE2D3] border border-[#D9BFA2] flex flex-col justify-between group"
+                className="card-luxury-3d rounded-2xl overflow-hidden bg-[#E8D8C4] border border-[#C5A16A] flex flex-col justify-between group"
               >
                 <div>
-                  <div className="relative aspect-[4/3] w-full overflow-hidden bg-[#F3EBDD]">
+                  <div className="relative aspect-[4/3] w-full overflow-hidden bg-[#F7F0E5]">
                     <img
                       src={occ.image}
                       alt={occ.title}
                       loading="lazy"
                       className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#30251F]/60 to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#392820]/60 to-transparent" />
                     <span className="absolute bottom-3 left-3 text-white font-serif text-xl font-medium">
                       {occ.title}
                     </span>
                   </div>
 
                   <div className="p-5">
-                    <span className="text-[11px] font-semibold text-[#6B4435] uppercase tracking-wider block mb-1">
+                    <span className="text-[11px] font-semibold text-[#493126] uppercase tracking-wider block mb-1">
                       {occ.subtitle}
                     </span>
-                    <p className="text-xs text-[#30251F]/80 leading-relaxed mt-1">
+                    <p className="text-xs text-[#392820]/80 leading-relaxed mt-1">
                       {occ.description}
                     </p>
-                    <div className="mt-4 pt-3 border-t border-[#D9BFA2]/50 space-y-1 text-[11px] text-[#30251F]/70">
-                      <div><strong className="text-[#6B4435]">Servings:</strong> {occ.servings}</div>
-                      <div><strong className="text-[#6B4435]">Best Flavour:</strong> {occ.popularFlavour}</div>
-                      <div><strong className="text-[#6B4435]">Notice:</strong> {occ.leadTime}</div>
+                    <div className="mt-4 pt-3 border-t border-[#C5A16A]/50 space-y-1 text-[11px] text-[#392820]/70">
+                      <div><strong className="text-[#493126]">Servings:</strong> {occ.servings}</div>
+                      <div><strong className="text-[#493126]">Best Flavour:</strong> {occ.popularFlavour}</div>
+                      <div><strong className="text-[#493126]">Notice:</strong> {occ.leadTime}</div>
                     </div>
                   </div>
                 </div>
@@ -1118,7 +1118,7 @@ export function CinematicBakeryExperience() {
                   <button
                     type="button"
                     onClick={() => handleWhatsAppOrder(occ.title, undefined, "Special Occasions")}
-                    className="w-full py-2.5 px-3 rounded-full bg-[#6B4435] hover:bg-[#30251F] text-white text-xs font-semibold tracking-wider uppercase flex items-center justify-center gap-1.5 transition-all cursor-pointer shadow-sm"
+                    className="w-full py-2.5 px-3 rounded-full bg-[#493126] hover:bg-[#35231D] text-[#FFF8EE] text-xs font-semibold tracking-wider uppercase flex items-center justify-center gap-1.5 transition-all cursor-pointer shadow-sm"
                   >
                     <MessageCircle size={13} />
                     <span>Inquire for {occ.title}</span>
@@ -1132,19 +1132,19 @@ export function CinematicBakeryExperience() {
 
       {/* ====================================================================
           SECTION 9 – PHOTO GALLERY WITH LIGHTBOX MODAL
-          Warm Cream (#F3EBDD) with Real Bakery Photographs
+          Warm Cream (#F7F0E5) with Real Bakery Photographs
           ==================================================================== */}
-      <section id="gallery" className="relative w-full py-20 lg:py-28 bg-[#F3EBDD] border-b border-[#D9BFA2]/40">
+      <section id="gallery" className="relative w-full py-20 lg:py-28 bg-[#F7F0E5] border-b border-[#C5A16A]/40">
         <div className="max-w-[1360px] mx-auto px-5 sm:px-10">
           <div className="text-center max-w-2xl mx-auto mb-12">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#EDE2D3] border border-[#D9BFA2] text-[#6B4435] text-xs font-semibold tracking-[0.2em] uppercase mb-3">
-              <Sparkles size={13} className="text-[#6B4435]" />
+            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#E8D8C4] border border-[#C5A16A] text-[#493126] text-xs font-semibold tracking-[0.2em] uppercase mb-3">
+              <Sparkles size={13} className="text-[#493126]" />
               <span>Section 09 • Visual Gallery</span>
             </div>
-            <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-medium text-[#6B4435] tracking-tight">
+            <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-medium text-[#493126] tracking-tight">
               A Glimpse into Our Atelier
             </h2>
-            <p className="font-sans text-sm sm:text-base text-[#30251F]/80 mt-2">
+            <p className="font-sans text-sm sm:text-base text-[#392820]/80 mt-2">
               Authentic photographs of our store in Shree Ram Market, display counters, and celebration cakes.
             </p>
           </div>
@@ -1158,8 +1158,8 @@ export function CinematicBakeryExperience() {
                 onClick={() => setActiveGalleryCategory(tab)}
                 className={`px-4 py-1.5 rounded-full text-xs font-semibold tracking-wider uppercase transition-all cursor-pointer ${
                   activeGalleryCategory === tab
-                    ? "bg-[#6B4435] text-white shadow-md scale-105"
-                    : "bg-[#EDE2D3] text-[#30251F] hover:bg-[#D9BFA2]/40 border border-[#D9BFA2]/60"
+                    ? "bg-[#493126] text-[#FFF8EE] shadow-md scale-105"
+                    : "bg-[#E8D8C4] text-[#392820] hover:bg-[#C5A16A]/40 border border-[#C5A16A]/60"
                 }`}
               >
                 {tab}
@@ -1173,7 +1173,7 @@ export function CinematicBakeryExperience() {
               <div
                 key={photo.id}
                 onClick={() => setSelectedLightboxPhoto(photo)}
-                className="group relative rounded-2xl overflow-hidden bg-[#EDE2D3] border border-[#D9BFA2] cursor-pointer shadow-md hover:shadow-xl transition-all aspect-[4/3]"
+                className="group relative rounded-2xl overflow-hidden bg-[#E8D8C4] border border-[#C5A16A] cursor-pointer shadow-md hover:shadow-xl transition-all aspect-[4/3]"
               >
                 <img
                   src={photo.src}
@@ -1181,8 +1181,8 @@ export function CinematicBakeryExperience() {
                   loading="lazy"
                   className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-108"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#30251F]/85 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-5 text-white">
-                  <span className="text-[10px] uppercase tracking-wider text-[#D9BFA2] font-semibold">{photo.category}</span>
+                <div className="absolute inset-0 bg-gradient-to-t from-[#392820]/85 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-5 text-white">
+                  <span className="text-[10px] uppercase tracking-wider text-[#C5A16A] font-semibold">{photo.category}</span>
                   <h4 className="font-serif text-lg font-medium leading-tight mt-1">{photo.title}</h4>
                   <p className="text-xs text-white/80 line-clamp-1 mt-1">{photo.description}</p>
                 </div>
@@ -1194,44 +1194,44 @@ export function CinematicBakeryExperience() {
 
       {/* ====================================================================
           SECTION 10 – CUSTOMER REVIEWS (Google 5-Star Reviews)
-          Soft Ivory (#F8F3EA) with Google Rating & Horizontal Card Track
+          Soft Ivory (#EFE3D2) with Google Rating & Horizontal Card Track
           ==================================================================== */}
-      <section id="reviews" className="relative w-full py-20 lg:py-28 bg-[#F8F3EA] border-b border-[#D9BFA2]/40">
+      <section id="reviews" className="relative w-full py-20 lg:py-28 bg-[#EFE3D2] border-b border-[#C5A16A]/40">
         <div className="max-w-[1360px] mx-auto px-5 sm:px-10">
           {/* Header & Google Rating Badge */}
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
             <div>
-              <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#EDE2D3] border border-[#D9BFA2] text-[#6B4435] text-xs font-semibold tracking-[0.2em] uppercase mb-3">
+              <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#E8D8C4] border border-[#C5A16A] text-[#493126] text-xs font-semibold tracking-[0.2em] uppercase mb-3">
                 <GoogleGIcon size={14} />
                 <span>Section 10 • Google 5-Star Reviews</span>
               </div>
-              <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-medium text-[#6B4435] tracking-tight">
+              <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-medium text-[#493126] tracking-tight">
                 Loved by Dinanagar Patrons
               </h2>
-              <p className="font-sans text-sm sm:text-base text-[#30251F]/80 mt-2">
+              <p className="font-sans text-sm sm:text-base text-[#392820]/80 mt-2">
                 Real customer feedback from celebrations across Dinanagar, Gurdaspur, and beyond.
               </p>
             </div>
 
             {/* Google Maps Verified Score Card */}
-            <div className="flex items-center gap-3.5 p-3.5 rounded-2xl bg-[#EDE2D3] border border-[#D9BFA2] shadow-sm">
+            <div className="flex items-center gap-3.5 p-3.5 rounded-2xl bg-[#E8D8C4] border border-[#C5A16A] shadow-sm">
               <GoogleGIcon size={32} />
               <div>
                 <div className="flex items-center gap-1.5">
-                  <span className="font-serif text-xl font-bold text-[#30251F]">4.9</span>
+                  <span className="font-serif text-xl font-bold text-[#392820]">4.9</span>
                   <div className="flex text-[#FBBC05]">
                     {[...Array(5)].map((_, i) => (
                       <Star key={i} size={14} fill="currentColor" stroke="none" />
                     ))}
                   </div>
                 </div>
-                <span className="text-xs text-[#30251F]/70 font-medium">Over 280+ Verified Google Reviews</span>
+                <span className="text-xs text-[#392820]/70 font-medium">Over 280+ Verified Google Reviews</span>
               </div>
               <a
                 href={BRAND.mapsUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="ml-2 text-xs font-semibold text-[#6B4435] hover:underline flex items-center gap-1"
+                className="ml-2 text-xs font-semibold text-[#493126] hover:underline flex items-center gap-1"
               >
                 <span>Maps</span>
                 <ExternalLink size={12} />
@@ -1246,7 +1246,7 @@ export function CinematicBakeryExperience() {
               type="button"
               onClick={() => handleReviewScroll("left")}
               aria-label="Previous Reviews"
-              className="hidden lg:flex absolute -left-5 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full bg-white border border-[#D9BFA2] text-[#6B4435] shadow-lg items-center justify-center hover:bg-[#6B4435] hover:text-white transition-all cursor-pointer"
+              className="hidden lg:flex absolute -left-5 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full bg-white border border-[#C5A16A] text-[#493126] shadow-lg items-center justify-center hover:bg-[#493126] hover:text-white transition-all cursor-pointer"
             >
               <ChevronLeft size={20} />
             </button>
@@ -1254,7 +1254,7 @@ export function CinematicBakeryExperience() {
               type="button"
               onClick={() => handleReviewScroll("right")}
               aria-label="Next Reviews"
-              className="hidden lg:flex absolute -right-5 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full bg-white border border-[#D9BFA2] text-[#6B4435] shadow-lg items-center justify-center hover:bg-[#6B4435] hover:text-white transition-all cursor-pointer"
+              className="hidden lg:flex absolute -right-5 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full bg-white border border-[#C5A16A] text-[#493126] shadow-lg items-center justify-center hover:bg-[#493126] hover:text-white transition-all cursor-pointer"
             >
               <ChevronRight size={20} />
             </button>
@@ -1268,7 +1268,7 @@ export function CinematicBakeryExperience() {
               {GOOGLE_REVIEWS_DATA.map((rev) => (
                 <div
                   key={rev.id}
-                  className="card-luxury-3d w-[320px] sm:w-[380px] flex-shrink-0 snap-center rounded-2xl bg-[#EDE2D3] border border-[#D9BFA2] p-6 flex flex-col justify-between"
+                  className="card-luxury-3d w-[320px] sm:w-[380px] flex-shrink-0 snap-center rounded-2xl bg-[#E8D8C4] border border-[#C5A16A] p-6 flex flex-col justify-between"
                 >
                   <div>
                     {/* Author & Badge */}
@@ -1277,11 +1277,11 @@ export function CinematicBakeryExperience() {
                         <img
                           src={rev.avatar}
                           alt={rev.author}
-                          className="w-11 h-11 rounded-full object-cover border border-[#D9BFA2]"
+                          className="w-11 h-11 rounded-full object-cover border border-[#C5A16A]"
                         />
                         <div>
-                          <h4 className="font-serif text-base font-bold text-[#30251F]">{rev.author}</h4>
-                          <span className="text-[11px] text-[#30251F]/60">{rev.badge}</span>
+                          <h4 className="font-serif text-base font-bold text-[#392820]">{rev.author}</h4>
+                          <span className="text-[11px] text-[#392820]/60">{rev.badge}</span>
                         </div>
                       </div>
                       <GoogleGIcon size={20} />
@@ -1292,26 +1292,26 @@ export function CinematicBakeryExperience() {
                       {[...Array(rev.rating)].map((_, i) => (
                         <Star key={i} size={15} fill="currentColor" stroke="none" />
                       ))}
-                      <span className="text-xs text-[#30251F]/60 ml-2">{rev.date}</span>
+                      <span className="text-xs text-[#392820]/60 ml-2">{rev.date}</span>
                     </div>
 
                     {/* Review text */}
-                    <p className="text-xs text-[#30251F]/85 leading-relaxed italic">
+                    <p className="text-xs text-[#392820]/85 leading-relaxed italic">
                       "{rev.text}"
                     </p>
                   </div>
 
                   {/* Delivered Cake Reference */}
-                  <div className="mt-5 pt-3.5 border-t border-[#D9BFA2]/60 flex items-center justify-between">
+                  <div className="mt-5 pt-3.5 border-t border-[#C5A16A]/60 flex items-center justify-between">
                     <div className="flex items-center gap-2.5">
                       <img
                         src={rev.cakeImage}
                         alt={rev.cakeName}
-                        className="w-9 h-9 rounded-lg object-cover border border-[#D9BFA2]"
+                        className="w-9 h-9 rounded-lg object-cover border border-[#C5A16A]"
                       />
                       <div>
-                        <span className="text-[10px] text-[#6B4435] font-semibold uppercase block">{rev.occasion}</span>
-                        <span className="text-xs font-medium text-[#30251F] line-clamp-1">{rev.cakeName}</span>
+                        <span className="text-[10px] text-[#493126] font-semibold uppercase block">{rev.occasion}</span>
+                        <span className="text-xs font-medium text-[#392820] line-clamp-1">{rev.cakeName}</span>
                       </div>
                     </div>
                   </div>
@@ -1324,20 +1324,20 @@ export function CinematicBakeryExperience() {
 
       {/* ====================================================================
           SECTION 11 – INSTAGRAM SHOWCASE
-          Warm Cream (#F3EBDD) with @karshni_bakers Profile Link
+          Warm Cream (#F7F0E5) with @karshni_bakers Profile Link
           ==================================================================== */}
-      <section id="instagram" className="relative w-full py-20 lg:py-28 bg-[#F3EBDD] border-b border-[#D9BFA2]/40">
+      <section id="instagram" className="relative w-full py-20 lg:py-28 bg-[#F7F0E5] border-b border-[#C5A16A]/40">
         <div className="max-w-[1360px] mx-auto px-5 sm:px-10">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
             <div>
-              <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#EDE2D3] border border-[#D9BFA2] text-[#6B4435] text-xs font-semibold tracking-[0.2em] uppercase mb-3">
-                <Instagram size={13} className="text-[#6B4435]" />
+              <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#E8D8C4] border border-[#C5A16A] text-[#493126] text-xs font-semibold tracking-[0.2em] uppercase mb-3">
+                <Instagram size={13} className="text-[#493126]" />
                 <span>Section 11 • Instagram Stories</span>
               </div>
-              <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-medium text-[#6B4435] tracking-tight">
+              <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-medium text-[#493126] tracking-tight">
                 Follow @karshni_bakers
               </h2>
-              <p className="font-sans text-sm sm:text-base text-[#30251F]/80 mt-2">
+              <p className="font-sans text-sm sm:text-base text-[#392820]/80 mt-2">
                 Daily fresh bakes, behind-the-scenes cake artistry, and patron celebration stories on Instagram.
               </p>
             </div>
@@ -1345,7 +1345,7 @@ export function CinematicBakeryExperience() {
               href={BRAND.instagramUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#6B4435] hover:bg-[#30251F] text-white text-xs font-bold tracking-wider uppercase transition-all shadow-md self-start md:self-auto"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#493126] hover:bg-[#35231D] text-[#FFF8EE] text-xs font-bold tracking-wider uppercase transition-all shadow-md self-start md:self-auto"
             >
               <Instagram size={15} />
               <span>Follow on Instagram</span>
@@ -1361,7 +1361,7 @@ export function CinematicBakeryExperience() {
                 href={BRAND.instagramUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group relative rounded-xl overflow-hidden aspect-square bg-[#EDE2D3] border border-[#D9BFA2] block shadow-sm hover:shadow-lg transition-all"
+                className="group relative rounded-xl overflow-hidden aspect-square bg-[#E8D8C4] border border-[#C5A16A] block shadow-sm hover:shadow-lg transition-all"
               >
                 <img
                   src={post.image}
@@ -1369,8 +1369,8 @@ export function CinematicBakeryExperience() {
                   loading="lazy"
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-108"
                 />
-                <div className="absolute inset-0 bg-[#30251F]/70 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center p-3 text-white text-center">
-                  <Instagram size={22} className="text-[#D9BFA2] mb-1.5" />
+                <div className="absolute inset-0 bg-[#392820]/70 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center p-3 text-white text-center">
+                  <Instagram size={22} className="text-[#C5A16A] mb-1.5" />
                   <span className="text-[11px] font-bold">♥ {post.likes}</span>
                   <span className="text-[10px] text-white/80 line-clamp-2 mt-1">{post.caption}</span>
                 </div>
@@ -1382,64 +1382,64 @@ export function CinematicBakeryExperience() {
 
       {/* ====================================================================
           SECTION 12 – VISIT OUR BAKERY
-          Soft Ivory (#F8F3EA) with Verified Address, Hours & Google Maps Embed
+          Soft Ivory (#EFE3D2) with Verified Address, Hours & Google Maps Embed
           ==================================================================== */}
-      <section id="contact" className="relative w-full py-20 lg:py-28 bg-[#F8F3EA] border-b border-[#D9BFA2]/40">
+      <section id="contact" className="relative w-full py-20 lg:py-28 bg-[#EFE3D2] border-b border-[#C5A16A]/40">
         <div className="max-w-[1360px] mx-auto px-5 sm:px-10">
           <div className="text-center max-w-2xl mx-auto mb-14">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#EDE2D3] border border-[#D9BFA2] text-[#6B4435] text-xs font-semibold tracking-[0.2em] uppercase mb-3">
-              <MapPin size={13} className="text-[#6B4435]" />
+            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#E8D8C4] border border-[#C5A16A] text-[#493126] text-xs font-semibold tracking-[0.2em] uppercase mb-3">
+              <MapPin size={13} className="text-[#493126]" />
               <span>Section 12 • Visit Karshni</span>
             </div>
-            <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-medium text-[#6B4435] tracking-tight">
+            <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-medium text-[#493126] tracking-tight">
               Visit Us in Dinanagar
             </h2>
-            <p className="font-sans text-sm sm:text-base text-[#30251F]/80 mt-2">
+            <p className="font-sans text-sm sm:text-base text-[#392820]/80 mt-2">
               Step into our boutique bakery in Shree Ram Market for warm oven bakes or custom cake consultations.
             </p>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
             {/* Store Information Card */}
-            <div className="lg:col-span-5 card-luxury-3d rounded-3xl p-8 bg-[#EDE2D3] border border-[#D9BFA2] flex flex-col justify-between">
+            <div className="lg:col-span-5 card-luxury-3d rounded-3xl p-8 bg-[#E8D8C4] border border-[#C5A16A] flex flex-col justify-between">
               <div className="space-y-6">
                 <div>
-                  <h3 className="font-serif text-2xl font-bold text-[#6B4435]">{BRAND.name}</h3>
-                  <p className="text-xs text-[#30251F]/70 font-medium uppercase tracking-wider mt-0.5">
+                  <h3 className="font-serif text-2xl font-bold text-[#493126]">{BRAND.name}</h3>
+                  <p className="text-xs text-[#392820]/70 font-medium uppercase tracking-wider mt-0.5">
                     Artisanal Bakery & Custom Cake Atelier
                   </p>
                 </div>
 
-                <div className="space-y-4 text-sm text-[#30251F]">
+                <div className="space-y-4 text-sm text-[#392820]">
                   <div className="flex items-start gap-3">
-                    <div className="w-9 h-9 rounded-full bg-[#6B4435] text-[#D9BFA2] flex items-center justify-center flex-shrink-0 mt-0.5 shadow-sm">
+                    <div className="w-9 h-9 rounded-full bg-[#493126] text-[#C5A16A] flex items-center justify-center flex-shrink-0 mt-0.5 shadow-sm">
                       <MapPin size={16} />
                     </div>
                     <div>
-                      <strong className="block text-xs uppercase tracking-wider text-[#6B4435]">Bakery Address</strong>
+                      <strong className="block text-xs uppercase tracking-wider text-[#493126]">Bakery Address</strong>
                       <span className="text-xs leading-relaxed mt-0.5 block">{BRAND.address}</span>
-                      <span className="text-[11px] text-[#30251F]/60 block mt-0.5">Near Punjab & Sind Bank, Dinanagar JT Road</span>
+                      <span className="text-[11px] text-[#392820]/60 block mt-0.5">Near Punjab & Sind Bank, Dinanagar JT Road</span>
                     </div>
                   </div>
 
                   <div className="flex items-start gap-3">
-                    <div className="w-9 h-9 rounded-full bg-[#6B4435] text-[#D9BFA2] flex items-center justify-center flex-shrink-0 mt-0.5 shadow-sm">
+                    <div className="w-9 h-9 rounded-full bg-[#493126] text-[#C5A16A] flex items-center justify-center flex-shrink-0 mt-0.5 shadow-sm">
                       <Clock size={16} />
                     </div>
                     <div>
-                      <strong className="block text-xs uppercase tracking-wider text-[#6B4435]">Operating Hours</strong>
+                      <strong className="block text-xs uppercase tracking-wider text-[#493126]">Operating Hours</strong>
                       <span className="text-xs block mt-0.5">{BRAND.hours}</span>
-                      <span className="text-[11px] text-[#6B4435] font-semibold block mt-0.5">{BRAND.days}</span>
+                      <span className="text-[11px] text-[#493126] font-semibold block mt-0.5">{BRAND.days}</span>
                     </div>
                   </div>
 
                   <div className="flex items-start gap-3">
-                    <div className="w-9 h-9 rounded-full bg-[#6B4435] text-[#D9BFA2] flex items-center justify-center flex-shrink-0 mt-0.5 shadow-sm">
+                    <div className="w-9 h-9 rounded-full bg-[#493126] text-[#C5A16A] flex items-center justify-center flex-shrink-0 mt-0.5 shadow-sm">
                       <Phone size={16} />
                     </div>
                     <div>
-                      <strong className="block text-xs uppercase tracking-wider text-[#6B4435]">Phone & Orders</strong>
-                      <a href={`tel:${BRAND.phoneRaw}`} className="text-xs font-semibold text-[#6B4435] hover:underline block mt-0.5">
+                      <strong className="block text-xs uppercase tracking-wider text-[#493126]">Phone & Orders</strong>
+                      <a href={`tel:${BRAND.phoneRaw}`} className="text-xs font-semibold text-[#493126] hover:underline block mt-0.5">
                         {BRAND.phone}
                       </a>
                     </div>
@@ -1447,12 +1447,12 @@ export function CinematicBakeryExperience() {
                 </div>
               </div>
 
-              <div className="pt-6 border-t border-[#D9BFA2]/60 flex flex-col sm:flex-row gap-3">
+              <div className="pt-6 border-t border-[#C5A16A]/60 flex flex-col sm:flex-row gap-3">
                 <a
                   href={BRAND.mapsUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex-1 py-3 px-4 rounded-full bg-[#6B4435] hover:bg-[#30251F] text-white text-xs font-bold tracking-wider uppercase text-center transition-all shadow-md flex items-center justify-center gap-2"
+                  className="flex-1 py-3 px-4 rounded-full bg-[#493126] hover:bg-[#35231D] text-[#FFF8EE] text-xs font-bold tracking-wider uppercase text-center transition-all shadow-md flex items-center justify-center gap-2"
                 >
                   <MapPin size={14} />
                   <span>Get Directions</span>
@@ -1461,7 +1461,7 @@ export function CinematicBakeryExperience() {
                   href={`https://wa.me/${BRAND.whatsapp}?text=${encodeURIComponent("Hello Karshni Bakers! I would like to visit your bakery in Shree Ram Market, Dinanagar. Please share directions.")}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex-1 py-3 px-4 rounded-full bg-white hover:bg-[#F3EBDD] text-[#6B4435] border border-[#6B4435] text-xs font-bold tracking-wider uppercase text-center transition-all flex items-center justify-center gap-2"
+                  className="flex-1 py-3 px-4 rounded-full bg-white hover:bg-[#F7F0E5] text-[#493126] border border-[#493126] text-xs font-bold tracking-wider uppercase text-center transition-all flex items-center justify-center gap-2"
                 >
                   <MessageCircle size={14} />
                   <span>WhatsApp</span>
@@ -1470,7 +1470,7 @@ export function CinematicBakeryExperience() {
             </div>
 
             {/* Google Maps Embed */}
-            <div className="lg:col-span-7 rounded-3xl overflow-hidden bg-[#EDE2D3] border-2 border-[#D9BFA2] shadow-xl min-h-[380px] relative">
+            <div className="lg:col-span-7 rounded-3xl overflow-hidden bg-[#E8D8C4] border-2 border-[#C5A16A] shadow-xl min-h-[380px] relative">
               <iframe
                 title="Karshni Bakers Dinanagar Google Maps Location"
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d13511.455648895085!2d75.4608333!3d32.1466667!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x391c0b396e95c1d1%3A0xb3a268a735c05273!2sDinanagar%2C%20Punjab%20143531!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
@@ -1492,7 +1492,7 @@ export function CinematicBakeryExperience() {
           onClick={() => setSelectedLightboxPhoto(null)}
         >
           <div
-            className="relative max-w-4xl w-full bg-[#180C06] border-2 border-[#D9BFA2] rounded-3xl overflow-hidden shadow-2xl"
+            className="relative max-w-4xl w-full bg-[#180C06] border-2 border-[#C5A16A] rounded-3xl overflow-hidden shadow-2xl"
             onClick={(e) => e.stopPropagation()}
           >
             <button
@@ -1514,7 +1514,7 @@ export function CinematicBakeryExperience() {
 
             <div className="p-6 bg-[#221008] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
               <div>
-                <span className="text-[10px] uppercase tracking-widest text-[#D9BFA2] font-semibold">
+                <span className="text-[10px] uppercase tracking-widest text-[#C5A16A] font-semibold">
                   {selectedLightboxPhoto.category}
                 </span>
                 <h3 className="font-serif text-xl text-white font-medium mt-0.5">
@@ -1528,7 +1528,7 @@ export function CinematicBakeryExperience() {
               <button
                 type="button"
                 onClick={() => handleWhatsAppOrder(selectedLightboxPhoto.title, undefined, selectedLightboxPhoto.category)}
-                className="py-2.5 px-5 rounded-full bg-[#D9BFA2] hover:bg-white text-[#30251F] text-xs font-bold tracking-wider uppercase flex items-center gap-2 shadow-md transition-all flex-shrink-0 cursor-pointer"
+                className="py-2.5 px-5 rounded-full bg-[#C5A16A] hover:bg-white text-[#392820] text-xs font-bold tracking-wider uppercase flex items-center gap-2 shadow-md transition-all flex-shrink-0 cursor-pointer"
               >
                 <MessageCircle size={14} />
                 <span>Order This Design</span>

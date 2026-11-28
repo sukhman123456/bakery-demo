@@ -436,26 +436,26 @@ export function SiteShell({ children }: { children: ReactNode }) {
       <main className="flex-grow">{children}</main>
 
       {/* Luxury Brand Footer (Section 13) */}
-      <footer className="bg-[#30251F] text-[#F8F3EA] border-t-2 border-[#D9BFA2]/40 pt-16 pb-10 px-6">
+      <footer className="bg-[#35231D] text-[#FFF8EE] border-t-2 border-[#C5A16A]/40 pt-16 pb-10 px-6">
         <div className="max-w-[1360px] mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-14">
           {/* Brand Info */}
           <div className="space-y-4">
             <BrandLogo scrolled={false} size="lg" />
-            <p className="text-sm text-[#F8F3EA]/80 leading-relaxed font-light mt-4">
+            <p className="text-sm text-[#FFF8EE]/80 leading-relaxed font-light mt-4">
               {BRAND.tagline}. Handcrafted celebration cakes, bespoke fondant creations, and artisanal delicacies, baked fresh daily in Dinanagar, Punjab.
             </p>
             <div className="pt-2">
-              <span className="text-xs font-semibold tracking-wider uppercase text-[#D9BFA2] block mb-1.5">
+              <span className="text-xs font-semibold tracking-wider uppercase text-[#C5A16A] block mb-1.5">
                 Bakery Specialties
               </span>
               <div className="flex flex-wrap items-center gap-2 text-xs text-white/90">
-                <span className="bg-[#6B4435] px-2.5 py-1 rounded-full border border-[#D9BFA2]/50 text-[#F8F3EA]">
+                <span className="bg-[#493126] px-2.5 py-1 rounded-full border border-[#C5A16A]/50 text-[#FFF8EE]">
                   Custom Birthday Cakes
                 </span>
-                <span className="bg-[#6B4435] px-2.5 py-1 rounded-full border border-[#D9BFA2]/50 text-[#F8F3EA]">
+                <span className="bg-[#493126] px-2.5 py-1 rounded-full border border-[#C5A16A]/50 text-[#FFF8EE]">
                   Wedding Cakes
                 </span>
-                <span className="bg-[#6B4435] px-2.5 py-1 rounded-full border border-[#D9BFA2]/50 text-[#F8F3EA]">
+                <span className="bg-[#493126] px-2.5 py-1 rounded-full border border-[#C5A16A]/50 text-[#FFF8EE]">
                   Designer Cakes
                 </span>
               </div>
@@ -464,67 +464,67 @@ export function SiteShell({ children }: { children: ReactNode }) {
 
           {/* Quick Links */}
           <div>
-            <h4 className="font-serif text-lg text-[#F8F3EA] font-medium mb-4 pb-1 border-b border-[#D9BFA2]/30 inline-block">
+            <h4 className="font-serif text-lg text-[#FFF8EE] font-medium mb-4 pb-1 border-b border-[#C5A16A]/30 inline-block">
               Quick Navigation
             </h4>
-            <ul className="space-y-2.5 text-sm text-[#F8F3EA]/80">
+            <ul className="space-y-2.5 text-sm text-[#FFF8EE]/80">
               <li>
-                <a href="/#hero" className="hover:text-[#D9BFA2] transition-colors">
+                <a href="/#hero" className="hover:text-[#C5A16A] transition-colors">
                   01. Home & Highlights
                 </a>
               </li>
               <li>
-                <a href="/#signature-cakes" className="hover:text-[#D9BFA2] transition-colors">
+                <a href="/#signature-cakes" className="hover:text-[#C5A16A] transition-colors">
                   02. Featured Collection
                 </a>
               </li>
               <li>
-                <a href="/#about" className="hover:text-[#D9BFA2] transition-colors">
+                <a href="/#about" className="hover:text-[#C5A16A] transition-colors">
                   03. About Manoj Kumar & Story
                 </a>
               </li>
               <li>
-                <a href="/#signature-gallery" className="hover:text-[#D9BFA2] transition-colors">
+                <a href="/#signature-gallery" className="hover:text-[#C5A16A] transition-colors">
                   04. Signature Celebration Cakes
                 </a>
               </li>
               <li>
-                <a href="/#menu" className="hover:text-[#D9BFA2] transition-colors">
+                <a href="/#menu" className="hover:text-[#C5A16A] transition-colors">
                   05. Complete Bakery Menu
                 </a>
               </li>
               <li>
-                <a href="/#custom-cake" className="hover:text-[#D9BFA2] transition-colors">
+                <a href="/#custom-cake" className="hover:text-[#C5A16A] transition-colors">
                   06. Custom Cake Experience
                 </a>
               </li>
               <li>
-                <a href="/#why-choose-us" className="hover:text-[#D9BFA2] transition-colors">
+                <a href="/#why-choose-us" className="hover:text-[#C5A16A] transition-colors">
                   07. Why Choose Us (Purity)
                 </a>
               </li>
               <li>
-                <a href="/#occasions" className="hover:text-[#D9BFA2] transition-colors">
+                <a href="/#occasions" className="hover:text-[#C5A16A] transition-colors">
                   08. Special Occasions
                 </a>
               </li>
               <li>
-                <a href="/#gallery" className="hover:text-[#D9BFA2] transition-colors">
+                <a href="/#gallery" className="hover:text-[#C5A16A] transition-colors">
                   09. Photo Gallery
                 </a>
               </li>
               <li>
-                <a href="/#reviews" className="hover:text-[#D9BFA2] transition-colors">
+                <a href="/#reviews" className="hover:text-[#C5A16A] transition-colors">
                   10. Google 5-Star Reviews
                 </a>
               </li>
               <li>
-                <a href="/#instagram" className="hover:text-[#D9BFA2] transition-colors">
+                <a href="/#instagram" className="hover:text-[#C5A16A] transition-colors">
                   11. Instagram Showcase
                 </a>
               </li>
               <li>
-                <a href="/#contact" className="hover:text-[#D9BFA2] transition-colors">
+                <a href="/#contact" className="hover:text-[#C5A16A] transition-colors">
                   12. Visit Our Bakery
                 </a>
               </li>
@@ -533,10 +533,10 @@ export function SiteShell({ children }: { children: ReactNode }) {
 
           {/* Food & Product Categories */}
           <div>
-            <h4 className="font-serif text-lg text-[#F8F3EA] font-medium mb-4 pb-1 border-b border-[#D9BFA2]/30 inline-block">
+            <h4 className="font-serif text-lg text-[#FFF8EE] font-medium mb-4 pb-1 border-b border-[#C5A16A]/30 inline-block">
               Bakery Offerings
             </h4>
-            <ul className="grid grid-cols-2 gap-x-2 gap-y-2 text-xs text-[#F8F3EA]/80">
+            <ul className="grid grid-cols-2 gap-x-2 gap-y-2 text-xs text-[#FFF8EE]/80">
               <li>• Birthday Cakes</li>
               <li>• Chocolate Noir</li>
               <li>• Anniversary Hearts</li>
@@ -554,21 +554,21 @@ export function SiteShell({ children }: { children: ReactNode }) {
 
           {/* Visit & Contact */}
           <div className="space-y-3">
-            <h4 className="font-serif text-lg text-[#F8F3EA] font-medium mb-4 pb-1 border-b border-[#D9BFA2]/30 inline-block">
+            <h4 className="font-serif text-lg text-[#FFF8EE] font-medium mb-4 pb-1 border-b border-[#C5A16A]/30 inline-block">
               Visit Karshni Baker’s
             </h4>
-            <div className="text-sm text-[#F8F3EA]/90 space-y-3 font-light">
+            <div className="text-sm text-[#FFF8EE]/90 space-y-3 font-light">
               <p className="flex items-start gap-2">
-                <MapPin size={16} className="text-[#D9BFA2] flex-shrink-0 mt-1" />
+                <MapPin size={16} className="text-[#C5A16A] flex-shrink-0 mt-1" />
                 <span>{BRAND.address}</span>
               </p>
               <p className="flex items-center gap-2">
-                <Clock size={16} className="text-[#D9BFA2] flex-shrink-0" />
+                <Clock size={16} className="text-[#C5A16A] flex-shrink-0" />
                 <span>{BRAND.hours} (Daily)</span>
               </p>
               <p className="flex items-center gap-2">
-                <Phone size={16} className="text-[#D9BFA2] flex-shrink-0" />
-                <a href={`tel:${BRAND.phoneRaw}`} className="hover:text-[#D9BFA2] font-medium">
+                <Phone size={16} className="text-[#C5A16A] flex-shrink-0" />
+                <a href={`tel:${BRAND.phoneRaw}`} className="hover:text-[#C5A16A] font-medium">
                   {BRAND.phone}
                 </a>
               </p>
@@ -578,7 +578,7 @@ export function SiteShell({ children }: { children: ReactNode }) {
                 href={BRAND.mapsUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full py-2.5 px-4 rounded-full bg-[#6B4435] hover:bg-[#D9BFA2] hover:text-[#30251F] text-white text-xs font-bold tracking-wider uppercase flex items-center justify-center gap-2 transition-all shadow-md"
+                className="w-full py-2.5 px-4 rounded-full bg-[#493126] hover:bg-[#C5A16A] hover:text-[#35231D] text-[#FFF8EE] text-xs font-bold tracking-wider uppercase flex items-center justify-center gap-2 transition-all shadow-md"
               >
                 <MapPin size={14} />
                 <span>Get Directions (Google Maps)</span>
@@ -599,7 +599,7 @@ export function SiteShell({ children }: { children: ReactNode }) {
         {/* Bottom Bar */}
         <div className="max-w-[1360px] mx-auto pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between text-xs text-white/50 gap-4">
           <p>© {new Date().getFullYear()} {BRAND.fullName}. All rights reserved.</p>
-          <p className="text-[#D9BFA2]/90">
+          <p className="text-[#C5A16A]/90">
             Shree Ram Market, Near Punjab & Sind Bank, Dinanagar, Punjab 143531
           </p>
         </div>

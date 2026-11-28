@@ -125,7 +125,7 @@ function AboutPage() {
             </div>
 
             <div className="lg:col-span-6 relative">
-              <div className="rounded-3xl overflow-hidden shadow-2xl border-4 border-[#D9BFA2] bg-[#180C06] p-4 text-center">
+              <div className="rounded-3xl overflow-hidden shadow-2xl border-4 border-[#C5A16A] bg-[#180C06] p-4 text-center">
                 <div className="aspect-square w-full rounded-2xl overflow-hidden mb-4">
                   <img
                     src={BRAND.founderPhoto}
@@ -133,11 +133,11 @@ function AboutPage() {
                     className="w-full h-full object-cover object-top"
                   />
                 </div>
-                <div className="py-2 px-4 rounded-xl bg-gradient-to-r from-[#D9BFA2] via-[#F3EBDD] to-[#D9BFA2] text-[#30251F]">
+                <div className="py-2 px-4 rounded-xl bg-gradient-to-r from-[#C5A16A] via-[#F7F0E5] to-[#C5A16A] text-[#392820]">
                   <p className="font-serif text-base font-bold uppercase tracking-wider">{BRAND.founder}</p>
-                  <p className="text-xs uppercase tracking-widest font-semibold text-[#6B4435]">{BRAND.founderTitle}</p>
+                  <p className="text-xs uppercase tracking-widest font-semibold text-[#493126]">{BRAND.founderTitle}</p>
                 </div>
-                <p className="text-xs text-[#F8F3EA]/80 mt-3 leading-relaxed px-2 font-light">
+                <p className="text-xs text-[#EFE3D2]/80 mt-3 leading-relaxed px-2 font-light">
                   {BRAND.founderBio}
                 </p>
               </div>

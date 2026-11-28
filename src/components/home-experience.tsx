@@ -260,7 +260,7 @@ export function HomeExperience() {
         >
           {/* Top: 1-Line Clean Luxury Brand Pill with Floating Glow & Continuous Gold Shimmer */}
           <div className="pt-2 animate-luxury-float-glow">
-            <div className="relative overflow-hidden inline-flex items-center gap-2 sm:gap-2.5 px-4 sm:px-5 py-2 sm:py-2.5 rounded-full bg-[#180C05]/90 backdrop-blur-md border border-[#D9BFA2]/75 text-[#D9BFA2] text-xs font-serif tracking-[0.24em] uppercase shadow-[0_6px_30px_rgba(0,0,0,0.9),0_0_20px_rgba(217,191,162,0.3)] select-none">
+            <div className="relative overflow-hidden inline-flex items-center gap-2 sm:gap-2.5 px-4 sm:px-5 py-2 sm:py-2.5 rounded-full bg-[#180C05]/90 backdrop-blur-md border border-[#C5A16A]/75 text-[#C5A16A] text-xs font-serif tracking-[0.24em] uppercase shadow-[0_6px_30px_rgba(0,0,0,0.9),0_0_20px_rgba(197,161,106,0.3)] select-none">
               {/* Animated Specular Light Beam sweeping across pill */}
               <div className="absolute inset-0 w-1/2 h-full bg-gradient-to-r from-transparent via-[#FFF8E7]/25 to-transparent -skew-x-12 animate-shimmer-sweep pointer-events-none" />
 
@@ -274,7 +274,7 @@ export function HomeExperience() {
 
           {/* Ambient Center Spotlight Glow behind the cake */}
           <div className="pointer-events-none absolute inset-0 flex items-center justify-center -z-10">
-            <div className="w-64 h-64 sm:w-80 sm:h-80 rounded-full bg-gradient-radial from-[#DFC085]/15 via-[#6B4435]/8 to-transparent blur-2xl animate-halo-pulse" />
+            <div className="w-64 h-64 sm:w-80 sm:h-80 rounded-full bg-gradient-radial from-[#DFC085]/15 via-[#493126]/8 to-transparent blur-2xl animate-halo-pulse" />
           </div>
 
           {/* Bottom: Clean Luxury Actions with Micro-Interactions & Sheen */}
@@ -282,7 +282,7 @@ export function HomeExperience() {
             <button
               type="button"
               onClick={() => scrollToSection("signature-cakes")}
-              className="group relative overflow-hidden px-5 py-2.5 rounded-full bg-gradient-to-r from-[#D9BFA2] via-[#F8F3EA] to-[#D9BFA2] text-[#30251F] text-xs font-bold tracking-wider uppercase shadow-[0_4px_20px_rgba(217,191,162,0.45)] hover:shadow-[0_6px_28px_rgba(223,192,133,0.7)] hover:scale-105 active:scale-95 transition-all duration-300 flex items-center gap-1.5 cursor-pointer"
+              className="group relative overflow-hidden px-5 py-2.5 rounded-full bg-gradient-to-r from-[#C5A16A] via-[#EFE3D2] to-[#C5A16A] text-[#392820] text-xs font-bold tracking-wider uppercase shadow-[0_4px_20px_rgba(197,161,106,0.45)] hover:shadow-[0_6px_28px_rgba(223,192,133,0.7)] hover:scale-105 active:scale-95 transition-all duration-300 flex items-center gap-1.5 cursor-pointer"
             >
               <span className="relative z-10 flex items-center gap-1.5">
                 <span>Explore Cakes</span>
@@ -293,7 +293,7 @@ export function HomeExperience() {
             <button
               type="button"
               onClick={() => handleOrderWhatsApp()}
-              className="group relative px-5 py-2.5 rounded-full bg-[#30251F]/90 hover:bg-[#180C05] text-white border border-[#D9BFA2]/60 text-xs font-bold tracking-wider uppercase shadow-lg hover:shadow-[0_4px_20px_rgba(107,68,53,0.6)] flex items-center gap-2 transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer"
+              className="group relative px-5 py-2.5 rounded-full bg-[#35231D]/90 hover:bg-[#180C05] text-[#FFF8EE] border border-[#C5A16A]/60 text-xs font-bold tracking-wider uppercase shadow-lg hover:shadow-[0_4px_20px_rgba(73,49,38,0.6)] flex items-center gap-2 transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer"
             >
               <span className="relative flex h-2 w-2">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#25D366] opacity-75"></span>
@@ -380,20 +380,20 @@ export function HomeExperience() {
       {/* ====================================================================
           LUXURY MARQUEE RIBBON
           ==================================================================== */}
-      <div className="w-full bg-[#6B4435] text-[#F3EBDD] py-3 px-4 border-y border-[#D9BFA2]/40 overflow-hidden select-none">
+      <div className="w-full bg-[#493126] text-[#FFF8EE] py-3 px-4 border-y border-[#C5A16A]/40 overflow-hidden select-none">
         <div className="flex items-center justify-center gap-4 sm:gap-8 text-[11px] sm:text-xs font-serif tracking-[0.2em] uppercase font-light text-center flex-wrap">
           <span className="flex items-center gap-1.5">
-            <span className="text-[#D9BFA2]">✦</span> Freshly Baked Daily in Dinanagar
+            <span className="text-[#C5A16A]">✦</span> Freshly Baked Daily in Dinanagar
           </span>
-          <span className="text-[#D9BFA2] opacity-60">•</span>
+          <span className="text-[#C5A16A] opacity-60">•</span>
           <span className="flex items-center gap-1.5">
             100% Pure Dairy Butter
           </span>
-          <span className="hidden sm:inline-block text-[#D9BFA2] opacity-60">•</span>
+          <span className="hidden sm:inline-block text-[#C5A16A] opacity-60">•</span>
           <span className="hidden sm:flex items-center gap-1.5">
             Bespoke Theme & Wedding Cakes
           </span>
-          <span className="text-[#D9BFA2] opacity-60">•</span>
+          <span className="text-[#C5A16A] opacity-60">•</span>
           <span className="flex items-center gap-1.5">
             Shree Ram Market • Near Punjab & Sind Bank
           </span>
