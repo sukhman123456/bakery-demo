@@ -13,7 +13,6 @@ import {
 import { useEffect, useRef, useState, useCallback, type ReactNode } from "react";
 import { BRAND } from "../lib/bakery-data";
 import { BrandLogo } from "./brand-logo";
-import { FloatingSocialDock } from "./ui/social-action-buttons";
 import { CinematicIntroLoader } from "./cinematic-intro-loader";
 
 interface NavItem {
@@ -604,9 +603,6 @@ export function SiteShell({ children }: { children: ReactNode }) {
           </p>
         </div>
       </footer>
-
-      {/* Global Floating Call-To-Action Dock (Always slides with scroll on mobile & desktop) */}
-      <FloatingSocialDock />
     </div>
   );
 }
