@@ -1264,4 +1264,6 @@ h4 {
   }
 
   .art-wipe-overlay {
-    clip-path: none !important
+    clip-path: none !important;
+  }
+}

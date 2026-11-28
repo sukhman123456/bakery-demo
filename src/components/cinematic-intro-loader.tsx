@@ -7,6 +7,9 @@ interface CinematicIntroLoaderProps {
 
 export function CinematicIntroLoader({ onComplete }: CinematicIntroLoaderProps) {
   const [isFinished, setIsFinished] = useState(false);
+  const onCompleteRef = useRef(onComplete);
+  onCompleteRef.current = onComplete;
+  const hasRunRef = useRef(false);
 
   const overlayRef = useRef<HTMLDivElement>(null);
   const logoWrapperRef = useRef<HTMLDivElement>(null);
@@ -19,6 +22,8 @@ export function CinematicIntroLoader({ onComplete }: CinematicIntroLoaderProps) 
 
   useEffect(() => {
     if (typeof window === "undefined") return;
+    if (hasRunRef.current) return;
+    hasRunRef.current = true;
 
     // Lock page scroll during the luxury intro presentation
     const originalOverflow = document.body.style.overflow;
@@ -160,7 +165,7 @@ export function CinematicIntroLoader({ onComplete }: CinematicIntroLoaderProps) 
                 onComplete: () => {
                   document.body.style.overflow = originalOverflow;
                   setIsFinished(true);
-                  onComplete();
+                  onCompleteRef.current?.();
                 },
               });
             },
@@ -192,7 +197,7 @@ export function CinematicIntroLoader({ onComplete }: CinematicIntroLoaderProps) 
             onComplete: () => {
               document.body.style.overflow = originalOverflow;
               setIsFinished(true);
-              onComplete();
+              onCompleteRef.current?.();
             },
           });
         }
@@ -201,9 +206,8 @@ export function CinematicIntroLoader({ onComplete }: CinematicIntroLoaderProps) 
 
     return () => {
       document.body.style.overflow = originalOverflow;
-      ctx.revert();
     };
-  }, [onComplete]);
+  }, []);
 
   const handleSkip = () => {
     document.body.style.overflow = "";
@@ -216,12 +220,12 @@ export function CinematicIntroLoader({ onComplete }: CinematicIntroLoaderProps) 
         duration: 0.35,
         onComplete: () => {
           setIsFinished(true);
-          onComplete();
+          onCompleteRef.current?.();
         },
       });
     } else {
       setIsFinished(true);
-      onComplete();
+      onCompleteRef.current?.();
     }
   };
 
