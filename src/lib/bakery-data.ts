@@ -275,16 +275,6 @@ export const BAKERY_PRODUCTS: BakeryProductItem[] = [
 
   // 2. Pastries
   {
-    id: "prod-pastry-1",
-    name: "Artisan Fruit & Ganache Tarts",
-    category: "Pastries",
-    description: "Crisp golden shortcrust pastry filled with dark Belgian chocolate ganache or seasonal fruit compote.",
-    image: REAL_PHOTOS.tarts,
-    dietary: "Vegetarian",
-    tag: "Fresh Cut",
-    priceNote: "Fresh Daily",
-  },
-  {
     id: "prod-pastry-2",
     name: "Flaky Crème Horn Rolls",
     category: "Pastries",
