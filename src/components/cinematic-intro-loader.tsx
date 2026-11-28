@@ -45,77 +45,81 @@ export function CinematicIntroLoader({ onComplete }: CinematicIntroLoaderProps) 
     // Setup initial GSAP states
     const ctx = gsap.context(() => {
       // Ambient spotlight & sparkles
-      gsap.set(haloGlowRef.current, { scale: 0.5, opacity: 0 });
+      gsap.set(haloGlowRef.current, { scale: 0.6, opacity: 0 });
       gsap.set(sparklesRef.current, { opacity: 0 });
 
       // Core brand emblem & typography
-      gsap.set(crestRef.current, { scale: 0.65, opacity: 0, rotation: -8 });
-      gsap.set(karshniRef.current, { opacity: 0, y: 22, filter: "blur(5px)" });
-      gsap.set(bakersRef.current, { opacity: 0, y: 18, letterSpacing: "0.32em" });
-      gsap.set(taglineRef.current, { opacity: 0, y: 14, scale: 0.94 });
+      gsap.set(crestRef.current, { scale: 0.75, opacity: 0, rotation: -6 });
+      gsap.set(karshniRef.current, { opacity: 0, y: 24, filter: "blur(8px)" });
+      gsap.set(bakersRef.current, { opacity: 0, y: 20, letterSpacing: "0.36em" });
+      gsap.set(taglineRef.current, { opacity: 0, y: 16, scale: 0.94 });
 
       const tl = gsap.timeline();
 
       // -------------------------------------------------------------
-      // PHASE 1: Center Majesty Reveal (0.0s - 1.2s)
-      // Royal emblem scales & glows, cursive Karshni & serif Bakers emerge
+      // PHASE 1: Atmospheric Awakening & Royal Crest Reveal (0.0s - 1.4s)
+      // Warm boutique aura expands, royal crest materializes with poise
       // -------------------------------------------------------------
       tl.to(
         haloGlowRef.current,
         {
-          scale: 1.15,
-          opacity: 0.9,
-          duration: 1.2,
+          scale: 1.25,
+          opacity: 0.95,
+          duration: 1.6,
           ease: "power2.out",
         },
         0.1
       )
+        .to(
+          sparklesRef.current,
+          {
+            opacity: 1,
+            duration: 1.2,
+            ease: "power2.out",
+          },
+          0.3
+        )
         .to(
           crestRef.current,
           {
             scale: 1,
             opacity: 1,
             rotation: 0,
-            duration: 1.0,
-            ease: "back.out(1.4)",
-          },
-          0.2
-        )
-        .to(
-          sparklesRef.current,
-          {
-            opacity: 1,
-            duration: 0.8,
+            duration: 1.3,
             ease: "power2.out",
           },
           0.35
-        )
-        .to(
-          karshniRef.current,
-          {
-            opacity: 1,
-            y: 0,
-            filter: "blur(0px)",
-            duration: 0.9,
-            ease: "power2.out",
-          },
-          0.3
-        )
-        .to(
-          bakersRef.current,
-          {
-            opacity: 1,
-            y: 0,
-            letterSpacing: "0.22em",
-            duration: 0.9,
-            ease: "power2.out",
-          },
-          0.45
         );
 
       // -------------------------------------------------------------
-      // PHASE 2: Tagline Reveal Underneath (1.05s - 1.85s)
-      // "— HAUTE PÂTISSERIE —" fades in and tracks gracefully below
+      // PHASE 2: Calligraphy Signature & Serif Reveal (0.75s - 2.2s)
+      // "Karshni" unrolls with liquid grace; "Bakers" tracks out majestically
+      // -------------------------------------------------------------
+      tl.to(
+        karshniRef.current,
+        {
+          opacity: 1,
+          y: 0,
+          filter: "blur(0px)",
+          duration: 1.2,
+          ease: "power2.out",
+        },
+        0.75
+      ).to(
+        bakersRef.current,
+        {
+          opacity: 1,
+          y: 0,
+          letterSpacing: "0.22em",
+          duration: 1.2,
+          ease: "power2.out",
+        },
+        1.05
+      );
+
+      // -------------------------------------------------------------
+      // PHASE 3: Tagline & Filigree Hairlines Reveal (1.8s - 2.8s)
+      // "— HAUTE PÂTISSERIE —" softly blooms underneath
       // -------------------------------------------------------------
       tl.to(
         taglineRef.current,
@@ -123,20 +127,22 @@ export function CinematicIntroLoader({ onComplete }: CinematicIntroLoaderProps) 
           opacity: 1,
           y: 0,
           scale: 1,
-          duration: 0.85,
+          duration: 1.1,
           ease: "power2.out",
         },
-        1.05
+        1.8
       );
 
       // -------------------------------------------------------------
-      // PHASE 3: Ultra-Smooth Glide to Navbar Target (2.0s - 3.4s)
-      // Flawless Zero-Blink Handoff:
-      // - Calculates live exact bounding coordinates
-      // - Glides with silky 'power3.inOut' easing over 1.35s
-      // - Fades backdrop curtain in sync
-      // - Pre-activates navbar logo underneath at landing moment
-      // - Seamless cross-fade leaving zero gap, zero flicker!
+      // PHASE 4: THE LUXURY SHOWCASE HOLD (2.8s - 4.4s)
+      // 1.6 Full Seconds of Regal Stature & Poise
+      // User admires the artisan branding, golden dust floats gracefully
+      // -------------------------------------------------------------
+      // (Timeline holds here majestically until 4.4s)
+
+      // -------------------------------------------------------------
+      // PHASE 5: The Cinematic Departure & Flight to Navbar (4.4s - 5.8s)
+      // Seamless Zero-Blink Glide & Curtain Dissolve
       // -------------------------------------------------------------
       tl.add(() => {
         const targetEl = document.getElementById("header-brand-logo");
@@ -160,13 +166,13 @@ export function CinematicIntroLoader({ onComplete }: CinematicIntroLoaderProps) 
           const scaleX = targetRect.width / currentRect.width;
           const scaleY = targetRect.height / currentRect.height;
 
-          // 1. Silky flight directly to navbar target
+          // 1. Silky flight directly to navbar target over 1.4s
           gsap.to(logoEl, {
             x: deltaX,
             y: deltaY,
             scaleX: scaleX,
             scaleY: scaleY,
-            duration: 1.35,
+            duration: 1.4,
             ease: "power3.inOut",
             onComplete: () => {
               // Exact 1-frame handoff: navbar logo becomes solid and intro overlay unmounts
@@ -188,15 +194,15 @@ export function CinematicIntroLoader({ onComplete }: CinematicIntroLoaderProps) 
           // 2. Concurrently fade out dark backdrop overlay as logo glides up
           gsap.to(overlayRef.current, {
             opacity: 0,
-            duration: 1.1,
+            duration: 1.15,
             ease: "power2.inOut",
-            delay: 0.25,
+            delay: 0.2,
           });
 
           // 3. Fade out ambient glow & sparkles during flight
           gsap.to([haloGlowRef.current, sparklesRef.current], {
             opacity: 0,
-            duration: 0.5,
+            duration: 0.6,
             ease: "power2.in",
           });
         } else {
@@ -214,7 +220,7 @@ export function CinematicIntroLoader({ onComplete }: CinematicIntroLoaderProps) 
             },
           });
         }
-      }, 2.0);
+      }, 4.4);
     });
 
     return () => {
@@ -248,18 +254,22 @@ export function CinematicIntroLoader({ onComplete }: CinematicIntroLoaderProps) 
         background: "radial-gradient(circle at center, #241108 0%, #120703 65%, #080201 100%)",
       }}
     >
-      {/* Ambient Halo Radial Spotlight */}
+      {/* Ambient Halo Radial Spotlight with warm luxury pulsation */}
       <div
         ref={haloGlowRef}
-        className="pointer-events-none absolute w-[340px] h-[340px] sm:w-[500px] sm:h-[500px] rounded-full bg-gradient-radial from-[#DFC085]/25 via-[#6B4435]/15 to-transparent blur-3xl will-change-transform"
+        className="pointer-events-none absolute w-[400px] h-[400px] sm:w-[600px] sm:h-[600px] rounded-full bg-gradient-radial from-[#DFC085]/25 via-[#6B4435]/15 to-transparent blur-3xl will-change-transform"
       />
 
-      {/* Floating Golden Dust Particles */}
+      {/* Floating Golden Confectionery Dust Particles */}
       <div ref={sparklesRef} className="pointer-events-none absolute inset-0 overflow-hidden">
-        <div className="absolute top-1/4 left-1/5 w-1.5 h-1.5 rounded-full bg-[#DFC085] opacity-60 animate-sparkle-twinkle" />
-        <div className="absolute top-1/3 right-1/4 w-2 h-2 rounded-full bg-[#FFE29A] opacity-75 animate-sparkle-twinkle-delay" />
-        <div className="absolute bottom-1/3 left-1/3 w-1 h-1 rounded-full bg-[#DFC085] opacity-50 animate-sparkle-twinkle" />
-        <div className="absolute bottom-1/4 right-1/5 w-1.5 h-1.5 rounded-full bg-[#FFF8E7] opacity-70 animate-sparkle-twinkle-delay" />
+        <div className="absolute top-[20%] left-[16%] w-1.5 h-1.5 rounded-full bg-[#DFC085] opacity-75 animate-sparkle-twinkle" />
+        <div className="absolute top-[26%] right-[20%] w-2 h-2 rounded-full bg-[#FFE29A] opacity-80 animate-sparkle-twinkle-delay" />
+        <div className="absolute top-[42%] left-[24%] w-1 h-1 rounded-full bg-[#DFC085] opacity-60 animate-sparkle-twinkle" />
+        <div className="absolute top-[38%] right-[16%] w-1.5 h-1.5 rounded-full bg-[#FFF4DB] opacity-75 animate-sparkle-twinkle-delay" />
+        <div className="absolute bottom-[32%] left-[20%] w-2 h-2 rounded-full bg-[#DFC085] opacity-70 animate-sparkle-twinkle" />
+        <div className="absolute bottom-[26%] right-[24%] w-1.5 h-1.5 rounded-full bg-[#FFE29A] opacity-75 animate-sparkle-twinkle-delay" />
+        <div className="absolute bottom-[18%] left-[28%] w-1 h-1 rounded-full bg-[#FFF8E7] opacity-65 animate-sparkle-twinkle" />
+        <div className="absolute bottom-[22%] right-[30%] w-1.5 h-1.5 rounded-full bg-[#DFC085] opacity-80 animate-sparkle-twinkle-delay" />
       </div>
 
       {/* Centered Brand Presentation Container (Glides to Navbar on Phase 3) */}
@@ -414,7 +424,7 @@ export function CinematicIntroLoader({ onComplete }: CinematicIntroLoaderProps) 
       <button
         type="button"
         onClick={handleSkip}
-        className="absolute bottom-6 right-6 z-20 text-[11px] uppercase tracking-[0.2em] font-serif text-[#DFC085]/70 hover:text-[#DFC085] transition-all px-4 py-1.5 rounded-full border border-[#DFC085]/25 hover:border-[#DFC085]/60 bg-black/40 backdrop-blur-md cursor-pointer hover:scale-105 active:scale-95"
+        className="absolute bottom-6 right-6 z-20 text-[11px] uppercase tracking-[0.22em] font-serif text-[#DFC085]/80 hover:text-white transition-all px-4 sm:px-5 py-2 rounded-full border border-[#DFC085]/35 hover:border-[#DFC085]/80 bg-black/50 backdrop-blur-md cursor-pointer hover:scale-105 active:scale-95 shadow-[0_4px_20px_rgba(0,0,0,0.7)]"
       >
         Skip Intro &rarr;
       </button>
