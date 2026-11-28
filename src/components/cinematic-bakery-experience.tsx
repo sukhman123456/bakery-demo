@@ -659,30 +659,111 @@ export function CinematicBakeryExperience() {
               </div>
             ))}
 
-            {/* 6th Card: Custom 3D Cake Callout */}
-            <div className="rounded-3xl p-8 bg-gradient-to-br from-[#493126] to-[#392820] text-[#EFE3D2] border border-[#C5A16A] flex flex-col justify-between shadow-xl">
+            {/* 6th Card: Custom 3D Bespoke Cake Atelier (Upgraded with Rich Imagery, Micro-Animations & Dual Actions) */}
+            <div className="card-luxury-3d rounded-3xl overflow-hidden bg-gradient-to-br from-[#2D180F] via-[#20100A] to-[#140804] border-2 border-[#C5A16A]/80 flex flex-col justify-between group shadow-2xl relative">
+              {/* Antique Corner Filigree Ornaments */}
+              <FrameCorner className="absolute top-2 left-2 z-20 pointer-events-none opacity-80" />
+              <FrameCorner className="absolute top-2 right-2 z-20 rotate-90 pointer-events-none opacity-80" />
+
               <div>
-                <div className="w-12 h-12 rounded-2xl bg-[#C5A16A]/20 border border-[#C5A16A]/40 text-[#C5A16A] flex items-center justify-center mb-4">
-                  <Cake size={24} />
+                {/* 1:1 Aspect Ratio Master Visual Stage with Hover Zoom & Floating Badges */}
+                <div className="relative aspect-square w-full overflow-hidden bg-[#170B06]">
+                  <img
+                    src="/images/cakes/bespoke-cake-atelier.jpg"
+                    alt="Master Artisan Decorating Bespoke Cake from Reference Photo"
+                    loading="lazy"
+                    className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-108 will-change-transform"
+                  />
+
+                  {/* Gradient Vignette Overlays for Maximum Contrast & Atmosphere */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#20100A] via-transparent to-black/30 pointer-events-none" />
+
+                  {/* Top-Left: Sparkling Gold Atelier Pill */}
+                  <div className="absolute top-3.5 left-3.5 px-3 py-1 rounded-full bg-[#180C06]/90 border border-[#C5A16A]/70 text-[#C5A16A] text-[11px] font-semibold tracking-wider uppercase backdrop-blur-md shadow-lg flex items-center gap-1.5">
+                    <Sparkles size={11} className="text-[#DFC085] animate-sparkle-twinkle" />
+                    <span>Bespoke Atelier</span>
+                  </div>
+
+                  {/* Top-Right: Chef Consultation Badge */}
+                  <div className="absolute top-3.5 right-3.5 px-3 py-1 rounded-full bg-[#C5A16A] text-[#24130A] text-[11px] font-bold tracking-wider uppercase shadow-md">
+                    Custom 3D Art
+                  </div>
+
+                  {/* Bottom Image Overlay Pill with Shimmer Sweep */}
+                  <div className="absolute bottom-3 inset-x-3.5">
+                    <div className="relative overflow-hidden inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-[#140804]/90 backdrop-blur-md border border-[#C5A16A]/60 text-[#FFF8EE] text-[11px] font-medium shadow-lg w-full justify-center">
+                      <div className="absolute inset-0 w-1/2 h-full bg-gradient-to-r from-transparent via-white/20 to-transparent -skew-x-12 animate-shimmer-sweep pointer-events-none" />
+                      <span className="text-[#DFC085]">✦</span>
+                      <span>Pinterest & Instagram Reference Friendly</span>
+                      <span className="text-[#DFC085]">✦</span>
+                    </div>
+                  </div>
                 </div>
-                <span className="text-xs uppercase tracking-widest text-[#C5A16A] font-semibold block mb-1">
-                  Bespoke Atelier
-                </span>
-                <h3 className="font-serif text-3xl font-medium text-white">
-                  Have a Unique Design in Mind?
-                </h3>
-                <p className="text-xs text-[#EFE3D2]/80 mt-3 leading-relaxed">
-                  Share a photo from Instagram or Pinterest, or describe your imagination. Manoj Kumar and our master team will craft it with 100% pure butter and perfection.
-                </p>
+
+                {/* Card Content */}
+                <div className="p-6">
+                  <div className="flex items-center justify-between gap-2 mb-1">
+                    <span className="text-[11px] font-semibold uppercase tracking-widest text-[#C5A16A]">
+                      Bespoke Milestone Studio
+                    </span>
+                    <span className="text-[10px] uppercase tracking-wider text-emerald-400 font-medium flex items-center gap-1">
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                      Live Kitchen
+                    </span>
+                  </div>
+
+                  <h3 className="font-serif text-2xl font-medium text-white group-hover:text-[#DFC085] transition-colors leading-tight">
+                    Have a Unique Design in Mind?
+                  </h3>
+
+                  <p className="text-xs text-[#EFE3D2]/85 mt-2 leading-relaxed">
+                    Share any photo from Instagram or Pinterest, or describe your vision. Master craftsman Manoj Kumar sculpts it with 100% pure butter and culinary perfection.
+                  </p>
+
+                  {/* 3 Craft Pillars */}
+                  <div className="mt-4 pt-3.5 border-t border-[#C5A16A]/30 grid grid-cols-3 gap-2 text-center">
+                    <div className="p-2 rounded-xl bg-white/5 border border-white/5">
+                      <span className="text-[10px] font-semibold text-[#DFC085] block">Any Theme</span>
+                      <span className="text-[9px] text-[#EFE3D2]/70 block mt-0.5">3D / Cartoon / Floral</span>
+                    </div>
+                    <div className="p-2 rounded-xl bg-white/5 border border-white/5">
+                      <span className="text-[10px] font-semibold text-[#DFC085] block">Pure Butter</span>
+                      <span className="text-[9px] text-[#EFE3D2]/70 block mt-0.5">100% Pure Dairy</span>
+                    </div>
+                    <div className="p-2 rounded-xl bg-white/5 border border-white/5">
+                      <span className="text-[10px] font-semibold text-[#DFC085] block">Direct WhatsApp</span>
+                      <span className="text-[9px] text-[#EFE3D2]/70 block mt-0.5">Instant Quote</span>
+                    </div>
+                  </div>
+                </div>
               </div>
 
-              <div className="pt-6">
+              {/* Dual Action Buttons */}
+              <div className="p-6 pt-0 space-y-2.5">
                 <a
                   href="#custom-cake"
-                  className="w-full py-3.5 px-5 rounded-full bg-[#C5A16A] hover:bg-white text-[#392820] text-xs font-bold tracking-wider uppercase flex items-center justify-center gap-2 shadow-lg transition-all"
+                  className="group/btn relative overflow-hidden w-full py-3 px-4 rounded-full bg-gradient-to-r from-[#C5A16A] via-[#E8D8C4] to-[#C5A16A] hover:from-[#DFC085] hover:to-[#B97942] text-[#24130A] text-xs font-bold tracking-wider uppercase flex items-center justify-center gap-2 shadow-lg hover:shadow-[0_4px_25px_rgba(197,161,106,0.6)] hover:scale-[1.02] active:scale-95 transition-all cursor-pointer"
                 >
-                  <Upload size={14} />
+                  <Upload size={14} className="transition-transform group-hover/btn:-translate-y-0.5" />
                   <span>Upload Design Reference</span>
+                  <ArrowRight size={13} className="transition-transform group-hover/btn:translate-x-1" />
+                  <div className="absolute inset-0 w-1/2 h-full bg-gradient-to-r from-transparent via-white/40 to-transparent -skew-x-12 animate-shimmer-sweep pointer-events-none" />
+                </a>
+
+                <a
+                  href={`https://wa.me/${BRAND.whatsapp}?text=${encodeURIComponent(
+                    "Hello Manoj Kumar ji! I have a unique cake design reference photo from Pinterest/Instagram that I would like to create with Karshni Bakers. Please review!"
+                  )}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full py-2.5 px-4 rounded-full bg-white/10 hover:bg-[#25D366] text-white hover:text-white border border-[#C5A16A]/50 hover:border-[#25D366] text-xs font-semibold tracking-wider uppercase flex items-center justify-center gap-2 transition-all cursor-pointer shadow-sm hover:scale-[1.02] active:scale-95"
+                >
+                  <span className="relative flex h-2 w-2">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#25D366] opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-[#25D366]"></span>
+                  </span>
+                  <MessageCircle size={14} className="text-[#DFC085] group-hover:text-white" />
+                  <span>Consult Manoj Kumar on WhatsApp</span>
                 </a>
               </div>
             </div>
