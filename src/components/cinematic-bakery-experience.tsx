@@ -1109,63 +1109,125 @@ export function CinematicBakeryExperience() {
       </section>
 
       {/* ====================================================================
-          SECTION 7 – WHY CHOOSE US
-          Warm Cream (#F7F0E5) with 5 Trust & Quality Pillars
+          SECTION 7 – WHY CHOOSE US (Compact, Animated & Creative)
+          Warm Cream (#F7F0E5) with Interactive Micro-Cards & Horizontal Snap
           ==================================================================== */}
-      <section id="why-choose-us" className="relative w-full py-20 lg:py-28 bg-[#F7F0E5] border-b border-[#C5A16A]/40">
-        <div className="max-w-[1360px] mx-auto px-5 sm:px-10">
-          <div className="text-center max-w-2xl mx-auto mb-16">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#E8D8C4] border border-[#C5A16A] text-[#493126] text-xs font-semibold tracking-[0.2em] uppercase mb-3">
-              <ShieldCheck size={13} className="text-[#493126]" />
-              <span>Section 07 • The Karshni Standard</span>
+      <section id="why-choose-us" className="relative w-full py-10 sm:py-14 bg-[#F7F0E5] border-b border-[#C5A16A]/40 overflow-hidden">
+        {/* Subtle Ambient Gold Gradient Aura in Background */}
+        <div className="absolute -top-20 left-1/2 -translate-x-1/2 w-[550px] h-[220px] bg-gradient-to-b from-[#C5A16A]/15 to-transparent rounded-full blur-3xl pointer-events-none" />
+
+        <div className="max-w-[1360px] mx-auto px-4 sm:px-8 relative z-10">
+          {/* Header — Compact & Punchy */}
+          <div className="text-center max-w-xl mx-auto mb-7 sm:mb-9">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#E8D8C4] border border-[#C5A16A] text-[#493126] text-[10px] sm:text-xs font-bold tracking-[0.2em] uppercase mb-2 shadow-sm">
+              <ShieldCheck size={13} className="text-[#C5A16A] animate-pulse" />
+              <span>The Karshni Standard</span>
             </div>
-            <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-medium text-[#493126] tracking-tight">
+            <h2 className="font-serif text-2xl sm:text-3xl lg:text-4xl font-medium text-[#493126] tracking-tight">
               Why Dinanagar Chooses Karshni
             </h2>
-            <p className="font-sans text-sm sm:text-base text-[#392820]/80 mt-2">
-              Every creation that leaves our kitchen carries our sacred promise of pure ingredients and artisan honesty.
+            <p className="font-sans text-xs sm:text-sm text-[#392820]/75 mt-1 leading-relaxed">
+              5 sacred kitchen promises crafted into every celebration cake & artisan bake.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
-            {[
-              {
-                icon: Award,
-                title: "100% Pure Butter",
-                desc: "Slow-churned dairy butter and natural dairy cream. Zero dalda, zero margarine, zero compromise.",
-              },
-              {
-                icon: Flame,
-                title: "Belgian Chocolate",
-                desc: "Real imported cocoa solids and Valrhona dark chocolate for an authentic, rich melt-in-mouth finish.",
-              },
-              {
-                icon: Clock,
-                title: "Baked Fresh Daily",
-                desc: "Every cake is baked freshly on the day of your event, never frozen or pre-stored.",
-              },
-              {
-                icon: Sparkles,
-                title: "3D Sugar Art",
-                desc: "Sculpted ribbon bows, custom figurines, and delicate date plaques crafted by master artists.",
-              },
-              {
-                icon: Truck,
-                title: "Punctual Delivery",
-                desc: "Handled with utmost care in reinforced luxury packaging across Dinanagar & neighboring regions.",
-              },
-            ].map((item, idx) => (
-              <div
-                key={idx}
-                className="card-luxury-3d rounded-2xl p-6 bg-[#E8D8C4] border border-[#C5A16A] text-center flex flex-col items-center"
-              >
-                <div className="w-12 h-12 rounded-full bg-[#493126] text-[#C5A16A] flex items-center justify-center mb-4 shadow-md">
-                  <item.icon size={22} />
+          {/* Cards Track: On Mobile horizontal swipeable snap track (saves ~1000px height); On Desktop sleek 5-pillar row */}
+          <div className="relative">
+            <div className="flex lg:grid lg:grid-cols-5 gap-3.5 sm:gap-4 overflow-x-auto lg:overflow-x-visible pb-3 pt-1 px-1 snap-x snap-mandatory scroll-smooth no-scrollbar">
+              {[
+                {
+                  num: "01",
+                  tag: "100% PURE",
+                  icon: Award,
+                  title: "Pure Dairy Butter",
+                  desc: "Slow-churned dairy butter & natural cream. Zero dalda, zero margarine, zero compromise.",
+                  highlight: "Zero Hydrogenated Fats",
+                },
+                {
+                  num: "02",
+                  tag: "BELGIAN",
+                  icon: Flame,
+                  title: "Belgian Chocolate",
+                  desc: "Real imported cocoa solids and 70% Valrhona dark chocolate for an authentic melt-in-mouth finish.",
+                  highlight: "70% Valrhona Cacao",
+                },
+                {
+                  num: "03",
+                  tag: "SAME DAY",
+                  icon: Clock,
+                  title: "Baked Fresh Daily",
+                  desc: "Every milestone cake is baked freshly on your event day. Oven-warm craft, never pre-frozen.",
+                  highlight: "Bespoke Oven Fresh",
+                },
+                {
+                  num: "04",
+                  tag: "3D ART",
+                  icon: Sparkles,
+                  title: "Handmade Sugar Art",
+                  desc: "Sculpted ribbon bows, character figures, and delicate date plaques crafted by master artists.",
+                  highlight: "Fondant & Sugarcraft",
+                },
+                {
+                  num: "05",
+                  tag: "SAFE TRANSIT",
+                  icon: Truck,
+                  title: "Punctual Delivery",
+                  desc: "Carefully transported in reinforced luxury boxes across Dinanagar & neighboring towns.",
+                  highlight: "White-Glove Care",
+                },
+              ].map((pillar, idx) => (
+                <div
+                  key={idx}
+                  className="w-[230px] sm:w-[250px] lg:w-auto shrink-0 snap-center card-luxury-3d rounded-2xl p-4 sm:p-5 bg-gradient-to-b from-[#EFE3D2] to-[#E8D8C4] border border-[#C5A16A]/70 hover:border-[#C5A16A] text-left flex flex-col justify-between group transition-all duration-300 hover:-translate-y-1 hover:shadow-lg relative overflow-hidden"
+                >
+                  {/* Subtle Shimmer Bar at Top on Hover */}
+                  <div className="absolute top-0 inset-x-0 h-0.5 bg-gradient-to-r from-transparent via-[#C5A16A] to-transparent opacity-40 group-hover:opacity-100 transition-opacity" />
+
+                  {/* Watermark Number in Top Right */}
+                  <span className="absolute top-2 right-3 font-serif text-2xl font-bold text-[#C5A16A]/20 group-hover:text-[#C5A16A]/40 transition-colors pointer-events-none select-none">
+                    {pillar.num}
+                  </span>
+
+                  <div>
+                    {/* Top Row: Icon with glowing halo & mini badge */}
+                    <div className="flex items-center justify-between gap-2 mb-3">
+                      <div className="w-10 h-10 rounded-xl bg-[#493126] text-[#C5A16A] flex items-center justify-center shadow-md group-hover:scale-110 group-hover:bg-[#35231D] transition-transform">
+                        <pillar.icon size={19} className="transition-transform group-hover:rotate-6" />
+                      </div>
+                      <span className="text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-md bg-[#F7F0E5] border border-[#C5A16A]/50 text-[#493126]">
+                        {pillar.tag}
+                      </span>
+                    </div>
+
+                    <h3 className="font-serif text-base sm:text-lg font-medium text-[#392820] leading-snug group-hover:text-[#493126] transition-colors mb-1.5">
+                      {pillar.title}
+                    </h3>
+                    <p className="text-[11px] sm:text-xs text-[#392820]/75 leading-relaxed line-clamp-3">
+                      {pillar.desc}
+                    </p>
+                  </div>
+
+                  {/* Bottom Micro Highlight Pill */}
+                  <div className="mt-3.5 pt-2.5 border-t border-[#C5A16A]/30 flex items-center gap-1.5 text-[10px] font-semibold text-[#493126]">
+                    <Sparkles size={10} className="text-[#C5A16A]" />
+                    <span>{pillar.highlight}</span>
+                  </div>
                 </div>
-                <h3 className="font-serif text-lg font-medium text-[#392820] mb-2">{item.title}</h3>
-                <p className="text-xs text-[#392820]/75 leading-relaxed">{item.desc}</p>
-              </div>
-            ))}
+              ))}
+            </div>
+
+            {/* Mobile Swipe Hint with Dots */}
+            <div className="flex lg:hidden items-center justify-center gap-1.5 mt-2.5 text-center">
+              <span className="text-[10px] text-[#493126]/70 uppercase tracking-widest font-medium mr-1.5">
+                ✦ Swipe to explore standards
+              </span>
+              {[0, 1, 2, 3, 4].map((i) => (
+                <span
+                  key={i}
+                  className="w-1.5 h-1.5 rounded-full bg-[#C5A16A]/60"
+                />
+              ))}
+            </div>
           </div>
         </div>
       </section>
