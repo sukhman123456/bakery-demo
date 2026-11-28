@@ -26,6 +26,7 @@ export const Route = createFileRoute("/bakery")({
 
 const BAKERY_CATEGORIES = [
   "All",
+  "Gift Hampers",
   "Pastries",
   "Brownies",
   "Donuts",
@@ -33,7 +34,6 @@ const BAKERY_CATEGORIES = [
   "Cookies",
   "Breads",
   "Desserts",
-  "Beverages",
 ] as const;
 
 function BakeryPage() {

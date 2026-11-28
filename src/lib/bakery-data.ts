@@ -207,7 +207,6 @@ export const PRODUCT_CATEGORIES = [
   "Cupcakes",
   "Breads",
   "Desserts",
-  "Beverages",
 ] as const;
 
 export type ProductCategory = (typeof PRODUCT_CATEGORIES)[number];
@@ -450,38 +449,6 @@ export const BAKERY_PRODUCTS: BakeryProductItem[] = [
     dietary: "Vegetarian",
     tag: "Party Favorite",
     priceNote: "₹60 / pc",
-  },
-
-  // 9. Beverages
-  {
-    id: "prod-bev-1",
-    name: "Artisan Cold Coffee with Belgian Ice Cream",
-    category: "Beverages",
-    description: "Signature freshly pulled espresso blended with creamy milk, dark chocolate fudge, and vanilla ice cream.",
-    image: REAL_PHOTOS.storeInterior,
-    dietary: "Vegetarian",
-    tag: "Signature Drink",
-    priceNote: "₹140",
-  },
-  {
-    id: "prod-bev-2",
-    name: "Royal Dark Chocolate Hot Cocoa",
-    category: "Beverages",
-    description: "Rich steamed dairy milk infused with pure 70% Belgian chocolate, served with whipped cream.",
-    image: REAL_PHOTOS.storeInterior,
-    dietary: "Vegetarian",
-    tag: "Winter Special",
-    priceNote: "₹130",
-  },
-  {
-    id: "prod-bev-3",
-    name: "Iced Caramel Macchiato",
-    category: "Beverages",
-    description: "Chilled milk kissed with Madagascar vanilla syrup, dark espresso float, and buttery golden caramel.",
-    image: REAL_PHOTOS.storeInterior,
-    dietary: "Vegetarian",
-    tag: "Cafe Favorite",
-    priceNote: "₹150",
   },
 ];
 
