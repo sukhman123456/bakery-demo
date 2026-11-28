@@ -161,7 +161,7 @@ const SIGNATURE_CAKE_CATEGORIES = [
     title: "Belgian Chocolate Noir",
     category: "Chocolate Cakes",
     description: "Layers of moist Dutch cocoa sponge bathed in rich Belgian ganache, topped with fresh berries & macarons.",
-    image: "/images/cakes/cake-belgian-drip-clean.jpg",
+    image: "/images/cakes/cake-belgian-chocolate-noir.jpg",
     price: "From ₹1,199",
     tag: "Chef Special",
     flavour: "70% Valrhona Dark Cacao",

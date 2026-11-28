@@ -227,7 +227,7 @@ export const BAKERY_PRODUCTS: BakeryProductItem[] = [
     name: "Belgian Chocolate Drip Cake",
     category: "Cakes",
     description: "Layers of moist chocolate sponge drizzled with rich ganache, topped with macarons and fresh berries.",
-    image: "/images/cakes/cake-belgian-drip-clean.jpg",
+    image: "/images/cakes/cake-belgian-chocolate-noir.jpg",
     dietary: "Chef Special",
     tag: "Signature",
     priceNote: "Inquire / Custom Order",
