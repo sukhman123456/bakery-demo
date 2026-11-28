@@ -311,7 +311,7 @@ export const BAKERY_PRODUCTS: BakeryProductItem[] = [
     name: "Belgian Chocolate Fudge Cupcakes",
     category: "Cupcakes",
     description: "Moist dark cocoa sponge crowned with decadent chocolate frosting and chocolate flakes.",
-    image: "/images/bakery/cupcakes-clean.jpg",
+    image: "/images/bakery/cupcakes-chocolate-fudge.jpg",
     dietary: "Vegetarian",
     tag: "Indulgent",
     priceNote: "Fresh Daily",
