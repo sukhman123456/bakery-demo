@@ -36,6 +36,9 @@ const navItems: NavItem[] = [
   { id: "contact", label: "Visit & Contact", href: "/#contact", routePath: "/contact" },
 ];
 
+// Global module-level singleton to guarantee intro only plays once per page view
+let globalIntroFinished = false;
+
 export function SiteShell({ children }: { children: ReactNode }) {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -51,9 +54,20 @@ export function SiteShell({ children }: { children: ReactNode }) {
 
   const isHomePage = pathname === "/" || pathname === "";
   const showSolidNavbar = !isHomePage || scrolled;
-  const [introComplete, setIntroComplete] = useState(!isHomePage);
+  const [introComplete, setIntroComplete] = useState(() => {
+    if (!isHomePage) return true;
+    if (globalIntroFinished) return true;
+    if (typeof window !== "undefined" && (window as any).__KARSHNI_INTRO_DONE__) {
+      return true;
+    }
+    return false;
+  });
 
   const handleIntroComplete = useCallback(() => {
+    globalIntroFinished = true;
+    if (typeof window !== "undefined") {
+      (window as any).__KARSHNI_INTRO_DONE__ = true;
+    }
     setIntroComplete(true);
   }, []);
 

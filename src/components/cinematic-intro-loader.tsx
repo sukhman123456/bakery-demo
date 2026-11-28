@@ -1,15 +1,24 @@
 import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 
+// Module-scoped guards to ensure the intro runs exactly once and never restarts or plays twice
+let globalIntroHasStarted = false;
+let globalIntroHasFinished = false;
+
 interface CinematicIntroLoaderProps {
   onComplete: () => void;
 }
 
 export function CinematicIntroLoader({ onComplete }: CinematicIntroLoaderProps) {
-  const [isFinished, setIsFinished] = useState(false);
+  const [isFinished, setIsFinished] = useState(() => {
+    if (globalIntroHasFinished) return true;
+    if (typeof window !== "undefined" && (window as any).__KARSHNI_INTRO_DONE__) {
+      return true;
+    }
+    return false;
+  });
   const onCompleteRef = useRef(onComplete);
   onCompleteRef.current = onComplete;
-  const hasRunRef = useRef(false);
 
   const overlayRef = useRef<HTMLDivElement>(null);
   const logoWrapperRef = useRef<HTMLDivElement>(null);
@@ -22,8 +31,12 @@ export function CinematicIntroLoader({ onComplete }: CinematicIntroLoaderProps) 
 
   useEffect(() => {
     if (typeof window === "undefined") return;
-    if (hasRunRef.current) return;
-    hasRunRef.current = true;
+    if (globalIntroHasStarted || globalIntroHasFinished || (window as any).__KARSHNI_INTRO_DONE__) {
+      setIsFinished(true);
+      onCompleteRef.current?.();
+      return;
+    }
+    globalIntroHasStarted = true;
 
     // Lock page scroll during the luxury intro presentation
     const originalOverflow = document.body.style.overflow;
@@ -158,6 +171,10 @@ export function CinematicIntroLoader({ onComplete }: CinematicIntroLoaderProps) 
             onComplete: () => {
               // Exact 1-frame handoff: navbar logo becomes solid and intro overlay unmounts
               // in the exact same paint frame with zero early pop-in and zero fade delay!
+              globalIntroHasFinished = true;
+              if (typeof window !== "undefined") {
+                (window as any).__KARSHNI_INTRO_DONE__ = true;
+              }
               targetEl.style.opacity = "1";
               if (overlayRef.current) {
                 overlayRef.current.style.display = "none";
@@ -187,6 +204,10 @@ export function CinematicIntroLoader({ onComplete }: CinematicIntroLoaderProps) 
             opacity: 0,
             duration: 0.6,
             onComplete: () => {
+              globalIntroHasFinished = true;
+              if (typeof window !== "undefined") {
+                (window as any).__KARSHNI_INTRO_DONE__ = true;
+              }
               document.body.style.overflow = originalOverflow;
               setIsFinished(true);
               onCompleteRef.current?.();
@@ -202,26 +223,22 @@ export function CinematicIntroLoader({ onComplete }: CinematicIntroLoaderProps) 
   }, []);
 
   const handleSkip = () => {
+    globalIntroHasFinished = true;
+    if (typeof window !== "undefined") {
+      (window as any).__KARSHNI_INTRO_DONE__ = true;
+    }
     document.body.style.overflow = "";
     const targetEl = document.getElementById("header-brand-logo");
     if (targetEl) targetEl.style.opacity = "1";
 
     if (overlayRef.current) {
-      gsap.to(overlayRef.current, {
-        opacity: 0,
-        duration: 0.35,
-        onComplete: () => {
-          setIsFinished(true);
-          onCompleteRef.current?.();
-        },
-      });
-    } else {
-      setIsFinished(true);
-      onCompleteRef.current?.();
+      overlayRef.current.style.display = "none";
     }
+    setIsFinished(true);
+    onCompleteRef.current?.();
   };
 
-  if (isFinished) return null;
+  if (isFinished || globalIntroHasFinished) return null;
 
   return (
     <div
