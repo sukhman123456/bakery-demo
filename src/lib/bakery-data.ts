@@ -458,75 +458,75 @@ export const BAKERY_PRODUCTS: BakeryProductItem[] = [
 export const GALLERY_PHOTOS: GalleryPhoto[] = [
   {
     id: "gal-1",
-    title: "Freshly Baked With Love — Karshni Baker's",
+    title: "Belgian Chocolate Ganache Drip Cake",
     category: "Cakes",
-    src: REAL_PHOTOS.hero,
-    aspect: "wide",
+    src: "/images/gallery/gal-1-chocolate-cake.jpg",
+    aspect: "landscape",
     description:
-      "Our signature master showcase: artisanal chocolate drip cake, golden croissants, and handcrafted cupcakes.",
+      "Smooth Belgian chocolate buttercream finished with glossy dark ganache drips and hand-piped rosettes.",
   },
   {
     id: "gal-2",
-    title: "Luxury Tulip Ribbon Bow Cake",
+    title: "Ivory Velvet Rose Wedding Cake",
     category: "Cakes",
-    src: REAL_PHOTOS.cakeTulipBow,
+    src: "/images/gallery/gal-2-wedding-floral-cake.jpg",
     aspect: "portrait",
     description:
-      "Handcrafted sugarcraft ribbon bow with miniature tulip buds on satin smooth fondant.",
+      "Four-tier ivory satin celebration cake adorned with fresh pastel garden roses on a sculpted pedestal.",
   },
   {
     id: "gal-3",
-    title: "Belgian Fudge Chocolate Brownies",
+    title: "Golden French Butter Croissants",
     category: "Pastries & Bakes",
-    src: REAL_PHOTOS.brownies,
+    src: "/images/gallery/gal-3-butter-croissants.jpg",
     aspect: "landscape",
     description:
-      "Dense Belgian dark chocolate squares baked fresh daily with a crackly glaze top.",
+      "Flaky laminated European butter croissants dusted with fine icing sugar over dark stone.",
   },
   {
     id: "gal-4",
-    title: "Romantic Heart Milestone Cake",
+    title: "Fresh Raspberry & Cream Gateau",
     category: "Cakes",
-    src: REAL_PHOTOS.cakeRomanticHeart,
+    src: "/images/gallery/gal-4-berry-velvet-cake.jpg",
     aspect: "portrait",
     description:
-      "Heart-shaped anniversary creation with golden calligraphy, fresh red roses, and date plaque.",
+      "Tender vanilla sponge layered with pistachio-berry compote, chantilly cream, and fresh raspberries.",
   },
   {
     id: "gal-5",
-    title: "Artisan Patisserie Tarts & Pastries",
+    title: "Molten Belgian Fudge Brownies",
     category: "Pastries & Bakes",
-    src: REAL_PHOTOS.tarts,
-    aspect: "landscape",
+    src: "/images/gallery/gal-5-fudge-brownies.jpg",
+    aspect: "portrait",
     description:
-      "Flaky tart shells filled with dark chocolate ganache and seasonal fruit compote.",
+      "Stacked rich dark cocoa fudge brownies finished with a warm ribbon of melted Belgian chocolate.",
   },
   {
     id: "gal-6",
-    title: "Fresh Baked Artisan Bread Loaves",
+    title: "Rustic Seeded Artisan Bread Loaves",
     category: "Pastries & Bakes",
-    src: REAL_PHOTOS.freshBread,
+    src: "/images/gallery/gal-6-artisan-breads.jpg",
     aspect: "landscape",
     description:
-      "Golden crust hand-kneaded artisan breads, buns, and garlic loaves fresh from the oven.",
+      "Slow-fermented country sourdough and toasted seed-crusted loaves baked fresh each morning.",
   },
   {
     id: "gal-7",
-    title: "McLaren Supercar Themed Cake",
-    category: "Cakes",
-    src: REAL_PHOTOS.cakeSupercar,
-    aspect: "portrait",
+    title: "Two-Tier Chocolate Finishing Studio",
+    category: "Ambience",
+    src: "/images/gallery/gal-7-bakery-atelier.jpg",
+    aspect: "landscape",
     description:
-      "Custom racetrack cake designed for celebrations with racing flags and supercar topper.",
+      "Hand-piped cream swirls, fresh berries, and delicate gold leaf inside our patisserie kitchen.",
   },
   {
     id: "gal-8",
-    title: "Karshni Bakery Display & Ambiance",
+    title: "Warm Boutique Café & Artisan Rack",
     category: "Ambience",
-    src: REAL_PHOTOS.bakeryWide,
+    src: "/images/gallery/gal-8-patisserie-lounge.jpg",
     aspect: "wide",
     description:
-      "Illuminated glass showcase filled with fresh cakes and delicacies at Shree Ram Market, Dinanagar.",
+      "Cozy golden-lit bakery café counter with espresso latte art, dark cocoa cake, and fresh loaves.",
   },
 ];
 

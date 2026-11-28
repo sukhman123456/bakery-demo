@@ -34,6 +34,7 @@ import {
   Pause,
   Play,
   BadgeCheck,
+  Eye,
 } from "lucide-react";
 import {
   BRAND,
@@ -1653,7 +1654,7 @@ export function CinematicBakeryExperience() {
               A Glimpse into Our Atelier
             </h2>
             <p className="font-sans text-sm sm:text-base text-[#392820]/80 mt-2">
-              Authentic photographs of our store in Shree Ram Market, display counters, and celebration cakes.
+              Curated showcase of bespoke celebration cakes, golden croissants, fudge brownies, and warm patisserie ambience.
             </p>
           </div>
 
@@ -1675,24 +1676,42 @@ export function CinematicBakeryExperience() {
             ))}
           </div>
 
-          {/* Responsive Gallery Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {/* Responsive Editorial Gallery Grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6">
             {filteredGallery.map((photo) => (
               <div
                 key={photo.id}
                 onClick={() => setSelectedLightboxPhoto(photo)}
-                className="group relative rounded-2xl overflow-hidden bg-[#E8D8C4] border border-[#C5A16A] cursor-pointer shadow-md hover:shadow-xl transition-all aspect-[4/3]"
+                className="card-luxury-3d group rounded-2xl overflow-hidden bg-[#E8D8C4] border border-[#C5A16A] cursor-pointer shadow-md hover:shadow-xl transition-all duration-500 flex flex-col justify-between"
               >
-                <img
-                  src={photo.src}
-                  alt={photo.title}
-                  loading="lazy"
-                  className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-108"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#392820]/85 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-5 text-white">
-                  <span className="text-[10px] uppercase tracking-wider text-[#C5A16A] font-semibold">{photo.category}</span>
-                  <h4 className="font-serif text-lg font-medium leading-tight mt-1">{photo.title}</h4>
-                  <p className="text-xs text-white/80 line-clamp-1 mt-1">{photo.description}</p>
+                <div className="relative aspect-[4/3] w-full overflow-hidden bg-[#EFE3D2]">
+                  <img
+                    src={photo.src}
+                    alt={photo.title}
+                    loading="lazy"
+                    className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-108"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#180C06]/55 via-transparent to-black/15 opacity-80 group-hover:opacity-100 transition-opacity pointer-events-none" />
+
+                  <span className="absolute top-2.5 left-2.5 px-2.5 py-0.5 rounded-full bg-[#180C06]/85 border border-[#C5A16A]/60 text-[#DFC085] text-[10px] font-semibold uppercase tracking-wider">
+                    {photo.category}
+                  </span>
+
+                  <span className="absolute top-2.5 right-2.5 px-2.5 py-0.5 rounded-full bg-[#FFF8EE]/90 text-[#493126] text-[10px] font-bold flex items-center gap-1 shadow-sm opacity-90 group-hover:opacity-100 transition-opacity">
+                    <Eye size={11} />
+                    <span>View</span>
+                  </span>
+                </div>
+
+                <div className="p-4 flex-1 flex flex-col justify-between bg-gradient-to-b from-[#EFE3D2]/60 to-[#E8D8C4]">
+                  <div>
+                    <h4 className="font-serif text-base sm:text-lg font-medium text-[#392820] group-hover:text-[#493126] leading-snug transition-colors">
+                      {photo.title}
+                    </h4>
+                    <p className="text-[11px] sm:text-xs text-[#392820]/75 line-clamp-2 mt-1 leading-relaxed">
+                      {photo.description}
+                    </p>
+                  </div>
                 </div>
               </div>
             ))}

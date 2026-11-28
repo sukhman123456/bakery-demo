@@ -64,7 +64,7 @@ function GalleryPage() {
             Karshni Baker's <span className="italic text-[#DFC085]">Gallery</span>
           </h1>
           <p className="text-base text-[#F5EDE2]/90 max-w-xl mx-auto font-light leading-relaxed mb-6">
-            Authentic photographs of our custom cakes, chocolate creations, golden croissants, fresh pastries, and warm bakery atmosphere in Dinanagar, Punjab.
+            Curated showcase of bespoke celebration cakes, flaky butter croissants, fudge brownies, and cozy patisserie ambience.
           </p>
 
           <div className="flex flex-wrap items-center justify-center gap-3">
