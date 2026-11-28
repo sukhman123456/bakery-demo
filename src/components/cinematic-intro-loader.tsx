@@ -143,40 +143,37 @@ export function CinematicIntroLoader({ onComplete }: CinematicIntroLoaderProps) 
           const deltaX = targetCenterX - currentCenterX;
           const deltaY = targetCenterY - currentCenterY;
 
-          // Proportional scale to fit navbar logo height
-          const scaleRatio = targetRect.height / currentRect.height;
+          // 1:1 Exact scale matching both width and height down to the exact pixel
+          const scaleX = targetRect.width / currentRect.width;
+          const scaleY = targetRect.height / currentRect.height;
 
-          // 1. Silky flight to target
+          // 1. Silky flight directly to navbar target
           gsap.to(logoEl, {
             x: deltaX,
             y: deltaY,
-            scale: scaleRatio,
+            scaleX: scaleX,
+            scaleY: scaleY,
             duration: 1.35,
             ease: "power3.inOut",
             onComplete: () => {
-              // Immediately ensure target element is solid 100%
+              // Exact 1-frame handoff: navbar logo becomes solid and intro overlay unmounts
+              // in the exact same paint frame with zero early pop-in and zero fade delay!
               targetEl.style.opacity = "1";
-
-              // Cross-fade out the intro logo over 100ms — 100% zero blink!
-              gsap.to(logoEl, {
-                opacity: 0,
-                duration: 0.1,
-                ease: "none",
-                onComplete: () => {
-                  document.body.style.overflow = originalOverflow;
-                  setIsFinished(true);
-                  onCompleteRef.current?.();
-                },
-              });
+              if (overlayRef.current) {
+                overlayRef.current.style.display = "none";
+              }
+              document.body.style.overflow = originalOverflow;
+              setIsFinished(true);
+              onCompleteRef.current?.();
             },
           });
 
-          // 2. Concurrently fade out dark backdrop overlay
+          // 2. Concurrently fade out dark backdrop overlay as logo glides up
           gsap.to(overlayRef.current, {
             opacity: 0,
-            duration: 1.05,
+            duration: 1.1,
             ease: "power2.inOut",
-            delay: 0.2,
+            delay: 0.25,
           });
 
           // 3. Fade out ambient glow & sparkles during flight
@@ -184,11 +181,6 @@ export function CinematicIntroLoader({ onComplete }: CinematicIntroLoaderProps) 
             opacity: 0,
             duration: 0.5,
             ease: "power2.in",
-          });
-
-          // 4. Reveal navbar logo just before touchdown so there is NEVER a blank gap
-          gsap.delayedCall(1.2, () => {
-            targetEl.style.opacity = "1";
           });
         } else {
           gsap.to(overlayRef.current, {
