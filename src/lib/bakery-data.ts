@@ -286,12 +286,12 @@ export const BAKERY_PRODUCTS: BakeryProductItem[] = [
   },
   {
     id: "prod-pastry-3",
-    name: "Golden Butter Croissants",
+    name: "Belgian Chocolate Truffle Pastry",
     category: "Pastries",
-    description: "Multi-layered European butter croissants baked each morning to a light, flaky golden crust.",
-    image: "/images/bakery/croissant-clean.jpg",
+    description: "Layers of moist dark cocoa sponge bathed in rich Belgian ganache, topped with chocolate curls & fresh raspberry.",
+    image: "/images/bakery/pastry-chocolate-truffle.jpg",
     dietary: "Vegetarian",
-    tag: "Oven Hot",
+    tag: "Bestseller",
     priceNote: "Fresh Daily",
   },
 
