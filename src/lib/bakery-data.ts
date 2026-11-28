@@ -333,7 +333,7 @@ export const BAKERY_PRODUCTS: BakeryProductItem[] = [
     name: "Chunky Chocolate Chip Cookies",
     category: "Cookies",
     description: "Crisp on the outside and soft inside, packed with Belgian chocolate chips and brown sugar.",
-    image: REAL_PHOTOS.homemadeBiscuits,
+    image: "/images/bakery/chunky-chocolate-chip-cookies.jpg",
     dietary: "Vegetarian",
     tag: "Bestseller",
     priceNote: "Fresh Daily",
