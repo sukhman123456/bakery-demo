@@ -407,16 +407,6 @@ export const BAKERY_PRODUCTS: BakeryProductItem[] = [
     tag: "Bestseller",
     priceNote: "₹120 / pc",
   },
-  {
-    id: "prod-brownie-2",
-    name: "Roasted Walnut Fudge Brownie",
-    category: "Brownies",
-    description: "Kashmiri golden walnuts folded into rich 70% dark Belgian cocoa batter with melted fudge chunks.",
-    image: "/images/bakery/roasted-walnut-fudge-brownie.jpg",
-    dietary: "Vegetarian",
-    tag: "Chef Special",
-    priceNote: "₹140 / pc",
-  },
 
   // 7. Donuts
   {
