@@ -823,6 +823,34 @@ export function CinematicBakeryExperience() {
             })}
           </div>
 
+          {/* Active Category Special Banner for Gift Hampers */}
+          {activeMenuCategory === "Gift Hampers" && (
+            <div className="mb-8 p-5 sm:p-6 rounded-2xl bg-gradient-to-r from-[#35231D] via-[#2A1710] to-[#35231D] border-2 border-[#C5A16A] text-[#FFF8EE] shadow-xl flex flex-col sm:flex-row items-center justify-between gap-4">
+              <div className="text-center sm:text-left">
+                <span className="text-[11px] font-bold uppercase tracking-widest text-[#DFC085] block mb-1">
+                  ✦ Bespoke Celebration Gifting & Bulk Favours ✦
+                </span>
+                <h4 className="font-serif text-xl sm:text-2xl text-white font-medium">
+                  Planning Wedding Favours or Festive Gift Packets?
+                </h4>
+                <p className="text-xs text-[#EFE3D2]/85 mt-1 max-w-xl">
+                  We customize keepsake boxes, satin ribbons, and artisan treats (macarons, cookies, brownies & chocolates) tailored to your theme and guest count in Dinanagar.
+                </p>
+              </div>
+              <a
+                href={`https://wa.me/${BRAND.whatsapp}?text=${encodeURIComponent(
+                  "Hello Manoj Kumar ji! I would like to enquire about bulk custom Gift Packets / Hampers for a wedding or family celebration in Dinanagar."
+                )}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="shrink-0 px-5 py-2.5 rounded-full bg-[#C5A16A] hover:bg-[#DFC085] text-[#24130A] text-xs font-bold uppercase tracking-wider transition-transform hover:scale-105 active:scale-95 shadow-md flex items-center gap-2"
+              >
+                <MessageCircle size={15} />
+                <span>Enquire Bulk Gifting</span>
+              </a>
+            </div>
+          )}
+
           {/* Product Grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {filteredProducts.map((product) => (
@@ -962,6 +990,7 @@ export function CinematicBakeryExperience() {
                     <option value="Birthday Party">Birthday Party</option>
                     <option value="Anniversary & Romance">Anniversary & Romance</option>
                     <option value="Wedding & Engagement">Wedding & Engagement</option>
+                    <option value="Luxury Gift Hampers & Return Favours">Luxury Gift Hampers & Return Favours</option>
                     <option value="Kids Theme / Cartoon">Kids Theme / Cartoon</option>
                     <option value="Baby Shower / Welcome">Baby Shower / Welcome</option>
                     <option value="Milestone / Corporate">Milestone / Corporate Celebration</option>

@@ -197,19 +197,9 @@ export const BAKERY_SERVICES: BakeryServiceItem[] = [
 /**
  * 6. PRODUCTS & MENU
  */
-export interface BakeryProductItem {
-  id: string;
-  name: string;
-  category: "Cakes" | "Pastries" | "Brownies" | "Donuts" | "Cookies" | "Cupcakes" | "Breads" | "Desserts" | "Beverages";
-  description: string;
-  image: string;
-  dietary?: "Vegetarian" | "Eggless Available" | "Chef Special" | "Bestseller";
-  tag: string;
-  priceNote: string;
-}
-
 export const PRODUCT_CATEGORIES = [
   "Cakes",
+  "Gift Hampers",
   "Pastries",
   "Brownies",
   "Donuts",
@@ -219,6 +209,19 @@ export const PRODUCT_CATEGORIES = [
   "Desserts",
   "Beverages",
 ] as const;
+
+export type ProductCategory = (typeof PRODUCT_CATEGORIES)[number];
+
+export interface BakeryProductItem {
+  id: string;
+  name: string;
+  category: ProductCategory;
+  description: string;
+  image: string;
+  dietary?: "Vegetarian" | "Eggless Available" | "Chef Special" | "Bestseller";
+  tag: string;
+  priceNote: string;
+}
 
 export const BAKERY_PRODUCTS: BakeryProductItem[] = [
   // 1. Cakes
@@ -273,7 +276,39 @@ export const BAKERY_PRODUCTS: BakeryProductItem[] = [
     priceNote: "Inquire / Custom Order",
   },
 
-  // 2. Pastries
+  // 2. Luxury Gift Hampers & Celebration Boxes
+  {
+    id: "prod-hamper-1",
+    name: "Royal Celebration Luxury Gift Hamper",
+    category: "Gift Hampers",
+    description: "Opulent rigid keepsake hamper with satin bow, artisan cookies, French macarons, walnut brownies, miniature loaf cake & chocolate truffles.",
+    image: "/images/bakery/luxury-royal-gift-hamper.jpg",
+    dietary: "Chef Special",
+    tag: "Royal Hamper",
+    priceNote: "From ₹1,299",
+  },
+  {
+    id: "prod-hamper-2",
+    name: "Bespoke Wedding & Return Favour Boxes",
+    category: "Gift Hampers",
+    description: "Elegant ivory & gold favour boxes with gourmet macarons, gold-dusted shortbread cookies, silk ribbons & custom event plaques.",
+    image: "/images/bakery/wedding-favor-gift-boxes.jpg",
+    dietary: "Chef Special",
+    tag: "Wedding Special",
+    priceNote: "From ₹450 / Box",
+  },
+  {
+    id: "prod-hamper-3",
+    name: "Artisan Sweet Celebration Box",
+    category: "Gift Hampers",
+    description: "Curated luxury gift box containing assorted brownies, macarons, handmade cookies, and seasonal pastries.",
+    image: REAL_PHOTOS.celebrationHamper,
+    dietary: "Chef Special",
+    tag: "Festive Classic",
+    priceNote: "From ₹650",
+  },
+
+  // 3. Pastries
   {
     id: "prod-pastry-2",
     name: "Flaky Crème Horn Rolls",
