@@ -244,7 +244,7 @@ const SPECIAL_OCCASIONS = [
     title: "Corporate & Milestones",
     subtitle: "Celebrate Team Victories",
     description: "Custom corporate logo cakes, retirement celebrations, opening parties, and festive gift boxes.",
-    image: REAL_PHOTOS.hero,
+    image: "/images/bakery/luxury-royal-gift-hamper.jpg",
     servings: "10 to 100+ Guests",
     popularFlavour: "Assorted Pastry & Cake Platters",
     leadTime: "24–48h Notice",

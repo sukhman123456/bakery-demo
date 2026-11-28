@@ -134,7 +134,7 @@ export const BAKERY_SERVICES: BakeryServiceItem[] = [
     title: "Designer Cakes",
     shortDescription:
       "Bespoke artistic centerpieces featuring rich chocolate drips, French macarons, and gold-leaf accents.",
-    image: REAL_PHOTOS.hero,
+    image: "/images/cakes/cake-belgian-drip-clean.jpg",
     badge: "Artisan Signature",
     categoryTarget: "Cakes",
   },
