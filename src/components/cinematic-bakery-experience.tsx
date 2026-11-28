@@ -1641,25 +1641,54 @@ export function CinematicBakeryExperience() {
 
       {/* ====================================================================
           SECTION 9 – PHOTO GALLERY WITH LIGHTBOX MODAL
-          Warm Cream (#F7F0E5) with Real Bakery Photographs
+          Rich Chocolate (#35231D) Contrast Backdrop + Animated Patisserie Art
           ==================================================================== */}
-      <section id="gallery" className="relative w-full py-20 lg:py-28 bg-[#F7F0E5] border-b border-[#C5A16A]/40">
-        <div className="max-w-[1360px] mx-auto px-5 sm:px-10">
+      <section
+        id="gallery"
+        className="relative w-full py-20 lg:py-28 bg-gradient-to-b from-[#2A1913] via-[#35231D] to-[#23140F] border-y border-[#C5A16A]/55 overflow-hidden"
+      >
+        {/* Slow-Panning Animated Bakery Photography Backdrop Layer */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
+          <img
+            src="/images/gallery/gal-8-patisserie-lounge.jpg"
+            alt=""
+            aria-hidden="true"
+            className="w-full h-full object-cover opacity-[0.18] mix-blend-luminosity animate-gallery-bg-pan"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#2A1913]/92 via-[#35231D]/82 to-[#22120D]/95" />
+          {/* Ambient Drifting Champagne Gold Light Orbs */}
+          <div className="absolute -top-16 -left-16 w-72 h-72 rounded-full bg-[#C5A16A]/18 blur-3xl animate-ambient-drift" />
+          <div
+            className="absolute top-1/2 right-0 w-80 h-80 rounded-full bg-[#DFC085]/14 blur-3xl animate-ambient-drift"
+            style={{ animationDelay: "2.5s" }}
+          />
+          <div
+            className="absolute -bottom-20 left-1/3 w-72 h-72 rounded-full bg-[#B97942]/18 blur-3xl animate-ambient-drift"
+            style={{ animationDelay: "4.5s" }}
+          />
+        </div>
+
+        {/* Luminous Gold Hairline Accents */}
+        <div className="absolute top-0 inset-x-0 h-[1px] bg-gradient-to-r from-transparent via-[#DFC085]/70 to-transparent pointer-events-none" />
+        <div className="absolute bottom-0 inset-x-0 h-[1px] bg-gradient-to-r from-transparent via-[#DFC085]/70 to-transparent pointer-events-none" />
+
+        <div className="max-w-[1360px] mx-auto px-5 sm:px-10 relative z-10">
           <div className="text-center max-w-2xl mx-auto mb-12">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#E8D8C4] border border-[#C5A16A] text-[#493126] text-xs font-semibold tracking-[0.2em] uppercase mb-3">
-              <Sparkles size={13} className="text-[#493126]" />
+            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#493126]/85 border border-[#C5A16A]/75 text-[#DFC085] text-xs font-semibold tracking-[0.2em] uppercase mb-3 shadow-[0_0_18px_rgba(197,161,106,0.25)]">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#DFC085] animate-ping" />
+              <Sparkles size={13} className="text-[#DFC085]" />
               <span>Section 09 • Visual Gallery</span>
             </div>
-            <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-medium text-[#493126] tracking-tight">
-              A Glimpse into Our Atelier
+            <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-medium text-[#FFF8EE] tracking-tight">
+              A Glimpse into <span className="italic text-[#DFC085]">Our Atelier</span>
             </h2>
-            <p className="font-sans text-sm sm:text-base text-[#392820]/80 mt-2">
+            <p className="font-sans text-sm sm:text-base text-[#EFE3D2]/85 mt-2">
               Curated showcase of bespoke celebration cakes, golden croissants, fudge brownies, and warm patisserie ambience.
             </p>
           </div>
 
           {/* Gallery Category Filter */}
-          <div className="flex items-center justify-center gap-2 flex-wrap mb-10">
+          <div className="flex items-center justify-center gap-2.5 flex-wrap mb-10">
             {["All", "Cakes", "Pastries", "Ambience"].map((tab) => (
               <button
                 key={tab}
@@ -1667,8 +1696,8 @@ export function CinematicBakeryExperience() {
                 onClick={() => setActiveGalleryCategory(tab)}
                 className={`px-4 py-1.5 rounded-full text-xs font-semibold tracking-wider uppercase transition-all cursor-pointer ${
                   activeGalleryCategory === tab
-                    ? "bg-[#493126] text-[#FFF8EE] shadow-md scale-105"
-                    : "bg-[#E8D8C4] text-[#392820] hover:bg-[#C5A16A]/40 border border-[#C5A16A]/60"
+                    ? "bg-gradient-to-r from-[#DFC085] via-[#C5A16A] to-[#DFC085] text-[#24130A] font-bold shadow-[0_4px_20px_rgba(197,161,106,0.45)] scale-105"
+                    : "bg-[#493126]/70 text-[#EFE3D2] hover:bg-[#493126] hover:text-white border border-[#C5A16A]/45 hover:border-[#DFC085]"
                 }`}
               >
                 {tab}
@@ -1682,9 +1711,9 @@ export function CinematicBakeryExperience() {
               <div
                 key={photo.id}
                 onClick={() => setSelectedLightboxPhoto(photo)}
-                className="card-luxury-3d group rounded-2xl overflow-hidden bg-[#E8D8C4] border border-[#C5A16A] cursor-pointer shadow-md hover:shadow-xl transition-all duration-500 flex flex-col justify-between"
+                className="card-luxury-3d group rounded-2xl overflow-hidden bg-gradient-to-b from-[#FFF8EE] to-[#EFE3D2] border-2 border-[#C5A16A]/80 hover:border-[#DFC085] cursor-pointer shadow-[0_14px_34px_rgba(0,0,0,0.42)] hover:shadow-[0_18px_42px_rgba(223,192,133,0.35)] hover:-translate-y-1.5 transition-all duration-500 flex flex-col justify-between"
               >
-                <div className="relative aspect-[4/3] w-full overflow-hidden bg-[#EFE3D2]">
+                <div className="relative aspect-[4/3] w-full overflow-hidden bg-[#24130A]">
                   <img
                     src={photo.src}
                     alt={photo.title}
@@ -1697,18 +1726,18 @@ export function CinematicBakeryExperience() {
                     {photo.category}
                   </span>
 
-                  <span className="absolute top-2.5 right-2.5 px-2.5 py-0.5 rounded-full bg-[#FFF8EE]/90 text-[#493126] text-[10px] font-bold flex items-center gap-1 shadow-sm opacity-90 group-hover:opacity-100 transition-opacity">
+                  <span className="absolute top-2.5 right-2.5 px-2.5 py-0.5 rounded-full bg-[#FFF8EE]/95 text-[#493126] text-[10px] font-bold flex items-center gap-1 shadow-sm opacity-90 group-hover:opacity-100 transition-opacity">
                     <Eye size={11} />
                     <span>View</span>
                   </span>
                 </div>
 
-                <div className="p-4 flex-1 flex flex-col justify-between bg-gradient-to-b from-[#EFE3D2]/60 to-[#E8D8C4]">
+                <div className="p-4 flex-1 flex flex-col justify-between bg-gradient-to-b from-[#FFF8EE] to-[#EFE3D2]">
                   <div>
                     <h4 className="font-serif text-base sm:text-lg font-medium text-[#392820] group-hover:text-[#493126] leading-snug transition-colors">
                       {photo.title}
                     </h4>
-                    <p className="text-[11px] sm:text-xs text-[#392820]/75 line-clamp-2 mt-1 leading-relaxed">
+                    <p className="text-[11px] sm:text-xs text-[#796253] line-clamp-2 mt-1 leading-relaxed">
                       {photo.description}
                     </p>
                   </div>
