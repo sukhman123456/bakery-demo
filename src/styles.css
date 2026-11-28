@@ -1164,6 +1164,38 @@ h4 {
   animation: cardImageBreathe 6s ease-in-out infinite;
 }
 
+@keyframes igHeartPop {
+  0% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+  30% {
+    opacity: 1;
+    transform: scale(1.25);
+  }
+  70% {
+    opacity: 1;
+    transform: scale(0.95);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.15);
+  }
+}
+
+.animate-ig-heart-pop {
+  animation: igHeartPop 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
 /* Card image zoom effect */
 .signature-card-img-wrap {
   position: relative;

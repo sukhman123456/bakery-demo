@@ -28,6 +28,12 @@ import {
   Flame,
   CheckCircle2,
   Gift,
+  Bookmark,
+  Send,
+  MoreHorizontal,
+  Pause,
+  Play,
+  BadgeCheck,
 } from "lucide-react";
 import {
   BRAND,
@@ -251,44 +257,66 @@ const INSTAGRAM_POSTS = [
   {
     id: "ig-1",
     image: REAL_PHOTOS.cakeTulipBow,
-    likes: "428",
-    comments: "34",
-    caption: "The Royal Tulip Ribbon Cake — pure patisserie elegance in Dinanagar ✨ #KarshniBakers #DesignerCakes",
+    badge: "Designer Cake",
+    title: "Royal Tulip Ribbon Bow Cake",
+    location: "Dinanagar, Punjab",
+    caption: "The Royal Tulip Ribbon Cake — pure patisserie elegance crafted with satin fondant in Dinanagar ✨ #KarshniBakers #DesignerCakes",
   },
   {
     id: "ig-2",
     image: "/images/cakes/cake-belgian-drip-clean.jpg",
-    likes: "612",
-    comments: "58",
-    caption: "Molten Belgian chocolate drip, fresh macarons and pure dairy butter sponge 🍫 #ChocolateLover #Bakery",
+    badge: "Signature Bake",
+    title: "Belgian Chocolate Drip Cake",
+    location: "Shree Ram Market, Dinanagar",
+    caption: "Molten Belgian chocolate drip, fresh macarons and 100% pure dairy butter sponge 🍫 #ChocolateLover #DinanagarBakery",
   },
   {
     id: "ig-3",
     image: REAL_PHOTOS.cakeRomanticHeart,
-    likes: "542",
-    comments: "49",
-    caption: "Marking milestones in pure sweetness! Handcrafted anniversary calendar cake ❤️ #KarshniLove",
+    badge: "Anniversary Special",
+    title: "Romantic Heart Calendar Cake",
+    location: "Dinanagar, Punjab",
+    caption: "Marking milestones in pure sweetness! Handcrafted anniversary calendar cake with fresh roses ❤️ #KarshniLove #AnniversaryCake",
   },
   {
     id: "ig-4",
-    image: REAL_PHOTOS.bakeryDisplay,
-    likes: "389",
-    comments: "22",
-    caption: "Freshly baked every morning right here at Shree Ram Market counter! Come taste the purity 🥐 #Dinanagar",
+    image: "/images/bakery/luxury-royal-gift-hamper.jpg",
+    badge: "Gift Hampers",
+    title: "Royal Celebration Gift Hamper",
+    location: "Karshni Baker's Atelier",
+    caption: "Curated Royal Celebration Gift Hampers & wedding favour boxes — hand-packed with love 🎁 #KarshniHampers #WeddingFavours",
   },
   {
     id: "ig-5",
     image: REAL_PHOTOS.cakeSupercar,
-    likes: "495",
-    comments: "41",
-    caption: "Fast, furious and delicious! Custom 3D supercar track birthday cake 🏎️ #KidsParty #CustomCakes",
+    badge: "3D Theme Cake",
+    title: "McLaren Supercar Track Cake",
+    location: "Dinanagar, Punjab",
+    caption: "Fast, furious and delicious! Custom 3D supercar track birthday cake made for special kids milestones 🏎️ #KidsParty #CustomCakes",
   },
   {
     id: "ig-6",
     image: REAL_PHOTOS.brownies,
-    likes: "520",
-    comments: "37",
-    caption: "Fudge brownies baked with 70% dark Valrhona cocoa. That crackly crust though! 🤤 #BrownieLovers",
+    badge: "Fresh Fudge",
+    title: "Belgian Dark Chocolate Brownies",
+    location: "Shree Ram Market Counter",
+    caption: "Fudge brownies baked daily with 70% dark Valrhona cocoa. That crackly golden crust though! 🍫 #BrownieLovers #KarshniBakers",
+  },
+  {
+    id: "ig-7",
+    image: "/images/cakes/bespoke-cake-atelier.jpg",
+    badge: "Studio Craft",
+    title: "Handcrafted Sugar Art Studio",
+    location: "Karshni Kitchen, Dinanagar",
+    caption: "Behind the scenes at our Dinanagar cake atelier crafting bespoke celebration designs 🎨🎂 #BespokeCakes #ArtisanBakery",
+  },
+  {
+    id: "ig-8",
+    image: REAL_PHOTOS.bakeryDisplay,
+    badge: "Counter Fresh",
+    title: "Morning Showcase at Dinanagar",
+    location: "Shree Ram Market, Dinanagar",
+    caption: "Freshly baked every morning right here at Shree Ram Market counter! Come taste the purity 🥐 #Dinanagar #FreshEveryDay",
   },
 ];
 
@@ -365,6 +393,96 @@ export function CinematicBakeryExperience() {
       left: direction === "left" ? -scrollAmount : scrollAmount,
       behavior: "smooth",
     });
+  };
+
+  // Section 11: Live Sliding Instagram Feed State & Continuous Glide
+  const igTrackRef = useRef<HTMLDivElement>(null);
+  const igScrollPosRef = useRef(0);
+  const igResumeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const [isIgHoverOrTouchPaused, setIsIgHoverOrTouchPaused] = useState(false);
+  const [isIgUserPaused, setIsIgUserPaused] = useState(false);
+  const [likedIgPosts, setLikedIgPosts] = useState<Record<string, boolean>>({});
+  const [savedIgPosts, setSavedIgPosts] = useState<Record<string, boolean>>({});
+  const [heartBurstPostId, setHeartBurstPostId] = useState<string | null>(null);
+
+  const isIgSlidingPaused = isIgHoverOrTouchPaused || isIgUserPaused;
+
+  useEffect(() => {
+    return () => {
+      if (igResumeTimerRef.current) clearTimeout(igResumeTimerRef.current);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (isIgSlidingPaused) return;
+    let frameId: number;
+    let lastTime = performance.now();
+
+    const animateGlide = (now: number) => {
+      const dt = Math.min(now - lastTime, 50);
+      lastTime = now;
+
+      const container = igTrackRef.current;
+      if (container) {
+        const halfWidth = container.scrollWidth / 2;
+        if (halfWidth > 0) {
+          igScrollPosRef.current += dt * 0.045;
+          if (igScrollPosRef.current >= halfWidth) {
+            igScrollPosRef.current -= halfWidth;
+          }
+          container.scrollLeft = Math.floor(igScrollPosRef.current);
+        }
+      }
+      frameId = requestAnimationFrame(animateGlide);
+    };
+
+    frameId = requestAnimationFrame(animateGlide);
+    return () => cancelAnimationFrame(frameId);
+  }, [isIgSlidingPaused]);
+
+  const pauseIgTemporarily = () => {
+    setIsIgHoverOrTouchPaused(true);
+    if (igResumeTimerRef.current) clearTimeout(igResumeTimerRef.current);
+  };
+
+  const resumeIgAfterDelay = (delayMs = 2600) => {
+    if (igResumeTimerRef.current) clearTimeout(igResumeTimerRef.current);
+    igResumeTimerRef.current = setTimeout(() => {
+      if (igTrackRef.current) {
+        igScrollPosRef.current = igTrackRef.current.scrollLeft;
+      }
+      setIsIgHoverOrTouchPaused(false);
+    }, delayMs);
+  };
+
+  const handleIgArrowSlide = (direction: "left" | "right") => {
+    const container = igTrackRef.current;
+    if (!container) return;
+    pauseIgTemporarily();
+    const halfWidth = container.scrollWidth / 2;
+    if (direction === "left" && container.scrollLeft < 40 && halfWidth > 0) {
+      container.scrollLeft += halfWidth;
+    }
+    const delta = direction === "left" ? -305 : 305;
+    container.scrollBy({ left: delta, behavior: "smooth" });
+    resumeIgAfterDelay(3200);
+  };
+
+  const toggleLikeIgPost = (id: string, uniqueKey?: string) => {
+    setLikedIgPosts((prev) => {
+      const nextLiked = !prev[id];
+      if (nextLiked) {
+        setHeartBurstPostId(uniqueKey ?? id);
+        setTimeout(() => {
+          setHeartBurstPostId((cur) => (cur === (uniqueKey ?? id) ? null : cur));
+        }, 900);
+      }
+      return { ...prev, [id]: nextLiked };
+    });
+  };
+
+  const toggleSaveIgPost = (id: string) => {
+    setSavedIgPosts((prev) => ({ ...prev, [id]: !prev[id] }));
   };
 
   // Image Upload Handler for Section 6
@@ -1602,60 +1720,330 @@ export function CinematicBakeryExperience() {
       </section>
 
       {/* ====================================================================
-          SECTION 11 – INSTAGRAM SHOWCASE
-          Warm Cream (#F7F0E5) with @karshni_bakers Profile Link
+          SECTION 11 – INSTAGRAM SHOWCASE (Authentic Sliding Post Cards)
+          Warm Cream (#F7F0E5) with @karshni_bakers Live Feed Carousel
           ==================================================================== */}
-      <section id="instagram" className="relative w-full py-20 lg:py-28 bg-[#F7F0E5] border-b border-[#C5A16A]/40">
-        <div className="max-w-[1360px] mx-auto px-5 sm:px-10">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
-            <div>
-              <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#E8D8C4] border border-[#C5A16A] text-[#493126] text-xs font-semibold tracking-[0.2em] uppercase mb-3">
-                <Instagram size={13} className="text-[#493126]" />
-                <span>Section 11 • Instagram Stories</span>
-              </div>
-              <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-medium text-[#493126] tracking-tight">
-                Follow @karshni_bakers
-              </h2>
-              <p className="font-sans text-sm sm:text-base text-[#392820]/80 mt-2">
-                Daily fresh bakes, behind-the-scenes cake artistry, and patron celebration stories on Instagram.
-              </p>
-            </div>
-            <a
-              href={BRAND.instagramUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#493126] hover:bg-[#35231D] text-[#FFF8EE] text-xs font-bold tracking-wider uppercase transition-all shadow-md self-start md:self-auto"
-            >
-              <Instagram size={15} />
-              <span>Follow on Instagram</span>
-              <ExternalLink size={13} />
-            </a>
-          </div>
+      <section id="instagram" className="relative w-full py-14 lg:py-20 bg-[#F7F0E5] border-b border-[#C5A16A]/40 overflow-hidden">
+        {/* Ambient Soft Warm Backdrop Glow */}
+        <div className="absolute -top-24 right-0 w-96 h-96 rounded-full bg-gradient-to-br from-[#F58529]/10 via-[#DD2A7B]/10 to-transparent blur-3xl pointer-events-none" />
+        <div className="absolute -bottom-24 left-0 w-96 h-96 rounded-full bg-[#C5A16A]/15 blur-3xl pointer-events-none" />
 
-          {/* Instagram Post Grid */}
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-            {INSTAGRAM_POSTS.map((post) => (
+        <div className="max-w-[1360px] mx-auto px-4 sm:px-8 relative z-10">
+          {/* Header Row with Story Gradient Avatar & Follow CTA */}
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-5 mb-8 sm:mb-10">
+            <div className="flex items-start sm:items-center gap-4">
+              {/* Official Instagram Story Ring Profile Avatar */}
               <a
-                key={post.id}
                 href={BRAND.instagramUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group relative rounded-xl overflow-hidden aspect-square bg-[#E8D8C4] border border-[#C5A16A] block shadow-sm hover:shadow-lg transition-all"
+                className="shrink-0 p-[3px] rounded-full bg-gradient-to-tr from-[#F58529] via-[#DD2A7B] to-[#8134AF] shadow-lg hover:scale-105 transition-transform"
+                aria-label="Open @karshni_bakers on Instagram"
               >
-                <img
-                  src={post.image}
-                  alt={post.caption}
-                  loading="lazy"
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-108"
-                />
-                <div className="absolute inset-0 bg-[#392820]/70 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center p-3 text-white text-center">
-                  <Instagram size={22} className="text-[#C5A16A] mb-1.5" />
-                  <span className="text-[11px] font-bold">♥ {post.likes}</span>
-                  <span className="text-[10px] text-white/80 line-clamp-2 mt-1">{post.caption}</span>
+                <div className="p-[2px] rounded-full bg-[#F7F0E5]">
+                  <img
+                    src={REAL_PHOTOS.logo}
+                    alt="Karshni Baker's Instagram Profile"
+                    className="w-14 h-14 sm:w-16 sm:h-16 rounded-full object-cover"
+                  />
                 </div>
               </a>
-            ))}
+
+              <div>
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#E8D8C4] border border-[#C5A16A] text-[#493126] text-[10px] sm:text-xs font-bold tracking-[0.18em] uppercase mb-2 shadow-sm">
+                  <span className="w-2 h-2 rounded-full bg-gradient-to-r from-[#F58529] to-[#DD2A7B] animate-pulse" />
+                  <span>Live Instagram Feed</span>
+                </div>
+                <h2 className="font-serif text-2xl sm:text-4xl font-medium text-[#493126] tracking-tight flex items-center gap-2 flex-wrap">
+                  <span>{BRAND.instagram}</span>
+                  <BadgeCheck size={22} className="text-[#0095F6] shrink-0" />
+                </h2>
+                <p className="font-sans text-xs sm:text-sm text-[#392820]/80 mt-1">
+                  Fresh cakes, custom hamper boxes & behind-the-scenes stories straight from our Dinanagar kitchen.
+                </p>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-3 self-start md:self-auto">
+              <a
+                href={BRAND.instagramUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-[#493126] via-[#5C3A2B] to-[#493126] hover:from-[#35231D] hover:to-[#493126] text-[#FFF8EE] text-xs font-bold tracking-wider uppercase transition-all shadow-md hover:shadow-lg hover:scale-[1.02] border border-[#C5A16A]/60"
+              >
+                <Instagram size={15} className="text-[#DFC085]" />
+                <span>Follow on Instagram</span>
+                <ExternalLink size={12} className="opacity-80" />
+              </a>
+            </div>
           </div>
+        </div>
+
+        {/* Full-Width Continuous Sliding Instagram Post Feed */}
+        <div className="relative max-w-[1440px] mx-auto">
+          {/* Desktop Left/Right Floating Gradient Edge Masks */}
+          <div className="hidden md:block absolute left-0 top-0 bottom-0 w-16 bg-gradient-to-r from-[#F7F0E5] to-transparent z-20 pointer-events-none" />
+          <div className="hidden md:block absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-[#F7F0E5] to-transparent z-20 pointer-events-none" />
+
+          {/* Desktop Quick Arrows */}
+          <button
+            type="button"
+            onClick={() => handleIgArrowSlide("left")}
+            aria-label="Previous Instagram Post"
+            className="hidden md:flex absolute left-4 top-1/2 -translate-y-1/2 z-30 w-11 h-11 rounded-full bg-[#FFF8EE]/95 border border-[#C5A16A] text-[#493126] shadow-xl items-center justify-center hover:bg-[#493126] hover:text-[#FFF8EE] transition-all cursor-pointer hover:scale-110 active:scale-95"
+          >
+            <ChevronLeft size={20} />
+          </button>
+          <button
+            type="button"
+            onClick={() => handleIgArrowSlide("right")}
+            aria-label="Next Instagram Post"
+            className="hidden md:flex absolute right-4 top-1/2 -translate-y-1/2 z-30 w-11 h-11 rounded-full bg-[#FFF8EE]/95 border border-[#C5A16A] text-[#493126] shadow-xl items-center justify-center hover:bg-[#493126] hover:text-[#FFF8EE] transition-all cursor-pointer hover:scale-110 active:scale-95"
+          >
+            <ChevronRight size={20} />
+          </button>
+
+          {/* Horizontally Sliding Feed Container */}
+          <div
+            ref={igTrackRef}
+            onMouseEnter={pauseIgTemporarily}
+            onMouseLeave={() => resumeIgAfterDelay(800)}
+            onTouchStart={pauseIgTemporarily}
+            onTouchEnd={() => resumeIgAfterDelay(2600)}
+            className="flex gap-4 sm:gap-5 overflow-x-auto no-scrollbar px-4 sm:px-8 py-3 select-none"
+          >
+            {[...INSTAGRAM_POSTS, ...INSTAGRAM_POSTS].map((post, loopIdx) => {
+              const uniqueKey = `${post.id}-${loopIdx}`;
+              const isLiked = Boolean(likedIgPosts[post.id]);
+              const isSaved = Boolean(savedIgPosts[post.id]);
+              const isBursting = heartBurstPostId === uniqueKey;
+
+              return (
+                <article
+                  key={uniqueKey}
+                  className="w-[270px] sm:w-[300px] shrink-0 rounded-2xl bg-[#FFF8EE] border border-[#C5A16A]/80 shadow-[0_10px_28px_rgba(73,49,38,0.08)] hover:shadow-[0_14px_34px_rgba(197,161,106,0.28)] hover:border-[#C5A16A] transition-all duration-300 flex flex-col overflow-hidden group relative"
+                >
+                  {/* 1. Authentic Instagram Post Header */}
+                  <div className="px-3.5 py-2.5 flex items-center justify-between border-b border-[#C5A16A]/25 bg-gradient-to-r from-[#FFF8EE] to-[#F7F0E5]">
+                    <a
+                      href={BRAND.instagramUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2.5 min-w-0"
+                    >
+                      <div className="p-[2px] rounded-full bg-gradient-to-tr from-[#F58529] via-[#DD2A7B] to-[#8134AF] shrink-0">
+                        <div className="p-[1.5px] rounded-full bg-[#FFF8EE]">
+                          <img
+                            src={REAL_PHOTOS.logo}
+                            alt="karshni_bakers"
+                            className="w-7 h-7 rounded-full object-cover"
+                          />
+                        </div>
+                      </div>
+                      <div className="min-w-0">
+                        <div className="flex items-center gap-1">
+                          <span className="text-xs font-bold text-[#392820] truncate">
+                            karshni_bakers
+                          </span>
+                          <BadgeCheck size={13} className="text-[#0095F6] shrink-0" />
+                        </div>
+                        <span className="text-[10px] text-[#796253] block truncate">
+                          {post.location}
+                        </span>
+                      </div>
+                    </a>
+
+                    <a
+                      href={BRAND.instagramUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={`View ${post.title} on Instagram`}
+                      className="p-1.5 rounded-full text-[#493126]/70 hover:text-[#392820] hover:bg-[#E8D8C4]/60 transition-colors"
+                    >
+                      <MoreHorizontal size={16} />
+                    </a>
+                  </div>
+
+                  {/* 2. Instagram Photo Showcase (Double-tap or tap heart to love!) */}
+                  <div
+                    onClick={() => toggleLikeIgPost(post.id, uniqueKey)}
+                    className="relative aspect-square w-full overflow-hidden bg-[#24130A] cursor-pointer"
+                  >
+                    <img
+                      src={post.image}
+                      alt={post.title}
+                      loading="lazy"
+                      className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                    />
+
+                    {/* Subtle Diagonal Shimmer Sweep */}
+                    <div
+                      className="absolute inset-y-0 w-24 bg-gradient-to-r from-transparent via-white/35 to-transparent pointer-events-none animate-pillar-shimmer"
+                      style={{ animationDelay: `${(loopIdx % 6) * 0.8}s` }}
+                    />
+
+                    {/* Top-Right IG Badge Pill */}
+                    <span className="absolute top-2.5 right-2.5 px-2.5 py-0.5 rounded-full bg-[#180C06]/80 backdrop-blur-md border border-[#C5A16A]/60 text-[#DFC085] text-[10px] font-semibold tracking-wider uppercase flex items-center gap-1 shadow-md">
+                      <Instagram size={10} />
+                      <span>{post.badge}</span>
+                    </span>
+
+                    {/* Heart Burst Animation Overlay on Tap */}
+                    {isBursting && (
+                      <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-20">
+                        <Heart
+                          size={72}
+                          className="text-white fill-[#E1306C] drop-shadow-[0_6px_25px_rgba(225,48,108,0.7)] animate-ig-heart-pop"
+                        />
+                      </div>
+                    )}
+
+                    {/* Subtle Bottom Gradient */}
+                    <div className="absolute inset-x-0 bottom-0 h-14 bg-gradient-to-t from-black/55 to-transparent pointer-events-none" />
+                    <span className="absolute bottom-2 left-3 text-[10px] font-medium text-white/90 tracking-wide pointer-events-none">
+                      Tap photo to love ♥
+                    </span>
+                  </div>
+
+                  {/* 3. Authentic Instagram Action Bar (Heart, Inquiry, Share, Bookmark) */}
+                  <div className="px-3.5 pt-2.5 pb-1.5 flex items-center justify-between">
+                    <div className="flex items-center gap-3.5">
+                      <button
+                        type="button"
+                        onClick={() => toggleLikeIgPost(post.id, uniqueKey)}
+                        aria-label={isLiked ? "Unlike post" : "Like post"}
+                        className="transition-transform active:scale-125 cursor-pointer"
+                      >
+                        <Heart
+                          size={20}
+                          className={`transition-colors ${
+                            isLiked
+                              ? "text-[#E1306C] fill-[#E1306C]"
+                              : "text-[#392820] hover:text-[#E1306C]"
+                          }`}
+                        />
+                      </button>
+
+                      <button
+                        type="button"
+                        onClick={() =>
+                          handleWhatsAppOrder(post.title, "Custom Inquiry", "Instagram Showcase")
+                        }
+                        aria-label={`Inquire about ${post.title} on WhatsApp`}
+                        title="Order similar on WhatsApp"
+                        className="text-[#392820] hover:text-[#493126] transition-transform hover:scale-110 cursor-pointer"
+                      >
+                        <MessageCircle size={19} />
+                      </button>
+
+                      <a
+                        href={BRAND.instagramUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="Share or view on Instagram"
+                        className="text-[#392820] hover:text-[#493126] transition-transform hover:scale-110"
+                      >
+                        <Send size={18} />
+                      </a>
+                    </div>
+
+                    <button
+                      type="button"
+                      onClick={() => toggleSaveIgPost(post.id)}
+                      aria-label={isSaved ? "Remove bookmark" : "Save post"}
+                      className="transition-transform active:scale-125 cursor-pointer"
+                    >
+                      <Bookmark
+                        size={19}
+                        className={`transition-colors ${
+                          isSaved
+                            ? "text-[#493126] fill-[#C5A16A]"
+                            : "text-[#392820] hover:text-[#C5A16A]"
+                        }`}
+                      />
+                    </button>
+                  </div>
+
+                  {/* 4. Caption & Direct Instagram Link */}
+                  <div className="px-3.5 pb-3.5 flex-1 flex flex-col justify-between">
+                    <div>
+                      <div className="text-[11px] font-semibold text-[#493126] mb-1">
+                        {isLiked ? "♥ Loved by you & Karshni patrons" : "Handcrafted at Karshni Baker's"}
+                      </div>
+                      <p className="text-[11px] sm:text-xs text-[#392820]/85 leading-relaxed line-clamp-2">
+                        <span className="font-bold text-[#392820] mr-1">karshni_bakers</span>
+                        {post.caption}
+                      </p>
+                    </div>
+
+                    <div className="mt-2.5 pt-2 border-t border-[#C5A16A]/25 flex items-center justify-between gap-2">
+                      <a
+                        href={BRAND.instagramUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-[10px] font-bold uppercase tracking-wider text-[#493126] hover:text-[#C5A16A] flex items-center gap-1 transition-colors"
+                      >
+                        <Instagram size={11} />
+                        <span>View on IG</span>
+                        <ExternalLink size={10} />
+                      </a>
+                      <button
+                        type="button"
+                        onClick={() =>
+                          handleWhatsAppOrder(post.title, "Custom Design", "Instagram Showcase")
+                        }
+                        className="text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-[#493126] hover:bg-[#35231D] text-[#FFF8EE] transition-colors cursor-pointer"
+                      >
+                        Order Similar
+                      </button>
+                    </div>
+                  </div>
+                </article>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Interactive Slider Control Bar */}
+        <div className="max-w-[1360px] mx-auto px-4 sm:px-8 mt-4 flex items-center justify-between sm:justify-center gap-4">
+          <div className="flex items-center gap-2">
+            <button
+              type="button"
+              onClick={() => handleIgArrowSlide("left")}
+              aria-label="Slide left"
+              className="w-8 h-8 rounded-full bg-[#E8D8C4] border border-[#C5A16A] text-[#493126] flex items-center justify-center shadow-sm active:scale-95 transition-transform cursor-pointer"
+            >
+              <ChevronLeft size={15} />
+            </button>
+            <button
+              type="button"
+              onClick={() => setIsIgUserPaused((p) => !p)}
+              className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#E8D8C4] border border-[#C5A16A] text-[#493126] text-[10px] font-bold uppercase tracking-wider shadow-sm hover:bg-[#C5A16A]/30 transition-colors cursor-pointer"
+            >
+              {isIgSlidingPaused ? (
+                <>
+                  <Play size={11} className="fill-current" />
+                  <span>Resume Slide</span>
+                </>
+              ) : (
+                <>
+                  <Pause size={11} className="fill-current" />
+                  <span>Auto-Sliding</span>
+                </>
+              )}
+            </button>
+            <button
+              type="button"
+              onClick={() => handleIgArrowSlide("right")}
+              aria-label="Slide right"
+              className="w-8 h-8 rounded-full bg-[#E8D8C4] border border-[#C5A16A] text-[#493126] flex items-center justify-center shadow-sm active:scale-95 transition-transform cursor-pointer"
+            >
+              <ChevronRight size={15} />
+            </button>
+          </div>
+          <span className="hidden sm:inline text-[11px] text-[#796253] font-medium">
+            Swipe, hover to pause, or tap ♥ on any creation
+          </span>
         </div>
       </section>
 
