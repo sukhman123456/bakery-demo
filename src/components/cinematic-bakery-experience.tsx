@@ -318,6 +318,46 @@ export function CinematicBakeryExperience() {
   // Review Track Ref for smooth horizontal scroll
   const reviewTrackRef = useRef<HTMLDivElement>(null);
 
+  // Section 7: Karshni Standards Carousel State & Ref
+  const pillarsScrollRef = useRef<HTMLDivElement>(null);
+  const [activePillarIndex, setActivePillarIndex] = useState(0);
+  const [isPillarsPaused, setIsPillarsPaused] = useState(false);
+
+  useEffect(() => {
+    if (isPillarsPaused) return;
+    const timer = setInterval(() => {
+      setActivePillarIndex((prev) => {
+        const next = (prev + 1) % 5;
+        if (pillarsScrollRef.current) {
+          const container = pillarsScrollRef.current;
+          const card = container.children[next] as HTMLElement | undefined;
+          if (card) {
+            container.scrollTo({
+              left: card.offsetLeft - 16,
+              behavior: "smooth",
+            });
+          }
+        }
+        return next;
+      });
+    }, 3200);
+    return () => clearInterval(timer);
+  }, [isPillarsPaused]);
+
+  const handlePillarSelect = (index: number) => {
+    setActivePillarIndex(index);
+    setIsPillarsPaused(true);
+    if (pillarsScrollRef.current) {
+      const card = pillarsScrollRef.current.children[index] as HTMLElement | undefined;
+      if (card) {
+        pillarsScrollRef.current.scrollTo({
+          left: card.offsetLeft - 16,
+          behavior: "smooth",
+        });
+      }
+    }
+  };
+
   const handleReviewScroll = (direction: "left" | "right") => {
     if (!reviewTrackRef.current) return;
     const scrollAmount = 360;
@@ -1109,18 +1149,21 @@ export function CinematicBakeryExperience() {
       </section>
 
       {/* ====================================================================
-          SECTION 7 – WHY CHOOSE US (Compact, Animated & Creative)
-          Warm Cream (#F7F0E5) with Interactive Micro-Cards & Horizontal Snap
+          SECTION 7 – WHY CHOOSE US (Compact, Animated & Living Suite)
+          Warm Cream (#F7F0E5) with Ambient Gold Dust & Active Card Glow
           ==================================================================== */}
       <section id="why-choose-us" className="relative w-full py-10 sm:py-14 bg-[#F7F0E5] border-b border-[#C5A16A]/40 overflow-hidden">
-        {/* Subtle Ambient Gold Gradient Aura in Background */}
-        <div className="absolute -top-20 left-1/2 -translate-x-1/2 w-[550px] h-[220px] bg-gradient-to-b from-[#C5A16A]/15 to-transparent rounded-full blur-3xl pointer-events-none" />
+        {/* Ambient Floating Golden Orbs in Background */}
+        <div className="absolute top-2 left-10 w-24 h-24 rounded-full bg-[#C5A16A]/10 blur-xl animate-ambient-drift pointer-events-none" />
+        <div className="absolute bottom-4 right-12 w-32 h-32 rounded-full bg-[#DFC085]/15 blur-2xl animate-ambient-drift pointer-events-none" style={{ animationDelay: "3s" }} />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[200px] bg-gradient-to-r from-transparent via-[#C5A16A]/15 to-transparent blur-3xl pointer-events-none" />
 
         <div className="max-w-[1360px] mx-auto px-4 sm:px-8 relative z-10">
-          {/* Header — Compact & Punchy */}
-          <div className="text-center max-w-xl mx-auto mb-7 sm:mb-9">
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#E8D8C4] border border-[#C5A16A] text-[#493126] text-[10px] sm:text-xs font-bold tracking-[0.2em] uppercase mb-2 shadow-sm">
-              <ShieldCheck size={13} className="text-[#C5A16A] animate-pulse" />
+          {/* Header — Compact & Punchy with Live Pulse */}
+          <div className="text-center max-w-xl mx-auto mb-6 sm:mb-8">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#E8D8C4] border border-[#C5A16A] text-[#493126] text-[10px] sm:text-xs font-bold tracking-[0.2em] uppercase mb-2 shadow-sm animate-gold-border-flow">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#C5A16A] animate-ping" />
+              <ShieldCheck size={13} className="text-[#493126]" />
               <span>The Karshni Standard</span>
             </div>
             <h2 className="font-serif text-2xl sm:text-3xl lg:text-4xl font-medium text-[#493126] tracking-tight">
@@ -1131,9 +1174,15 @@ export function CinematicBakeryExperience() {
             </p>
           </div>
 
-          {/* Cards Track: On Mobile horizontal swipeable snap track (saves ~1000px height); On Desktop sleek 5-pillar row */}
+          {/* Cards Track with Live Staggered Shimmers & Mobile Auto-Scroll */}
           <div className="relative">
-            <div className="flex lg:grid lg:grid-cols-5 gap-3.5 sm:gap-4 overflow-x-auto lg:overflow-x-visible pb-3 pt-1 px-1 snap-x snap-mandatory scroll-smooth no-scrollbar">
+            <div
+              ref={pillarsScrollRef}
+              onMouseEnter={() => setIsPillarsPaused(true)}
+              onMouseLeave={() => setIsPillarsPaused(false)}
+              onTouchStart={() => setIsPillarsPaused(true)}
+              className="flex lg:grid lg:grid-cols-5 gap-3.5 sm:gap-4 overflow-x-auto lg:overflow-x-visible pb-3 pt-1 px-1 snap-x snap-mandatory scroll-smooth no-scrollbar"
+            >
               {[
                 {
                   num: "01",
@@ -1175,58 +1224,122 @@ export function CinematicBakeryExperience() {
                   desc: "Carefully transported in reinforced luxury boxes across Dinanagar & neighboring towns.",
                   highlight: "White-Glove Care",
                 },
-              ].map((pillar, idx) => (
-                <div
-                  key={idx}
-                  className="w-[230px] sm:w-[250px] lg:w-auto shrink-0 snap-center card-luxury-3d rounded-2xl p-4 sm:p-5 bg-gradient-to-b from-[#EFE3D2] to-[#E8D8C4] border border-[#C5A16A]/70 hover:border-[#C5A16A] text-left flex flex-col justify-between group transition-all duration-300 hover:-translate-y-1 hover:shadow-lg relative overflow-hidden"
-                >
-                  {/* Subtle Shimmer Bar at Top on Hover */}
-                  <div className="absolute top-0 inset-x-0 h-0.5 bg-gradient-to-r from-transparent via-[#C5A16A] to-transparent opacity-40 group-hover:opacity-100 transition-opacity" />
+              ].map((pillar, idx) => {
+                const isActive = activePillarIndex === idx;
+                return (
+                  <div
+                    key={idx}
+                    onClick={() => handlePillarSelect(idx)}
+                    className={`w-[230px] sm:w-[250px] lg:w-auto shrink-0 snap-center rounded-2xl p-4 sm:p-5 text-left flex flex-col justify-between group transition-all duration-500 relative overflow-hidden cursor-pointer ${
+                      isActive
+                        ? "bg-gradient-to-b from-[#FFF8EE] via-[#EFE3D2] to-[#E8D8C4] border-2 border-[#C5A16A] shadow-[0_8px_30px_rgba(197,161,106,0.3)] scale-[1.02]"
+                        : "bg-gradient-to-b from-[#EFE3D2] to-[#E8D8C4] border border-[#C5A16A]/70 hover:border-[#C5A16A] shadow-md hover:-translate-y-1 hover:shadow-lg"
+                    }`}
+                  >
+                    {/* Live Diagonal Shimmer Light Sweep (Always Running with Staggered Wave) */}
+                    <div
+                      className="absolute inset-y-0 w-24 bg-gradient-to-r from-transparent via-white/50 to-transparent pointer-events-none animate-pillar-shimmer"
+                      style={{ animationDelay: `${idx * 0.9}s` }}
+                    />
 
-                  {/* Watermark Number in Top Right */}
-                  <span className="absolute top-2 right-3 font-serif text-2xl font-bold text-[#C5A16A]/20 group-hover:text-[#C5A16A]/40 transition-colors pointer-events-none select-none">
-                    {pillar.num}
-                  </span>
+                    {/* Watermark Number in Top Right with Gentle Breathing */}
+                    <span
+                      className={`absolute top-2 right-3 font-serif text-2xl font-bold transition-all pointer-events-none select-none animate-number-breathe ${
+                        isActive ? "text-[#C5A16A]/60 scale-110" : "text-[#C5A16A]/25"
+                      }`}
+                      style={{ animationDelay: `${idx * 0.7}s` }}
+                    >
+                      {pillar.num}
+                    </span>
 
-                  <div>
-                    {/* Top Row: Icon with glowing halo & mini badge */}
-                    <div className="flex items-center justify-between gap-2 mb-3">
-                      <div className="w-10 h-10 rounded-xl bg-[#493126] text-[#C5A16A] flex items-center justify-center shadow-md group-hover:scale-110 group-hover:bg-[#35231D] transition-transform">
-                        <pillar.icon size={19} className="transition-transform group-hover:rotate-6" />
+                    <div>
+                      {/* Top Row: Levitating Icon with Aura & Mini Badge */}
+                      <div className="flex items-center justify-between gap-2 mb-3">
+                        <div
+                          className={`w-10 h-10 rounded-xl bg-[#493126] text-[#C5A16A] flex items-center justify-center shadow-md transition-all duration-300 animate-icon-levitate ${
+                            isActive ? "scale-110 shadow-[0_0_15px_rgba(197,161,106,0.6)] bg-[#35231D]" : ""
+                          }`}
+                          style={{ animationDelay: `${idx * 0.5}s` }}
+                        >
+                          <pillar.icon
+                            size={19}
+                            className={`transition-transform duration-300 ${
+                              isActive ? "scale-110 text-[#DFC085]" : "group-hover:rotate-6"
+                            }`}
+                          />
+                        </div>
+                        <span
+                          className={`text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-md transition-colors ${
+                            isActive
+                              ? "bg-[#493126] text-[#FFF8EE] shadow-sm"
+                              : "bg-[#F7F0E5] border border-[#C5A16A]/50 text-[#493126]"
+                          }`}
+                        >
+                          {pillar.tag}
+                        </span>
                       </div>
-                      <span className="text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-md bg-[#F7F0E5] border border-[#C5A16A]/50 text-[#493126]">
-                        {pillar.tag}
-                      </span>
+
+                      <h3
+                        className={`font-serif text-base sm:text-lg font-medium leading-snug transition-colors mb-1.5 ${
+                          isActive ? "text-[#493126] font-semibold" : "text-[#392820]"
+                        }`}
+                      >
+                        {pillar.title}
+                      </h3>
+                      <p className="text-[11px] sm:text-xs text-[#392820]/80 leading-relaxed line-clamp-3">
+                        {pillar.desc}
+                      </p>
                     </div>
 
-                    <h3 className="font-serif text-base sm:text-lg font-medium text-[#392820] leading-snug group-hover:text-[#493126] transition-colors mb-1.5">
-                      {pillar.title}
-                    </h3>
-                    <p className="text-[11px] sm:text-xs text-[#392820]/75 leading-relaxed line-clamp-3">
-                      {pillar.desc}
-                    </p>
+                    {/* Bottom Micro Highlight Pill */}
+                    <div className="mt-3.5 pt-2.5 border-t border-[#C5A16A]/30 flex items-center gap-1.5 text-[10px] font-semibold text-[#493126]">
+                      <Sparkles
+                        size={10}
+                        className={`text-[#C5A16A] ${isActive ? "animate-spin" : "animate-sparkle-twinkle"}`}
+                        style={{ animationDuration: "3s" }}
+                      />
+                      <span>{pillar.highlight}</span>
+                    </div>
                   </div>
-
-                  {/* Bottom Micro Highlight Pill */}
-                  <div className="mt-3.5 pt-2.5 border-t border-[#C5A16A]/30 flex items-center gap-1.5 text-[10px] font-semibold text-[#493126]">
-                    <Sparkles size={10} className="text-[#C5A16A]" />
-                    <span>{pillar.highlight}</span>
-                  </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
 
-            {/* Mobile Swipe Hint with Dots */}
-            <div className="flex lg:hidden items-center justify-center gap-1.5 mt-2.5 text-center">
-              <span className="text-[10px] text-[#493126]/70 uppercase tracking-widest font-medium mr-1.5">
-                ✦ Swipe to explore standards
-              </span>
-              {[0, 1, 2, 3, 4].map((i) => (
-                <span
-                  key={i}
-                  className="w-1.5 h-1.5 rounded-full bg-[#C5A16A]/60"
-                />
-              ))}
+            {/* Mobile / Tablet Interactive Controls: Prev/Next & Glowing Dot Indicators */}
+            <div className="flex lg:hidden items-center justify-between gap-3 mt-3 px-2">
+              <button
+                type="button"
+                onClick={() => handlePillarSelect((activePillarIndex - 1 + 5) % 5)}
+                className="w-7 h-7 rounded-full bg-[#E8D8C4] border border-[#C5A16A] text-[#493126] flex items-center justify-center shadow-sm active:scale-95 transition-transform cursor-pointer"
+                aria-label="Previous standard"
+              >
+                <ChevronLeft size={14} />
+              </button>
+
+              <div className="flex items-center gap-1.5">
+                {[0, 1, 2, 3, 4].map((i) => (
+                  <button
+                    key={i}
+                    type="button"
+                    onClick={() => handlePillarSelect(i)}
+                    className={`transition-all duration-300 rounded-full cursor-pointer ${
+                      activePillarIndex === i
+                        ? "w-6 h-2 bg-[#493126] shadow-sm"
+                        : "w-2 h-2 bg-[#C5A16A]/50 hover:bg-[#C5A16A]"
+                    }`}
+                    aria-label={`Go to standard ${i + 1}`}
+                  />
+                ))}
+              </div>
+
+              <button
+                type="button"
+                onClick={() => handlePillarSelect((activePillarIndex + 1) % 5)}
+                className="w-7 h-7 rounded-full bg-[#E8D8C4] border border-[#C5A16A] text-[#493126] flex items-center justify-center shadow-sm active:scale-95 transition-transform cursor-pointer"
+                aria-label="Next standard"
+              >
+                <ChevronRight size={14} />
+              </button>
             </div>
           </div>
         </div>

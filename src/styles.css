@@ -1072,6 +1072,85 @@ h4 {
   animation: frameGlow 4s ease-in-out infinite;
 }
 
+/* ============================================================================
+   KARSHNI STANDARDS ANIMATION SUITE (Section 7)
+   ============================================================================ */
+@keyframes pillarShimmer {
+  0% {
+    transform: translateX(-150%) skewX(-20deg);
+    opacity: 0;
+  }
+  15% {
+    opacity: 0.55;
+  }
+  35%, 100% {
+    transform: translateX(250%) skewX(-20deg);
+    opacity: 0;
+  }
+}
+
+.animate-pillar-shimmer {
+  animation: pillarShimmer 4.5s ease-in-out infinite;
+}
+
+@keyframes goldBorderFlow {
+  0%, 100% {
+    border-color: rgba(197, 161, 106, 0.55);
+    box-shadow: 0 4px 18px rgba(73, 49, 38, 0.08);
+  }
+  50% {
+    border-color: rgba(197, 161, 106, 0.95);
+    box-shadow: 0 8px 24px rgba(197, 161, 106, 0.3), 0 0 12px rgba(223, 192, 133, 0.35);
+  }
+}
+
+.animate-gold-border-flow {
+  animation: goldBorderFlow 4s ease-in-out infinite;
+}
+
+@keyframes iconLevitate {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-3px) scale(1.05);
+  }
+}
+
+.animate-icon-levitate {
+  animation: iconLevitate 3.2s ease-in-out infinite;
+}
+
+@keyframes numberBreathe {
+  0%, 100% {
+    opacity: 0.18;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.45;
+    transform: scale(1.1);
+  }
+}
+
+.animate-number-breathe {
+  animation: numberBreathe 3.8s ease-in-out infinite;
+}
+
+@keyframes ambientDrift {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.3;
+  }
+  50% {
+    transform: translate(18px, -12px) scale(1.2);
+    opacity: 0.65;
+  }
+}
+
+.animate-ambient-drift {
+  animation: ambientDrift 7s ease-in-out infinite;
+}
+
 /* Card image zoom effect */
 .signature-card-img-wrap {
   position: relative;
