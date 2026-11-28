@@ -1189,8 +1189,9 @@ export function CinematicBakeryExperience() {
                   tag: "100% PURE",
                   icon: Award,
                   title: "Pure Dairy Butter",
-                  desc: "Slow-churned dairy butter & natural cream. Zero dalda, zero margarine, zero compromise.",
+                  desc: "Slow-churned pure dairy butter & fresh farm cream. Zero dalda, zero margarine, zero compromise.",
                   highlight: "Zero Hydrogenated Fats",
+                  image: "/images/standards/pure-dairy-butter.jpg",
                 },
                 {
                   num: "02",
@@ -1199,6 +1200,7 @@ export function CinematicBakeryExperience() {
                   title: "Belgian Chocolate",
                   desc: "Real imported cocoa solids and 70% Valrhona dark chocolate for an authentic melt-in-mouth finish.",
                   highlight: "70% Valrhona Cacao",
+                  image: "/images/standards/belgian-chocolate.jpg",
                 },
                 {
                   num: "03",
@@ -1207,6 +1209,7 @@ export function CinematicBakeryExperience() {
                   title: "Baked Fresh Daily",
                   desc: "Every milestone cake is baked freshly on your event day. Oven-warm craft, never pre-frozen.",
                   highlight: "Bespoke Oven Fresh",
+                  image: "/images/standards/baked-fresh-daily.jpg",
                 },
                 {
                   num: "04",
@@ -1215,14 +1218,16 @@ export function CinematicBakeryExperience() {
                   title: "Handmade Sugar Art",
                   desc: "Sculpted ribbon bows, character figures, and delicate date plaques crafted by master artists.",
                   highlight: "Fondant & Sugarcraft",
+                  image: "/images/standards/handmade-sugar-art.jpg",
                 },
                 {
                   num: "05",
-                  tag: "SAFE TRANSIT",
+                  tag: "WHITE GLOVE",
                   icon: Truck,
                   title: "Punctual Delivery",
                   desc: "Carefully transported in reinforced luxury boxes across Dinanagar & neighboring towns.",
-                  highlight: "White-Glove Care",
+                  highlight: "Reinforced Cake Box",
+                  image: "/images/standards/luxury-safe-delivery.jpg",
                 },
               ].map((pillar, idx) => {
                 const isActive = activePillarIndex === idx;
@@ -1230,69 +1235,58 @@ export function CinematicBakeryExperience() {
                   <div
                     key={idx}
                     onClick={() => handlePillarSelect(idx)}
-                    className={`w-[230px] sm:w-[250px] lg:w-auto shrink-0 snap-center rounded-2xl p-4 sm:p-5 text-left flex flex-col justify-between group transition-all duration-500 relative overflow-hidden cursor-pointer ${
+                    className={`w-[240px] sm:w-[260px] lg:w-auto shrink-0 snap-center rounded-2xl p-3 sm:p-3.5 text-left flex flex-col justify-between group transition-all duration-500 relative overflow-hidden cursor-pointer ${
                       isActive
-                        ? "bg-gradient-to-b from-[#FFF8EE] via-[#EFE3D2] to-[#E8D8C4] border-2 border-[#C5A16A] shadow-[0_8px_30px_rgba(197,161,106,0.3)] scale-[1.02]"
+                        ? "bg-gradient-to-b from-[#FFF8EE] via-[#EFE3D2] to-[#E8D8C4] border-2 border-[#C5A16A] shadow-[0_10px_35px_rgba(197,161,106,0.35)] scale-[1.02]"
                         : "bg-gradient-to-b from-[#EFE3D2] to-[#E8D8C4] border border-[#C5A16A]/70 hover:border-[#C5A16A] shadow-md hover:-translate-y-1 hover:shadow-lg"
                     }`}
                   >
                     {/* Live Diagonal Shimmer Light Sweep (Always Running with Staggered Wave) */}
                     <div
-                      className="absolute inset-y-0 w-24 bg-gradient-to-r from-transparent via-white/50 to-transparent pointer-events-none animate-pillar-shimmer"
+                      className="absolute inset-y-0 w-28 bg-gradient-to-r from-transparent via-white/50 to-transparent pointer-events-none animate-pillar-shimmer z-20"
                       style={{ animationDelay: `${idx * 0.9}s` }}
                     />
 
-                    {/* Watermark Number in Top Right with Gentle Breathing */}
-                    <span
-                      className={`absolute top-2 right-3 font-serif text-2xl font-bold transition-all pointer-events-none select-none animate-number-breathe ${
-                        isActive ? "text-[#C5A16A]/60 scale-110" : "text-[#C5A16A]/25"
-                      }`}
-                      style={{ animationDelay: `${idx * 0.7}s` }}
-                    >
-                      {pillar.num}
-                    </span>
-
                     <div>
-                      {/* Top Row: Levitating Icon with Aura & Mini Badge */}
-                      <div className="flex items-center justify-between gap-2 mb-3">
-                        <div
-                          className={`w-10 h-10 rounded-xl bg-[#493126] text-[#C5A16A] flex items-center justify-center shadow-md transition-all duration-300 animate-icon-levitate ${
-                            isActive ? "scale-110 shadow-[0_0_15px_rgba(197,161,106,0.6)] bg-[#35231D]" : ""
+                      {/* 1. Culinary Image Showcase Window with Floating Badge & Vignette */}
+                      <div className="relative aspect-[16/10] w-full rounded-xl overflow-hidden bg-[#24130A] mb-3 shadow-inner">
+                        <img
+                          src={pillar.image}
+                          alt={pillar.title}
+                          loading="lazy"
+                          className={`w-full h-full object-cover transition-transform duration-700 ease-out will-change-transform ${
+                            isActive ? "scale-110 animate-image-breathe" : "group-hover:scale-110"
                           }`}
-                          style={{ animationDelay: `${idx * 0.5}s` }}
-                        >
-                          <pillar.icon
-                            size={19}
-                            className={`transition-transform duration-300 ${
-                              isActive ? "scale-110 text-[#DFC085]" : "group-hover:rotate-6"
-                            }`}
-                          />
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent pointer-events-none" />
+
+                        {/* Top-Left: Mini Pill Tag */}
+                        <div className="absolute top-2 left-2 z-10 flex items-center gap-1 px-2 py-0.5 rounded-md bg-[#180C06]/85 backdrop-blur-sm border border-[#C5A16A]/60 text-[#DFC085] text-[9px] font-bold tracking-wider uppercase">
+                          <pillar.icon size={11} className="text-[#DFC085]" />
+                          <span>{pillar.tag}</span>
                         </div>
-                        <span
-                          className={`text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-md transition-colors ${
-                            isActive
-                              ? "bg-[#493126] text-[#FFF8EE] shadow-sm"
-                              : "bg-[#F7F0E5] border border-[#C5A16A]/50 text-[#493126]"
-                          }`}
-                        >
-                          {pillar.tag}
+
+                        {/* Top-Right: Number Pill */}
+                        <span className="absolute top-2 right-2 z-10 px-1.5 py-0.5 rounded-md bg-black/50 backdrop-blur-sm text-[#DFC085] font-serif text-[11px] font-bold">
+                          {pillar.num}
                         </span>
                       </div>
 
+                      {/* 2. Text Details */}
                       <h3
-                        className={`font-serif text-base sm:text-lg font-medium leading-snug transition-colors mb-1.5 ${
+                        className={`font-serif text-base sm:text-lg font-medium leading-snug transition-colors mb-1 ${
                           isActive ? "text-[#493126] font-semibold" : "text-[#392820]"
                         }`}
                       >
                         {pillar.title}
                       </h3>
-                      <p className="text-[11px] sm:text-xs text-[#392820]/80 leading-relaxed line-clamp-3">
+                      <p className="text-[11px] sm:text-xs text-[#392820]/80 leading-relaxed line-clamp-2">
                         {pillar.desc}
                       </p>
                     </div>
 
-                    {/* Bottom Micro Highlight Pill */}
-                    <div className="mt-3.5 pt-2.5 border-t border-[#C5A16A]/30 flex items-center gap-1.5 text-[10px] font-semibold text-[#493126]">
+                    {/* 3. Bottom Micro Highlight Pill with Twinkling Sparkle */}
+                    <div className="mt-3 pt-2.5 border-t border-[#C5A16A]/30 flex items-center gap-1.5 text-[10px] font-semibold text-[#493126]">
                       <Sparkles
                         size={10}
                         className={`text-[#C5A16A] ${isActive ? "animate-spin" : "animate-sparkle-twinkle"}`}

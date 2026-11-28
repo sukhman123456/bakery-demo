@@ -1151,6 +1151,19 @@ h4 {
   animation: ambientDrift 7s ease-in-out infinite;
 }
 
+@keyframes cardImageBreathe {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.06);
+  }
+}
+
+.animate-image-breathe {
+  animation: cardImageBreathe 6s ease-in-out infinite;
+}
+
 /* Card image zoom effect */
 .signature-card-img-wrap {
   position: relative;
