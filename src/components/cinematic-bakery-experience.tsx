@@ -1911,9 +1911,51 @@ export function CinematicBakeryExperience() {
 
         {/* Full-Width Continuous Sliding Instagram Post Feed */}
         <div className="relative max-w-[1440px] mx-auto">
+          {/* TOP SLIDING NEON-GOLD LUMINOUS RAIL (Utte Slide) */}
+          <div className="ribbon-container relative overflow-hidden bg-gradient-to-r from-[#24130A] via-[#35231D] to-[#24130A] border-y border-[#DFC085]/35 shadow-[0_0_24px_rgba(223,192,133,0.22)] mb-3">
+            <div className="h-[2px] w-full bg-gradient-to-r from-[#C5A16A] via-[#F58529] via-[#DD2A7B] to-[#C5A16A] animate-neon-edge" />
+            <div className="py-2.5 overflow-hidden">
+              <div className="animate-ribbon-left items-center">
+                {[
+                  { thumb: REAL_PHOTOS.logo, text: "@KARSHNI_BAKERS • LIVE FEED", href: BRAND.instagramUrl, glow: "text-[#DFC085]" },
+                  { thumb: REAL_PHOTOS.cakeTulipBow, text: "CUSTOM 3D & WEDDING CAKES", href: "#custom-cake", glow: "text-[#FFF8EE]" },
+                  { thumb: "/images/bakery/luxury-royal-gift-hamper.jpg", text: "ROYAL GIFT HAMPERS & BOXES", href: "#menu", glow: "text-[#FDE68A]" },
+                  { thumb: REAL_PHOTOS.cakeRomanticHeart, text: "100% PURE DAIRY BUTTER", href: "#why-choose-us", glow: "text-[#FFF8EE]" },
+                  { thumb: "/images/cakes/cake-belgian-drip-clean.jpg", text: "BELGIAN CHOCOLATE NOIR", href: "#menu", glow: "text-[#DFC085]" },
+                  { thumb: REAL_PHOTOS.bakeryCounter, text: "SHREE RAM MARKET • DINANAGAR", href: BRAND.mapsUrl, glow: "text-[#FFF8EE]" },
+                  { thumb: REAL_PHOTOS.logo, text: "@KARSHNI_BAKERS • LIVE FEED", href: BRAND.instagramUrl, glow: "text-[#DFC085]" },
+                  { thumb: REAL_PHOTOS.cakeTulipBow, text: "CUSTOM 3D & WEDDING CAKES", href: "#custom-cake", glow: "text-[#FFF8EE]" },
+                  { thumb: "/images/bakery/luxury-royal-gift-hamper.jpg", text: "ROYAL GIFT HAMPERS & BOXES", href: "#menu", glow: "text-[#FDE68A]" },
+                  { thumb: REAL_PHOTOS.cakeRomanticHeart, text: "100% PURE DAIRY BUTTER", href: "#why-choose-us", glow: "text-[#FFF8EE]" },
+                  { thumb: "/images/cakes/cake-belgian-drip-clean.jpg", text: "BELGIAN CHOCOLATE NOIR", href: "#menu", glow: "text-[#DFC085]" },
+                  { thumb: REAL_PHOTOS.bakeryCounter, text: "SHREE RAM MARKET • DINANAGAR", href: BRAND.mapsUrl, glow: "text-[#FFF8EE]" },
+                ].map((item, i) => (
+                  <a
+                    key={`top-rail-${i}`}
+                    href={item.href}
+                    target={item.href.startsWith("http") ? "_blank" : undefined}
+                    rel={item.href.startsWith("http") ? "noopener noreferrer" : undefined}
+                    className="mr-6 sm:mr-9 inline-flex items-center gap-2.5 px-3 py-1 rounded-full bg-white/[0.04] border border-[#DFC085]/35 shadow-[0_0_12px_rgba(223,192,133,0.2)] hover:border-[#F58529]/70 hover:shadow-[0_0_16px_rgba(245,133,41,0.45)] transition-all shrink-0"
+                  >
+                    <img
+                      src={item.thumb}
+                      alt=""
+                      className="w-5 h-5 rounded-full object-cover ring-1 ring-[#DFC085] shadow-[0_0_8px_rgba(223,192,133,0.7)]"
+                    />
+                    <span className={`text-[10px] sm:text-[11px] font-bold tracking-[0.18em] uppercase drop-shadow-[0_0_8px_rgba(223,192,133,0.45)] ${item.glow}`}>
+                      {item.text}
+                    </span>
+                    <Sparkles size={10} className="text-[#F58529]" />
+                  </a>
+                ))}
+              </div>
+            </div>
+            <div className="h-[1px] w-full bg-gradient-to-r from-transparent via-[#DFC085]/60 to-transparent" />
+          </div>
+
           {/* Desktop Left/Right Floating Gradient Edge Masks */}
-          <div className="hidden md:block absolute left-0 top-0 bottom-0 w-16 bg-gradient-to-r from-[#F7F0E5] to-transparent z-20 pointer-events-none" />
-          <div className="hidden md:block absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-[#F7F0E5] to-transparent z-20 pointer-events-none" />
+          <div className="hidden md:block absolute left-0 top-12 bottom-12 w-16 bg-gradient-to-r from-[#F7F0E5] to-transparent z-20 pointer-events-none" />
+          <div className="hidden md:block absolute right-0 top-12 bottom-12 w-16 bg-gradient-to-l from-[#F7F0E5] to-transparent z-20 pointer-events-none" />
 
           {/* Desktop Quick Arrows */}
           <button
@@ -2146,6 +2188,48 @@ export function CinematicBakeryExperience() {
                 );
               })}
             </div>
+          </div>
+
+          {/* BOTTOM COUNTER-SLIDING NEON ROSE-AMBER RAIL (Thale Slide) */}
+          <div className="ribbon-container relative overflow-hidden bg-gradient-to-r from-[#24130A] via-[#35231D] to-[#24130A] border-y border-[#DD2A7B]/35 shadow-[0_0_24px_rgba(221,42,123,0.2),0_0_16px_rgba(223,192,133,0.2)] mt-3">
+            <div className="h-[1px] w-full bg-gradient-to-r from-transparent via-[#DFC085]/60 to-transparent" />
+            <div className="py-2.5 overflow-hidden">
+              <div className="animate-ribbon-right items-center">
+                {[
+                  { thumb: REAL_PHOTOS.cakeSupercar, text: "TAP ANY PHOTO TO OPEN INSTAGRAM", href: BRAND.instagramUrl, glow: "text-[#FDE68A]" },
+                  { thumb: REAL_PHOTOS.cakeMashaBear, text: "KIDS 3D BIRTHDAY CREATIONS", href: "#custom-cake", glow: "text-[#FFF8EE]" },
+                  { thumb: "/images/luxury-cake-craft.jpg", text: "ARTISAN SUGAR & FONDANT ART", href: "#custom-cake", glow: "text-[#DFC085]" },
+                  { thumb: REAL_PHOTOS.cakeKanishToybox, text: "SAME-DAY CELEBRATION CAKES", href: "#menu", glow: "text-[#FFF8EE]" },
+                  { thumb: "/images/bakery/wedding-favor-gift-boxes.jpg", text: "WEDDING & RETURN FAVOUR BOXES", href: "#menu", glow: "text-[#FDE68A]" },
+                  { thumb: REAL_PHOTOS.ownerManoj, text: "CRAFTED BY MANOJ KUMAR • WHATSAPP ORDER", href: `https://wa.me/${BRAND.whatsapp}`, glow: "text-[#FFF8EE]" },
+                  { thumb: REAL_PHOTOS.cakeSupercar, text: "TAP ANY PHOTO TO OPEN INSTAGRAM", href: BRAND.instagramUrl, glow: "text-[#FDE68A]" },
+                  { thumb: REAL_PHOTOS.cakeMashaBear, text: "KIDS 3D BIRTHDAY CREATIONS", href: "#custom-cake", glow: "text-[#FFF8EE]" },
+                  { thumb: "/images/luxury-cake-craft.jpg", text: "ARTISAN SUGAR & FONDANT ART", href: "#custom-cake", glow: "text-[#DFC085]" },
+                  { thumb: REAL_PHOTOS.cakeKanishToybox, text: "SAME-DAY CELEBRATION CAKES", href: "#menu", glow: "text-[#FFF8EE]" },
+                  { thumb: "/images/bakery/wedding-favor-gift-boxes.jpg", text: "WEDDING & RETURN FAVOUR BOXES", href: "#menu", glow: "text-[#FDE68A]" },
+                  { thumb: REAL_PHOTOS.ownerManoj, text: "CRAFTED BY MANOJ KUMAR • WHATSAPP ORDER", href: `https://wa.me/${BRAND.whatsapp}`, glow: "text-[#FFF8EE]" },
+                ].map((item, i) => (
+                  <a
+                    key={`bot-rail-${i}`}
+                    href={item.href}
+                    target={item.href.startsWith("http") ? "_blank" : undefined}
+                    rel={item.href.startsWith("http") ? "noopener noreferrer" : undefined}
+                    className="mr-6 sm:mr-9 inline-flex items-center gap-2.5 px-3 py-1 rounded-full bg-white/[0.04] border border-[#DD2A7B]/40 shadow-[0_0_12px_rgba(221,42,123,0.22)] hover:border-[#DFC085]/80 hover:shadow-[0_0_16px_rgba(223,192,133,0.45)] transition-all shrink-0"
+                  >
+                    <img
+                      src={item.thumb}
+                      alt=""
+                      className="w-5 h-5 rounded-full object-cover ring-1 ring-[#F58529] shadow-[0_0_8px_rgba(245,133,41,0.6)]"
+                    />
+                    <span className={`text-[10px] sm:text-[11px] font-bold tracking-[0.18em] uppercase drop-shadow-[0_0_8px_rgba(221,42,123,0.4)] ${item.glow}`}>
+                      {item.text}
+                    </span>
+                    <Heart size={10} className="text-[#DD2A7B] fill-[#DD2A7B]" />
+                  </a>
+                ))}
+              </div>
+            </div>
+            <div className="h-[2px] w-full bg-gradient-to-r from-[#8134AF] via-[#DD2A7B] via-[#F58529] to-[#DFC085] animate-neon-edge" />
           </div>
         </div>
 

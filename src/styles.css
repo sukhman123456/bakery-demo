@@ -1196,6 +1196,63 @@ h4 {
   scrollbar-width: none;
 }
 
+/* ==========================================================================
+   LUMINOUS NEON-GOLD SLIDING RIBBONS (Top & Bottom Rails around IG Feed)
+   ========================================================================== */
+@keyframes marqueeLeft {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+@keyframes marqueeRight {
+  0% {
+    transform: translate3d(-50%, 0, 0);
+  }
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.animate-ribbon-left {
+  display: flex;
+  width: max-content;
+  animation: marqueeLeft 32s linear infinite;
+  will-change: transform;
+}
+
+.animate-ribbon-right {
+  display: flex;
+  width: max-content;
+  animation: marqueeRight 36s linear infinite;
+  will-change: transform;
+}
+
+.ribbon-container:hover .animate-ribbon-left,
+.ribbon-container:hover .animate-ribbon-right {
+  animation-play-state: paused;
+}
+
+@keyframes neonEdgePulse {
+  0%,
+  100% {
+    opacity: 0.72;
+    filter: drop-shadow(0 0 6px rgba(223, 192, 133, 0.55));
+  }
+  50% {
+    opacity: 1;
+    filter: drop-shadow(0 0 14px rgba(245, 133, 41, 0.55))
+      drop-shadow(0 0 22px rgba(221, 42, 123, 0.35));
+  }
+}
+
+.animate-neon-edge {
+  animation: neonEdgePulse 3.6s ease-in-out infinite;
+}
+
 /* Card image zoom effect */
 .signature-card-img-wrap {
   position: relative;
