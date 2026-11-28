@@ -253,69 +253,78 @@ const SPECIAL_OCCASIONS = [
 // ============================================================================
 // INSTAGRAM SHOWCASE DATA (SECTION 11)
 // ============================================================================
+// Add exact Instagram /p/... or /reel/... post URLs in `postUrl` to deep-link individual posts
 const INSTAGRAM_POSTS = [
   {
     id: "ig-1",
     image: REAL_PHOTOS.cakeTulipBow,
-    badge: "Real Creation",
+    badge: "IG Post",
     title: "Luxury Tulip Ribbon Bow Cake",
     location: "Karshni Baker's, Dinanagar",
+    postUrl: BRAND.instagramUrl,
     caption: "Handcrafted white satin ribbon bow cake dotted with delicate pink tulip buds on a golden base ✨ #KarshniBakers #DesignerCakes",
   },
   {
     id: "ig-2",
     image: REAL_PHOTOS.cakeRomanticHeart,
-    badge: "Milestone Cake",
+    badge: "IG Post",
     title: "Romantic Heart & Calendar Cake",
     location: "Shree Ram Market, Dinanagar",
+    postUrl: BRAND.instagramUrl,
     caption: "Celebrating special dates with custom golden lettering, fresh red roses & an edible calendar plaque ❤️ #KarshniLove #CustomCakes",
   },
   {
     id: "ig-3",
     image: REAL_PHOTOS.cakeMashaBear,
-    badge: "Kids Birthday",
+    badge: "IG Reel",
     title: "Masha & The Bear Custom Cake",
     location: "Karshni Baker's, Dinanagar",
+    postUrl: BRAND.instagramUrl,
     caption: "Sweet woodland Masha & The Bear birthday cake custom-crafted in pink cream with floral accents 🐻🌸 #Dinanagar #BirthdayCake",
   },
   {
     id: "ig-4",
     image: REAL_PHOTOS.bakeryCounter,
-    badge: "Our Bakery",
+    badge: "IG Post",
     title: "Karshni Baker's & Cafe Counter",
     location: "Shree Ram Market, Dinanagar",
+    postUrl: BRAND.instagramUrl,
     caption: "Welcome to Karshni Baker's & Cafe! Fresh celebration cakes ready daily on our Dinanagar counter 🎂✨ #KarshniBakersAndCafe",
   },
   {
     id: "ig-5",
     image: REAL_PHOTOS.cakeSupercar,
-    badge: "Theme Cake",
+    badge: "IG Reel",
     title: "Blue McLaren Supercar Cake",
     location: "Dinanagar, Punjab",
+    postUrl: BRAND.instagramUrl,
     caption: "Custom sky-blue supercar racing theme cake with chequered flags & age topper for milestone birthdays 🏎️🏁 #KidsParty #ThemeCakes",
   },
   {
     id: "ig-6",
     image: REAL_PHOTOS.cakeKanishToybox,
-    badge: "Fondant Art",
+    badge: "IG Post",
     title: "Playful Toybox & Football Cake",
     location: "Karshni Baker's, Dinanagar",
+    postUrl: BRAND.instagramUrl,
     caption: "Hand-sculpted fondant airplane, teddy bear, football & car topper made fresh for little Kanish 🧸⚽ #FondantCake #Dinanagar",
   },
   {
     id: "ig-7",
     image: REAL_PHOTOS.bakeryDisplay,
-    badge: "Fresh Display",
+    badge: "IG Post",
     title: "Chilled Cake Display Counter",
     location: "Shree Ram Market, Dinanagar",
+    postUrl: BRAND.instagramUrl,
     caption: "Rows of fresh cream cakes, pastries and bakery delicacies chilled & ready for instant celebration pickup 🍰 #FreshDaily #Dinanagar",
   },
   {
     id: "ig-8",
     image: REAL_PHOTOS.bakeryWide,
-    badge: "Full Showcase",
+    badge: "IG Post",
     title: "Karshni Bakery Showcase",
     location: "JT Road, Dinanagar",
+    postUrl: BRAND.instagramUrl,
     caption: "Stepping into our Dinanagar boutique — custom cakes, fresh counter treats and warm hospitality every day 🌟 #KarshniBakers #Punjab",
   },
 ];
@@ -1826,7 +1835,7 @@ export function CinematicBakeryExperience() {
                   {/* 1. Authentic Instagram Post Header */}
                   <div className="px-3.5 py-2.5 flex items-center justify-between border-b border-[#C5A16A]/25 bg-gradient-to-r from-[#FFF8EE] to-[#F7F0E5]">
                     <a
-                      href={BRAND.instagramUrl}
+                      href={post.postUrl}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="flex items-center gap-2.5 min-w-0"
@@ -1854,7 +1863,7 @@ export function CinematicBakeryExperience() {
                     </a>
 
                     <a
-                      href={BRAND.instagramUrl}
+                      href={post.postUrl}
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label={`View ${post.title} on Instagram`}
@@ -1864,10 +1873,13 @@ export function CinematicBakeryExperience() {
                     </a>
                   </div>
 
-                  {/* 2. Instagram Photo Showcase (Double-tap or tap heart to love!) */}
-                  <div
-                    onClick={() => toggleLikeIgPost(post.id, uniqueKey)}
-                    className="relative aspect-square w-full overflow-hidden bg-[#24130A] cursor-pointer"
+                  {/* 2. Instagram Photo Showcase (Click anywhere on post photo to open directly on Instagram!) */}
+                  <a
+                    href={post.postUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`Open ${post.title} on Instagram`}
+                    className="relative aspect-square w-full overflow-hidden bg-[#24130A] block cursor-pointer"
                   >
                     <img
                       src={post.image}
@@ -1888,7 +1900,7 @@ export function CinematicBakeryExperience() {
                       <span>{post.badge}</span>
                     </span>
 
-                    {/* Heart Burst Animation Overlay on Tap */}
+                    {/* Heart Burst Animation Overlay when Heart button tapped */}
                     {isBursting && (
                       <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-20">
                         <Heart
@@ -1899,11 +1911,12 @@ export function CinematicBakeryExperience() {
                     )}
 
                     {/* Subtle Bottom Gradient */}
-                    <div className="absolute inset-x-0 bottom-0 h-14 bg-gradient-to-t from-black/55 to-transparent pointer-events-none" />
-                    <span className="absolute bottom-2 left-3 text-[10px] font-medium text-white/90 tracking-wide pointer-events-none">
-                      Tap photo to love ♥
+                    <div className="absolute inset-x-0 bottom-0 h-14 bg-gradient-to-t from-black/60 to-transparent pointer-events-none" />
+                    <span className="absolute bottom-2 left-3 text-[10px] font-semibold text-white/95 tracking-wide flex items-center gap-1 pointer-events-none">
+                      <span>Open on Instagram</span>
+                      <ExternalLink size={10} />
                     </span>
-                  </div>
+                  </a>
 
                   {/* 3. Authentic Instagram Action Bar (Heart, Inquiry, Share, Bookmark) */}
                   <div className="px-3.5 pt-2.5 pb-1.5 flex items-center justify-between">
@@ -1937,10 +1950,10 @@ export function CinematicBakeryExperience() {
                       </button>
 
                       <a
-                        href={BRAND.instagramUrl}
+                        href={post.postUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        aria-label="Share or view on Instagram"
+                        aria-label="Open on Instagram"
                         className="text-[#392820] hover:text-[#493126] transition-transform hover:scale-110"
                       >
                         <Send size={18} />
@@ -1966,25 +1979,30 @@ export function CinematicBakeryExperience() {
 
                   {/* 4. Caption & Direct Instagram Link */}
                   <div className="px-3.5 pb-3.5 flex-1 flex flex-col justify-between">
-                    <div>
+                    <a
+                      href={post.postUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="block group/cap"
+                    >
                       <div className="text-[11px] font-semibold text-[#493126] mb-1">
                         {isLiked ? "♥ Loved by you & Karshni patrons" : "Handcrafted at Karshni Baker's"}
                       </div>
-                      <p className="text-[11px] sm:text-xs text-[#392820]/85 leading-relaxed line-clamp-2">
+                      <p className="text-[11px] sm:text-xs text-[#392820]/85 leading-relaxed line-clamp-2 group-hover/cap:text-[#493126] transition-colors">
                         <span className="font-bold text-[#392820] mr-1">karshni_bakers</span>
                         {post.caption}
                       </p>
-                    </div>
+                    </a>
 
                     <div className="mt-2.5 pt-2 border-t border-[#C5A16A]/25 flex items-center justify-between gap-2">
                       <a
-                        href={BRAND.instagramUrl}
+                        href={post.postUrl}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-[10px] font-bold uppercase tracking-wider text-[#493126] hover:text-[#C5A16A] flex items-center gap-1 transition-colors"
                       >
                         <Instagram size={11} />
-                        <span>View on IG</span>
+                        <span>Open IG Post</span>
                         <ExternalLink size={10} />
                       </a>
                       <button
